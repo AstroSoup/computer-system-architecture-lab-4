@@ -26,7 +26,7 @@ string             ::= '"' { <any symbol except '"'> } '"'
 instruction        ::= io_command      (indirect_address | absolute_address)
                      | address_command (indirect_address | absolute_address | relative_address | immediate_value)
                      | no_address_command
-                     | jmp_command relative_address
+                     | jmp_command (relative_address | indirect_address)
 io_command         ::= "in" 
                      | "out"
 address_command    ::= "ld" 
@@ -37,8 +37,6 @@ address_command    ::= "ld"
                      | "asr" 
                      | "lsl" 
                      | "lsr"
-                     | "mul" 
-                     | "mulh" 
                      | "div" 
                      | "rem"
 no_address_command ::= "halt" 
@@ -70,7 +68,7 @@ comment            ::= ";" { <any symbol except "\n"> }
 
 ## Организация памяти
 
-TBD...
+Память реализует Принстонскую модель организации памяти. Длина машинного слова -- 32 бита. 
 
 ## Система команд
 Каждая команда занимает 1 машинное слово в памяти.
@@ -88,7 +86,10 @@ TBD...
     - абсолютная
     - косвенная
     - прямая загрузка операнда
+
+Размер операнда:
 таким образом все режимы адресации можно записать 2 битами.
+
 
 
 ## Транслятор
@@ -97,7 +98,15 @@ TBD...
 
 ## Модель процессора
 
-TBD...
+### Datapath
+
+Процессор построен на базе аккумуляторной архитектуры с применением паттерна теневого регистра для уменьшения обращений к памяти и параллелезации записей в память. 
+
+![Datapath scheme](assets/datapath/scheme.svg)
+
+### Control Unit
+
+TBD
 
 ## Тестирование
 
