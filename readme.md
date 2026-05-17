@@ -51,7 +51,7 @@ jmp_command        ::= "jmp"
                      | "bns" 
                      | "bnns"
 (* commands will be extended or cut down (who knows) *)
-indirect_address   ::= [ "-" ] "(" addr_value ")" [ "+" ]    (* dereference: address given by label or literal *)
+indirect_address   ::= "(" addr_value ")"    (* dereference: address given by label or literal *)
 absolute_address   ::= "$" (uint | hex | label_name)
 relative_address   ::= int | hex | label_name
 immediate_value    ::= "#" (int | hex | label_name)
@@ -62,9 +62,24 @@ label_name         ::= <any of "a-z A-Z _"> { <any of "a-z A-Z 0-9 _"> }
 comment            ::= ";" { <any symbol except "\n"> }
 ```
 
+Язык будет транслироваться в бинарный файл с хедером формата:
+
+| field | offset | size |
+| ----- | ------ | ---- |
+| magic number (600DCAFE) | 0x0 | 4 |
+| entrypoint | 0x4 | 4(in reality its 23 bit value but why not give it a full word for easier parsing) |  
+| sec_start | 0x8 | 4 |
+| sec_size | 0xC | 4 |
+| ... | ... | ... |
+| end of header (BAADCAFE) | ... | 4 |
+
+после хедера будут следовать данные программы без промежуточных нулей(если такие были в исходной программе), для экономии места.
+
 ## Организация памяти
 
 Память реализует Принстонскую модель организации памяти. Длина машинного слова -- 32 бита. 
+
+За загрузку в память бинарного файла будет отвечать отдельный компонент, загрузчик, устанавливающий значение PC, и распределяющий секции по памяти.
 
 ## Система команд
 Каждая команда занимает 1 машинное слово в памяти.
@@ -102,7 +117,7 @@ TBD...
 
 Процессор построен на базе аккумуляторной архитектуры с применением паттерна теневого регистра для уменьшения обращений к памяти и параллелезации записей в память. 
 
-TODO: remove path from DR to SHADOW_AR since only time we stash data into shadow AR is with swap which comes from AR. We cant access shadow ar direcly similarly to the way we cant access shadow acc directly.
+TODO: ADD A SIGNAL FOR STASHING BYTE SIZED DATA INTO MEMORY AND IO.
 
 
 ![Datapath scheme](assets/datapath/scheme.svg)
