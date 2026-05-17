@@ -124,7 +124,9 @@ TODO: ADD A SIGNAL FOR STASHING BYTE SIZED DATA INTO MEMORY AND IO.
 
 ### Control Unit
 
-TBD
+Управляющеее устройство построено на базе микроинструкций. Коды операций и режимы адресации получаются из справочной таблицы. 
+
+![Control Unit scheme](assets/control_unit/scheme.svg)
 
 ## Тестирование
 
