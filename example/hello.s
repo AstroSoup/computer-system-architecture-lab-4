@@ -6,7 +6,6 @@ hello: .word 5
 ptr: .word 0
 
 .text
-.org 0x00
 _start:
 ld #hello ; Loading an address through immedeate value operator used with label
 inc
