@@ -7,7 +7,7 @@
 ## Язык программирования
 
 Язык программирования ассемблера описанный в форме РБНФ:
-
+TODO: add labels to the instruction defenitions
 ```
 program            ::= { line }
 line               ::= [ label ] [ operation ] [ comment ] "\n"
@@ -23,22 +23,18 @@ org                ::= ".org" (uint | hex)
 data               ::= (".word" | ".byte") (int | hex | string)
 string             ::= '"' { <any symbol except '"'> } '"'
 
-instruction        ::= io_command      (indirect_address | absolute_address)
-                     | address_command (indirect_address | absolute_address | relative_address | immediate_value)
+instruction        ::= io_command (absolute_address | indirect_address)
+                     | address_command{".b" | ".w"} (indirect_address | absolute_address | relative_address | immediate_value)
                      | no_address_command
-                     | jmp_command (relative_address | indirect_address)
+                     | jmp_command (absolute_address | indirect_address)
 io_command         ::= "in" 
                      | "out"
 address_command    ::= "ld" 
                      | "st" 
                      | "add" 
                      | "sub" 
-                     | "asl" 
-                     | "asr" 
-                     | "lsl" 
-                     | "lsr"
-                     | "div" 
-                     | "rem"
+                     | "and" 
+                     | "or"
 no_address_command ::= "halt" 
                      | "nop" 
                      | "clr" 
@@ -86,9 +82,13 @@ comment            ::= ";" { <any symbol except "\n"> }
     - абсолютная
     - косвенная
     - прямая загрузка операнда
-
 Размер операнда:
-таким образом все режимы адресации можно записать 2 битами.
+    - байт
+    - слово
+
+Все байтовые инструкции расширяются нулем.
+
+таким образом все режимы адресации можно записать 3 битами.
 
 
 
@@ -101,6 +101,9 @@ TBD...
 ### Datapath
 
 Процессор построен на базе аккумуляторной архитектуры с применением паттерна теневого регистра для уменьшения обращений к памяти и параллелезации записей в память. 
+
+TODO: remove path from DR to SHADOW_AR since only time we stash data into shadow AR is with swap which comes from AR. We cant access shadow ar direcly similarly to the way we cant access shadow acc directly.
+
 
 ![Datapath scheme](assets/datapath/scheme.svg)
 
