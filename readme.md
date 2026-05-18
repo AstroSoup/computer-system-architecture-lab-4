@@ -7,7 +7,6 @@
 ## Язык программирования
 
 Язык программирования ассемблера описанный в форме РБНФ:
-TODO: add labels to the instruction defenitions
 ```
 program            ::= { line }
 line               ::= [ label ] [ operation ] [ comment ] "\n"
@@ -51,7 +50,7 @@ jmp_command        ::= "jmp"
                      | "bns" 
                      | "bnns"
 (* commands will be extended or cut down (who knows) *)
-indirect_address   ::= "(" addr_value ")"    (* dereference: address given by label or literal *)
+indirect_address   ::= "(" (uint | hex | label_name) ")"    (* dereference: address given by label or literal *)
 absolute_address   ::= "$" (uint | hex | label_name)
 relative_address   ::= int | hex | label_name
 immediate_value    ::= "#" (int | hex | label_name)
