@@ -1,3 +1,7 @@
 .venv
 poetry.lock
 *.bkp
+__pycache__
+*.maibinbin
+*.debug
+*.log
