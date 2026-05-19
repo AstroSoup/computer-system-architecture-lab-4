@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="IGHWcjJ9U4IlJsso8BCW">
-    <mxGraphModel dx="2320" dy="2493" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1547" dy="2058" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -647,6 +647,15 @@
         </mxCell>
         <mxCell id="JFqR3tzHbVx4rcQlRb5d-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="write_output" vertex="1">
           <mxGeometry height="30" width="60" x="1022" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="jWtiLBXUuXNoW69vWRDx-1" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" target="GXw_XDUH-c2vOypyJYSj-12" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1072" y="460" as="sourcePoint" />
+            <mxPoint x="1070" y="459" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jWtiLBXUuXNoW69vWRDx-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="latch_dr" vertex="1">
+          <mxGeometry height="30" width="60" x="1068" y="424" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
