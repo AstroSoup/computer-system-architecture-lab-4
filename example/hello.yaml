@@ -1,0 +1,21 @@
+memory_size: 1024
+limit: 4096
+devices:
+  - in: [1, 2, 3]
+    out: []
+  - in: [4, 5, 123]
+    out: []
+report:
+  - type: "step-by-step"
+    view: |
+      acc: {acc}, acc_shadow: {acc_shadow}, pc: {pc}, ar: {ar}, ar_shadow: {ar_shadow},  dr: {dr}, 
+      N:{N}, Z:{Z}, V:{V}, C:{C}, mir: {mir}, mpc: {mpc}, tick: {tick}
+
+  - type: "last"
+    view: |
+      in: 
+      {in(1)}
+      out: 
+      {out(1)}
+      memory_dump:
+      {memory[0:1024:16]}

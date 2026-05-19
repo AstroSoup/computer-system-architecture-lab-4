@@ -6,7 +6,7 @@ _start:
 
     welcome_loop:
         ld (ptr)
-        out #0
+        out $0
         ld ptr
         inc
         st ptr
@@ -22,13 +22,13 @@ _start:
     st ptr
 
 
-    in #0
+    in $0
     st name_len
     add hello
     st hello
 
     loop_name:
-        in #0
+        in $0
         st (ptr)
         ld ptr
         inc
@@ -44,7 +44,7 @@ _start:
 
     loop_hello:
         ld (ptr)
-        out #0
+        out $0
         ld ptr
         inc
         st ptr
@@ -54,7 +54,7 @@ _start:
         bnz loop_hello
     
     ld exc
-    out #0
+    out $0
     halt
 
 .data

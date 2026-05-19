@@ -1,22 +1,23 @@
-.data:
+.data
 len: .word 0
 
 .text
+.org 0x200
 _start:
-    in #0
-    bez exit
+    in $0
+    bzs exit
 
-    st len
+    st.w len
 
     loop:
-        in #0
-        out #0
+        in $0
+        out $0
 
-        ld len
+        ld.w len
         dec
-        st len
+        st.w len
         
-        bnz loop
+        bzns loop
 
     exit:
         halt
