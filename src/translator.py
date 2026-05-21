@@ -160,7 +160,7 @@ def process_instruction(instr_token, state):
     state.current_section()["content"].append({"type": operation, "value": argument, "address": state.current_address})
 
 
-def second_pass(state):
+def second_pass(state):  # noqa: C901
     for section in state.sections:
         if section["name"] == "text":
             for instr in section["content"]:
@@ -190,41 +190,50 @@ def second_pass(state):
                         instr["encoded"] = opcodes[instr["type"] + "_" + addressing_mode] << 23 | (
                             operand_value & 0x7FFFFF
                         )
-                    except KeyError:
+                    except KeyError as e:
                         raise ValueError(
                             f"Unknown instruction or addressing mode: {instr['type']} with operand {value}"
-                        )
+                        ) from e
                 else:
                     try:
                         instr["encoded"] = opcodes[instr["type"]] << 23
-                    except KeyError:
-                        raise ValueError(f"Unknown instruction: {instr['type']}")
-                logging.debug(f"Encoded instruction at address {instr['address']:#x}: {instr['encoded']:#010x}")
+                    except KeyError as e:
+                        raise ValueError(f"Unknown instruction: {instr['type']}") from e
     return state
+
+
+def write_header(state, f):
+    f.write(0x600DCAFE.to_bytes(4, byteorder="big", signed=False))  # magic number
+    f.write(state.labels["_start"].to_bytes(4, byteorder="big", signed=False))  # entry point
+    for section in state.sections:
+        f.write(section["start_address"].to_bytes(4, byteorder="big", signed=False))
+        f.write(section["size"].to_bytes(4, byteorder="big", signed=False))
+    f.write(0xBAADCAFE.to_bytes(4, byteorder="big", signed=False))  # section header end marker
+
+
+def write_text_section(section, f):
+    for instr in section["content"]:
+        logging.debug(f"Writing encoded instruction: {instr['encoded']}")
+        f.write(instr["encoded"].to_bytes(4, byteorder="big", signed=False))
+
+
+def write_data_section(section, f):
+    for item in section["content"]:
+        if item["type"] == "word":
+            f.write(item["value"].to_bytes(4, byteorder="big", signed=True))
+        elif item["type"] == "byte":
+            f.write(item["value"].to_bytes(1, byteorder="big", signed=True))
 
 
 def write_output(state, target):
     with open(target, "wb") as f:
-        f.write(0x600DCAFE.to_bytes(4, byteorder="big", signed=False))  # magic number
-        f.write(state.labels["_start"].to_bytes(4, byteorder="big", signed=False))  # entry point
-        for section in state.sections:
-            f.write(section["start_address"].to_bytes(4, byteorder="big", signed=False))
-            f.write(section["size"].to_bytes(4, byteorder="big", signed=False))
-        f.write(0xBAADCAFE.to_bytes(4, byteorder="big", signed=False))  # section header end marker
+        write_header(state, f)
 
         for section in state.sections:
             if section["name"] == "text":
-                for instr in section["content"]:
-                    logging.debug(f"Writing encoded instruction: {instr['encoded']}")
-                    f.write(instr["encoded"].to_bytes(4, byteorder="big", signed=False))
+                write_text_section(section, f)
             elif section["name"] == "data":
-                for item in section["content"]:
-                    if item["type"] == "word":
-                        logging.debug(f"Writing word: {item['value']} at address {item['address']:#x}")
-                        f.write(item["value"].to_bytes(4, byteorder="big", signed=True))
-                    elif item["type"] == "byte":
-                        logging.debug(f"Writing byte: {item['value']} at address {item['address']:#x}")
-                        f.write(item["value"].to_bytes(1, byteorder="big", signed=True))
+                write_data_section(section, f)
 
 
 def write_debug_file(filename, state):

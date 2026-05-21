@@ -66,7 +66,7 @@ opcodes = {
     "bns_indirect": 56,
     "bnns_relative": 57,
     "bnns_indirect": 58,
-    # ALU (mul)
+    # mul (it was added later)
     "mul_immediate": 59,
     "mul_relative": 60,
     "mul_absolute": 61,
@@ -119,7 +119,6 @@ mnemonics = {
     "mul_relative": lambda value: f"mem(pc + {value}) * acc -> acc",
     "mul_absolute": lambda value: f"mem({value}) * acc -> acc",
     "mul_indirect": lambda value: f"mem(mem({value})) * acc -> acc",
-
     # IO
     "in_absolute": lambda value: f"device({value}) -> acc",
     "in_indirect": lambda value: f"device(mem({value})) -> acc",
