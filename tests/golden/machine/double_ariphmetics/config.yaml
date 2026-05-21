@@ -1,0 +1,23 @@
+memory_size: 256
+limit: 4096
+devices:
+  - in: [4, 0x7FFF_FFFF, 1, 0x7FFF_FFFF, 1, 0]
+    out: []
+report:
+  - type: "first"
+    view: |
+      tick | mnemonic
+      -------------------------------------------------
+  - type: "step-by-step"
+    view: |
+      {tick} | {mnemonic}
+  - type: "last"
+    view: |
+      -------------------------------------------------
+      Program executed after {tick} ticks. Final state:
+      in: 
+      {in(0)}
+      out: 
+      {out(0)}
+      memory_dump:
+      {memory(0:160:16)}

@@ -93,6 +93,7 @@ ignore = [
     "PTH103", # `os.makedirs()` should be replaced by `Path.mkdir(parents=True)`
     "PTH120", # `os.path.dirname()` should be replaced by `Path.parent`
     "PTH100", # `os.path.abspath()` should be replaced by `Path.resolve()`
+    "TRY003", # Just throw exceptions as you want, man
 ]
 unfixable = [
     "ERA001", # prohibit to "auto-fix" (=remove) commented-out code

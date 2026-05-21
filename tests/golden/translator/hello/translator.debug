@@ -1,0 +1,13 @@
+<address> | <hex_code> | <mnemonic>                      
+19        | 0x03000000 | ld.w: 0 -> acc                  
+23        | 0x0a800004 | add: 4 + acc -> acc             
+27        | 0x07fffff0 | st.w: acc -> mem(pc + -16)      
+31        | 0x0700000f | ld.b: mem(mem(15)) -> acc       
+35        | 0x13800000 | out: acc -> device(0)           
+39        | 0x03ffffe4 | ld.w: mem(pc + -28) -> acc      
+43        | 0x02000000 | inc: acc + 1 -> acc             
+47        | 0x07ffffdc | st.w: acc -> mem(pc + -36)      
+51        | 0x0c800004 | sub: acc - 4 -> acc             
+55        | 0x0d7fffc5 | sub: acc - mem(pc + -59) -> acc 
+59        | 0x16ffffe0 | bzns: if (z == 0) pc + -32 -> pc
+63        | 0x00800000 | halt: halt execution            
