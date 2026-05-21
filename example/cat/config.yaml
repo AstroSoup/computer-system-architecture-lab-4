@@ -1,0 +1,23 @@
+memory_size: 1024
+limit: 4096
+devices:
+  - in: [13, 'c', 's', 'a', ' ', 'i', 's', ' ', 'g', 'r', 'e', 'a', 't', '!']
+    out: []
+report:
+  - type: "first"
+    view: |
+      tick | mnemonic
+      -------------------------------------------------
+  - type: "step-by-step"
+    view: |
+      {tick} | {mnemonic}
+  - type: "last"
+    view: |
+      -------------------------------------------------
+      Program executed after {tick} ticks. Final state:
+      in: 
+      {in(0):sym}
+      out: 
+      {out(0):sym}
+      memory_dump:
+      {memory(508:564:16)}

@@ -19,8 +19,6 @@ _start:
         sub #4
         sub hello
         bzns loop ; loop until string length is zero
-    
-
 
 .text
     halt

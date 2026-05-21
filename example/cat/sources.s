@@ -1,4 +1,5 @@
 .data
+.org 0x196
 len: .word 0
 
 .text

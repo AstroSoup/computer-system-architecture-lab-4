@@ -1,0 +1,7150 @@
+tick | mnemonic
+-------------------------------------------------
+0001 | pc -> ar, pc+4 -> pc
+0002 | mem(ar)[31:0] -> dr
+0003 | jmp @instruction
+0004 | dr[22:0] + pc -> ar
+0005 | mem(ar)[31:0] -> dr
+0006 | dr[31:0] -> acc
+0007 | jmp @fetch
+0008 | pc -> ar, pc+4 -> pc
+0009 | mem(ar)[31:0] -> dr
+0010 | jmp @instruction
+0011 | dr[22:0] + pc -> ar
+0012 | mem(ar)[31:0] -> dr
+0013 | acc + mem(ar) -> acc
+0014 | jmp @fetch
+0015 | pc -> ar, pc+4 -> pc
+0016 | mem(ar)[31:0] -> dr
+0017 | jmp @instruction
+0018 | dr[22:0] + pc -> ar
+0019 | acc[31:0] -> mem(ar)
+0020 | jmp @fetch
+0021 | pc -> ar, pc+4 -> pc
+0022 | mem(ar)[31:0] -> dr
+0023 | jmp @instruction
+0024 | dr[22:0] + pc -> ar
+0025 | mem(ar)[31:0] -> dr
+0026 | dr[31:0] -> acc
+0027 | jmp @fetch
+0028 | pc -> ar, pc+4 -> pc
+0029 | mem(ar)[31:0] -> dr
+0030 | jmp @instruction
+0031 | dr[22:0] + pc -> ar
+0032 | mem(ar)[31:0] -> dr
+0033 | acc * mem(ar) -> acc
+0034 | jmp @fetch
+0035 | pc -> ar, pc+4 -> pc
+0036 | mem(ar)[31:0] -> dr
+0037 | jmp @instruction
+0038 | dr[22:0] + pc -> ar
+0039 | mem(ar)[31:0] -> dr
+0040 | acc + mem(ar) -> acc
+0041 | jmp @fetch
+0042 | pc -> ar, pc+4 -> pc
+0043 | mem(ar)[31:0] -> dr
+0044 | jmp @instruction
+0045 | dr[22:0] + pc -> ar
+0046 | acc[31:0] -> mem(ar)
+0047 | jmp @fetch
+0048 | pc -> ar, pc+4 -> pc
+0049 | mem(ar)[31:0] -> dr
+0050 | jmp @instruction
+0051 | dr[22:0] + pc -> ar
+0052 | mem(ar)[31:0] -> dr
+0053 | dr[31:0] -> acc
+0054 | jmp @fetch
+0055 | pc -> ar, pc+4 -> pc
+0056 | mem(ar)[31:0] -> dr
+0057 | jmp @instruction
+0058 | acc - 1 -> acc
+0059 | jmp @fetch
+0060 | pc -> ar, pc+4 -> pc
+0061 | mem(ar)[31:0] -> dr
+0062 | jmp @instruction
+0063 | dr[22:0] + pc -> ar
+0064 | acc[31:0] -> mem(ar)
+0065 | jmp @fetch
+0066 | pc -> ar, pc+4 -> pc
+0067 | mem(ar)[31:0] -> dr
+0068 | jmp @instruction
+0069 | if Z set: jmp @fetch
+0070 | pc + extended(dr[22:0]) -> pc
+0071 | jmp @fetch
+0072 | pc -> ar, pc+4 -> pc
+0073 | mem(ar)[31:0] -> dr
+0074 | jmp @instruction
+0075 | dr[22:0] + pc -> ar
+0076 | mem(ar)[31:0] -> dr
+0077 | dr[31:0] -> acc
+0078 | jmp @fetch
+0079 | pc -> ar, pc+4 -> pc
+0080 | mem(ar)[31:0] -> dr
+0081 | jmp @instruction
+0082 | dr[22:0] + pc -> ar
+0083 | mem(ar)[31:0] -> dr
+0084 | acc + mem(ar) -> acc
+0085 | jmp @fetch
+0086 | pc -> ar, pc+4 -> pc
+0087 | mem(ar)[31:0] -> dr
+0088 | jmp @instruction
+0089 | dr[22:0] + pc -> ar
+0090 | acc[31:0] -> mem(ar)
+0091 | jmp @fetch
+0092 | pc -> ar, pc+4 -> pc
+0093 | mem(ar)[31:0] -> dr
+0094 | jmp @instruction
+0095 | dr[22:0] + pc -> ar
+0096 | mem(ar)[31:0] -> dr
+0097 | dr[31:0] -> acc
+0098 | jmp @fetch
+0099 | pc -> ar, pc+4 -> pc
+0100 | mem(ar)[31:0] -> dr
+0101 | jmp @instruction
+0102 | dr[22:0] + pc -> ar
+0103 | mem(ar)[31:0] -> dr
+0104 | acc * mem(ar) -> acc
+0105 | jmp @fetch
+0106 | pc -> ar, pc+4 -> pc
+0107 | mem(ar)[31:0] -> dr
+0108 | jmp @instruction
+0109 | dr[22:0] + pc -> ar
+0110 | mem(ar)[31:0] -> dr
+0111 | acc + mem(ar) -> acc
+0112 | jmp @fetch
+0113 | pc -> ar, pc+4 -> pc
+0114 | mem(ar)[31:0] -> dr
+0115 | jmp @instruction
+0116 | dr[22:0] + pc -> ar
+0117 | acc[31:0] -> mem(ar)
+0118 | jmp @fetch
+0119 | pc -> ar, pc+4 -> pc
+0120 | mem(ar)[31:0] -> dr
+0121 | jmp @instruction
+0122 | dr[22:0] + pc -> ar
+0123 | mem(ar)[31:0] -> dr
+0124 | dr[31:0] -> acc
+0125 | jmp @fetch
+0126 | pc -> ar, pc+4 -> pc
+0127 | mem(ar)[31:0] -> dr
+0128 | jmp @instruction
+0129 | acc - 1 -> acc
+0130 | jmp @fetch
+0131 | pc -> ar, pc+4 -> pc
+0132 | mem(ar)[31:0] -> dr
+0133 | jmp @instruction
+0134 | dr[22:0] + pc -> ar
+0135 | acc[31:0] -> mem(ar)
+0136 | jmp @fetch
+0137 | pc -> ar, pc+4 -> pc
+0138 | mem(ar)[31:0] -> dr
+0139 | jmp @instruction
+0140 | if Z set: jmp @fetch
+0141 | pc + extended(dr[22:0]) -> pc
+0142 | jmp @fetch
+0143 | pc -> ar, pc+4 -> pc
+0144 | mem(ar)[31:0] -> dr
+0145 | jmp @instruction
+0146 | dr[22:0] + pc -> ar
+0147 | mem(ar)[31:0] -> dr
+0148 | dr[31:0] -> acc
+0149 | jmp @fetch
+0150 | pc -> ar, pc+4 -> pc
+0151 | mem(ar)[31:0] -> dr
+0152 | jmp @instruction
+0153 | dr[22:0] + pc -> ar
+0154 | mem(ar)[31:0] -> dr
+0155 | acc + mem(ar) -> acc
+0156 | jmp @fetch
+0157 | pc -> ar, pc+4 -> pc
+0158 | mem(ar)[31:0] -> dr
+0159 | jmp @instruction
+0160 | dr[22:0] + pc -> ar
+0161 | acc[31:0] -> mem(ar)
+0162 | jmp @fetch
+0163 | pc -> ar, pc+4 -> pc
+0164 | mem(ar)[31:0] -> dr
+0165 | jmp @instruction
+0166 | dr[22:0] + pc -> ar
+0167 | mem(ar)[31:0] -> dr
+0168 | dr[31:0] -> acc
+0169 | jmp @fetch
+0170 | pc -> ar, pc+4 -> pc
+0171 | mem(ar)[31:0] -> dr
+0172 | jmp @instruction
+0173 | dr[22:0] + pc -> ar
+0174 | mem(ar)[31:0] -> dr
+0175 | acc * mem(ar) -> acc
+0176 | jmp @fetch
+0177 | pc -> ar, pc+4 -> pc
+0178 | mem(ar)[31:0] -> dr
+0179 | jmp @instruction
+0180 | dr[22:0] + pc -> ar
+0181 | mem(ar)[31:0] -> dr
+0182 | acc + mem(ar) -> acc
+0183 | jmp @fetch
+0184 | pc -> ar, pc+4 -> pc
+0185 | mem(ar)[31:0] -> dr
+0186 | jmp @instruction
+0187 | dr[22:0] + pc -> ar
+0188 | acc[31:0] -> mem(ar)
+0189 | jmp @fetch
+0190 | pc -> ar, pc+4 -> pc
+0191 | mem(ar)[31:0] -> dr
+0192 | jmp @instruction
+0193 | dr[22:0] + pc -> ar
+0194 | mem(ar)[31:0] -> dr
+0195 | dr[31:0] -> acc
+0196 | jmp @fetch
+0197 | pc -> ar, pc+4 -> pc
+0198 | mem(ar)[31:0] -> dr
+0199 | jmp @instruction
+0200 | acc - 1 -> acc
+0201 | jmp @fetch
+0202 | pc -> ar, pc+4 -> pc
+0203 | mem(ar)[31:0] -> dr
+0204 | jmp @instruction
+0205 | dr[22:0] + pc -> ar
+0206 | acc[31:0] -> mem(ar)
+0207 | jmp @fetch
+0208 | pc -> ar, pc+4 -> pc
+0209 | mem(ar)[31:0] -> dr
+0210 | jmp @instruction
+0211 | if Z set: jmp @fetch
+0212 | pc + extended(dr[22:0]) -> pc
+0213 | jmp @fetch
+0214 | pc -> ar, pc+4 -> pc
+0215 | mem(ar)[31:0] -> dr
+0216 | jmp @instruction
+0217 | dr[22:0] + pc -> ar
+0218 | mem(ar)[31:0] -> dr
+0219 | dr[31:0] -> acc
+0220 | jmp @fetch
+0221 | pc -> ar, pc+4 -> pc
+0222 | mem(ar)[31:0] -> dr
+0223 | jmp @instruction
+0224 | dr[22:0] + pc -> ar
+0225 | mem(ar)[31:0] -> dr
+0226 | acc + mem(ar) -> acc
+0227 | jmp @fetch
+0228 | pc -> ar, pc+4 -> pc
+0229 | mem(ar)[31:0] -> dr
+0230 | jmp @instruction
+0231 | dr[22:0] + pc -> ar
+0232 | acc[31:0] -> mem(ar)
+0233 | jmp @fetch
+0234 | pc -> ar, pc+4 -> pc
+0235 | mem(ar)[31:0] -> dr
+0236 | jmp @instruction
+0237 | dr[22:0] + pc -> ar
+0238 | mem(ar)[31:0] -> dr
+0239 | dr[31:0] -> acc
+0240 | jmp @fetch
+0241 | pc -> ar, pc+4 -> pc
+0242 | mem(ar)[31:0] -> dr
+0243 | jmp @instruction
+0244 | dr[22:0] + pc -> ar
+0245 | mem(ar)[31:0] -> dr
+0246 | acc * mem(ar) -> acc
+0247 | jmp @fetch
+0248 | pc -> ar, pc+4 -> pc
+0249 | mem(ar)[31:0] -> dr
+0250 | jmp @instruction
+0251 | dr[22:0] + pc -> ar
+0252 | mem(ar)[31:0] -> dr
+0253 | acc + mem(ar) -> acc
+0254 | jmp @fetch
+0255 | pc -> ar, pc+4 -> pc
+0256 | mem(ar)[31:0] -> dr
+0257 | jmp @instruction
+0258 | dr[22:0] + pc -> ar
+0259 | acc[31:0] -> mem(ar)
+0260 | jmp @fetch
+0261 | pc -> ar, pc+4 -> pc
+0262 | mem(ar)[31:0] -> dr
+0263 | jmp @instruction
+0264 | dr[22:0] + pc -> ar
+0265 | mem(ar)[31:0] -> dr
+0266 | dr[31:0] -> acc
+0267 | jmp @fetch
+0268 | pc -> ar, pc+4 -> pc
+0269 | mem(ar)[31:0] -> dr
+0270 | jmp @instruction
+0271 | acc - 1 -> acc
+0272 | jmp @fetch
+0273 | pc -> ar, pc+4 -> pc
+0274 | mem(ar)[31:0] -> dr
+0275 | jmp @instruction
+0276 | dr[22:0] + pc -> ar
+0277 | acc[31:0] -> mem(ar)
+0278 | jmp @fetch
+0279 | pc -> ar, pc+4 -> pc
+0280 | mem(ar)[31:0] -> dr
+0281 | jmp @instruction
+0282 | if Z set: jmp @fetch
+0283 | pc + extended(dr[22:0]) -> pc
+0284 | jmp @fetch
+0285 | pc -> ar, pc+4 -> pc
+0286 | mem(ar)[31:0] -> dr
+0287 | jmp @instruction
+0288 | dr[22:0] + pc -> ar
+0289 | mem(ar)[31:0] -> dr
+0290 | dr[31:0] -> acc
+0291 | jmp @fetch
+0292 | pc -> ar, pc+4 -> pc
+0293 | mem(ar)[31:0] -> dr
+0294 | jmp @instruction
+0295 | dr[22:0] + pc -> ar
+0296 | mem(ar)[31:0] -> dr
+0297 | acc + mem(ar) -> acc
+0298 | jmp @fetch
+0299 | pc -> ar, pc+4 -> pc
+0300 | mem(ar)[31:0] -> dr
+0301 | jmp @instruction
+0302 | dr[22:0] + pc -> ar
+0303 | acc[31:0] -> mem(ar)
+0304 | jmp @fetch
+0305 | pc -> ar, pc+4 -> pc
+0306 | mem(ar)[31:0] -> dr
+0307 | jmp @instruction
+0308 | dr[22:0] + pc -> ar
+0309 | mem(ar)[31:0] -> dr
+0310 | dr[31:0] -> acc
+0311 | jmp @fetch
+0312 | pc -> ar, pc+4 -> pc
+0313 | mem(ar)[31:0] -> dr
+0314 | jmp @instruction
+0315 | dr[22:0] + pc -> ar
+0316 | mem(ar)[31:0] -> dr
+0317 | acc * mem(ar) -> acc
+0318 | jmp @fetch
+0319 | pc -> ar, pc+4 -> pc
+0320 | mem(ar)[31:0] -> dr
+0321 | jmp @instruction
+0322 | dr[22:0] + pc -> ar
+0323 | mem(ar)[31:0] -> dr
+0324 | acc + mem(ar) -> acc
+0325 | jmp @fetch
+0326 | pc -> ar, pc+4 -> pc
+0327 | mem(ar)[31:0] -> dr
+0328 | jmp @instruction
+0329 | dr[22:0] + pc -> ar
+0330 | acc[31:0] -> mem(ar)
+0331 | jmp @fetch
+0332 | pc -> ar, pc+4 -> pc
+0333 | mem(ar)[31:0] -> dr
+0334 | jmp @instruction
+0335 | dr[22:0] + pc -> ar
+0336 | mem(ar)[31:0] -> dr
+0337 | dr[31:0] -> acc
+0338 | jmp @fetch
+0339 | pc -> ar, pc+4 -> pc
+0340 | mem(ar)[31:0] -> dr
+0341 | jmp @instruction
+0342 | acc - 1 -> acc
+0343 | jmp @fetch
+0344 | pc -> ar, pc+4 -> pc
+0345 | mem(ar)[31:0] -> dr
+0346 | jmp @instruction
+0347 | dr[22:0] + pc -> ar
+0348 | acc[31:0] -> mem(ar)
+0349 | jmp @fetch
+0350 | pc -> ar, pc+4 -> pc
+0351 | mem(ar)[31:0] -> dr
+0352 | jmp @instruction
+0353 | if Z set: jmp @fetch
+0354 | pc + extended(dr[22:0]) -> pc
+0355 | jmp @fetch
+0356 | pc -> ar, pc+4 -> pc
+0357 | mem(ar)[31:0] -> dr
+0358 | jmp @instruction
+0359 | dr[22:0] + pc -> ar
+0360 | mem(ar)[31:0] -> dr
+0361 | dr[31:0] -> acc
+0362 | jmp @fetch
+0363 | pc -> ar, pc+4 -> pc
+0364 | mem(ar)[31:0] -> dr
+0365 | jmp @instruction
+0366 | dr[22:0] + pc -> ar
+0367 | mem(ar)[31:0] -> dr
+0368 | acc + mem(ar) -> acc
+0369 | jmp @fetch
+0370 | pc -> ar, pc+4 -> pc
+0371 | mem(ar)[31:0] -> dr
+0372 | jmp @instruction
+0373 | dr[22:0] + pc -> ar
+0374 | acc[31:0] -> mem(ar)
+0375 | jmp @fetch
+0376 | pc -> ar, pc+4 -> pc
+0377 | mem(ar)[31:0] -> dr
+0378 | jmp @instruction
+0379 | dr[22:0] + pc -> ar
+0380 | mem(ar)[31:0] -> dr
+0381 | dr[31:0] -> acc
+0382 | jmp @fetch
+0383 | pc -> ar, pc+4 -> pc
+0384 | mem(ar)[31:0] -> dr
+0385 | jmp @instruction
+0386 | dr[22:0] + pc -> ar
+0387 | mem(ar)[31:0] -> dr
+0388 | acc * mem(ar) -> acc
+0389 | jmp @fetch
+0390 | pc -> ar, pc+4 -> pc
+0391 | mem(ar)[31:0] -> dr
+0392 | jmp @instruction
+0393 | dr[22:0] + pc -> ar
+0394 | mem(ar)[31:0] -> dr
+0395 | acc + mem(ar) -> acc
+0396 | jmp @fetch
+0397 | pc -> ar, pc+4 -> pc
+0398 | mem(ar)[31:0] -> dr
+0399 | jmp @instruction
+0400 | dr[22:0] + pc -> ar
+0401 | acc[31:0] -> mem(ar)
+0402 | jmp @fetch
+0403 | pc -> ar, pc+4 -> pc
+0404 | mem(ar)[31:0] -> dr
+0405 | jmp @instruction
+0406 | dr[22:0] + pc -> ar
+0407 | mem(ar)[31:0] -> dr
+0408 | dr[31:0] -> acc
+0409 | jmp @fetch
+0410 | pc -> ar, pc+4 -> pc
+0411 | mem(ar)[31:0] -> dr
+0412 | jmp @instruction
+0413 | acc - 1 -> acc
+0414 | jmp @fetch
+0415 | pc -> ar, pc+4 -> pc
+0416 | mem(ar)[31:0] -> dr
+0417 | jmp @instruction
+0418 | dr[22:0] + pc -> ar
+0419 | acc[31:0] -> mem(ar)
+0420 | jmp @fetch
+0421 | pc -> ar, pc+4 -> pc
+0422 | mem(ar)[31:0] -> dr
+0423 | jmp @instruction
+0424 | if Z set: jmp @fetch
+0425 | pc + extended(dr[22:0]) -> pc
+0426 | jmp @fetch
+0427 | pc -> ar, pc+4 -> pc
+0428 | mem(ar)[31:0] -> dr
+0429 | jmp @instruction
+0430 | dr[22:0] + pc -> ar
+0431 | mem(ar)[31:0] -> dr
+0432 | dr[31:0] -> acc
+0433 | jmp @fetch
+0434 | pc -> ar, pc+4 -> pc
+0435 | mem(ar)[31:0] -> dr
+0436 | jmp @instruction
+0437 | dr[22:0] + pc -> ar
+0438 | mem(ar)[31:0] -> dr
+0439 | acc + mem(ar) -> acc
+0440 | jmp @fetch
+0441 | pc -> ar, pc+4 -> pc
+0442 | mem(ar)[31:0] -> dr
+0443 | jmp @instruction
+0444 | dr[22:0] + pc -> ar
+0445 | acc[31:0] -> mem(ar)
+0446 | jmp @fetch
+0447 | pc -> ar, pc+4 -> pc
+0448 | mem(ar)[31:0] -> dr
+0449 | jmp @instruction
+0450 | dr[22:0] + pc -> ar
+0451 | mem(ar)[31:0] -> dr
+0452 | dr[31:0] -> acc
+0453 | jmp @fetch
+0454 | pc -> ar, pc+4 -> pc
+0455 | mem(ar)[31:0] -> dr
+0456 | jmp @instruction
+0457 | dr[22:0] + pc -> ar
+0458 | mem(ar)[31:0] -> dr
+0459 | acc * mem(ar) -> acc
+0460 | jmp @fetch
+0461 | pc -> ar, pc+4 -> pc
+0462 | mem(ar)[31:0] -> dr
+0463 | jmp @instruction
+0464 | dr[22:0] + pc -> ar
+0465 | mem(ar)[31:0] -> dr
+0466 | acc + mem(ar) -> acc
+0467 | jmp @fetch
+0468 | pc -> ar, pc+4 -> pc
+0469 | mem(ar)[31:0] -> dr
+0470 | jmp @instruction
+0471 | dr[22:0] + pc -> ar
+0472 | acc[31:0] -> mem(ar)
+0473 | jmp @fetch
+0474 | pc -> ar, pc+4 -> pc
+0475 | mem(ar)[31:0] -> dr
+0476 | jmp @instruction
+0477 | dr[22:0] + pc -> ar
+0478 | mem(ar)[31:0] -> dr
+0479 | dr[31:0] -> acc
+0480 | jmp @fetch
+0481 | pc -> ar, pc+4 -> pc
+0482 | mem(ar)[31:0] -> dr
+0483 | jmp @instruction
+0484 | acc - 1 -> acc
+0485 | jmp @fetch
+0486 | pc -> ar, pc+4 -> pc
+0487 | mem(ar)[31:0] -> dr
+0488 | jmp @instruction
+0489 | dr[22:0] + pc -> ar
+0490 | acc[31:0] -> mem(ar)
+0491 | jmp @fetch
+0492 | pc -> ar, pc+4 -> pc
+0493 | mem(ar)[31:0] -> dr
+0494 | jmp @instruction
+0495 | if Z set: jmp @fetch
+0496 | pc + extended(dr[22:0]) -> pc
+0497 | jmp @fetch
+0498 | pc -> ar, pc+4 -> pc
+0499 | mem(ar)[31:0] -> dr
+0500 | jmp @instruction
+0501 | dr[22:0] + pc -> ar
+0502 | mem(ar)[31:0] -> dr
+0503 | dr[31:0] -> acc
+0504 | jmp @fetch
+0505 | pc -> ar, pc+4 -> pc
+0506 | mem(ar)[31:0] -> dr
+0507 | jmp @instruction
+0508 | dr[22:0] + pc -> ar
+0509 | mem(ar)[31:0] -> dr
+0510 | acc + mem(ar) -> acc
+0511 | jmp @fetch
+0512 | pc -> ar, pc+4 -> pc
+0513 | mem(ar)[31:0] -> dr
+0514 | jmp @instruction
+0515 | dr[22:0] + pc -> ar
+0516 | acc[31:0] -> mem(ar)
+0517 | jmp @fetch
+0518 | pc -> ar, pc+4 -> pc
+0519 | mem(ar)[31:0] -> dr
+0520 | jmp @instruction
+0521 | dr[22:0] + pc -> ar
+0522 | mem(ar)[31:0] -> dr
+0523 | dr[31:0] -> acc
+0524 | jmp @fetch
+0525 | pc -> ar, pc+4 -> pc
+0526 | mem(ar)[31:0] -> dr
+0527 | jmp @instruction
+0528 | dr[22:0] + pc -> ar
+0529 | mem(ar)[31:0] -> dr
+0530 | acc * mem(ar) -> acc
+0531 | jmp @fetch
+0532 | pc -> ar, pc+4 -> pc
+0533 | mem(ar)[31:0] -> dr
+0534 | jmp @instruction
+0535 | dr[22:0] + pc -> ar
+0536 | mem(ar)[31:0] -> dr
+0537 | acc + mem(ar) -> acc
+0538 | jmp @fetch
+0539 | pc -> ar, pc+4 -> pc
+0540 | mem(ar)[31:0] -> dr
+0541 | jmp @instruction
+0542 | dr[22:0] + pc -> ar
+0543 | acc[31:0] -> mem(ar)
+0544 | jmp @fetch
+0545 | pc -> ar, pc+4 -> pc
+0546 | mem(ar)[31:0] -> dr
+0547 | jmp @instruction
+0548 | dr[22:0] + pc -> ar
+0549 | mem(ar)[31:0] -> dr
+0550 | dr[31:0] -> acc
+0551 | jmp @fetch
+0552 | pc -> ar, pc+4 -> pc
+0553 | mem(ar)[31:0] -> dr
+0554 | jmp @instruction
+0555 | acc - 1 -> acc
+0556 | jmp @fetch
+0557 | pc -> ar, pc+4 -> pc
+0558 | mem(ar)[31:0] -> dr
+0559 | jmp @instruction
+0560 | dr[22:0] + pc -> ar
+0561 | acc[31:0] -> mem(ar)
+0562 | jmp @fetch
+0563 | pc -> ar, pc+4 -> pc
+0564 | mem(ar)[31:0] -> dr
+0565 | jmp @instruction
+0566 | if Z set: jmp @fetch
+0567 | pc + extended(dr[22:0]) -> pc
+0568 | jmp @fetch
+0569 | pc -> ar, pc+4 -> pc
+0570 | mem(ar)[31:0] -> dr
+0571 | jmp @instruction
+0572 | dr[22:0] + pc -> ar
+0573 | mem(ar)[31:0] -> dr
+0574 | dr[31:0] -> acc
+0575 | jmp @fetch
+0576 | pc -> ar, pc+4 -> pc
+0577 | mem(ar)[31:0] -> dr
+0578 | jmp @instruction
+0579 | dr[22:0] + pc -> ar
+0580 | mem(ar)[31:0] -> dr
+0581 | acc + mem(ar) -> acc
+0582 | jmp @fetch
+0583 | pc -> ar, pc+4 -> pc
+0584 | mem(ar)[31:0] -> dr
+0585 | jmp @instruction
+0586 | dr[22:0] + pc -> ar
+0587 | acc[31:0] -> mem(ar)
+0588 | jmp @fetch
+0589 | pc -> ar, pc+4 -> pc
+0590 | mem(ar)[31:0] -> dr
+0591 | jmp @instruction
+0592 | dr[22:0] + pc -> ar
+0593 | mem(ar)[31:0] -> dr
+0594 | dr[31:0] -> acc
+0595 | jmp @fetch
+0596 | pc -> ar, pc+4 -> pc
+0597 | mem(ar)[31:0] -> dr
+0598 | jmp @instruction
+0599 | dr[22:0] + pc -> ar
+0600 | mem(ar)[31:0] -> dr
+0601 | acc * mem(ar) -> acc
+0602 | jmp @fetch
+0603 | pc -> ar, pc+4 -> pc
+0604 | mem(ar)[31:0] -> dr
+0605 | jmp @instruction
+0606 | dr[22:0] + pc -> ar
+0607 | mem(ar)[31:0] -> dr
+0608 | acc + mem(ar) -> acc
+0609 | jmp @fetch
+0610 | pc -> ar, pc+4 -> pc
+0611 | mem(ar)[31:0] -> dr
+0612 | jmp @instruction
+0613 | dr[22:0] + pc -> ar
+0614 | acc[31:0] -> mem(ar)
+0615 | jmp @fetch
+0616 | pc -> ar, pc+4 -> pc
+0617 | mem(ar)[31:0] -> dr
+0618 | jmp @instruction
+0619 | dr[22:0] + pc -> ar
+0620 | mem(ar)[31:0] -> dr
+0621 | dr[31:0] -> acc
+0622 | jmp @fetch
+0623 | pc -> ar, pc+4 -> pc
+0624 | mem(ar)[31:0] -> dr
+0625 | jmp @instruction
+0626 | acc - 1 -> acc
+0627 | jmp @fetch
+0628 | pc -> ar, pc+4 -> pc
+0629 | mem(ar)[31:0] -> dr
+0630 | jmp @instruction
+0631 | dr[22:0] + pc -> ar
+0632 | acc[31:0] -> mem(ar)
+0633 | jmp @fetch
+0634 | pc -> ar, pc+4 -> pc
+0635 | mem(ar)[31:0] -> dr
+0636 | jmp @instruction
+0637 | if Z set: jmp @fetch
+0638 | pc + extended(dr[22:0]) -> pc
+0639 | jmp @fetch
+0640 | pc -> ar, pc+4 -> pc
+0641 | mem(ar)[31:0] -> dr
+0642 | jmp @instruction
+0643 | dr[22:0] + pc -> ar
+0644 | mem(ar)[31:0] -> dr
+0645 | dr[31:0] -> acc
+0646 | jmp @fetch
+0647 | pc -> ar, pc+4 -> pc
+0648 | mem(ar)[31:0] -> dr
+0649 | jmp @instruction
+0650 | dr[22:0] + pc -> ar
+0651 | mem(ar)[31:0] -> dr
+0652 | acc + mem(ar) -> acc
+0653 | jmp @fetch
+0654 | pc -> ar, pc+4 -> pc
+0655 | mem(ar)[31:0] -> dr
+0656 | jmp @instruction
+0657 | dr[22:0] + pc -> ar
+0658 | acc[31:0] -> mem(ar)
+0659 | jmp @fetch
+0660 | pc -> ar, pc+4 -> pc
+0661 | mem(ar)[31:0] -> dr
+0662 | jmp @instruction
+0663 | dr[22:0] + pc -> ar
+0664 | mem(ar)[31:0] -> dr
+0665 | dr[31:0] -> acc
+0666 | jmp @fetch
+0667 | pc -> ar, pc+4 -> pc
+0668 | mem(ar)[31:0] -> dr
+0669 | jmp @instruction
+0670 | dr[22:0] + pc -> ar
+0671 | mem(ar)[31:0] -> dr
+0672 | acc * mem(ar) -> acc
+0673 | jmp @fetch
+0674 | pc -> ar, pc+4 -> pc
+0675 | mem(ar)[31:0] -> dr
+0676 | jmp @instruction
+0677 | dr[22:0] + pc -> ar
+0678 | mem(ar)[31:0] -> dr
+0679 | acc + mem(ar) -> acc
+0680 | jmp @fetch
+0681 | pc -> ar, pc+4 -> pc
+0682 | mem(ar)[31:0] -> dr
+0683 | jmp @instruction
+0684 | dr[22:0] + pc -> ar
+0685 | acc[31:0] -> mem(ar)
+0686 | jmp @fetch
+0687 | pc -> ar, pc+4 -> pc
+0688 | mem(ar)[31:0] -> dr
+0689 | jmp @instruction
+0690 | dr[22:0] + pc -> ar
+0691 | mem(ar)[31:0] -> dr
+0692 | dr[31:0] -> acc
+0693 | jmp @fetch
+0694 | pc -> ar, pc+4 -> pc
+0695 | mem(ar)[31:0] -> dr
+0696 | jmp @instruction
+0697 | acc - 1 -> acc
+0698 | jmp @fetch
+0699 | pc -> ar, pc+4 -> pc
+0700 | mem(ar)[31:0] -> dr
+0701 | jmp @instruction
+0702 | dr[22:0] + pc -> ar
+0703 | acc[31:0] -> mem(ar)
+0704 | jmp @fetch
+0705 | pc -> ar, pc+4 -> pc
+0706 | mem(ar)[31:0] -> dr
+0707 | jmp @instruction
+0708 | if Z set: jmp @fetch
+0709 | pc + extended(dr[22:0]) -> pc
+0710 | jmp @fetch
+0711 | pc -> ar, pc+4 -> pc
+0712 | mem(ar)[31:0] -> dr
+0713 | jmp @instruction
+0714 | dr[22:0] + pc -> ar
+0715 | mem(ar)[31:0] -> dr
+0716 | dr[31:0] -> acc
+0717 | jmp @fetch
+0718 | pc -> ar, pc+4 -> pc
+0719 | mem(ar)[31:0] -> dr
+0720 | jmp @instruction
+0721 | dr[22:0] + pc -> ar
+0722 | mem(ar)[31:0] -> dr
+0723 | acc + mem(ar) -> acc
+0724 | jmp @fetch
+0725 | pc -> ar, pc+4 -> pc
+0726 | mem(ar)[31:0] -> dr
+0727 | jmp @instruction
+0728 | dr[22:0] + pc -> ar
+0729 | acc[31:0] -> mem(ar)
+0730 | jmp @fetch
+0731 | pc -> ar, pc+4 -> pc
+0732 | mem(ar)[31:0] -> dr
+0733 | jmp @instruction
+0734 | dr[22:0] + pc -> ar
+0735 | mem(ar)[31:0] -> dr
+0736 | dr[31:0] -> acc
+0737 | jmp @fetch
+0738 | pc -> ar, pc+4 -> pc
+0739 | mem(ar)[31:0] -> dr
+0740 | jmp @instruction
+0741 | dr[22:0] + pc -> ar
+0742 | mem(ar)[31:0] -> dr
+0743 | acc * mem(ar) -> acc
+0744 | jmp @fetch
+0745 | pc -> ar, pc+4 -> pc
+0746 | mem(ar)[31:0] -> dr
+0747 | jmp @instruction
+0748 | dr[22:0] + pc -> ar
+0749 | mem(ar)[31:0] -> dr
+0750 | acc + mem(ar) -> acc
+0751 | jmp @fetch
+0752 | pc -> ar, pc+4 -> pc
+0753 | mem(ar)[31:0] -> dr
+0754 | jmp @instruction
+0755 | dr[22:0] + pc -> ar
+0756 | acc[31:0] -> mem(ar)
+0757 | jmp @fetch
+0758 | pc -> ar, pc+4 -> pc
+0759 | mem(ar)[31:0] -> dr
+0760 | jmp @instruction
+0761 | dr[22:0] + pc -> ar
+0762 | mem(ar)[31:0] -> dr
+0763 | dr[31:0] -> acc
+0764 | jmp @fetch
+0765 | pc -> ar, pc+4 -> pc
+0766 | mem(ar)[31:0] -> dr
+0767 | jmp @instruction
+0768 | acc - 1 -> acc
+0769 | jmp @fetch
+0770 | pc -> ar, pc+4 -> pc
+0771 | mem(ar)[31:0] -> dr
+0772 | jmp @instruction
+0773 | dr[22:0] + pc -> ar
+0774 | acc[31:0] -> mem(ar)
+0775 | jmp @fetch
+0776 | pc -> ar, pc+4 -> pc
+0777 | mem(ar)[31:0] -> dr
+0778 | jmp @instruction
+0779 | if Z set: jmp @fetch
+0780 | pc + extended(dr[22:0]) -> pc
+0781 | jmp @fetch
+0782 | pc -> ar, pc+4 -> pc
+0783 | mem(ar)[31:0] -> dr
+0784 | jmp @instruction
+0785 | dr[22:0] + pc -> ar
+0786 | mem(ar)[31:0] -> dr
+0787 | dr[31:0] -> acc
+0788 | jmp @fetch
+0789 | pc -> ar, pc+4 -> pc
+0790 | mem(ar)[31:0] -> dr
+0791 | jmp @instruction
+0792 | dr[22:0] + pc -> ar
+0793 | mem(ar)[31:0] -> dr
+0794 | acc + mem(ar) -> acc
+0795 | jmp @fetch
+0796 | pc -> ar, pc+4 -> pc
+0797 | mem(ar)[31:0] -> dr
+0798 | jmp @instruction
+0799 | dr[22:0] + pc -> ar
+0800 | acc[31:0] -> mem(ar)
+0801 | jmp @fetch
+0802 | pc -> ar, pc+4 -> pc
+0803 | mem(ar)[31:0] -> dr
+0804 | jmp @instruction
+0805 | dr[22:0] + pc -> ar
+0806 | mem(ar)[31:0] -> dr
+0807 | dr[31:0] -> acc
+0808 | jmp @fetch
+0809 | pc -> ar, pc+4 -> pc
+0810 | mem(ar)[31:0] -> dr
+0811 | jmp @instruction
+0812 | dr[22:0] + pc -> ar
+0813 | mem(ar)[31:0] -> dr
+0814 | acc * mem(ar) -> acc
+0815 | jmp @fetch
+0816 | pc -> ar, pc+4 -> pc
+0817 | mem(ar)[31:0] -> dr
+0818 | jmp @instruction
+0819 | dr[22:0] + pc -> ar
+0820 | mem(ar)[31:0] -> dr
+0821 | acc + mem(ar) -> acc
+0822 | jmp @fetch
+0823 | pc -> ar, pc+4 -> pc
+0824 | mem(ar)[31:0] -> dr
+0825 | jmp @instruction
+0826 | dr[22:0] + pc -> ar
+0827 | acc[31:0] -> mem(ar)
+0828 | jmp @fetch
+0829 | pc -> ar, pc+4 -> pc
+0830 | mem(ar)[31:0] -> dr
+0831 | jmp @instruction
+0832 | dr[22:0] + pc -> ar
+0833 | mem(ar)[31:0] -> dr
+0834 | dr[31:0] -> acc
+0835 | jmp @fetch
+0836 | pc -> ar, pc+4 -> pc
+0837 | mem(ar)[31:0] -> dr
+0838 | jmp @instruction
+0839 | acc - 1 -> acc
+0840 | jmp @fetch
+0841 | pc -> ar, pc+4 -> pc
+0842 | mem(ar)[31:0] -> dr
+0843 | jmp @instruction
+0844 | dr[22:0] + pc -> ar
+0845 | acc[31:0] -> mem(ar)
+0846 | jmp @fetch
+0847 | pc -> ar, pc+4 -> pc
+0848 | mem(ar)[31:0] -> dr
+0849 | jmp @instruction
+0850 | if Z set: jmp @fetch
+0851 | pc + extended(dr[22:0]) -> pc
+0852 | jmp @fetch
+0853 | pc -> ar, pc+4 -> pc
+0854 | mem(ar)[31:0] -> dr
+0855 | jmp @instruction
+0856 | dr[22:0] + pc -> ar
+0857 | mem(ar)[31:0] -> dr
+0858 | dr[31:0] -> acc
+0859 | jmp @fetch
+0860 | pc -> ar, pc+4 -> pc
+0861 | mem(ar)[31:0] -> dr
+0862 | jmp @instruction
+0863 | dr[22:0] + pc -> ar
+0864 | mem(ar)[31:0] -> dr
+0865 | acc + mem(ar) -> acc
+0866 | jmp @fetch
+0867 | pc -> ar, pc+4 -> pc
+0868 | mem(ar)[31:0] -> dr
+0869 | jmp @instruction
+0870 | dr[22:0] + pc -> ar
+0871 | acc[31:0] -> mem(ar)
+0872 | jmp @fetch
+0873 | pc -> ar, pc+4 -> pc
+0874 | mem(ar)[31:0] -> dr
+0875 | jmp @instruction
+0876 | dr[22:0] + pc -> ar
+0877 | mem(ar)[31:0] -> dr
+0878 | dr[31:0] -> acc
+0879 | jmp @fetch
+0880 | pc -> ar, pc+4 -> pc
+0881 | mem(ar)[31:0] -> dr
+0882 | jmp @instruction
+0883 | dr[22:0] + pc -> ar
+0884 | mem(ar)[31:0] -> dr
+0885 | acc * mem(ar) -> acc
+0886 | jmp @fetch
+0887 | pc -> ar, pc+4 -> pc
+0888 | mem(ar)[31:0] -> dr
+0889 | jmp @instruction
+0890 | dr[22:0] + pc -> ar
+0891 | mem(ar)[31:0] -> dr
+0892 | acc + mem(ar) -> acc
+0893 | jmp @fetch
+0894 | pc -> ar, pc+4 -> pc
+0895 | mem(ar)[31:0] -> dr
+0896 | jmp @instruction
+0897 | dr[22:0] + pc -> ar
+0898 | acc[31:0] -> mem(ar)
+0899 | jmp @fetch
+0900 | pc -> ar, pc+4 -> pc
+0901 | mem(ar)[31:0] -> dr
+0902 | jmp @instruction
+0903 | dr[22:0] + pc -> ar
+0904 | mem(ar)[31:0] -> dr
+0905 | dr[31:0] -> acc
+0906 | jmp @fetch
+0907 | pc -> ar, pc+4 -> pc
+0908 | mem(ar)[31:0] -> dr
+0909 | jmp @instruction
+0910 | acc - 1 -> acc
+0911 | jmp @fetch
+0912 | pc -> ar, pc+4 -> pc
+0913 | mem(ar)[31:0] -> dr
+0914 | jmp @instruction
+0915 | dr[22:0] + pc -> ar
+0916 | acc[31:0] -> mem(ar)
+0917 | jmp @fetch
+0918 | pc -> ar, pc+4 -> pc
+0919 | mem(ar)[31:0] -> dr
+0920 | jmp @instruction
+0921 | if Z set: jmp @fetch
+0922 | pc + extended(dr[22:0]) -> pc
+0923 | jmp @fetch
+0924 | pc -> ar, pc+4 -> pc
+0925 | mem(ar)[31:0] -> dr
+0926 | jmp @instruction
+0927 | dr[22:0] + pc -> ar
+0928 | mem(ar)[31:0] -> dr
+0929 | dr[31:0] -> acc
+0930 | jmp @fetch
+0931 | pc -> ar, pc+4 -> pc
+0932 | mem(ar)[31:0] -> dr
+0933 | jmp @instruction
+0934 | dr[22:0] + pc -> ar
+0935 | mem(ar)[31:0] -> dr
+0936 | acc + mem(ar) -> acc
+0937 | jmp @fetch
+0938 | pc -> ar, pc+4 -> pc
+0939 | mem(ar)[31:0] -> dr
+0940 | jmp @instruction
+0941 | dr[22:0] + pc -> ar
+0942 | acc[31:0] -> mem(ar)
+0943 | jmp @fetch
+0944 | pc -> ar, pc+4 -> pc
+0945 | mem(ar)[31:0] -> dr
+0946 | jmp @instruction
+0947 | dr[22:0] + pc -> ar
+0948 | mem(ar)[31:0] -> dr
+0949 | dr[31:0] -> acc
+0950 | jmp @fetch
+0951 | pc -> ar, pc+4 -> pc
+0952 | mem(ar)[31:0] -> dr
+0953 | jmp @instruction
+0954 | dr[22:0] + pc -> ar
+0955 | mem(ar)[31:0] -> dr
+0956 | acc * mem(ar) -> acc
+0957 | jmp @fetch
+0958 | pc -> ar, pc+4 -> pc
+0959 | mem(ar)[31:0] -> dr
+0960 | jmp @instruction
+0961 | dr[22:0] + pc -> ar
+0962 | mem(ar)[31:0] -> dr
+0963 | acc + mem(ar) -> acc
+0964 | jmp @fetch
+0965 | pc -> ar, pc+4 -> pc
+0966 | mem(ar)[31:0] -> dr
+0967 | jmp @instruction
+0968 | dr[22:0] + pc -> ar
+0969 | acc[31:0] -> mem(ar)
+0970 | jmp @fetch
+0971 | pc -> ar, pc+4 -> pc
+0972 | mem(ar)[31:0] -> dr
+0973 | jmp @instruction
+0974 | dr[22:0] + pc -> ar
+0975 | mem(ar)[31:0] -> dr
+0976 | dr[31:0] -> acc
+0977 | jmp @fetch
+0978 | pc -> ar, pc+4 -> pc
+0979 | mem(ar)[31:0] -> dr
+0980 | jmp @instruction
+0981 | acc - 1 -> acc
+0982 | jmp @fetch
+0983 | pc -> ar, pc+4 -> pc
+0984 | mem(ar)[31:0] -> dr
+0985 | jmp @instruction
+0986 | dr[22:0] + pc -> ar
+0987 | acc[31:0] -> mem(ar)
+0988 | jmp @fetch
+0989 | pc -> ar, pc+4 -> pc
+0990 | mem(ar)[31:0] -> dr
+0991 | jmp @instruction
+0992 | if Z set: jmp @fetch
+0993 | pc + extended(dr[22:0]) -> pc
+0994 | jmp @fetch
+0995 | pc -> ar, pc+4 -> pc
+0996 | mem(ar)[31:0] -> dr
+0997 | jmp @instruction
+0998 | dr[22:0] + pc -> ar
+0999 | mem(ar)[31:0] -> dr
+1000 | dr[31:0] -> acc
+1001 | jmp @fetch
+1002 | pc -> ar, pc+4 -> pc
+1003 | mem(ar)[31:0] -> dr
+1004 | jmp @instruction
+1005 | dr[22:0] + pc -> ar
+1006 | mem(ar)[31:0] -> dr
+1007 | acc + mem(ar) -> acc
+1008 | jmp @fetch
+1009 | pc -> ar, pc+4 -> pc
+1010 | mem(ar)[31:0] -> dr
+1011 | jmp @instruction
+1012 | dr[22:0] + pc -> ar
+1013 | acc[31:0] -> mem(ar)
+1014 | jmp @fetch
+1015 | pc -> ar, pc+4 -> pc
+1016 | mem(ar)[31:0] -> dr
+1017 | jmp @instruction
+1018 | dr[22:0] + pc -> ar
+1019 | mem(ar)[31:0] -> dr
+1020 | dr[31:0] -> acc
+1021 | jmp @fetch
+1022 | pc -> ar, pc+4 -> pc
+1023 | mem(ar)[31:0] -> dr
+1024 | jmp @instruction
+1025 | dr[22:0] + pc -> ar
+1026 | mem(ar)[31:0] -> dr
+1027 | acc * mem(ar) -> acc
+1028 | jmp @fetch
+1029 | pc -> ar, pc+4 -> pc
+1030 | mem(ar)[31:0] -> dr
+1031 | jmp @instruction
+1032 | dr[22:0] + pc -> ar
+1033 | mem(ar)[31:0] -> dr
+1034 | acc + mem(ar) -> acc
+1035 | jmp @fetch
+1036 | pc -> ar, pc+4 -> pc
+1037 | mem(ar)[31:0] -> dr
+1038 | jmp @instruction
+1039 | dr[22:0] + pc -> ar
+1040 | acc[31:0] -> mem(ar)
+1041 | jmp @fetch
+1042 | pc -> ar, pc+4 -> pc
+1043 | mem(ar)[31:0] -> dr
+1044 | jmp @instruction
+1045 | dr[22:0] + pc -> ar
+1046 | mem(ar)[31:0] -> dr
+1047 | dr[31:0] -> acc
+1048 | jmp @fetch
+1049 | pc -> ar, pc+4 -> pc
+1050 | mem(ar)[31:0] -> dr
+1051 | jmp @instruction
+1052 | acc - 1 -> acc
+1053 | jmp @fetch
+1054 | pc -> ar, pc+4 -> pc
+1055 | mem(ar)[31:0] -> dr
+1056 | jmp @instruction
+1057 | dr[22:0] + pc -> ar
+1058 | acc[31:0] -> mem(ar)
+1059 | jmp @fetch
+1060 | pc -> ar, pc+4 -> pc
+1061 | mem(ar)[31:0] -> dr
+1062 | jmp @instruction
+1063 | if Z set: jmp @fetch
+1064 | pc + extended(dr[22:0]) -> pc
+1065 | jmp @fetch
+1066 | pc -> ar, pc+4 -> pc
+1067 | mem(ar)[31:0] -> dr
+1068 | jmp @instruction
+1069 | dr[22:0] + pc -> ar
+1070 | mem(ar)[31:0] -> dr
+1071 | dr[31:0] -> acc
+1072 | jmp @fetch
+1073 | pc -> ar, pc+4 -> pc
+1074 | mem(ar)[31:0] -> dr
+1075 | jmp @instruction
+1076 | dr[22:0] + pc -> ar
+1077 | mem(ar)[31:0] -> dr
+1078 | acc + mem(ar) -> acc
+1079 | jmp @fetch
+1080 | pc -> ar, pc+4 -> pc
+1081 | mem(ar)[31:0] -> dr
+1082 | jmp @instruction
+1083 | dr[22:0] + pc -> ar
+1084 | acc[31:0] -> mem(ar)
+1085 | jmp @fetch
+1086 | pc -> ar, pc+4 -> pc
+1087 | mem(ar)[31:0] -> dr
+1088 | jmp @instruction
+1089 | dr[22:0] + pc -> ar
+1090 | mem(ar)[31:0] -> dr
+1091 | dr[31:0] -> acc
+1092 | jmp @fetch
+1093 | pc -> ar, pc+4 -> pc
+1094 | mem(ar)[31:0] -> dr
+1095 | jmp @instruction
+1096 | dr[22:0] + pc -> ar
+1097 | mem(ar)[31:0] -> dr
+1098 | acc * mem(ar) -> acc
+1099 | jmp @fetch
+1100 | pc -> ar, pc+4 -> pc
+1101 | mem(ar)[31:0] -> dr
+1102 | jmp @instruction
+1103 | dr[22:0] + pc -> ar
+1104 | mem(ar)[31:0] -> dr
+1105 | acc + mem(ar) -> acc
+1106 | jmp @fetch
+1107 | pc -> ar, pc+4 -> pc
+1108 | mem(ar)[31:0] -> dr
+1109 | jmp @instruction
+1110 | dr[22:0] + pc -> ar
+1111 | acc[31:0] -> mem(ar)
+1112 | jmp @fetch
+1113 | pc -> ar, pc+4 -> pc
+1114 | mem(ar)[31:0] -> dr
+1115 | jmp @instruction
+1116 | dr[22:0] + pc -> ar
+1117 | mem(ar)[31:0] -> dr
+1118 | dr[31:0] -> acc
+1119 | jmp @fetch
+1120 | pc -> ar, pc+4 -> pc
+1121 | mem(ar)[31:0] -> dr
+1122 | jmp @instruction
+1123 | acc - 1 -> acc
+1124 | jmp @fetch
+1125 | pc -> ar, pc+4 -> pc
+1126 | mem(ar)[31:0] -> dr
+1127 | jmp @instruction
+1128 | dr[22:0] + pc -> ar
+1129 | acc[31:0] -> mem(ar)
+1130 | jmp @fetch
+1131 | pc -> ar, pc+4 -> pc
+1132 | mem(ar)[31:0] -> dr
+1133 | jmp @instruction
+1134 | if Z set: jmp @fetch
+1135 | pc + extended(dr[22:0]) -> pc
+1136 | jmp @fetch
+1137 | pc -> ar, pc+4 -> pc
+1138 | mem(ar)[31:0] -> dr
+1139 | jmp @instruction
+1140 | dr[22:0] + pc -> ar
+1141 | mem(ar)[31:0] -> dr
+1142 | dr[31:0] -> acc
+1143 | jmp @fetch
+1144 | pc -> ar, pc+4 -> pc
+1145 | mem(ar)[31:0] -> dr
+1146 | jmp @instruction
+1147 | dr[22:0] + pc -> ar
+1148 | mem(ar)[31:0] -> dr
+1149 | acc + mem(ar) -> acc
+1150 | jmp @fetch
+1151 | pc -> ar, pc+4 -> pc
+1152 | mem(ar)[31:0] -> dr
+1153 | jmp @instruction
+1154 | dr[22:0] + pc -> ar
+1155 | acc[31:0] -> mem(ar)
+1156 | jmp @fetch
+1157 | pc -> ar, pc+4 -> pc
+1158 | mem(ar)[31:0] -> dr
+1159 | jmp @instruction
+1160 | dr[22:0] + pc -> ar
+1161 | mem(ar)[31:0] -> dr
+1162 | dr[31:0] -> acc
+1163 | jmp @fetch
+1164 | pc -> ar, pc+4 -> pc
+1165 | mem(ar)[31:0] -> dr
+1166 | jmp @instruction
+1167 | dr[22:0] + pc -> ar
+1168 | mem(ar)[31:0] -> dr
+1169 | acc * mem(ar) -> acc
+1170 | jmp @fetch
+1171 | pc -> ar, pc+4 -> pc
+1172 | mem(ar)[31:0] -> dr
+1173 | jmp @instruction
+1174 | dr[22:0] + pc -> ar
+1175 | mem(ar)[31:0] -> dr
+1176 | acc + mem(ar) -> acc
+1177 | jmp @fetch
+1178 | pc -> ar, pc+4 -> pc
+1179 | mem(ar)[31:0] -> dr
+1180 | jmp @instruction
+1181 | dr[22:0] + pc -> ar
+1182 | acc[31:0] -> mem(ar)
+1183 | jmp @fetch
+1184 | pc -> ar, pc+4 -> pc
+1185 | mem(ar)[31:0] -> dr
+1186 | jmp @instruction
+1187 | dr[22:0] + pc -> ar
+1188 | mem(ar)[31:0] -> dr
+1189 | dr[31:0] -> acc
+1190 | jmp @fetch
+1191 | pc -> ar, pc+4 -> pc
+1192 | mem(ar)[31:0] -> dr
+1193 | jmp @instruction
+1194 | acc - 1 -> acc
+1195 | jmp @fetch
+1196 | pc -> ar, pc+4 -> pc
+1197 | mem(ar)[31:0] -> dr
+1198 | jmp @instruction
+1199 | dr[22:0] + pc -> ar
+1200 | acc[31:0] -> mem(ar)
+1201 | jmp @fetch
+1202 | pc -> ar, pc+4 -> pc
+1203 | mem(ar)[31:0] -> dr
+1204 | jmp @instruction
+1205 | if Z set: jmp @fetch
+1206 | pc + extended(dr[22:0]) -> pc
+1207 | jmp @fetch
+1208 | pc -> ar, pc+4 -> pc
+1209 | mem(ar)[31:0] -> dr
+1210 | jmp @instruction
+1211 | dr[22:0] + pc -> ar
+1212 | mem(ar)[31:0] -> dr
+1213 | dr[31:0] -> acc
+1214 | jmp @fetch
+1215 | pc -> ar, pc+4 -> pc
+1216 | mem(ar)[31:0] -> dr
+1217 | jmp @instruction
+1218 | dr[22:0] + pc -> ar
+1219 | mem(ar)[31:0] -> dr
+1220 | acc + mem(ar) -> acc
+1221 | jmp @fetch
+1222 | pc -> ar, pc+4 -> pc
+1223 | mem(ar)[31:0] -> dr
+1224 | jmp @instruction
+1225 | dr[22:0] + pc -> ar
+1226 | acc[31:0] -> mem(ar)
+1227 | jmp @fetch
+1228 | pc -> ar, pc+4 -> pc
+1229 | mem(ar)[31:0] -> dr
+1230 | jmp @instruction
+1231 | dr[22:0] + pc -> ar
+1232 | mem(ar)[31:0] -> dr
+1233 | dr[31:0] -> acc
+1234 | jmp @fetch
+1235 | pc -> ar, pc+4 -> pc
+1236 | mem(ar)[31:0] -> dr
+1237 | jmp @instruction
+1238 | dr[22:0] + pc -> ar
+1239 | mem(ar)[31:0] -> dr
+1240 | acc * mem(ar) -> acc
+1241 | jmp @fetch
+1242 | pc -> ar, pc+4 -> pc
+1243 | mem(ar)[31:0] -> dr
+1244 | jmp @instruction
+1245 | dr[22:0] + pc -> ar
+1246 | mem(ar)[31:0] -> dr
+1247 | acc + mem(ar) -> acc
+1248 | jmp @fetch
+1249 | pc -> ar, pc+4 -> pc
+1250 | mem(ar)[31:0] -> dr
+1251 | jmp @instruction
+1252 | dr[22:0] + pc -> ar
+1253 | acc[31:0] -> mem(ar)
+1254 | jmp @fetch
+1255 | pc -> ar, pc+4 -> pc
+1256 | mem(ar)[31:0] -> dr
+1257 | jmp @instruction
+1258 | dr[22:0] + pc -> ar
+1259 | mem(ar)[31:0] -> dr
+1260 | dr[31:0] -> acc
+1261 | jmp @fetch
+1262 | pc -> ar, pc+4 -> pc
+1263 | mem(ar)[31:0] -> dr
+1264 | jmp @instruction
+1265 | acc - 1 -> acc
+1266 | jmp @fetch
+1267 | pc -> ar, pc+4 -> pc
+1268 | mem(ar)[31:0] -> dr
+1269 | jmp @instruction
+1270 | dr[22:0] + pc -> ar
+1271 | acc[31:0] -> mem(ar)
+1272 | jmp @fetch
+1273 | pc -> ar, pc+4 -> pc
+1274 | mem(ar)[31:0] -> dr
+1275 | jmp @instruction
+1276 | if Z set: jmp @fetch
+1277 | pc + extended(dr[22:0]) -> pc
+1278 | jmp @fetch
+1279 | pc -> ar, pc+4 -> pc
+1280 | mem(ar)[31:0] -> dr
+1281 | jmp @instruction
+1282 | dr[22:0] + pc -> ar
+1283 | mem(ar)[31:0] -> dr
+1284 | dr[31:0] -> acc
+1285 | jmp @fetch
+1286 | pc -> ar, pc+4 -> pc
+1287 | mem(ar)[31:0] -> dr
+1288 | jmp @instruction
+1289 | dr[22:0] + pc -> ar
+1290 | mem(ar)[31:0] -> dr
+1291 | acc + mem(ar) -> acc
+1292 | jmp @fetch
+1293 | pc -> ar, pc+4 -> pc
+1294 | mem(ar)[31:0] -> dr
+1295 | jmp @instruction
+1296 | dr[22:0] + pc -> ar
+1297 | acc[31:0] -> mem(ar)
+1298 | jmp @fetch
+1299 | pc -> ar, pc+4 -> pc
+1300 | mem(ar)[31:0] -> dr
+1301 | jmp @instruction
+1302 | dr[22:0] + pc -> ar
+1303 | mem(ar)[31:0] -> dr
+1304 | dr[31:0] -> acc
+1305 | jmp @fetch
+1306 | pc -> ar, pc+4 -> pc
+1307 | mem(ar)[31:0] -> dr
+1308 | jmp @instruction
+1309 | dr[22:0] + pc -> ar
+1310 | mem(ar)[31:0] -> dr
+1311 | acc * mem(ar) -> acc
+1312 | jmp @fetch
+1313 | pc -> ar, pc+4 -> pc
+1314 | mem(ar)[31:0] -> dr
+1315 | jmp @instruction
+1316 | dr[22:0] + pc -> ar
+1317 | mem(ar)[31:0] -> dr
+1318 | acc + mem(ar) -> acc
+1319 | jmp @fetch
+1320 | pc -> ar, pc+4 -> pc
+1321 | mem(ar)[31:0] -> dr
+1322 | jmp @instruction
+1323 | dr[22:0] + pc -> ar
+1324 | acc[31:0] -> mem(ar)
+1325 | jmp @fetch
+1326 | pc -> ar, pc+4 -> pc
+1327 | mem(ar)[31:0] -> dr
+1328 | jmp @instruction
+1329 | dr[22:0] + pc -> ar
+1330 | mem(ar)[31:0] -> dr
+1331 | dr[31:0] -> acc
+1332 | jmp @fetch
+1333 | pc -> ar, pc+4 -> pc
+1334 | mem(ar)[31:0] -> dr
+1335 | jmp @instruction
+1336 | acc - 1 -> acc
+1337 | jmp @fetch
+1338 | pc -> ar, pc+4 -> pc
+1339 | mem(ar)[31:0] -> dr
+1340 | jmp @instruction
+1341 | dr[22:0] + pc -> ar
+1342 | acc[31:0] -> mem(ar)
+1343 | jmp @fetch
+1344 | pc -> ar, pc+4 -> pc
+1345 | mem(ar)[31:0] -> dr
+1346 | jmp @instruction
+1347 | if Z set: jmp @fetch
+1348 | pc + extended(dr[22:0]) -> pc
+1349 | jmp @fetch
+1350 | pc -> ar, pc+4 -> pc
+1351 | mem(ar)[31:0] -> dr
+1352 | jmp @instruction
+1353 | dr[22:0] + pc -> ar
+1354 | mem(ar)[31:0] -> dr
+1355 | dr[31:0] -> acc
+1356 | jmp @fetch
+1357 | pc -> ar, pc+4 -> pc
+1358 | mem(ar)[31:0] -> dr
+1359 | jmp @instruction
+1360 | dr[22:0] + pc -> ar
+1361 | mem(ar)[31:0] -> dr
+1362 | acc + mem(ar) -> acc
+1363 | jmp @fetch
+1364 | pc -> ar, pc+4 -> pc
+1365 | mem(ar)[31:0] -> dr
+1366 | jmp @instruction
+1367 | dr[22:0] + pc -> ar
+1368 | acc[31:0] -> mem(ar)
+1369 | jmp @fetch
+1370 | pc -> ar, pc+4 -> pc
+1371 | mem(ar)[31:0] -> dr
+1372 | jmp @instruction
+1373 | dr[22:0] + pc -> ar
+1374 | mem(ar)[31:0] -> dr
+1375 | dr[31:0] -> acc
+1376 | jmp @fetch
+1377 | pc -> ar, pc+4 -> pc
+1378 | mem(ar)[31:0] -> dr
+1379 | jmp @instruction
+1380 | dr[22:0] + pc -> ar
+1381 | mem(ar)[31:0] -> dr
+1382 | acc * mem(ar) -> acc
+1383 | jmp @fetch
+1384 | pc -> ar, pc+4 -> pc
+1385 | mem(ar)[31:0] -> dr
+1386 | jmp @instruction
+1387 | dr[22:0] + pc -> ar
+1388 | mem(ar)[31:0] -> dr
+1389 | acc + mem(ar) -> acc
+1390 | jmp @fetch
+1391 | pc -> ar, pc+4 -> pc
+1392 | mem(ar)[31:0] -> dr
+1393 | jmp @instruction
+1394 | dr[22:0] + pc -> ar
+1395 | acc[31:0] -> mem(ar)
+1396 | jmp @fetch
+1397 | pc -> ar, pc+4 -> pc
+1398 | mem(ar)[31:0] -> dr
+1399 | jmp @instruction
+1400 | dr[22:0] + pc -> ar
+1401 | mem(ar)[31:0] -> dr
+1402 | dr[31:0] -> acc
+1403 | jmp @fetch
+1404 | pc -> ar, pc+4 -> pc
+1405 | mem(ar)[31:0] -> dr
+1406 | jmp @instruction
+1407 | acc - 1 -> acc
+1408 | jmp @fetch
+1409 | pc -> ar, pc+4 -> pc
+1410 | mem(ar)[31:0] -> dr
+1411 | jmp @instruction
+1412 | dr[22:0] + pc -> ar
+1413 | acc[31:0] -> mem(ar)
+1414 | jmp @fetch
+1415 | pc -> ar, pc+4 -> pc
+1416 | mem(ar)[31:0] -> dr
+1417 | jmp @instruction
+1418 | if Z set: jmp @fetch
+1419 | pc + extended(dr[22:0]) -> pc
+1420 | jmp @fetch
+1421 | pc -> ar, pc+4 -> pc
+1422 | mem(ar)[31:0] -> dr
+1423 | jmp @instruction
+1424 | dr[22:0] + pc -> ar
+1425 | mem(ar)[31:0] -> dr
+1426 | dr[31:0] -> acc
+1427 | jmp @fetch
+1428 | pc -> ar, pc+4 -> pc
+1429 | mem(ar)[31:0] -> dr
+1430 | jmp @instruction
+1431 | dr[22:0] + pc -> ar
+1432 | mem(ar)[31:0] -> dr
+1433 | acc + mem(ar) -> acc
+1434 | jmp @fetch
+1435 | pc -> ar, pc+4 -> pc
+1436 | mem(ar)[31:0] -> dr
+1437 | jmp @instruction
+1438 | dr[22:0] + pc -> ar
+1439 | acc[31:0] -> mem(ar)
+1440 | jmp @fetch
+1441 | pc -> ar, pc+4 -> pc
+1442 | mem(ar)[31:0] -> dr
+1443 | jmp @instruction
+1444 | dr[22:0] + pc -> ar
+1445 | mem(ar)[31:0] -> dr
+1446 | dr[31:0] -> acc
+1447 | jmp @fetch
+1448 | pc -> ar, pc+4 -> pc
+1449 | mem(ar)[31:0] -> dr
+1450 | jmp @instruction
+1451 | dr[22:0] + pc -> ar
+1452 | mem(ar)[31:0] -> dr
+1453 | acc * mem(ar) -> acc
+1454 | jmp @fetch
+1455 | pc -> ar, pc+4 -> pc
+1456 | mem(ar)[31:0] -> dr
+1457 | jmp @instruction
+1458 | dr[22:0] + pc -> ar
+1459 | mem(ar)[31:0] -> dr
+1460 | acc + mem(ar) -> acc
+1461 | jmp @fetch
+1462 | pc -> ar, pc+4 -> pc
+1463 | mem(ar)[31:0] -> dr
+1464 | jmp @instruction
+1465 | dr[22:0] + pc -> ar
+1466 | acc[31:0] -> mem(ar)
+1467 | jmp @fetch
+1468 | pc -> ar, pc+4 -> pc
+1469 | mem(ar)[31:0] -> dr
+1470 | jmp @instruction
+1471 | dr[22:0] + pc -> ar
+1472 | mem(ar)[31:0] -> dr
+1473 | dr[31:0] -> acc
+1474 | jmp @fetch
+1475 | pc -> ar, pc+4 -> pc
+1476 | mem(ar)[31:0] -> dr
+1477 | jmp @instruction
+1478 | acc - 1 -> acc
+1479 | jmp @fetch
+1480 | pc -> ar, pc+4 -> pc
+1481 | mem(ar)[31:0] -> dr
+1482 | jmp @instruction
+1483 | dr[22:0] + pc -> ar
+1484 | acc[31:0] -> mem(ar)
+1485 | jmp @fetch
+1486 | pc -> ar, pc+4 -> pc
+1487 | mem(ar)[31:0] -> dr
+1488 | jmp @instruction
+1489 | if Z set: jmp @fetch
+1490 | pc + extended(dr[22:0]) -> pc
+1491 | jmp @fetch
+1492 | pc -> ar, pc+4 -> pc
+1493 | mem(ar)[31:0] -> dr
+1494 | jmp @instruction
+1495 | dr[22:0] + pc -> ar
+1496 | mem(ar)[31:0] -> dr
+1497 | dr[31:0] -> acc
+1498 | jmp @fetch
+1499 | pc -> ar, pc+4 -> pc
+1500 | mem(ar)[31:0] -> dr
+1501 | jmp @instruction
+1502 | dr[22:0] + pc -> ar
+1503 | mem(ar)[31:0] -> dr
+1504 | acc + mem(ar) -> acc
+1505 | jmp @fetch
+1506 | pc -> ar, pc+4 -> pc
+1507 | mem(ar)[31:0] -> dr
+1508 | jmp @instruction
+1509 | dr[22:0] + pc -> ar
+1510 | acc[31:0] -> mem(ar)
+1511 | jmp @fetch
+1512 | pc -> ar, pc+4 -> pc
+1513 | mem(ar)[31:0] -> dr
+1514 | jmp @instruction
+1515 | dr[22:0] + pc -> ar
+1516 | mem(ar)[31:0] -> dr
+1517 | dr[31:0] -> acc
+1518 | jmp @fetch
+1519 | pc -> ar, pc+4 -> pc
+1520 | mem(ar)[31:0] -> dr
+1521 | jmp @instruction
+1522 | dr[22:0] + pc -> ar
+1523 | mem(ar)[31:0] -> dr
+1524 | acc * mem(ar) -> acc
+1525 | jmp @fetch
+1526 | pc -> ar, pc+4 -> pc
+1527 | mem(ar)[31:0] -> dr
+1528 | jmp @instruction
+1529 | dr[22:0] + pc -> ar
+1530 | mem(ar)[31:0] -> dr
+1531 | acc + mem(ar) -> acc
+1532 | jmp @fetch
+1533 | pc -> ar, pc+4 -> pc
+1534 | mem(ar)[31:0] -> dr
+1535 | jmp @instruction
+1536 | dr[22:0] + pc -> ar
+1537 | acc[31:0] -> mem(ar)
+1538 | jmp @fetch
+1539 | pc -> ar, pc+4 -> pc
+1540 | mem(ar)[31:0] -> dr
+1541 | jmp @instruction
+1542 | dr[22:0] + pc -> ar
+1543 | mem(ar)[31:0] -> dr
+1544 | dr[31:0] -> acc
+1545 | jmp @fetch
+1546 | pc -> ar, pc+4 -> pc
+1547 | mem(ar)[31:0] -> dr
+1548 | jmp @instruction
+1549 | acc - 1 -> acc
+1550 | jmp @fetch
+1551 | pc -> ar, pc+4 -> pc
+1552 | mem(ar)[31:0] -> dr
+1553 | jmp @instruction
+1554 | dr[22:0] + pc -> ar
+1555 | acc[31:0] -> mem(ar)
+1556 | jmp @fetch
+1557 | pc -> ar, pc+4 -> pc
+1558 | mem(ar)[31:0] -> dr
+1559 | jmp @instruction
+1560 | if Z set: jmp @fetch
+1561 | pc + extended(dr[22:0]) -> pc
+1562 | jmp @fetch
+1563 | pc -> ar, pc+4 -> pc
+1564 | mem(ar)[31:0] -> dr
+1565 | jmp @instruction
+1566 | dr[22:0] + pc -> ar
+1567 | mem(ar)[31:0] -> dr
+1568 | dr[31:0] -> acc
+1569 | jmp @fetch
+1570 | pc -> ar, pc+4 -> pc
+1571 | mem(ar)[31:0] -> dr
+1572 | jmp @instruction
+1573 | dr[22:0] + pc -> ar
+1574 | mem(ar)[31:0] -> dr
+1575 | acc + mem(ar) -> acc
+1576 | jmp @fetch
+1577 | pc -> ar, pc+4 -> pc
+1578 | mem(ar)[31:0] -> dr
+1579 | jmp @instruction
+1580 | dr[22:0] + pc -> ar
+1581 | acc[31:0] -> mem(ar)
+1582 | jmp @fetch
+1583 | pc -> ar, pc+4 -> pc
+1584 | mem(ar)[31:0] -> dr
+1585 | jmp @instruction
+1586 | dr[22:0] + pc -> ar
+1587 | mem(ar)[31:0] -> dr
+1588 | dr[31:0] -> acc
+1589 | jmp @fetch
+1590 | pc -> ar, pc+4 -> pc
+1591 | mem(ar)[31:0] -> dr
+1592 | jmp @instruction
+1593 | dr[22:0] + pc -> ar
+1594 | mem(ar)[31:0] -> dr
+1595 | acc * mem(ar) -> acc
+1596 | jmp @fetch
+1597 | pc -> ar, pc+4 -> pc
+1598 | mem(ar)[31:0] -> dr
+1599 | jmp @instruction
+1600 | dr[22:0] + pc -> ar
+1601 | mem(ar)[31:0] -> dr
+1602 | acc + mem(ar) -> acc
+1603 | jmp @fetch
+1604 | pc -> ar, pc+4 -> pc
+1605 | mem(ar)[31:0] -> dr
+1606 | jmp @instruction
+1607 | dr[22:0] + pc -> ar
+1608 | acc[31:0] -> mem(ar)
+1609 | jmp @fetch
+1610 | pc -> ar, pc+4 -> pc
+1611 | mem(ar)[31:0] -> dr
+1612 | jmp @instruction
+1613 | dr[22:0] + pc -> ar
+1614 | mem(ar)[31:0] -> dr
+1615 | dr[31:0] -> acc
+1616 | jmp @fetch
+1617 | pc -> ar, pc+4 -> pc
+1618 | mem(ar)[31:0] -> dr
+1619 | jmp @instruction
+1620 | acc - 1 -> acc
+1621 | jmp @fetch
+1622 | pc -> ar, pc+4 -> pc
+1623 | mem(ar)[31:0] -> dr
+1624 | jmp @instruction
+1625 | dr[22:0] + pc -> ar
+1626 | acc[31:0] -> mem(ar)
+1627 | jmp @fetch
+1628 | pc -> ar, pc+4 -> pc
+1629 | mem(ar)[31:0] -> dr
+1630 | jmp @instruction
+1631 | if Z set: jmp @fetch
+1632 | pc + extended(dr[22:0]) -> pc
+1633 | jmp @fetch
+1634 | pc -> ar, pc+4 -> pc
+1635 | mem(ar)[31:0] -> dr
+1636 | jmp @instruction
+1637 | dr[22:0] + pc -> ar
+1638 | mem(ar)[31:0] -> dr
+1639 | dr[31:0] -> acc
+1640 | jmp @fetch
+1641 | pc -> ar, pc+4 -> pc
+1642 | mem(ar)[31:0] -> dr
+1643 | jmp @instruction
+1644 | dr[22:0] + pc -> ar
+1645 | mem(ar)[31:0] -> dr
+1646 | acc + mem(ar) -> acc
+1647 | jmp @fetch
+1648 | pc -> ar, pc+4 -> pc
+1649 | mem(ar)[31:0] -> dr
+1650 | jmp @instruction
+1651 | dr[22:0] + pc -> ar
+1652 | acc[31:0] -> mem(ar)
+1653 | jmp @fetch
+1654 | pc -> ar, pc+4 -> pc
+1655 | mem(ar)[31:0] -> dr
+1656 | jmp @instruction
+1657 | dr[22:0] + pc -> ar
+1658 | mem(ar)[31:0] -> dr
+1659 | dr[31:0] -> acc
+1660 | jmp @fetch
+1661 | pc -> ar, pc+4 -> pc
+1662 | mem(ar)[31:0] -> dr
+1663 | jmp @instruction
+1664 | dr[22:0] + pc -> ar
+1665 | mem(ar)[31:0] -> dr
+1666 | acc * mem(ar) -> acc
+1667 | jmp @fetch
+1668 | pc -> ar, pc+4 -> pc
+1669 | mem(ar)[31:0] -> dr
+1670 | jmp @instruction
+1671 | dr[22:0] + pc -> ar
+1672 | mem(ar)[31:0] -> dr
+1673 | acc + mem(ar) -> acc
+1674 | jmp @fetch
+1675 | pc -> ar, pc+4 -> pc
+1676 | mem(ar)[31:0] -> dr
+1677 | jmp @instruction
+1678 | dr[22:0] + pc -> ar
+1679 | acc[31:0] -> mem(ar)
+1680 | jmp @fetch
+1681 | pc -> ar, pc+4 -> pc
+1682 | mem(ar)[31:0] -> dr
+1683 | jmp @instruction
+1684 | dr[22:0] + pc -> ar
+1685 | mem(ar)[31:0] -> dr
+1686 | dr[31:0] -> acc
+1687 | jmp @fetch
+1688 | pc -> ar, pc+4 -> pc
+1689 | mem(ar)[31:0] -> dr
+1690 | jmp @instruction
+1691 | acc - 1 -> acc
+1692 | jmp @fetch
+1693 | pc -> ar, pc+4 -> pc
+1694 | mem(ar)[31:0] -> dr
+1695 | jmp @instruction
+1696 | dr[22:0] + pc -> ar
+1697 | acc[31:0] -> mem(ar)
+1698 | jmp @fetch
+1699 | pc -> ar, pc+4 -> pc
+1700 | mem(ar)[31:0] -> dr
+1701 | jmp @instruction
+1702 | if Z set: jmp @fetch
+1703 | pc + extended(dr[22:0]) -> pc
+1704 | jmp @fetch
+1705 | pc -> ar, pc+4 -> pc
+1706 | mem(ar)[31:0] -> dr
+1707 | jmp @instruction
+1708 | dr[22:0] + pc -> ar
+1709 | mem(ar)[31:0] -> dr
+1710 | dr[31:0] -> acc
+1711 | jmp @fetch
+1712 | pc -> ar, pc+4 -> pc
+1713 | mem(ar)[31:0] -> dr
+1714 | jmp @instruction
+1715 | dr[22:0] + pc -> ar
+1716 | mem(ar)[31:0] -> dr
+1717 | acc + mem(ar) -> acc
+1718 | jmp @fetch
+1719 | pc -> ar, pc+4 -> pc
+1720 | mem(ar)[31:0] -> dr
+1721 | jmp @instruction
+1722 | dr[22:0] + pc -> ar
+1723 | acc[31:0] -> mem(ar)
+1724 | jmp @fetch
+1725 | pc -> ar, pc+4 -> pc
+1726 | mem(ar)[31:0] -> dr
+1727 | jmp @instruction
+1728 | dr[22:0] + pc -> ar
+1729 | mem(ar)[31:0] -> dr
+1730 | dr[31:0] -> acc
+1731 | jmp @fetch
+1732 | pc -> ar, pc+4 -> pc
+1733 | mem(ar)[31:0] -> dr
+1734 | jmp @instruction
+1735 | dr[22:0] + pc -> ar
+1736 | mem(ar)[31:0] -> dr
+1737 | acc * mem(ar) -> acc
+1738 | jmp @fetch
+1739 | pc -> ar, pc+4 -> pc
+1740 | mem(ar)[31:0] -> dr
+1741 | jmp @instruction
+1742 | dr[22:0] + pc -> ar
+1743 | mem(ar)[31:0] -> dr
+1744 | acc + mem(ar) -> acc
+1745 | jmp @fetch
+1746 | pc -> ar, pc+4 -> pc
+1747 | mem(ar)[31:0] -> dr
+1748 | jmp @instruction
+1749 | dr[22:0] + pc -> ar
+1750 | acc[31:0] -> mem(ar)
+1751 | jmp @fetch
+1752 | pc -> ar, pc+4 -> pc
+1753 | mem(ar)[31:0] -> dr
+1754 | jmp @instruction
+1755 | dr[22:0] + pc -> ar
+1756 | mem(ar)[31:0] -> dr
+1757 | dr[31:0] -> acc
+1758 | jmp @fetch
+1759 | pc -> ar, pc+4 -> pc
+1760 | mem(ar)[31:0] -> dr
+1761 | jmp @instruction
+1762 | acc - 1 -> acc
+1763 | jmp @fetch
+1764 | pc -> ar, pc+4 -> pc
+1765 | mem(ar)[31:0] -> dr
+1766 | jmp @instruction
+1767 | dr[22:0] + pc -> ar
+1768 | acc[31:0] -> mem(ar)
+1769 | jmp @fetch
+1770 | pc -> ar, pc+4 -> pc
+1771 | mem(ar)[31:0] -> dr
+1772 | jmp @instruction
+1773 | if Z set: jmp @fetch
+1774 | pc + extended(dr[22:0]) -> pc
+1775 | jmp @fetch
+1776 | pc -> ar, pc+4 -> pc
+1777 | mem(ar)[31:0] -> dr
+1778 | jmp @instruction
+1779 | dr[22:0] + pc -> ar
+1780 | mem(ar)[31:0] -> dr
+1781 | dr[31:0] -> acc
+1782 | jmp @fetch
+1783 | pc -> ar, pc+4 -> pc
+1784 | mem(ar)[31:0] -> dr
+1785 | jmp @instruction
+1786 | dr[22:0] + pc -> ar
+1787 | mem(ar)[31:0] -> dr
+1788 | acc + mem(ar) -> acc
+1789 | jmp @fetch
+1790 | pc -> ar, pc+4 -> pc
+1791 | mem(ar)[31:0] -> dr
+1792 | jmp @instruction
+1793 | dr[22:0] + pc -> ar
+1794 | acc[31:0] -> mem(ar)
+1795 | jmp @fetch
+1796 | pc -> ar, pc+4 -> pc
+1797 | mem(ar)[31:0] -> dr
+1798 | jmp @instruction
+1799 | dr[22:0] + pc -> ar
+1800 | mem(ar)[31:0] -> dr
+1801 | dr[31:0] -> acc
+1802 | jmp @fetch
+1803 | pc -> ar, pc+4 -> pc
+1804 | mem(ar)[31:0] -> dr
+1805 | jmp @instruction
+1806 | dr[22:0] + pc -> ar
+1807 | mem(ar)[31:0] -> dr
+1808 | acc * mem(ar) -> acc
+1809 | jmp @fetch
+1810 | pc -> ar, pc+4 -> pc
+1811 | mem(ar)[31:0] -> dr
+1812 | jmp @instruction
+1813 | dr[22:0] + pc -> ar
+1814 | mem(ar)[31:0] -> dr
+1815 | acc + mem(ar) -> acc
+1816 | jmp @fetch
+1817 | pc -> ar, pc+4 -> pc
+1818 | mem(ar)[31:0] -> dr
+1819 | jmp @instruction
+1820 | dr[22:0] + pc -> ar
+1821 | acc[31:0] -> mem(ar)
+1822 | jmp @fetch
+1823 | pc -> ar, pc+4 -> pc
+1824 | mem(ar)[31:0] -> dr
+1825 | jmp @instruction
+1826 | dr[22:0] + pc -> ar
+1827 | mem(ar)[31:0] -> dr
+1828 | dr[31:0] -> acc
+1829 | jmp @fetch
+1830 | pc -> ar, pc+4 -> pc
+1831 | mem(ar)[31:0] -> dr
+1832 | jmp @instruction
+1833 | acc - 1 -> acc
+1834 | jmp @fetch
+1835 | pc -> ar, pc+4 -> pc
+1836 | mem(ar)[31:0] -> dr
+1837 | jmp @instruction
+1838 | dr[22:0] + pc -> ar
+1839 | acc[31:0] -> mem(ar)
+1840 | jmp @fetch
+1841 | pc -> ar, pc+4 -> pc
+1842 | mem(ar)[31:0] -> dr
+1843 | jmp @instruction
+1844 | if Z set: jmp @fetch
+1845 | pc + extended(dr[22:0]) -> pc
+1846 | jmp @fetch
+1847 | pc -> ar, pc+4 -> pc
+1848 | mem(ar)[31:0] -> dr
+1849 | jmp @instruction
+1850 | dr[22:0] + pc -> ar
+1851 | mem(ar)[31:0] -> dr
+1852 | dr[31:0] -> acc
+1853 | jmp @fetch
+1854 | pc -> ar, pc+4 -> pc
+1855 | mem(ar)[31:0] -> dr
+1856 | jmp @instruction
+1857 | dr[22:0] + pc -> ar
+1858 | mem(ar)[31:0] -> dr
+1859 | acc + mem(ar) -> acc
+1860 | jmp @fetch
+1861 | pc -> ar, pc+4 -> pc
+1862 | mem(ar)[31:0] -> dr
+1863 | jmp @instruction
+1864 | dr[22:0] + pc -> ar
+1865 | acc[31:0] -> mem(ar)
+1866 | jmp @fetch
+1867 | pc -> ar, pc+4 -> pc
+1868 | mem(ar)[31:0] -> dr
+1869 | jmp @instruction
+1870 | dr[22:0] + pc -> ar
+1871 | mem(ar)[31:0] -> dr
+1872 | dr[31:0] -> acc
+1873 | jmp @fetch
+1874 | pc -> ar, pc+4 -> pc
+1875 | mem(ar)[31:0] -> dr
+1876 | jmp @instruction
+1877 | dr[22:0] + pc -> ar
+1878 | mem(ar)[31:0] -> dr
+1879 | acc * mem(ar) -> acc
+1880 | jmp @fetch
+1881 | pc -> ar, pc+4 -> pc
+1882 | mem(ar)[31:0] -> dr
+1883 | jmp @instruction
+1884 | dr[22:0] + pc -> ar
+1885 | mem(ar)[31:0] -> dr
+1886 | acc + mem(ar) -> acc
+1887 | jmp @fetch
+1888 | pc -> ar, pc+4 -> pc
+1889 | mem(ar)[31:0] -> dr
+1890 | jmp @instruction
+1891 | dr[22:0] + pc -> ar
+1892 | acc[31:0] -> mem(ar)
+1893 | jmp @fetch
+1894 | pc -> ar, pc+4 -> pc
+1895 | mem(ar)[31:0] -> dr
+1896 | jmp @instruction
+1897 | dr[22:0] + pc -> ar
+1898 | mem(ar)[31:0] -> dr
+1899 | dr[31:0] -> acc
+1900 | jmp @fetch
+1901 | pc -> ar, pc+4 -> pc
+1902 | mem(ar)[31:0] -> dr
+1903 | jmp @instruction
+1904 | acc - 1 -> acc
+1905 | jmp @fetch
+1906 | pc -> ar, pc+4 -> pc
+1907 | mem(ar)[31:0] -> dr
+1908 | jmp @instruction
+1909 | dr[22:0] + pc -> ar
+1910 | acc[31:0] -> mem(ar)
+1911 | jmp @fetch
+1912 | pc -> ar, pc+4 -> pc
+1913 | mem(ar)[31:0] -> dr
+1914 | jmp @instruction
+1915 | if Z set: jmp @fetch
+1916 | pc + extended(dr[22:0]) -> pc
+1917 | jmp @fetch
+1918 | pc -> ar, pc+4 -> pc
+1919 | mem(ar)[31:0] -> dr
+1920 | jmp @instruction
+1921 | dr[22:0] + pc -> ar
+1922 | mem(ar)[31:0] -> dr
+1923 | dr[31:0] -> acc
+1924 | jmp @fetch
+1925 | pc -> ar, pc+4 -> pc
+1926 | mem(ar)[31:0] -> dr
+1927 | jmp @instruction
+1928 | dr[22:0] + pc -> ar
+1929 | mem(ar)[31:0] -> dr
+1930 | acc + mem(ar) -> acc
+1931 | jmp @fetch
+1932 | pc -> ar, pc+4 -> pc
+1933 | mem(ar)[31:0] -> dr
+1934 | jmp @instruction
+1935 | dr[22:0] + pc -> ar
+1936 | acc[31:0] -> mem(ar)
+1937 | jmp @fetch
+1938 | pc -> ar, pc+4 -> pc
+1939 | mem(ar)[31:0] -> dr
+1940 | jmp @instruction
+1941 | dr[22:0] + pc -> ar
+1942 | mem(ar)[31:0] -> dr
+1943 | dr[31:0] -> acc
+1944 | jmp @fetch
+1945 | pc -> ar, pc+4 -> pc
+1946 | mem(ar)[31:0] -> dr
+1947 | jmp @instruction
+1948 | dr[22:0] + pc -> ar
+1949 | mem(ar)[31:0] -> dr
+1950 | acc * mem(ar) -> acc
+1951 | jmp @fetch
+1952 | pc -> ar, pc+4 -> pc
+1953 | mem(ar)[31:0] -> dr
+1954 | jmp @instruction
+1955 | dr[22:0] + pc -> ar
+1956 | mem(ar)[31:0] -> dr
+1957 | acc + mem(ar) -> acc
+1958 | jmp @fetch
+1959 | pc -> ar, pc+4 -> pc
+1960 | mem(ar)[31:0] -> dr
+1961 | jmp @instruction
+1962 | dr[22:0] + pc -> ar
+1963 | acc[31:0] -> mem(ar)
+1964 | jmp @fetch
+1965 | pc -> ar, pc+4 -> pc
+1966 | mem(ar)[31:0] -> dr
+1967 | jmp @instruction
+1968 | dr[22:0] + pc -> ar
+1969 | mem(ar)[31:0] -> dr
+1970 | dr[31:0] -> acc
+1971 | jmp @fetch
+1972 | pc -> ar, pc+4 -> pc
+1973 | mem(ar)[31:0] -> dr
+1974 | jmp @instruction
+1975 | acc - 1 -> acc
+1976 | jmp @fetch
+1977 | pc -> ar, pc+4 -> pc
+1978 | mem(ar)[31:0] -> dr
+1979 | jmp @instruction
+1980 | dr[22:0] + pc -> ar
+1981 | acc[31:0] -> mem(ar)
+1982 | jmp @fetch
+1983 | pc -> ar, pc+4 -> pc
+1984 | mem(ar)[31:0] -> dr
+1985 | jmp @instruction
+1986 | if Z set: jmp @fetch
+1987 | pc + extended(dr[22:0]) -> pc
+1988 | jmp @fetch
+1989 | pc -> ar, pc+4 -> pc
+1990 | mem(ar)[31:0] -> dr
+1991 | jmp @instruction
+1992 | dr[22:0] + pc -> ar
+1993 | mem(ar)[31:0] -> dr
+1994 | dr[31:0] -> acc
+1995 | jmp @fetch
+1996 | pc -> ar, pc+4 -> pc
+1997 | mem(ar)[31:0] -> dr
+1998 | jmp @instruction
+1999 | dr[22:0] + pc -> ar
+2000 | mem(ar)[31:0] -> dr
+2001 | acc + mem(ar) -> acc
+2002 | jmp @fetch
+2003 | pc -> ar, pc+4 -> pc
+2004 | mem(ar)[31:0] -> dr
+2005 | jmp @instruction
+2006 | dr[22:0] + pc -> ar
+2007 | acc[31:0] -> mem(ar)
+2008 | jmp @fetch
+2009 | pc -> ar, pc+4 -> pc
+2010 | mem(ar)[31:0] -> dr
+2011 | jmp @instruction
+2012 | dr[22:0] + pc -> ar
+2013 | mem(ar)[31:0] -> dr
+2014 | dr[31:0] -> acc
+2015 | jmp @fetch
+2016 | pc -> ar, pc+4 -> pc
+2017 | mem(ar)[31:0] -> dr
+2018 | jmp @instruction
+2019 | dr[22:0] + pc -> ar
+2020 | mem(ar)[31:0] -> dr
+2021 | acc * mem(ar) -> acc
+2022 | jmp @fetch
+2023 | pc -> ar, pc+4 -> pc
+2024 | mem(ar)[31:0] -> dr
+2025 | jmp @instruction
+2026 | dr[22:0] + pc -> ar
+2027 | mem(ar)[31:0] -> dr
+2028 | acc + mem(ar) -> acc
+2029 | jmp @fetch
+2030 | pc -> ar, pc+4 -> pc
+2031 | mem(ar)[31:0] -> dr
+2032 | jmp @instruction
+2033 | dr[22:0] + pc -> ar
+2034 | acc[31:0] -> mem(ar)
+2035 | jmp @fetch
+2036 | pc -> ar, pc+4 -> pc
+2037 | mem(ar)[31:0] -> dr
+2038 | jmp @instruction
+2039 | dr[22:0] + pc -> ar
+2040 | mem(ar)[31:0] -> dr
+2041 | dr[31:0] -> acc
+2042 | jmp @fetch
+2043 | pc -> ar, pc+4 -> pc
+2044 | mem(ar)[31:0] -> dr
+2045 | jmp @instruction
+2046 | acc - 1 -> acc
+2047 | jmp @fetch
+2048 | pc -> ar, pc+4 -> pc
+2049 | mem(ar)[31:0] -> dr
+2050 | jmp @instruction
+2051 | dr[22:0] + pc -> ar
+2052 | acc[31:0] -> mem(ar)
+2053 | jmp @fetch
+2054 | pc -> ar, pc+4 -> pc
+2055 | mem(ar)[31:0] -> dr
+2056 | jmp @instruction
+2057 | if Z set: jmp @fetch
+2058 | pc + extended(dr[22:0]) -> pc
+2059 | jmp @fetch
+2060 | pc -> ar, pc+4 -> pc
+2061 | mem(ar)[31:0] -> dr
+2062 | jmp @instruction
+2063 | dr[22:0] + pc -> ar
+2064 | mem(ar)[31:0] -> dr
+2065 | dr[31:0] -> acc
+2066 | jmp @fetch
+2067 | pc -> ar, pc+4 -> pc
+2068 | mem(ar)[31:0] -> dr
+2069 | jmp @instruction
+2070 | dr[22:0] + pc -> ar
+2071 | mem(ar)[31:0] -> dr
+2072 | acc + mem(ar) -> acc
+2073 | jmp @fetch
+2074 | pc -> ar, pc+4 -> pc
+2075 | mem(ar)[31:0] -> dr
+2076 | jmp @instruction
+2077 | dr[22:0] + pc -> ar
+2078 | acc[31:0] -> mem(ar)
+2079 | jmp @fetch
+2080 | pc -> ar, pc+4 -> pc
+2081 | mem(ar)[31:0] -> dr
+2082 | jmp @instruction
+2083 | dr[22:0] + pc -> ar
+2084 | mem(ar)[31:0] -> dr
+2085 | dr[31:0] -> acc
+2086 | jmp @fetch
+2087 | pc -> ar, pc+4 -> pc
+2088 | mem(ar)[31:0] -> dr
+2089 | jmp @instruction
+2090 | dr[22:0] + pc -> ar
+2091 | mem(ar)[31:0] -> dr
+2092 | acc * mem(ar) -> acc
+2093 | jmp @fetch
+2094 | pc -> ar, pc+4 -> pc
+2095 | mem(ar)[31:0] -> dr
+2096 | jmp @instruction
+2097 | dr[22:0] + pc -> ar
+2098 | mem(ar)[31:0] -> dr
+2099 | acc + mem(ar) -> acc
+2100 | jmp @fetch
+2101 | pc -> ar, pc+4 -> pc
+2102 | mem(ar)[31:0] -> dr
+2103 | jmp @instruction
+2104 | dr[22:0] + pc -> ar
+2105 | acc[31:0] -> mem(ar)
+2106 | jmp @fetch
+2107 | pc -> ar, pc+4 -> pc
+2108 | mem(ar)[31:0] -> dr
+2109 | jmp @instruction
+2110 | dr[22:0] + pc -> ar
+2111 | mem(ar)[31:0] -> dr
+2112 | dr[31:0] -> acc
+2113 | jmp @fetch
+2114 | pc -> ar, pc+4 -> pc
+2115 | mem(ar)[31:0] -> dr
+2116 | jmp @instruction
+2117 | acc - 1 -> acc
+2118 | jmp @fetch
+2119 | pc -> ar, pc+4 -> pc
+2120 | mem(ar)[31:0] -> dr
+2121 | jmp @instruction
+2122 | dr[22:0] + pc -> ar
+2123 | acc[31:0] -> mem(ar)
+2124 | jmp @fetch
+2125 | pc -> ar, pc+4 -> pc
+2126 | mem(ar)[31:0] -> dr
+2127 | jmp @instruction
+2128 | if Z set: jmp @fetch
+2129 | pc + extended(dr[22:0]) -> pc
+2130 | jmp @fetch
+2131 | pc -> ar, pc+4 -> pc
+2132 | mem(ar)[31:0] -> dr
+2133 | jmp @instruction
+2134 | dr[22:0] + pc -> ar
+2135 | mem(ar)[31:0] -> dr
+2136 | dr[31:0] -> acc
+2137 | jmp @fetch
+2138 | pc -> ar, pc+4 -> pc
+2139 | mem(ar)[31:0] -> dr
+2140 | jmp @instruction
+2141 | dr[22:0] + pc -> ar
+2142 | mem(ar)[31:0] -> dr
+2143 | acc + mem(ar) -> acc
+2144 | jmp @fetch
+2145 | pc -> ar, pc+4 -> pc
+2146 | mem(ar)[31:0] -> dr
+2147 | jmp @instruction
+2148 | dr[22:0] + pc -> ar
+2149 | acc[31:0] -> mem(ar)
+2150 | jmp @fetch
+2151 | pc -> ar, pc+4 -> pc
+2152 | mem(ar)[31:0] -> dr
+2153 | jmp @instruction
+2154 | dr[22:0] + pc -> ar
+2155 | mem(ar)[31:0] -> dr
+2156 | dr[31:0] -> acc
+2157 | jmp @fetch
+2158 | pc -> ar, pc+4 -> pc
+2159 | mem(ar)[31:0] -> dr
+2160 | jmp @instruction
+2161 | dr[22:0] + pc -> ar
+2162 | mem(ar)[31:0] -> dr
+2163 | acc * mem(ar) -> acc
+2164 | jmp @fetch
+2165 | pc -> ar, pc+4 -> pc
+2166 | mem(ar)[31:0] -> dr
+2167 | jmp @instruction
+2168 | dr[22:0] + pc -> ar
+2169 | mem(ar)[31:0] -> dr
+2170 | acc + mem(ar) -> acc
+2171 | jmp @fetch
+2172 | pc -> ar, pc+4 -> pc
+2173 | mem(ar)[31:0] -> dr
+2174 | jmp @instruction
+2175 | dr[22:0] + pc -> ar
+2176 | acc[31:0] -> mem(ar)
+2177 | jmp @fetch
+2178 | pc -> ar, pc+4 -> pc
+2179 | mem(ar)[31:0] -> dr
+2180 | jmp @instruction
+2181 | dr[22:0] + pc -> ar
+2182 | mem(ar)[31:0] -> dr
+2183 | dr[31:0] -> acc
+2184 | jmp @fetch
+2185 | pc -> ar, pc+4 -> pc
+2186 | mem(ar)[31:0] -> dr
+2187 | jmp @instruction
+2188 | acc - 1 -> acc
+2189 | jmp @fetch
+2190 | pc -> ar, pc+4 -> pc
+2191 | mem(ar)[31:0] -> dr
+2192 | jmp @instruction
+2193 | dr[22:0] + pc -> ar
+2194 | acc[31:0] -> mem(ar)
+2195 | jmp @fetch
+2196 | pc -> ar, pc+4 -> pc
+2197 | mem(ar)[31:0] -> dr
+2198 | jmp @instruction
+2199 | if Z set: jmp @fetch
+2200 | pc + extended(dr[22:0]) -> pc
+2201 | jmp @fetch
+2202 | pc -> ar, pc+4 -> pc
+2203 | mem(ar)[31:0] -> dr
+2204 | jmp @instruction
+2205 | dr[22:0] + pc -> ar
+2206 | mem(ar)[31:0] -> dr
+2207 | dr[31:0] -> acc
+2208 | jmp @fetch
+2209 | pc -> ar, pc+4 -> pc
+2210 | mem(ar)[31:0] -> dr
+2211 | jmp @instruction
+2212 | dr[22:0] + pc -> ar
+2213 | mem(ar)[31:0] -> dr
+2214 | acc + mem(ar) -> acc
+2215 | jmp @fetch
+2216 | pc -> ar, pc+4 -> pc
+2217 | mem(ar)[31:0] -> dr
+2218 | jmp @instruction
+2219 | dr[22:0] + pc -> ar
+2220 | acc[31:0] -> mem(ar)
+2221 | jmp @fetch
+2222 | pc -> ar, pc+4 -> pc
+2223 | mem(ar)[31:0] -> dr
+2224 | jmp @instruction
+2225 | dr[22:0] + pc -> ar
+2226 | mem(ar)[31:0] -> dr
+2227 | dr[31:0] -> acc
+2228 | jmp @fetch
+2229 | pc -> ar, pc+4 -> pc
+2230 | mem(ar)[31:0] -> dr
+2231 | jmp @instruction
+2232 | dr[22:0] + pc -> ar
+2233 | mem(ar)[31:0] -> dr
+2234 | acc * mem(ar) -> acc
+2235 | jmp @fetch
+2236 | pc -> ar, pc+4 -> pc
+2237 | mem(ar)[31:0] -> dr
+2238 | jmp @instruction
+2239 | dr[22:0] + pc -> ar
+2240 | mem(ar)[31:0] -> dr
+2241 | acc + mem(ar) -> acc
+2242 | jmp @fetch
+2243 | pc -> ar, pc+4 -> pc
+2244 | mem(ar)[31:0] -> dr
+2245 | jmp @instruction
+2246 | dr[22:0] + pc -> ar
+2247 | acc[31:0] -> mem(ar)
+2248 | jmp @fetch
+2249 | pc -> ar, pc+4 -> pc
+2250 | mem(ar)[31:0] -> dr
+2251 | jmp @instruction
+2252 | dr[22:0] + pc -> ar
+2253 | mem(ar)[31:0] -> dr
+2254 | dr[31:0] -> acc
+2255 | jmp @fetch
+2256 | pc -> ar, pc+4 -> pc
+2257 | mem(ar)[31:0] -> dr
+2258 | jmp @instruction
+2259 | acc - 1 -> acc
+2260 | jmp @fetch
+2261 | pc -> ar, pc+4 -> pc
+2262 | mem(ar)[31:0] -> dr
+2263 | jmp @instruction
+2264 | dr[22:0] + pc -> ar
+2265 | acc[31:0] -> mem(ar)
+2266 | jmp @fetch
+2267 | pc -> ar, pc+4 -> pc
+2268 | mem(ar)[31:0] -> dr
+2269 | jmp @instruction
+2270 | if Z set: jmp @fetch
+2271 | pc + extended(dr[22:0]) -> pc
+2272 | jmp @fetch
+2273 | pc -> ar, pc+4 -> pc
+2274 | mem(ar)[31:0] -> dr
+2275 | jmp @instruction
+2276 | dr[22:0] + pc -> ar
+2277 | mem(ar)[31:0] -> dr
+2278 | dr[31:0] -> acc
+2279 | jmp @fetch
+2280 | pc -> ar, pc+4 -> pc
+2281 | mem(ar)[31:0] -> dr
+2282 | jmp @instruction
+2283 | dr[22:0] + pc -> ar
+2284 | mem(ar)[31:0] -> dr
+2285 | acc + mem(ar) -> acc
+2286 | jmp @fetch
+2287 | pc -> ar, pc+4 -> pc
+2288 | mem(ar)[31:0] -> dr
+2289 | jmp @instruction
+2290 | dr[22:0] + pc -> ar
+2291 | acc[31:0] -> mem(ar)
+2292 | jmp @fetch
+2293 | pc -> ar, pc+4 -> pc
+2294 | mem(ar)[31:0] -> dr
+2295 | jmp @instruction
+2296 | dr[22:0] + pc -> ar
+2297 | mem(ar)[31:0] -> dr
+2298 | dr[31:0] -> acc
+2299 | jmp @fetch
+2300 | pc -> ar, pc+4 -> pc
+2301 | mem(ar)[31:0] -> dr
+2302 | jmp @instruction
+2303 | dr[22:0] + pc -> ar
+2304 | mem(ar)[31:0] -> dr
+2305 | acc * mem(ar) -> acc
+2306 | jmp @fetch
+2307 | pc -> ar, pc+4 -> pc
+2308 | mem(ar)[31:0] -> dr
+2309 | jmp @instruction
+2310 | dr[22:0] + pc -> ar
+2311 | mem(ar)[31:0] -> dr
+2312 | acc + mem(ar) -> acc
+2313 | jmp @fetch
+2314 | pc -> ar, pc+4 -> pc
+2315 | mem(ar)[31:0] -> dr
+2316 | jmp @instruction
+2317 | dr[22:0] + pc -> ar
+2318 | acc[31:0] -> mem(ar)
+2319 | jmp @fetch
+2320 | pc -> ar, pc+4 -> pc
+2321 | mem(ar)[31:0] -> dr
+2322 | jmp @instruction
+2323 | dr[22:0] + pc -> ar
+2324 | mem(ar)[31:0] -> dr
+2325 | dr[31:0] -> acc
+2326 | jmp @fetch
+2327 | pc -> ar, pc+4 -> pc
+2328 | mem(ar)[31:0] -> dr
+2329 | jmp @instruction
+2330 | acc - 1 -> acc
+2331 | jmp @fetch
+2332 | pc -> ar, pc+4 -> pc
+2333 | mem(ar)[31:0] -> dr
+2334 | jmp @instruction
+2335 | dr[22:0] + pc -> ar
+2336 | acc[31:0] -> mem(ar)
+2337 | jmp @fetch
+2338 | pc -> ar, pc+4 -> pc
+2339 | mem(ar)[31:0] -> dr
+2340 | jmp @instruction
+2341 | if Z set: jmp @fetch
+2342 | pc + extended(dr[22:0]) -> pc
+2343 | jmp @fetch
+2344 | pc -> ar, pc+4 -> pc
+2345 | mem(ar)[31:0] -> dr
+2346 | jmp @instruction
+2347 | dr[22:0] + pc -> ar
+2348 | mem(ar)[31:0] -> dr
+2349 | dr[31:0] -> acc
+2350 | jmp @fetch
+2351 | pc -> ar, pc+4 -> pc
+2352 | mem(ar)[31:0] -> dr
+2353 | jmp @instruction
+2354 | dr[22:0] + pc -> ar
+2355 | mem(ar)[31:0] -> dr
+2356 | acc + mem(ar) -> acc
+2357 | jmp @fetch
+2358 | pc -> ar, pc+4 -> pc
+2359 | mem(ar)[31:0] -> dr
+2360 | jmp @instruction
+2361 | dr[22:0] + pc -> ar
+2362 | acc[31:0] -> mem(ar)
+2363 | jmp @fetch
+2364 | pc -> ar, pc+4 -> pc
+2365 | mem(ar)[31:0] -> dr
+2366 | jmp @instruction
+2367 | dr[22:0] + pc -> ar
+2368 | mem(ar)[31:0] -> dr
+2369 | dr[31:0] -> acc
+2370 | jmp @fetch
+2371 | pc -> ar, pc+4 -> pc
+2372 | mem(ar)[31:0] -> dr
+2373 | jmp @instruction
+2374 | dr[22:0] + pc -> ar
+2375 | mem(ar)[31:0] -> dr
+2376 | acc * mem(ar) -> acc
+2377 | jmp @fetch
+2378 | pc -> ar, pc+4 -> pc
+2379 | mem(ar)[31:0] -> dr
+2380 | jmp @instruction
+2381 | dr[22:0] + pc -> ar
+2382 | mem(ar)[31:0] -> dr
+2383 | acc + mem(ar) -> acc
+2384 | jmp @fetch
+2385 | pc -> ar, pc+4 -> pc
+2386 | mem(ar)[31:0] -> dr
+2387 | jmp @instruction
+2388 | dr[22:0] + pc -> ar
+2389 | acc[31:0] -> mem(ar)
+2390 | jmp @fetch
+2391 | pc -> ar, pc+4 -> pc
+2392 | mem(ar)[31:0] -> dr
+2393 | jmp @instruction
+2394 | dr[22:0] + pc -> ar
+2395 | mem(ar)[31:0] -> dr
+2396 | dr[31:0] -> acc
+2397 | jmp @fetch
+2398 | pc -> ar, pc+4 -> pc
+2399 | mem(ar)[31:0] -> dr
+2400 | jmp @instruction
+2401 | acc - 1 -> acc
+2402 | jmp @fetch
+2403 | pc -> ar, pc+4 -> pc
+2404 | mem(ar)[31:0] -> dr
+2405 | jmp @instruction
+2406 | dr[22:0] + pc -> ar
+2407 | acc[31:0] -> mem(ar)
+2408 | jmp @fetch
+2409 | pc -> ar, pc+4 -> pc
+2410 | mem(ar)[31:0] -> dr
+2411 | jmp @instruction
+2412 | if Z set: jmp @fetch
+2413 | pc + extended(dr[22:0]) -> pc
+2414 | jmp @fetch
+2415 | pc -> ar, pc+4 -> pc
+2416 | mem(ar)[31:0] -> dr
+2417 | jmp @instruction
+2418 | dr[22:0] + pc -> ar
+2419 | mem(ar)[31:0] -> dr
+2420 | dr[31:0] -> acc
+2421 | jmp @fetch
+2422 | pc -> ar, pc+4 -> pc
+2423 | mem(ar)[31:0] -> dr
+2424 | jmp @instruction
+2425 | dr[22:0] + pc -> ar
+2426 | mem(ar)[31:0] -> dr
+2427 | acc + mem(ar) -> acc
+2428 | jmp @fetch
+2429 | pc -> ar, pc+4 -> pc
+2430 | mem(ar)[31:0] -> dr
+2431 | jmp @instruction
+2432 | dr[22:0] + pc -> ar
+2433 | acc[31:0] -> mem(ar)
+2434 | jmp @fetch
+2435 | pc -> ar, pc+4 -> pc
+2436 | mem(ar)[31:0] -> dr
+2437 | jmp @instruction
+2438 | dr[22:0] + pc -> ar
+2439 | mem(ar)[31:0] -> dr
+2440 | dr[31:0] -> acc
+2441 | jmp @fetch
+2442 | pc -> ar, pc+4 -> pc
+2443 | mem(ar)[31:0] -> dr
+2444 | jmp @instruction
+2445 | dr[22:0] + pc -> ar
+2446 | mem(ar)[31:0] -> dr
+2447 | acc * mem(ar) -> acc
+2448 | jmp @fetch
+2449 | pc -> ar, pc+4 -> pc
+2450 | mem(ar)[31:0] -> dr
+2451 | jmp @instruction
+2452 | dr[22:0] + pc -> ar
+2453 | mem(ar)[31:0] -> dr
+2454 | acc + mem(ar) -> acc
+2455 | jmp @fetch
+2456 | pc -> ar, pc+4 -> pc
+2457 | mem(ar)[31:0] -> dr
+2458 | jmp @instruction
+2459 | dr[22:0] + pc -> ar
+2460 | acc[31:0] -> mem(ar)
+2461 | jmp @fetch
+2462 | pc -> ar, pc+4 -> pc
+2463 | mem(ar)[31:0] -> dr
+2464 | jmp @instruction
+2465 | dr[22:0] + pc -> ar
+2466 | mem(ar)[31:0] -> dr
+2467 | dr[31:0] -> acc
+2468 | jmp @fetch
+2469 | pc -> ar, pc+4 -> pc
+2470 | mem(ar)[31:0] -> dr
+2471 | jmp @instruction
+2472 | acc - 1 -> acc
+2473 | jmp @fetch
+2474 | pc -> ar, pc+4 -> pc
+2475 | mem(ar)[31:0] -> dr
+2476 | jmp @instruction
+2477 | dr[22:0] + pc -> ar
+2478 | acc[31:0] -> mem(ar)
+2479 | jmp @fetch
+2480 | pc -> ar, pc+4 -> pc
+2481 | mem(ar)[31:0] -> dr
+2482 | jmp @instruction
+2483 | if Z set: jmp @fetch
+2484 | pc + extended(dr[22:0]) -> pc
+2485 | jmp @fetch
+2486 | pc -> ar, pc+4 -> pc
+2487 | mem(ar)[31:0] -> dr
+2488 | jmp @instruction
+2489 | dr[22:0] + pc -> ar
+2490 | mem(ar)[31:0] -> dr
+2491 | dr[31:0] -> acc
+2492 | jmp @fetch
+2493 | pc -> ar, pc+4 -> pc
+2494 | mem(ar)[31:0] -> dr
+2495 | jmp @instruction
+2496 | dr[22:0] + pc -> ar
+2497 | mem(ar)[31:0] -> dr
+2498 | acc + mem(ar) -> acc
+2499 | jmp @fetch
+2500 | pc -> ar, pc+4 -> pc
+2501 | mem(ar)[31:0] -> dr
+2502 | jmp @instruction
+2503 | dr[22:0] + pc -> ar
+2504 | acc[31:0] -> mem(ar)
+2505 | jmp @fetch
+2506 | pc -> ar, pc+4 -> pc
+2507 | mem(ar)[31:0] -> dr
+2508 | jmp @instruction
+2509 | dr[22:0] + pc -> ar
+2510 | mem(ar)[31:0] -> dr
+2511 | dr[31:0] -> acc
+2512 | jmp @fetch
+2513 | pc -> ar, pc+4 -> pc
+2514 | mem(ar)[31:0] -> dr
+2515 | jmp @instruction
+2516 | dr[22:0] + pc -> ar
+2517 | mem(ar)[31:0] -> dr
+2518 | acc * mem(ar) -> acc
+2519 | jmp @fetch
+2520 | pc -> ar, pc+4 -> pc
+2521 | mem(ar)[31:0] -> dr
+2522 | jmp @instruction
+2523 | dr[22:0] + pc -> ar
+2524 | mem(ar)[31:0] -> dr
+2525 | acc + mem(ar) -> acc
+2526 | jmp @fetch
+2527 | pc -> ar, pc+4 -> pc
+2528 | mem(ar)[31:0] -> dr
+2529 | jmp @instruction
+2530 | dr[22:0] + pc -> ar
+2531 | acc[31:0] -> mem(ar)
+2532 | jmp @fetch
+2533 | pc -> ar, pc+4 -> pc
+2534 | mem(ar)[31:0] -> dr
+2535 | jmp @instruction
+2536 | dr[22:0] + pc -> ar
+2537 | mem(ar)[31:0] -> dr
+2538 | dr[31:0] -> acc
+2539 | jmp @fetch
+2540 | pc -> ar, pc+4 -> pc
+2541 | mem(ar)[31:0] -> dr
+2542 | jmp @instruction
+2543 | acc - 1 -> acc
+2544 | jmp @fetch
+2545 | pc -> ar, pc+4 -> pc
+2546 | mem(ar)[31:0] -> dr
+2547 | jmp @instruction
+2548 | dr[22:0] + pc -> ar
+2549 | acc[31:0] -> mem(ar)
+2550 | jmp @fetch
+2551 | pc -> ar, pc+4 -> pc
+2552 | mem(ar)[31:0] -> dr
+2553 | jmp @instruction
+2554 | if Z set: jmp @fetch
+2555 | pc + extended(dr[22:0]) -> pc
+2556 | jmp @fetch
+2557 | pc -> ar, pc+4 -> pc
+2558 | mem(ar)[31:0] -> dr
+2559 | jmp @instruction
+2560 | dr[22:0] + pc -> ar
+2561 | mem(ar)[31:0] -> dr
+2562 | dr[31:0] -> acc
+2563 | jmp @fetch
+2564 | pc -> ar, pc+4 -> pc
+2565 | mem(ar)[31:0] -> dr
+2566 | jmp @instruction
+2567 | dr[22:0] + pc -> ar
+2568 | mem(ar)[31:0] -> dr
+2569 | acc + mem(ar) -> acc
+2570 | jmp @fetch
+2571 | pc -> ar, pc+4 -> pc
+2572 | mem(ar)[31:0] -> dr
+2573 | jmp @instruction
+2574 | dr[22:0] + pc -> ar
+2575 | acc[31:0] -> mem(ar)
+2576 | jmp @fetch
+2577 | pc -> ar, pc+4 -> pc
+2578 | mem(ar)[31:0] -> dr
+2579 | jmp @instruction
+2580 | dr[22:0] + pc -> ar
+2581 | mem(ar)[31:0] -> dr
+2582 | dr[31:0] -> acc
+2583 | jmp @fetch
+2584 | pc -> ar, pc+4 -> pc
+2585 | mem(ar)[31:0] -> dr
+2586 | jmp @instruction
+2587 | dr[22:0] + pc -> ar
+2588 | mem(ar)[31:0] -> dr
+2589 | acc * mem(ar) -> acc
+2590 | jmp @fetch
+2591 | pc -> ar, pc+4 -> pc
+2592 | mem(ar)[31:0] -> dr
+2593 | jmp @instruction
+2594 | dr[22:0] + pc -> ar
+2595 | mem(ar)[31:0] -> dr
+2596 | acc + mem(ar) -> acc
+2597 | jmp @fetch
+2598 | pc -> ar, pc+4 -> pc
+2599 | mem(ar)[31:0] -> dr
+2600 | jmp @instruction
+2601 | dr[22:0] + pc -> ar
+2602 | acc[31:0] -> mem(ar)
+2603 | jmp @fetch
+2604 | pc -> ar, pc+4 -> pc
+2605 | mem(ar)[31:0] -> dr
+2606 | jmp @instruction
+2607 | dr[22:0] + pc -> ar
+2608 | mem(ar)[31:0] -> dr
+2609 | dr[31:0] -> acc
+2610 | jmp @fetch
+2611 | pc -> ar, pc+4 -> pc
+2612 | mem(ar)[31:0] -> dr
+2613 | jmp @instruction
+2614 | acc - 1 -> acc
+2615 | jmp @fetch
+2616 | pc -> ar, pc+4 -> pc
+2617 | mem(ar)[31:0] -> dr
+2618 | jmp @instruction
+2619 | dr[22:0] + pc -> ar
+2620 | acc[31:0] -> mem(ar)
+2621 | jmp @fetch
+2622 | pc -> ar, pc+4 -> pc
+2623 | mem(ar)[31:0] -> dr
+2624 | jmp @instruction
+2625 | if Z set: jmp @fetch
+2626 | pc + extended(dr[22:0]) -> pc
+2627 | jmp @fetch
+2628 | pc -> ar, pc+4 -> pc
+2629 | mem(ar)[31:0] -> dr
+2630 | jmp @instruction
+2631 | dr[22:0] + pc -> ar
+2632 | mem(ar)[31:0] -> dr
+2633 | dr[31:0] -> acc
+2634 | jmp @fetch
+2635 | pc -> ar, pc+4 -> pc
+2636 | mem(ar)[31:0] -> dr
+2637 | jmp @instruction
+2638 | dr[22:0] + pc -> ar
+2639 | mem(ar)[31:0] -> dr
+2640 | acc + mem(ar) -> acc
+2641 | jmp @fetch
+2642 | pc -> ar, pc+4 -> pc
+2643 | mem(ar)[31:0] -> dr
+2644 | jmp @instruction
+2645 | dr[22:0] + pc -> ar
+2646 | acc[31:0] -> mem(ar)
+2647 | jmp @fetch
+2648 | pc -> ar, pc+4 -> pc
+2649 | mem(ar)[31:0] -> dr
+2650 | jmp @instruction
+2651 | dr[22:0] + pc -> ar
+2652 | mem(ar)[31:0] -> dr
+2653 | dr[31:0] -> acc
+2654 | jmp @fetch
+2655 | pc -> ar, pc+4 -> pc
+2656 | mem(ar)[31:0] -> dr
+2657 | jmp @instruction
+2658 | dr[22:0] + pc -> ar
+2659 | mem(ar)[31:0] -> dr
+2660 | acc * mem(ar) -> acc
+2661 | jmp @fetch
+2662 | pc -> ar, pc+4 -> pc
+2663 | mem(ar)[31:0] -> dr
+2664 | jmp @instruction
+2665 | dr[22:0] + pc -> ar
+2666 | mem(ar)[31:0] -> dr
+2667 | acc + mem(ar) -> acc
+2668 | jmp @fetch
+2669 | pc -> ar, pc+4 -> pc
+2670 | mem(ar)[31:0] -> dr
+2671 | jmp @instruction
+2672 | dr[22:0] + pc -> ar
+2673 | acc[31:0] -> mem(ar)
+2674 | jmp @fetch
+2675 | pc -> ar, pc+4 -> pc
+2676 | mem(ar)[31:0] -> dr
+2677 | jmp @instruction
+2678 | dr[22:0] + pc -> ar
+2679 | mem(ar)[31:0] -> dr
+2680 | dr[31:0] -> acc
+2681 | jmp @fetch
+2682 | pc -> ar, pc+4 -> pc
+2683 | mem(ar)[31:0] -> dr
+2684 | jmp @instruction
+2685 | acc - 1 -> acc
+2686 | jmp @fetch
+2687 | pc -> ar, pc+4 -> pc
+2688 | mem(ar)[31:0] -> dr
+2689 | jmp @instruction
+2690 | dr[22:0] + pc -> ar
+2691 | acc[31:0] -> mem(ar)
+2692 | jmp @fetch
+2693 | pc -> ar, pc+4 -> pc
+2694 | mem(ar)[31:0] -> dr
+2695 | jmp @instruction
+2696 | if Z set: jmp @fetch
+2697 | pc + extended(dr[22:0]) -> pc
+2698 | jmp @fetch
+2699 | pc -> ar, pc+4 -> pc
+2700 | mem(ar)[31:0] -> dr
+2701 | jmp @instruction
+2702 | dr[22:0] + pc -> ar
+2703 | mem(ar)[31:0] -> dr
+2704 | dr[31:0] -> acc
+2705 | jmp @fetch
+2706 | pc -> ar, pc+4 -> pc
+2707 | mem(ar)[31:0] -> dr
+2708 | jmp @instruction
+2709 | dr[22:0] + pc -> ar
+2710 | mem(ar)[31:0] -> dr
+2711 | acc + mem(ar) -> acc
+2712 | jmp @fetch
+2713 | pc -> ar, pc+4 -> pc
+2714 | mem(ar)[31:0] -> dr
+2715 | jmp @instruction
+2716 | dr[22:0] + pc -> ar
+2717 | acc[31:0] -> mem(ar)
+2718 | jmp @fetch
+2719 | pc -> ar, pc+4 -> pc
+2720 | mem(ar)[31:0] -> dr
+2721 | jmp @instruction
+2722 | dr[22:0] + pc -> ar
+2723 | mem(ar)[31:0] -> dr
+2724 | dr[31:0] -> acc
+2725 | jmp @fetch
+2726 | pc -> ar, pc+4 -> pc
+2727 | mem(ar)[31:0] -> dr
+2728 | jmp @instruction
+2729 | dr[22:0] + pc -> ar
+2730 | mem(ar)[31:0] -> dr
+2731 | acc * mem(ar) -> acc
+2732 | jmp @fetch
+2733 | pc -> ar, pc+4 -> pc
+2734 | mem(ar)[31:0] -> dr
+2735 | jmp @instruction
+2736 | dr[22:0] + pc -> ar
+2737 | mem(ar)[31:0] -> dr
+2738 | acc + mem(ar) -> acc
+2739 | jmp @fetch
+2740 | pc -> ar, pc+4 -> pc
+2741 | mem(ar)[31:0] -> dr
+2742 | jmp @instruction
+2743 | dr[22:0] + pc -> ar
+2744 | acc[31:0] -> mem(ar)
+2745 | jmp @fetch
+2746 | pc -> ar, pc+4 -> pc
+2747 | mem(ar)[31:0] -> dr
+2748 | jmp @instruction
+2749 | dr[22:0] + pc -> ar
+2750 | mem(ar)[31:0] -> dr
+2751 | dr[31:0] -> acc
+2752 | jmp @fetch
+2753 | pc -> ar, pc+4 -> pc
+2754 | mem(ar)[31:0] -> dr
+2755 | jmp @instruction
+2756 | acc - 1 -> acc
+2757 | jmp @fetch
+2758 | pc -> ar, pc+4 -> pc
+2759 | mem(ar)[31:0] -> dr
+2760 | jmp @instruction
+2761 | dr[22:0] + pc -> ar
+2762 | acc[31:0] -> mem(ar)
+2763 | jmp @fetch
+2764 | pc -> ar, pc+4 -> pc
+2765 | mem(ar)[31:0] -> dr
+2766 | jmp @instruction
+2767 | if Z set: jmp @fetch
+2768 | pc + extended(dr[22:0]) -> pc
+2769 | jmp @fetch
+2770 | pc -> ar, pc+4 -> pc
+2771 | mem(ar)[31:0] -> dr
+2772 | jmp @instruction
+2773 | dr[22:0] + pc -> ar
+2774 | mem(ar)[31:0] -> dr
+2775 | dr[31:0] -> acc
+2776 | jmp @fetch
+2777 | pc -> ar, pc+4 -> pc
+2778 | mem(ar)[31:0] -> dr
+2779 | jmp @instruction
+2780 | dr[22:0] + pc -> ar
+2781 | mem(ar)[31:0] -> dr
+2782 | acc + mem(ar) -> acc
+2783 | jmp @fetch
+2784 | pc -> ar, pc+4 -> pc
+2785 | mem(ar)[31:0] -> dr
+2786 | jmp @instruction
+2787 | dr[22:0] + pc -> ar
+2788 | acc[31:0] -> mem(ar)
+2789 | jmp @fetch
+2790 | pc -> ar, pc+4 -> pc
+2791 | mem(ar)[31:0] -> dr
+2792 | jmp @instruction
+2793 | dr[22:0] + pc -> ar
+2794 | mem(ar)[31:0] -> dr
+2795 | dr[31:0] -> acc
+2796 | jmp @fetch
+2797 | pc -> ar, pc+4 -> pc
+2798 | mem(ar)[31:0] -> dr
+2799 | jmp @instruction
+2800 | dr[22:0] + pc -> ar
+2801 | mem(ar)[31:0] -> dr
+2802 | acc * mem(ar) -> acc
+2803 | jmp @fetch
+2804 | pc -> ar, pc+4 -> pc
+2805 | mem(ar)[31:0] -> dr
+2806 | jmp @instruction
+2807 | dr[22:0] + pc -> ar
+2808 | mem(ar)[31:0] -> dr
+2809 | acc + mem(ar) -> acc
+2810 | jmp @fetch
+2811 | pc -> ar, pc+4 -> pc
+2812 | mem(ar)[31:0] -> dr
+2813 | jmp @instruction
+2814 | dr[22:0] + pc -> ar
+2815 | acc[31:0] -> mem(ar)
+2816 | jmp @fetch
+2817 | pc -> ar, pc+4 -> pc
+2818 | mem(ar)[31:0] -> dr
+2819 | jmp @instruction
+2820 | dr[22:0] + pc -> ar
+2821 | mem(ar)[31:0] -> dr
+2822 | dr[31:0] -> acc
+2823 | jmp @fetch
+2824 | pc -> ar, pc+4 -> pc
+2825 | mem(ar)[31:0] -> dr
+2826 | jmp @instruction
+2827 | acc - 1 -> acc
+2828 | jmp @fetch
+2829 | pc -> ar, pc+4 -> pc
+2830 | mem(ar)[31:0] -> dr
+2831 | jmp @instruction
+2832 | dr[22:0] + pc -> ar
+2833 | acc[31:0] -> mem(ar)
+2834 | jmp @fetch
+2835 | pc -> ar, pc+4 -> pc
+2836 | mem(ar)[31:0] -> dr
+2837 | jmp @instruction
+2838 | if Z set: jmp @fetch
+2839 | pc + extended(dr[22:0]) -> pc
+2840 | jmp @fetch
+2841 | pc -> ar, pc+4 -> pc
+2842 | mem(ar)[31:0] -> dr
+2843 | jmp @instruction
+2844 | dr[22:0] + pc -> ar
+2845 | mem(ar)[31:0] -> dr
+2846 | dr[31:0] -> acc
+2847 | jmp @fetch
+2848 | pc -> ar, pc+4 -> pc
+2849 | mem(ar)[31:0] -> dr
+2850 | jmp @instruction
+2851 | dr[22:0] + pc -> ar
+2852 | mem(ar)[31:0] -> dr
+2853 | acc + mem(ar) -> acc
+2854 | jmp @fetch
+2855 | pc -> ar, pc+4 -> pc
+2856 | mem(ar)[31:0] -> dr
+2857 | jmp @instruction
+2858 | dr[22:0] + pc -> ar
+2859 | acc[31:0] -> mem(ar)
+2860 | jmp @fetch
+2861 | pc -> ar, pc+4 -> pc
+2862 | mem(ar)[31:0] -> dr
+2863 | jmp @instruction
+2864 | dr[22:0] + pc -> ar
+2865 | mem(ar)[31:0] -> dr
+2866 | dr[31:0] -> acc
+2867 | jmp @fetch
+2868 | pc -> ar, pc+4 -> pc
+2869 | mem(ar)[31:0] -> dr
+2870 | jmp @instruction
+2871 | dr[22:0] + pc -> ar
+2872 | mem(ar)[31:0] -> dr
+2873 | acc * mem(ar) -> acc
+2874 | jmp @fetch
+2875 | pc -> ar, pc+4 -> pc
+2876 | mem(ar)[31:0] -> dr
+2877 | jmp @instruction
+2878 | dr[22:0] + pc -> ar
+2879 | mem(ar)[31:0] -> dr
+2880 | acc + mem(ar) -> acc
+2881 | jmp @fetch
+2882 | pc -> ar, pc+4 -> pc
+2883 | mem(ar)[31:0] -> dr
+2884 | jmp @instruction
+2885 | dr[22:0] + pc -> ar
+2886 | acc[31:0] -> mem(ar)
+2887 | jmp @fetch
+2888 | pc -> ar, pc+4 -> pc
+2889 | mem(ar)[31:0] -> dr
+2890 | jmp @instruction
+2891 | dr[22:0] + pc -> ar
+2892 | mem(ar)[31:0] -> dr
+2893 | dr[31:0] -> acc
+2894 | jmp @fetch
+2895 | pc -> ar, pc+4 -> pc
+2896 | mem(ar)[31:0] -> dr
+2897 | jmp @instruction
+2898 | acc - 1 -> acc
+2899 | jmp @fetch
+2900 | pc -> ar, pc+4 -> pc
+2901 | mem(ar)[31:0] -> dr
+2902 | jmp @instruction
+2903 | dr[22:0] + pc -> ar
+2904 | acc[31:0] -> mem(ar)
+2905 | jmp @fetch
+2906 | pc -> ar, pc+4 -> pc
+2907 | mem(ar)[31:0] -> dr
+2908 | jmp @instruction
+2909 | if Z set: jmp @fetch
+2910 | pc + extended(dr[22:0]) -> pc
+2911 | jmp @fetch
+2912 | pc -> ar, pc+4 -> pc
+2913 | mem(ar)[31:0] -> dr
+2914 | jmp @instruction
+2915 | dr[22:0] + pc -> ar
+2916 | mem(ar)[31:0] -> dr
+2917 | dr[31:0] -> acc
+2918 | jmp @fetch
+2919 | pc -> ar, pc+4 -> pc
+2920 | mem(ar)[31:0] -> dr
+2921 | jmp @instruction
+2922 | dr[22:0] + pc -> ar
+2923 | mem(ar)[31:0] -> dr
+2924 | acc + mem(ar) -> acc
+2925 | jmp @fetch
+2926 | pc -> ar, pc+4 -> pc
+2927 | mem(ar)[31:0] -> dr
+2928 | jmp @instruction
+2929 | dr[22:0] + pc -> ar
+2930 | acc[31:0] -> mem(ar)
+2931 | jmp @fetch
+2932 | pc -> ar, pc+4 -> pc
+2933 | mem(ar)[31:0] -> dr
+2934 | jmp @instruction
+2935 | dr[22:0] + pc -> ar
+2936 | mem(ar)[31:0] -> dr
+2937 | dr[31:0] -> acc
+2938 | jmp @fetch
+2939 | pc -> ar, pc+4 -> pc
+2940 | mem(ar)[31:0] -> dr
+2941 | jmp @instruction
+2942 | dr[22:0] + pc -> ar
+2943 | mem(ar)[31:0] -> dr
+2944 | acc * mem(ar) -> acc
+2945 | jmp @fetch
+2946 | pc -> ar, pc+4 -> pc
+2947 | mem(ar)[31:0] -> dr
+2948 | jmp @instruction
+2949 | dr[22:0] + pc -> ar
+2950 | mem(ar)[31:0] -> dr
+2951 | acc + mem(ar) -> acc
+2952 | jmp @fetch
+2953 | pc -> ar, pc+4 -> pc
+2954 | mem(ar)[31:0] -> dr
+2955 | jmp @instruction
+2956 | dr[22:0] + pc -> ar
+2957 | acc[31:0] -> mem(ar)
+2958 | jmp @fetch
+2959 | pc -> ar, pc+4 -> pc
+2960 | mem(ar)[31:0] -> dr
+2961 | jmp @instruction
+2962 | dr[22:0] + pc -> ar
+2963 | mem(ar)[31:0] -> dr
+2964 | dr[31:0] -> acc
+2965 | jmp @fetch
+2966 | pc -> ar, pc+4 -> pc
+2967 | mem(ar)[31:0] -> dr
+2968 | jmp @instruction
+2969 | acc - 1 -> acc
+2970 | jmp @fetch
+2971 | pc -> ar, pc+4 -> pc
+2972 | mem(ar)[31:0] -> dr
+2973 | jmp @instruction
+2974 | dr[22:0] + pc -> ar
+2975 | acc[31:0] -> mem(ar)
+2976 | jmp @fetch
+2977 | pc -> ar, pc+4 -> pc
+2978 | mem(ar)[31:0] -> dr
+2979 | jmp @instruction
+2980 | if Z set: jmp @fetch
+2981 | pc + extended(dr[22:0]) -> pc
+2982 | jmp @fetch
+2983 | pc -> ar, pc+4 -> pc
+2984 | mem(ar)[31:0] -> dr
+2985 | jmp @instruction
+2986 | dr[22:0] + pc -> ar
+2987 | mem(ar)[31:0] -> dr
+2988 | dr[31:0] -> acc
+2989 | jmp @fetch
+2990 | pc -> ar, pc+4 -> pc
+2991 | mem(ar)[31:0] -> dr
+2992 | jmp @instruction
+2993 | dr[22:0] + pc -> ar
+2994 | mem(ar)[31:0] -> dr
+2995 | acc + mem(ar) -> acc
+2996 | jmp @fetch
+2997 | pc -> ar, pc+4 -> pc
+2998 | mem(ar)[31:0] -> dr
+2999 | jmp @instruction
+3000 | dr[22:0] + pc -> ar
+3001 | acc[31:0] -> mem(ar)
+3002 | jmp @fetch
+3003 | pc -> ar, pc+4 -> pc
+3004 | mem(ar)[31:0] -> dr
+3005 | jmp @instruction
+3006 | dr[22:0] + pc -> ar
+3007 | mem(ar)[31:0] -> dr
+3008 | dr[31:0] -> acc
+3009 | jmp @fetch
+3010 | pc -> ar, pc+4 -> pc
+3011 | mem(ar)[31:0] -> dr
+3012 | jmp @instruction
+3013 | dr[22:0] + pc -> ar
+3014 | mem(ar)[31:0] -> dr
+3015 | acc * mem(ar) -> acc
+3016 | jmp @fetch
+3017 | pc -> ar, pc+4 -> pc
+3018 | mem(ar)[31:0] -> dr
+3019 | jmp @instruction
+3020 | dr[22:0] + pc -> ar
+3021 | mem(ar)[31:0] -> dr
+3022 | acc + mem(ar) -> acc
+3023 | jmp @fetch
+3024 | pc -> ar, pc+4 -> pc
+3025 | mem(ar)[31:0] -> dr
+3026 | jmp @instruction
+3027 | dr[22:0] + pc -> ar
+3028 | acc[31:0] -> mem(ar)
+3029 | jmp @fetch
+3030 | pc -> ar, pc+4 -> pc
+3031 | mem(ar)[31:0] -> dr
+3032 | jmp @instruction
+3033 | dr[22:0] + pc -> ar
+3034 | mem(ar)[31:0] -> dr
+3035 | dr[31:0] -> acc
+3036 | jmp @fetch
+3037 | pc -> ar, pc+4 -> pc
+3038 | mem(ar)[31:0] -> dr
+3039 | jmp @instruction
+3040 | acc - 1 -> acc
+3041 | jmp @fetch
+3042 | pc -> ar, pc+4 -> pc
+3043 | mem(ar)[31:0] -> dr
+3044 | jmp @instruction
+3045 | dr[22:0] + pc -> ar
+3046 | acc[31:0] -> mem(ar)
+3047 | jmp @fetch
+3048 | pc -> ar, pc+4 -> pc
+3049 | mem(ar)[31:0] -> dr
+3050 | jmp @instruction
+3051 | if Z set: jmp @fetch
+3052 | pc + extended(dr[22:0]) -> pc
+3053 | jmp @fetch
+3054 | pc -> ar, pc+4 -> pc
+3055 | mem(ar)[31:0] -> dr
+3056 | jmp @instruction
+3057 | dr[22:0] + pc -> ar
+3058 | mem(ar)[31:0] -> dr
+3059 | dr[31:0] -> acc
+3060 | jmp @fetch
+3061 | pc -> ar, pc+4 -> pc
+3062 | mem(ar)[31:0] -> dr
+3063 | jmp @instruction
+3064 | dr[22:0] + pc -> ar
+3065 | mem(ar)[31:0] -> dr
+3066 | acc + mem(ar) -> acc
+3067 | jmp @fetch
+3068 | pc -> ar, pc+4 -> pc
+3069 | mem(ar)[31:0] -> dr
+3070 | jmp @instruction
+3071 | dr[22:0] + pc -> ar
+3072 | acc[31:0] -> mem(ar)
+3073 | jmp @fetch
+3074 | pc -> ar, pc+4 -> pc
+3075 | mem(ar)[31:0] -> dr
+3076 | jmp @instruction
+3077 | dr[22:0] + pc -> ar
+3078 | mem(ar)[31:0] -> dr
+3079 | dr[31:0] -> acc
+3080 | jmp @fetch
+3081 | pc -> ar, pc+4 -> pc
+3082 | mem(ar)[31:0] -> dr
+3083 | jmp @instruction
+3084 | dr[22:0] + pc -> ar
+3085 | mem(ar)[31:0] -> dr
+3086 | acc * mem(ar) -> acc
+3087 | jmp @fetch
+3088 | pc -> ar, pc+4 -> pc
+3089 | mem(ar)[31:0] -> dr
+3090 | jmp @instruction
+3091 | dr[22:0] + pc -> ar
+3092 | mem(ar)[31:0] -> dr
+3093 | acc + mem(ar) -> acc
+3094 | jmp @fetch
+3095 | pc -> ar, pc+4 -> pc
+3096 | mem(ar)[31:0] -> dr
+3097 | jmp @instruction
+3098 | dr[22:0] + pc -> ar
+3099 | acc[31:0] -> mem(ar)
+3100 | jmp @fetch
+3101 | pc -> ar, pc+4 -> pc
+3102 | mem(ar)[31:0] -> dr
+3103 | jmp @instruction
+3104 | dr[22:0] + pc -> ar
+3105 | mem(ar)[31:0] -> dr
+3106 | dr[31:0] -> acc
+3107 | jmp @fetch
+3108 | pc -> ar, pc+4 -> pc
+3109 | mem(ar)[31:0] -> dr
+3110 | jmp @instruction
+3111 | acc - 1 -> acc
+3112 | jmp @fetch
+3113 | pc -> ar, pc+4 -> pc
+3114 | mem(ar)[31:0] -> dr
+3115 | jmp @instruction
+3116 | dr[22:0] + pc -> ar
+3117 | acc[31:0] -> mem(ar)
+3118 | jmp @fetch
+3119 | pc -> ar, pc+4 -> pc
+3120 | mem(ar)[31:0] -> dr
+3121 | jmp @instruction
+3122 | if Z set: jmp @fetch
+3123 | pc + extended(dr[22:0]) -> pc
+3124 | jmp @fetch
+3125 | pc -> ar, pc+4 -> pc
+3126 | mem(ar)[31:0] -> dr
+3127 | jmp @instruction
+3128 | dr[22:0] + pc -> ar
+3129 | mem(ar)[31:0] -> dr
+3130 | dr[31:0] -> acc
+3131 | jmp @fetch
+3132 | pc -> ar, pc+4 -> pc
+3133 | mem(ar)[31:0] -> dr
+3134 | jmp @instruction
+3135 | dr[22:0] + pc -> ar
+3136 | mem(ar)[31:0] -> dr
+3137 | acc + mem(ar) -> acc
+3138 | jmp @fetch
+3139 | pc -> ar, pc+4 -> pc
+3140 | mem(ar)[31:0] -> dr
+3141 | jmp @instruction
+3142 | dr[22:0] + pc -> ar
+3143 | acc[31:0] -> mem(ar)
+3144 | jmp @fetch
+3145 | pc -> ar, pc+4 -> pc
+3146 | mem(ar)[31:0] -> dr
+3147 | jmp @instruction
+3148 | dr[22:0] + pc -> ar
+3149 | mem(ar)[31:0] -> dr
+3150 | dr[31:0] -> acc
+3151 | jmp @fetch
+3152 | pc -> ar, pc+4 -> pc
+3153 | mem(ar)[31:0] -> dr
+3154 | jmp @instruction
+3155 | dr[22:0] + pc -> ar
+3156 | mem(ar)[31:0] -> dr
+3157 | acc * mem(ar) -> acc
+3158 | jmp @fetch
+3159 | pc -> ar, pc+4 -> pc
+3160 | mem(ar)[31:0] -> dr
+3161 | jmp @instruction
+3162 | dr[22:0] + pc -> ar
+3163 | mem(ar)[31:0] -> dr
+3164 | acc + mem(ar) -> acc
+3165 | jmp @fetch
+3166 | pc -> ar, pc+4 -> pc
+3167 | mem(ar)[31:0] -> dr
+3168 | jmp @instruction
+3169 | dr[22:0] + pc -> ar
+3170 | acc[31:0] -> mem(ar)
+3171 | jmp @fetch
+3172 | pc -> ar, pc+4 -> pc
+3173 | mem(ar)[31:0] -> dr
+3174 | jmp @instruction
+3175 | dr[22:0] + pc -> ar
+3176 | mem(ar)[31:0] -> dr
+3177 | dr[31:0] -> acc
+3178 | jmp @fetch
+3179 | pc -> ar, pc+4 -> pc
+3180 | mem(ar)[31:0] -> dr
+3181 | jmp @instruction
+3182 | acc - 1 -> acc
+3183 | jmp @fetch
+3184 | pc -> ar, pc+4 -> pc
+3185 | mem(ar)[31:0] -> dr
+3186 | jmp @instruction
+3187 | dr[22:0] + pc -> ar
+3188 | acc[31:0] -> mem(ar)
+3189 | jmp @fetch
+3190 | pc -> ar, pc+4 -> pc
+3191 | mem(ar)[31:0] -> dr
+3192 | jmp @instruction
+3193 | if Z set: jmp @fetch
+3194 | pc + extended(dr[22:0]) -> pc
+3195 | jmp @fetch
+3196 | pc -> ar, pc+4 -> pc
+3197 | mem(ar)[31:0] -> dr
+3198 | jmp @instruction
+3199 | dr[22:0] + pc -> ar
+3200 | mem(ar)[31:0] -> dr
+3201 | dr[31:0] -> acc
+3202 | jmp @fetch
+3203 | pc -> ar, pc+4 -> pc
+3204 | mem(ar)[31:0] -> dr
+3205 | jmp @instruction
+3206 | dr[22:0] + pc -> ar
+3207 | mem(ar)[31:0] -> dr
+3208 | acc + mem(ar) -> acc
+3209 | jmp @fetch
+3210 | pc -> ar, pc+4 -> pc
+3211 | mem(ar)[31:0] -> dr
+3212 | jmp @instruction
+3213 | dr[22:0] + pc -> ar
+3214 | acc[31:0] -> mem(ar)
+3215 | jmp @fetch
+3216 | pc -> ar, pc+4 -> pc
+3217 | mem(ar)[31:0] -> dr
+3218 | jmp @instruction
+3219 | dr[22:0] + pc -> ar
+3220 | mem(ar)[31:0] -> dr
+3221 | dr[31:0] -> acc
+3222 | jmp @fetch
+3223 | pc -> ar, pc+4 -> pc
+3224 | mem(ar)[31:0] -> dr
+3225 | jmp @instruction
+3226 | dr[22:0] + pc -> ar
+3227 | mem(ar)[31:0] -> dr
+3228 | acc * mem(ar) -> acc
+3229 | jmp @fetch
+3230 | pc -> ar, pc+4 -> pc
+3231 | mem(ar)[31:0] -> dr
+3232 | jmp @instruction
+3233 | dr[22:0] + pc -> ar
+3234 | mem(ar)[31:0] -> dr
+3235 | acc + mem(ar) -> acc
+3236 | jmp @fetch
+3237 | pc -> ar, pc+4 -> pc
+3238 | mem(ar)[31:0] -> dr
+3239 | jmp @instruction
+3240 | dr[22:0] + pc -> ar
+3241 | acc[31:0] -> mem(ar)
+3242 | jmp @fetch
+3243 | pc -> ar, pc+4 -> pc
+3244 | mem(ar)[31:0] -> dr
+3245 | jmp @instruction
+3246 | dr[22:0] + pc -> ar
+3247 | mem(ar)[31:0] -> dr
+3248 | dr[31:0] -> acc
+3249 | jmp @fetch
+3250 | pc -> ar, pc+4 -> pc
+3251 | mem(ar)[31:0] -> dr
+3252 | jmp @instruction
+3253 | acc - 1 -> acc
+3254 | jmp @fetch
+3255 | pc -> ar, pc+4 -> pc
+3256 | mem(ar)[31:0] -> dr
+3257 | jmp @instruction
+3258 | dr[22:0] + pc -> ar
+3259 | acc[31:0] -> mem(ar)
+3260 | jmp @fetch
+3261 | pc -> ar, pc+4 -> pc
+3262 | mem(ar)[31:0] -> dr
+3263 | jmp @instruction
+3264 | if Z set: jmp @fetch
+3265 | pc + extended(dr[22:0]) -> pc
+3266 | jmp @fetch
+3267 | pc -> ar, pc+4 -> pc
+3268 | mem(ar)[31:0] -> dr
+3269 | jmp @instruction
+3270 | dr[22:0] + pc -> ar
+3271 | mem(ar)[31:0] -> dr
+3272 | dr[31:0] -> acc
+3273 | jmp @fetch
+3274 | pc -> ar, pc+4 -> pc
+3275 | mem(ar)[31:0] -> dr
+3276 | jmp @instruction
+3277 | dr[22:0] + pc -> ar
+3278 | mem(ar)[31:0] -> dr
+3279 | acc + mem(ar) -> acc
+3280 | jmp @fetch
+3281 | pc -> ar, pc+4 -> pc
+3282 | mem(ar)[31:0] -> dr
+3283 | jmp @instruction
+3284 | dr[22:0] + pc -> ar
+3285 | acc[31:0] -> mem(ar)
+3286 | jmp @fetch
+3287 | pc -> ar, pc+4 -> pc
+3288 | mem(ar)[31:0] -> dr
+3289 | jmp @instruction
+3290 | dr[22:0] + pc -> ar
+3291 | mem(ar)[31:0] -> dr
+3292 | dr[31:0] -> acc
+3293 | jmp @fetch
+3294 | pc -> ar, pc+4 -> pc
+3295 | mem(ar)[31:0] -> dr
+3296 | jmp @instruction
+3297 | dr[22:0] + pc -> ar
+3298 | mem(ar)[31:0] -> dr
+3299 | acc * mem(ar) -> acc
+3300 | jmp @fetch
+3301 | pc -> ar, pc+4 -> pc
+3302 | mem(ar)[31:0] -> dr
+3303 | jmp @instruction
+3304 | dr[22:0] + pc -> ar
+3305 | mem(ar)[31:0] -> dr
+3306 | acc + mem(ar) -> acc
+3307 | jmp @fetch
+3308 | pc -> ar, pc+4 -> pc
+3309 | mem(ar)[31:0] -> dr
+3310 | jmp @instruction
+3311 | dr[22:0] + pc -> ar
+3312 | acc[31:0] -> mem(ar)
+3313 | jmp @fetch
+3314 | pc -> ar, pc+4 -> pc
+3315 | mem(ar)[31:0] -> dr
+3316 | jmp @instruction
+3317 | dr[22:0] + pc -> ar
+3318 | mem(ar)[31:0] -> dr
+3319 | dr[31:0] -> acc
+3320 | jmp @fetch
+3321 | pc -> ar, pc+4 -> pc
+3322 | mem(ar)[31:0] -> dr
+3323 | jmp @instruction
+3324 | acc - 1 -> acc
+3325 | jmp @fetch
+3326 | pc -> ar, pc+4 -> pc
+3327 | mem(ar)[31:0] -> dr
+3328 | jmp @instruction
+3329 | dr[22:0] + pc -> ar
+3330 | acc[31:0] -> mem(ar)
+3331 | jmp @fetch
+3332 | pc -> ar, pc+4 -> pc
+3333 | mem(ar)[31:0] -> dr
+3334 | jmp @instruction
+3335 | if Z set: jmp @fetch
+3336 | pc + extended(dr[22:0]) -> pc
+3337 | jmp @fetch
+3338 | pc -> ar, pc+4 -> pc
+3339 | mem(ar)[31:0] -> dr
+3340 | jmp @instruction
+3341 | dr[22:0] + pc -> ar
+3342 | mem(ar)[31:0] -> dr
+3343 | dr[31:0] -> acc
+3344 | jmp @fetch
+3345 | pc -> ar, pc+4 -> pc
+3346 | mem(ar)[31:0] -> dr
+3347 | jmp @instruction
+3348 | dr[22:0] + pc -> ar
+3349 | mem(ar)[31:0] -> dr
+3350 | acc + mem(ar) -> acc
+3351 | jmp @fetch
+3352 | pc -> ar, pc+4 -> pc
+3353 | mem(ar)[31:0] -> dr
+3354 | jmp @instruction
+3355 | dr[22:0] + pc -> ar
+3356 | acc[31:0] -> mem(ar)
+3357 | jmp @fetch
+3358 | pc -> ar, pc+4 -> pc
+3359 | mem(ar)[31:0] -> dr
+3360 | jmp @instruction
+3361 | dr[22:0] + pc -> ar
+3362 | mem(ar)[31:0] -> dr
+3363 | dr[31:0] -> acc
+3364 | jmp @fetch
+3365 | pc -> ar, pc+4 -> pc
+3366 | mem(ar)[31:0] -> dr
+3367 | jmp @instruction
+3368 | dr[22:0] + pc -> ar
+3369 | mem(ar)[31:0] -> dr
+3370 | acc * mem(ar) -> acc
+3371 | jmp @fetch
+3372 | pc -> ar, pc+4 -> pc
+3373 | mem(ar)[31:0] -> dr
+3374 | jmp @instruction
+3375 | dr[22:0] + pc -> ar
+3376 | mem(ar)[31:0] -> dr
+3377 | acc + mem(ar) -> acc
+3378 | jmp @fetch
+3379 | pc -> ar, pc+4 -> pc
+3380 | mem(ar)[31:0] -> dr
+3381 | jmp @instruction
+3382 | dr[22:0] + pc -> ar
+3383 | acc[31:0] -> mem(ar)
+3384 | jmp @fetch
+3385 | pc -> ar, pc+4 -> pc
+3386 | mem(ar)[31:0] -> dr
+3387 | jmp @instruction
+3388 | dr[22:0] + pc -> ar
+3389 | mem(ar)[31:0] -> dr
+3390 | dr[31:0] -> acc
+3391 | jmp @fetch
+3392 | pc -> ar, pc+4 -> pc
+3393 | mem(ar)[31:0] -> dr
+3394 | jmp @instruction
+3395 | acc - 1 -> acc
+3396 | jmp @fetch
+3397 | pc -> ar, pc+4 -> pc
+3398 | mem(ar)[31:0] -> dr
+3399 | jmp @instruction
+3400 | dr[22:0] + pc -> ar
+3401 | acc[31:0] -> mem(ar)
+3402 | jmp @fetch
+3403 | pc -> ar, pc+4 -> pc
+3404 | mem(ar)[31:0] -> dr
+3405 | jmp @instruction
+3406 | if Z set: jmp @fetch
+3407 | pc + extended(dr[22:0]) -> pc
+3408 | jmp @fetch
+3409 | pc -> ar, pc+4 -> pc
+3410 | mem(ar)[31:0] -> dr
+3411 | jmp @instruction
+3412 | dr[22:0] + pc -> ar
+3413 | mem(ar)[31:0] -> dr
+3414 | dr[31:0] -> acc
+3415 | jmp @fetch
+3416 | pc -> ar, pc+4 -> pc
+3417 | mem(ar)[31:0] -> dr
+3418 | jmp @instruction
+3419 | dr[22:0] + pc -> ar
+3420 | mem(ar)[31:0] -> dr
+3421 | acc + mem(ar) -> acc
+3422 | jmp @fetch
+3423 | pc -> ar, pc+4 -> pc
+3424 | mem(ar)[31:0] -> dr
+3425 | jmp @instruction
+3426 | dr[22:0] + pc -> ar
+3427 | acc[31:0] -> mem(ar)
+3428 | jmp @fetch
+3429 | pc -> ar, pc+4 -> pc
+3430 | mem(ar)[31:0] -> dr
+3431 | jmp @instruction
+3432 | dr[22:0] + pc -> ar
+3433 | mem(ar)[31:0] -> dr
+3434 | dr[31:0] -> acc
+3435 | jmp @fetch
+3436 | pc -> ar, pc+4 -> pc
+3437 | mem(ar)[31:0] -> dr
+3438 | jmp @instruction
+3439 | dr[22:0] + pc -> ar
+3440 | mem(ar)[31:0] -> dr
+3441 | acc * mem(ar) -> acc
+3442 | jmp @fetch
+3443 | pc -> ar, pc+4 -> pc
+3444 | mem(ar)[31:0] -> dr
+3445 | jmp @instruction
+3446 | dr[22:0] + pc -> ar
+3447 | mem(ar)[31:0] -> dr
+3448 | acc + mem(ar) -> acc
+3449 | jmp @fetch
+3450 | pc -> ar, pc+4 -> pc
+3451 | mem(ar)[31:0] -> dr
+3452 | jmp @instruction
+3453 | dr[22:0] + pc -> ar
+3454 | acc[31:0] -> mem(ar)
+3455 | jmp @fetch
+3456 | pc -> ar, pc+4 -> pc
+3457 | mem(ar)[31:0] -> dr
+3458 | jmp @instruction
+3459 | dr[22:0] + pc -> ar
+3460 | mem(ar)[31:0] -> dr
+3461 | dr[31:0] -> acc
+3462 | jmp @fetch
+3463 | pc -> ar, pc+4 -> pc
+3464 | mem(ar)[31:0] -> dr
+3465 | jmp @instruction
+3466 | acc - 1 -> acc
+3467 | jmp @fetch
+3468 | pc -> ar, pc+4 -> pc
+3469 | mem(ar)[31:0] -> dr
+3470 | jmp @instruction
+3471 | dr[22:0] + pc -> ar
+3472 | acc[31:0] -> mem(ar)
+3473 | jmp @fetch
+3474 | pc -> ar, pc+4 -> pc
+3475 | mem(ar)[31:0] -> dr
+3476 | jmp @instruction
+3477 | if Z set: jmp @fetch
+3478 | pc + extended(dr[22:0]) -> pc
+3479 | jmp @fetch
+3480 | pc -> ar, pc+4 -> pc
+3481 | mem(ar)[31:0] -> dr
+3482 | jmp @instruction
+3483 | dr[22:0] + pc -> ar
+3484 | mem(ar)[31:0] -> dr
+3485 | dr[31:0] -> acc
+3486 | jmp @fetch
+3487 | pc -> ar, pc+4 -> pc
+3488 | mem(ar)[31:0] -> dr
+3489 | jmp @instruction
+3490 | dr[22:0] + pc -> ar
+3491 | mem(ar)[31:0] -> dr
+3492 | acc + mem(ar) -> acc
+3493 | jmp @fetch
+3494 | pc -> ar, pc+4 -> pc
+3495 | mem(ar)[31:0] -> dr
+3496 | jmp @instruction
+3497 | dr[22:0] + pc -> ar
+3498 | acc[31:0] -> mem(ar)
+3499 | jmp @fetch
+3500 | pc -> ar, pc+4 -> pc
+3501 | mem(ar)[31:0] -> dr
+3502 | jmp @instruction
+3503 | dr[22:0] + pc -> ar
+3504 | mem(ar)[31:0] -> dr
+3505 | dr[31:0] -> acc
+3506 | jmp @fetch
+3507 | pc -> ar, pc+4 -> pc
+3508 | mem(ar)[31:0] -> dr
+3509 | jmp @instruction
+3510 | dr[22:0] + pc -> ar
+3511 | mem(ar)[31:0] -> dr
+3512 | acc * mem(ar) -> acc
+3513 | jmp @fetch
+3514 | pc -> ar, pc+4 -> pc
+3515 | mem(ar)[31:0] -> dr
+3516 | jmp @instruction
+3517 | dr[22:0] + pc -> ar
+3518 | mem(ar)[31:0] -> dr
+3519 | acc + mem(ar) -> acc
+3520 | jmp @fetch
+3521 | pc -> ar, pc+4 -> pc
+3522 | mem(ar)[31:0] -> dr
+3523 | jmp @instruction
+3524 | dr[22:0] + pc -> ar
+3525 | acc[31:0] -> mem(ar)
+3526 | jmp @fetch
+3527 | pc -> ar, pc+4 -> pc
+3528 | mem(ar)[31:0] -> dr
+3529 | jmp @instruction
+3530 | dr[22:0] + pc -> ar
+3531 | mem(ar)[31:0] -> dr
+3532 | dr[31:0] -> acc
+3533 | jmp @fetch
+3534 | pc -> ar, pc+4 -> pc
+3535 | mem(ar)[31:0] -> dr
+3536 | jmp @instruction
+3537 | acc - 1 -> acc
+3538 | jmp @fetch
+3539 | pc -> ar, pc+4 -> pc
+3540 | mem(ar)[31:0] -> dr
+3541 | jmp @instruction
+3542 | dr[22:0] + pc -> ar
+3543 | acc[31:0] -> mem(ar)
+3544 | jmp @fetch
+3545 | pc -> ar, pc+4 -> pc
+3546 | mem(ar)[31:0] -> dr
+3547 | jmp @instruction
+3548 | if Z set: jmp @fetch
+3549 | pc + extended(dr[22:0]) -> pc
+3550 | jmp @fetch
+3551 | pc -> ar, pc+4 -> pc
+3552 | mem(ar)[31:0] -> dr
+3553 | jmp @instruction
+3554 | dr[22:0] + pc -> ar
+3555 | mem(ar)[31:0] -> dr
+3556 | dr[31:0] -> acc
+3557 | jmp @fetch
+3558 | pc -> ar, pc+4 -> pc
+3559 | mem(ar)[31:0] -> dr
+3560 | jmp @instruction
+3561 | dr[22:0] + pc -> ar
+3562 | mem(ar)[31:0] -> dr
+3563 | acc + mem(ar) -> acc
+3564 | jmp @fetch
+3565 | pc -> ar, pc+4 -> pc
+3566 | mem(ar)[31:0] -> dr
+3567 | jmp @instruction
+3568 | dr[22:0] + pc -> ar
+3569 | acc[31:0] -> mem(ar)
+3570 | jmp @fetch
+3571 | pc -> ar, pc+4 -> pc
+3572 | mem(ar)[31:0] -> dr
+3573 | jmp @instruction
+3574 | dr[22:0] + pc -> ar
+3575 | mem(ar)[31:0] -> dr
+3576 | dr[31:0] -> acc
+3577 | jmp @fetch
+3578 | pc -> ar, pc+4 -> pc
+3579 | mem(ar)[31:0] -> dr
+3580 | jmp @instruction
+3581 | dr[22:0] + pc -> ar
+3582 | mem(ar)[31:0] -> dr
+3583 | acc * mem(ar) -> acc
+3584 | jmp @fetch
+3585 | pc -> ar, pc+4 -> pc
+3586 | mem(ar)[31:0] -> dr
+3587 | jmp @instruction
+3588 | dr[22:0] + pc -> ar
+3589 | mem(ar)[31:0] -> dr
+3590 | acc + mem(ar) -> acc
+3591 | jmp @fetch
+3592 | pc -> ar, pc+4 -> pc
+3593 | mem(ar)[31:0] -> dr
+3594 | jmp @instruction
+3595 | dr[22:0] + pc -> ar
+3596 | acc[31:0] -> mem(ar)
+3597 | jmp @fetch
+3598 | pc -> ar, pc+4 -> pc
+3599 | mem(ar)[31:0] -> dr
+3600 | jmp @instruction
+3601 | dr[22:0] + pc -> ar
+3602 | mem(ar)[31:0] -> dr
+3603 | dr[31:0] -> acc
+3604 | jmp @fetch
+3605 | pc -> ar, pc+4 -> pc
+3606 | mem(ar)[31:0] -> dr
+3607 | jmp @instruction
+3608 | acc - 1 -> acc
+3609 | jmp @fetch
+3610 | pc -> ar, pc+4 -> pc
+3611 | mem(ar)[31:0] -> dr
+3612 | jmp @instruction
+3613 | dr[22:0] + pc -> ar
+3614 | acc[31:0] -> mem(ar)
+3615 | jmp @fetch
+3616 | pc -> ar, pc+4 -> pc
+3617 | mem(ar)[31:0] -> dr
+3618 | jmp @instruction
+3619 | if Z set: jmp @fetch
+3620 | pc + extended(dr[22:0]) -> pc
+3621 | jmp @fetch
+3622 | pc -> ar, pc+4 -> pc
+3623 | mem(ar)[31:0] -> dr
+3624 | jmp @instruction
+3625 | dr[22:0] + pc -> ar
+3626 | mem(ar)[31:0] -> dr
+3627 | dr[31:0] -> acc
+3628 | jmp @fetch
+3629 | pc -> ar, pc+4 -> pc
+3630 | mem(ar)[31:0] -> dr
+3631 | jmp @instruction
+3632 | dr[22:0] + pc -> ar
+3633 | mem(ar)[31:0] -> dr
+3634 | acc + mem(ar) -> acc
+3635 | jmp @fetch
+3636 | pc -> ar, pc+4 -> pc
+3637 | mem(ar)[31:0] -> dr
+3638 | jmp @instruction
+3639 | dr[22:0] + pc -> ar
+3640 | acc[31:0] -> mem(ar)
+3641 | jmp @fetch
+3642 | pc -> ar, pc+4 -> pc
+3643 | mem(ar)[31:0] -> dr
+3644 | jmp @instruction
+3645 | dr[22:0] + pc -> ar
+3646 | mem(ar)[31:0] -> dr
+3647 | dr[31:0] -> acc
+3648 | jmp @fetch
+3649 | pc -> ar, pc+4 -> pc
+3650 | mem(ar)[31:0] -> dr
+3651 | jmp @instruction
+3652 | dr[22:0] + pc -> ar
+3653 | mem(ar)[31:0] -> dr
+3654 | acc * mem(ar) -> acc
+3655 | jmp @fetch
+3656 | pc -> ar, pc+4 -> pc
+3657 | mem(ar)[31:0] -> dr
+3658 | jmp @instruction
+3659 | dr[22:0] + pc -> ar
+3660 | mem(ar)[31:0] -> dr
+3661 | acc + mem(ar) -> acc
+3662 | jmp @fetch
+3663 | pc -> ar, pc+4 -> pc
+3664 | mem(ar)[31:0] -> dr
+3665 | jmp @instruction
+3666 | dr[22:0] + pc -> ar
+3667 | acc[31:0] -> mem(ar)
+3668 | jmp @fetch
+3669 | pc -> ar, pc+4 -> pc
+3670 | mem(ar)[31:0] -> dr
+3671 | jmp @instruction
+3672 | dr[22:0] + pc -> ar
+3673 | mem(ar)[31:0] -> dr
+3674 | dr[31:0] -> acc
+3675 | jmp @fetch
+3676 | pc -> ar, pc+4 -> pc
+3677 | mem(ar)[31:0] -> dr
+3678 | jmp @instruction
+3679 | acc - 1 -> acc
+3680 | jmp @fetch
+3681 | pc -> ar, pc+4 -> pc
+3682 | mem(ar)[31:0] -> dr
+3683 | jmp @instruction
+3684 | dr[22:0] + pc -> ar
+3685 | acc[31:0] -> mem(ar)
+3686 | jmp @fetch
+3687 | pc -> ar, pc+4 -> pc
+3688 | mem(ar)[31:0] -> dr
+3689 | jmp @instruction
+3690 | if Z set: jmp @fetch
+3691 | pc + extended(dr[22:0]) -> pc
+3692 | jmp @fetch
+3693 | pc -> ar, pc+4 -> pc
+3694 | mem(ar)[31:0] -> dr
+3695 | jmp @instruction
+3696 | dr[22:0] + pc -> ar
+3697 | mem(ar)[31:0] -> dr
+3698 | dr[31:0] -> acc
+3699 | jmp @fetch
+3700 | pc -> ar, pc+4 -> pc
+3701 | mem(ar)[31:0] -> dr
+3702 | jmp @instruction
+3703 | dr[22:0] + pc -> ar
+3704 | mem(ar)[31:0] -> dr
+3705 | acc + mem(ar) -> acc
+3706 | jmp @fetch
+3707 | pc -> ar, pc+4 -> pc
+3708 | mem(ar)[31:0] -> dr
+3709 | jmp @instruction
+3710 | dr[22:0] + pc -> ar
+3711 | acc[31:0] -> mem(ar)
+3712 | jmp @fetch
+3713 | pc -> ar, pc+4 -> pc
+3714 | mem(ar)[31:0] -> dr
+3715 | jmp @instruction
+3716 | dr[22:0] + pc -> ar
+3717 | mem(ar)[31:0] -> dr
+3718 | dr[31:0] -> acc
+3719 | jmp @fetch
+3720 | pc -> ar, pc+4 -> pc
+3721 | mem(ar)[31:0] -> dr
+3722 | jmp @instruction
+3723 | dr[22:0] + pc -> ar
+3724 | mem(ar)[31:0] -> dr
+3725 | acc * mem(ar) -> acc
+3726 | jmp @fetch
+3727 | pc -> ar, pc+4 -> pc
+3728 | mem(ar)[31:0] -> dr
+3729 | jmp @instruction
+3730 | dr[22:0] + pc -> ar
+3731 | mem(ar)[31:0] -> dr
+3732 | acc + mem(ar) -> acc
+3733 | jmp @fetch
+3734 | pc -> ar, pc+4 -> pc
+3735 | mem(ar)[31:0] -> dr
+3736 | jmp @instruction
+3737 | dr[22:0] + pc -> ar
+3738 | acc[31:0] -> mem(ar)
+3739 | jmp @fetch
+3740 | pc -> ar, pc+4 -> pc
+3741 | mem(ar)[31:0] -> dr
+3742 | jmp @instruction
+3743 | dr[22:0] + pc -> ar
+3744 | mem(ar)[31:0] -> dr
+3745 | dr[31:0] -> acc
+3746 | jmp @fetch
+3747 | pc -> ar, pc+4 -> pc
+3748 | mem(ar)[31:0] -> dr
+3749 | jmp @instruction
+3750 | acc - 1 -> acc
+3751 | jmp @fetch
+3752 | pc -> ar, pc+4 -> pc
+3753 | mem(ar)[31:0] -> dr
+3754 | jmp @instruction
+3755 | dr[22:0] + pc -> ar
+3756 | acc[31:0] -> mem(ar)
+3757 | jmp @fetch
+3758 | pc -> ar, pc+4 -> pc
+3759 | mem(ar)[31:0] -> dr
+3760 | jmp @instruction
+3761 | if Z set: jmp @fetch
+3762 | pc + extended(dr[22:0]) -> pc
+3763 | jmp @fetch
+3764 | pc -> ar, pc+4 -> pc
+3765 | mem(ar)[31:0] -> dr
+3766 | jmp @instruction
+3767 | dr[22:0] + pc -> ar
+3768 | mem(ar)[31:0] -> dr
+3769 | dr[31:0] -> acc
+3770 | jmp @fetch
+3771 | pc -> ar, pc+4 -> pc
+3772 | mem(ar)[31:0] -> dr
+3773 | jmp @instruction
+3774 | dr[22:0] + pc -> ar
+3775 | mem(ar)[31:0] -> dr
+3776 | acc + mem(ar) -> acc
+3777 | jmp @fetch
+3778 | pc -> ar, pc+4 -> pc
+3779 | mem(ar)[31:0] -> dr
+3780 | jmp @instruction
+3781 | dr[22:0] + pc -> ar
+3782 | acc[31:0] -> mem(ar)
+3783 | jmp @fetch
+3784 | pc -> ar, pc+4 -> pc
+3785 | mem(ar)[31:0] -> dr
+3786 | jmp @instruction
+3787 | dr[22:0] + pc -> ar
+3788 | mem(ar)[31:0] -> dr
+3789 | dr[31:0] -> acc
+3790 | jmp @fetch
+3791 | pc -> ar, pc+4 -> pc
+3792 | mem(ar)[31:0] -> dr
+3793 | jmp @instruction
+3794 | dr[22:0] + pc -> ar
+3795 | mem(ar)[31:0] -> dr
+3796 | acc * mem(ar) -> acc
+3797 | jmp @fetch
+3798 | pc -> ar, pc+4 -> pc
+3799 | mem(ar)[31:0] -> dr
+3800 | jmp @instruction
+3801 | dr[22:0] + pc -> ar
+3802 | mem(ar)[31:0] -> dr
+3803 | acc + mem(ar) -> acc
+3804 | jmp @fetch
+3805 | pc -> ar, pc+4 -> pc
+3806 | mem(ar)[31:0] -> dr
+3807 | jmp @instruction
+3808 | dr[22:0] + pc -> ar
+3809 | acc[31:0] -> mem(ar)
+3810 | jmp @fetch
+3811 | pc -> ar, pc+4 -> pc
+3812 | mem(ar)[31:0] -> dr
+3813 | jmp @instruction
+3814 | dr[22:0] + pc -> ar
+3815 | mem(ar)[31:0] -> dr
+3816 | dr[31:0] -> acc
+3817 | jmp @fetch
+3818 | pc -> ar, pc+4 -> pc
+3819 | mem(ar)[31:0] -> dr
+3820 | jmp @instruction
+3821 | acc - 1 -> acc
+3822 | jmp @fetch
+3823 | pc -> ar, pc+4 -> pc
+3824 | mem(ar)[31:0] -> dr
+3825 | jmp @instruction
+3826 | dr[22:0] + pc -> ar
+3827 | acc[31:0] -> mem(ar)
+3828 | jmp @fetch
+3829 | pc -> ar, pc+4 -> pc
+3830 | mem(ar)[31:0] -> dr
+3831 | jmp @instruction
+3832 | if Z set: jmp @fetch
+3833 | pc + extended(dr[22:0]) -> pc
+3834 | jmp @fetch
+3835 | pc -> ar, pc+4 -> pc
+3836 | mem(ar)[31:0] -> dr
+3837 | jmp @instruction
+3838 | dr[22:0] + pc -> ar
+3839 | mem(ar)[31:0] -> dr
+3840 | dr[31:0] -> acc
+3841 | jmp @fetch
+3842 | pc -> ar, pc+4 -> pc
+3843 | mem(ar)[31:0] -> dr
+3844 | jmp @instruction
+3845 | dr[22:0] + pc -> ar
+3846 | mem(ar)[31:0] -> dr
+3847 | acc + mem(ar) -> acc
+3848 | jmp @fetch
+3849 | pc -> ar, pc+4 -> pc
+3850 | mem(ar)[31:0] -> dr
+3851 | jmp @instruction
+3852 | dr[22:0] + pc -> ar
+3853 | acc[31:0] -> mem(ar)
+3854 | jmp @fetch
+3855 | pc -> ar, pc+4 -> pc
+3856 | mem(ar)[31:0] -> dr
+3857 | jmp @instruction
+3858 | dr[22:0] + pc -> ar
+3859 | mem(ar)[31:0] -> dr
+3860 | dr[31:0] -> acc
+3861 | jmp @fetch
+3862 | pc -> ar, pc+4 -> pc
+3863 | mem(ar)[31:0] -> dr
+3864 | jmp @instruction
+3865 | dr[22:0] + pc -> ar
+3866 | mem(ar)[31:0] -> dr
+3867 | acc * mem(ar) -> acc
+3868 | jmp @fetch
+3869 | pc -> ar, pc+4 -> pc
+3870 | mem(ar)[31:0] -> dr
+3871 | jmp @instruction
+3872 | dr[22:0] + pc -> ar
+3873 | mem(ar)[31:0] -> dr
+3874 | acc + mem(ar) -> acc
+3875 | jmp @fetch
+3876 | pc -> ar, pc+4 -> pc
+3877 | mem(ar)[31:0] -> dr
+3878 | jmp @instruction
+3879 | dr[22:0] + pc -> ar
+3880 | acc[31:0] -> mem(ar)
+3881 | jmp @fetch
+3882 | pc -> ar, pc+4 -> pc
+3883 | mem(ar)[31:0] -> dr
+3884 | jmp @instruction
+3885 | dr[22:0] + pc -> ar
+3886 | mem(ar)[31:0] -> dr
+3887 | dr[31:0] -> acc
+3888 | jmp @fetch
+3889 | pc -> ar, pc+4 -> pc
+3890 | mem(ar)[31:0] -> dr
+3891 | jmp @instruction
+3892 | acc - 1 -> acc
+3893 | jmp @fetch
+3894 | pc -> ar, pc+4 -> pc
+3895 | mem(ar)[31:0] -> dr
+3896 | jmp @instruction
+3897 | dr[22:0] + pc -> ar
+3898 | acc[31:0] -> mem(ar)
+3899 | jmp @fetch
+3900 | pc -> ar, pc+4 -> pc
+3901 | mem(ar)[31:0] -> dr
+3902 | jmp @instruction
+3903 | if Z set: jmp @fetch
+3904 | pc + extended(dr[22:0]) -> pc
+3905 | jmp @fetch
+3906 | pc -> ar, pc+4 -> pc
+3907 | mem(ar)[31:0] -> dr
+3908 | jmp @instruction
+3909 | dr[22:0] + pc -> ar
+3910 | mem(ar)[31:0] -> dr
+3911 | dr[31:0] -> acc
+3912 | jmp @fetch
+3913 | pc -> ar, pc+4 -> pc
+3914 | mem(ar)[31:0] -> dr
+3915 | jmp @instruction
+3916 | dr[22:0] + pc -> ar
+3917 | mem(ar)[31:0] -> dr
+3918 | acc + mem(ar) -> acc
+3919 | jmp @fetch
+3920 | pc -> ar, pc+4 -> pc
+3921 | mem(ar)[31:0] -> dr
+3922 | jmp @instruction
+3923 | dr[22:0] + pc -> ar
+3924 | acc[31:0] -> mem(ar)
+3925 | jmp @fetch
+3926 | pc -> ar, pc+4 -> pc
+3927 | mem(ar)[31:0] -> dr
+3928 | jmp @instruction
+3929 | dr[22:0] + pc -> ar
+3930 | mem(ar)[31:0] -> dr
+3931 | dr[31:0] -> acc
+3932 | jmp @fetch
+3933 | pc -> ar, pc+4 -> pc
+3934 | mem(ar)[31:0] -> dr
+3935 | jmp @instruction
+3936 | dr[22:0] + pc -> ar
+3937 | mem(ar)[31:0] -> dr
+3938 | acc * mem(ar) -> acc
+3939 | jmp @fetch
+3940 | pc -> ar, pc+4 -> pc
+3941 | mem(ar)[31:0] -> dr
+3942 | jmp @instruction
+3943 | dr[22:0] + pc -> ar
+3944 | mem(ar)[31:0] -> dr
+3945 | acc + mem(ar) -> acc
+3946 | jmp @fetch
+3947 | pc -> ar, pc+4 -> pc
+3948 | mem(ar)[31:0] -> dr
+3949 | jmp @instruction
+3950 | dr[22:0] + pc -> ar
+3951 | acc[31:0] -> mem(ar)
+3952 | jmp @fetch
+3953 | pc -> ar, pc+4 -> pc
+3954 | mem(ar)[31:0] -> dr
+3955 | jmp @instruction
+3956 | dr[22:0] + pc -> ar
+3957 | mem(ar)[31:0] -> dr
+3958 | dr[31:0] -> acc
+3959 | jmp @fetch
+3960 | pc -> ar, pc+4 -> pc
+3961 | mem(ar)[31:0] -> dr
+3962 | jmp @instruction
+3963 | acc - 1 -> acc
+3964 | jmp @fetch
+3965 | pc -> ar, pc+4 -> pc
+3966 | mem(ar)[31:0] -> dr
+3967 | jmp @instruction
+3968 | dr[22:0] + pc -> ar
+3969 | acc[31:0] -> mem(ar)
+3970 | jmp @fetch
+3971 | pc -> ar, pc+4 -> pc
+3972 | mem(ar)[31:0] -> dr
+3973 | jmp @instruction
+3974 | if Z set: jmp @fetch
+3975 | pc + extended(dr[22:0]) -> pc
+3976 | jmp @fetch
+3977 | pc -> ar, pc+4 -> pc
+3978 | mem(ar)[31:0] -> dr
+3979 | jmp @instruction
+3980 | dr[22:0] + pc -> ar
+3981 | mem(ar)[31:0] -> dr
+3982 | dr[31:0] -> acc
+3983 | jmp @fetch
+3984 | pc -> ar, pc+4 -> pc
+3985 | mem(ar)[31:0] -> dr
+3986 | jmp @instruction
+3987 | dr[22:0] + pc -> ar
+3988 | mem(ar)[31:0] -> dr
+3989 | acc + mem(ar) -> acc
+3990 | jmp @fetch
+3991 | pc -> ar, pc+4 -> pc
+3992 | mem(ar)[31:0] -> dr
+3993 | jmp @instruction
+3994 | dr[22:0] + pc -> ar
+3995 | acc[31:0] -> mem(ar)
+3996 | jmp @fetch
+3997 | pc -> ar, pc+4 -> pc
+3998 | mem(ar)[31:0] -> dr
+3999 | jmp @instruction
+4000 | dr[22:0] + pc -> ar
+4001 | mem(ar)[31:0] -> dr
+4002 | dr[31:0] -> acc
+4003 | jmp @fetch
+4004 | pc -> ar, pc+4 -> pc
+4005 | mem(ar)[31:0] -> dr
+4006 | jmp @instruction
+4007 | dr[22:0] + pc -> ar
+4008 | mem(ar)[31:0] -> dr
+4009 | acc * mem(ar) -> acc
+4010 | jmp @fetch
+4011 | pc -> ar, pc+4 -> pc
+4012 | mem(ar)[31:0] -> dr
+4013 | jmp @instruction
+4014 | dr[22:0] + pc -> ar
+4015 | mem(ar)[31:0] -> dr
+4016 | acc + mem(ar) -> acc
+4017 | jmp @fetch
+4018 | pc -> ar, pc+4 -> pc
+4019 | mem(ar)[31:0] -> dr
+4020 | jmp @instruction
+4021 | dr[22:0] + pc -> ar
+4022 | acc[31:0] -> mem(ar)
+4023 | jmp @fetch
+4024 | pc -> ar, pc+4 -> pc
+4025 | mem(ar)[31:0] -> dr
+4026 | jmp @instruction
+4027 | dr[22:0] + pc -> ar
+4028 | mem(ar)[31:0] -> dr
+4029 | dr[31:0] -> acc
+4030 | jmp @fetch
+4031 | pc -> ar, pc+4 -> pc
+4032 | mem(ar)[31:0] -> dr
+4033 | jmp @instruction
+4034 | acc - 1 -> acc
+4035 | jmp @fetch
+4036 | pc -> ar, pc+4 -> pc
+4037 | mem(ar)[31:0] -> dr
+4038 | jmp @instruction
+4039 | dr[22:0] + pc -> ar
+4040 | acc[31:0] -> mem(ar)
+4041 | jmp @fetch
+4042 | pc -> ar, pc+4 -> pc
+4043 | mem(ar)[31:0] -> dr
+4044 | jmp @instruction
+4045 | if Z set: jmp @fetch
+4046 | pc + extended(dr[22:0]) -> pc
+4047 | jmp @fetch
+4048 | pc -> ar, pc+4 -> pc
+4049 | mem(ar)[31:0] -> dr
+4050 | jmp @instruction
+4051 | dr[22:0] + pc -> ar
+4052 | mem(ar)[31:0] -> dr
+4053 | dr[31:0] -> acc
+4054 | jmp @fetch
+4055 | pc -> ar, pc+4 -> pc
+4056 | mem(ar)[31:0] -> dr
+4057 | jmp @instruction
+4058 | dr[22:0] + pc -> ar
+4059 | mem(ar)[31:0] -> dr
+4060 | acc + mem(ar) -> acc
+4061 | jmp @fetch
+4062 | pc -> ar, pc+4 -> pc
+4063 | mem(ar)[31:0] -> dr
+4064 | jmp @instruction
+4065 | dr[22:0] + pc -> ar
+4066 | acc[31:0] -> mem(ar)
+4067 | jmp @fetch
+4068 | pc -> ar, pc+4 -> pc
+4069 | mem(ar)[31:0] -> dr
+4070 | jmp @instruction
+4071 | dr[22:0] + pc -> ar
+4072 | mem(ar)[31:0] -> dr
+4073 | dr[31:0] -> acc
+4074 | jmp @fetch
+4075 | pc -> ar, pc+4 -> pc
+4076 | mem(ar)[31:0] -> dr
+4077 | jmp @instruction
+4078 | dr[22:0] + pc -> ar
+4079 | mem(ar)[31:0] -> dr
+4080 | acc * mem(ar) -> acc
+4081 | jmp @fetch
+4082 | pc -> ar, pc+4 -> pc
+4083 | mem(ar)[31:0] -> dr
+4084 | jmp @instruction
+4085 | dr[22:0] + pc -> ar
+4086 | mem(ar)[31:0] -> dr
+4087 | acc + mem(ar) -> acc
+4088 | jmp @fetch
+4089 | pc -> ar, pc+4 -> pc
+4090 | mem(ar)[31:0] -> dr
+4091 | jmp @instruction
+4092 | dr[22:0] + pc -> ar
+4093 | acc[31:0] -> mem(ar)
+4094 | jmp @fetch
+4095 | pc -> ar, pc+4 -> pc
+4096 | mem(ar)[31:0] -> dr
+4097 | jmp @instruction
+4098 | dr[22:0] + pc -> ar
+4099 | mem(ar)[31:0] -> dr
+4100 | dr[31:0] -> acc
+4101 | jmp @fetch
+4102 | pc -> ar, pc+4 -> pc
+4103 | mem(ar)[31:0] -> dr
+4104 | jmp @instruction
+4105 | acc - 1 -> acc
+4106 | jmp @fetch
+4107 | pc -> ar, pc+4 -> pc
+4108 | mem(ar)[31:0] -> dr
+4109 | jmp @instruction
+4110 | dr[22:0] + pc -> ar
+4111 | acc[31:0] -> mem(ar)
+4112 | jmp @fetch
+4113 | pc -> ar, pc+4 -> pc
+4114 | mem(ar)[31:0] -> dr
+4115 | jmp @instruction
+4116 | if Z set: jmp @fetch
+4117 | pc + extended(dr[22:0]) -> pc
+4118 | jmp @fetch
+4119 | pc -> ar, pc+4 -> pc
+4120 | mem(ar)[31:0] -> dr
+4121 | jmp @instruction
+4122 | dr[22:0] + pc -> ar
+4123 | mem(ar)[31:0] -> dr
+4124 | dr[31:0] -> acc
+4125 | jmp @fetch
+4126 | pc -> ar, pc+4 -> pc
+4127 | mem(ar)[31:0] -> dr
+4128 | jmp @instruction
+4129 | dr[22:0] + pc -> ar
+4130 | mem(ar)[31:0] -> dr
+4131 | acc + mem(ar) -> acc
+4132 | jmp @fetch
+4133 | pc -> ar, pc+4 -> pc
+4134 | mem(ar)[31:0] -> dr
+4135 | jmp @instruction
+4136 | dr[22:0] + pc -> ar
+4137 | acc[31:0] -> mem(ar)
+4138 | jmp @fetch
+4139 | pc -> ar, pc+4 -> pc
+4140 | mem(ar)[31:0] -> dr
+4141 | jmp @instruction
+4142 | dr[22:0] + pc -> ar
+4143 | mem(ar)[31:0] -> dr
+4144 | dr[31:0] -> acc
+4145 | jmp @fetch
+4146 | pc -> ar, pc+4 -> pc
+4147 | mem(ar)[31:0] -> dr
+4148 | jmp @instruction
+4149 | dr[22:0] + pc -> ar
+4150 | mem(ar)[31:0] -> dr
+4151 | acc * mem(ar) -> acc
+4152 | jmp @fetch
+4153 | pc -> ar, pc+4 -> pc
+4154 | mem(ar)[31:0] -> dr
+4155 | jmp @instruction
+4156 | dr[22:0] + pc -> ar
+4157 | mem(ar)[31:0] -> dr
+4158 | acc + mem(ar) -> acc
+4159 | jmp @fetch
+4160 | pc -> ar, pc+4 -> pc
+4161 | mem(ar)[31:0] -> dr
+4162 | jmp @instruction
+4163 | dr[22:0] + pc -> ar
+4164 | acc[31:0] -> mem(ar)
+4165 | jmp @fetch
+4166 | pc -> ar, pc+4 -> pc
+4167 | mem(ar)[31:0] -> dr
+4168 | jmp @instruction
+4169 | dr[22:0] + pc -> ar
+4170 | mem(ar)[31:0] -> dr
+4171 | dr[31:0] -> acc
+4172 | jmp @fetch
+4173 | pc -> ar, pc+4 -> pc
+4174 | mem(ar)[31:0] -> dr
+4175 | jmp @instruction
+4176 | acc - 1 -> acc
+4177 | jmp @fetch
+4178 | pc -> ar, pc+4 -> pc
+4179 | mem(ar)[31:0] -> dr
+4180 | jmp @instruction
+4181 | dr[22:0] + pc -> ar
+4182 | acc[31:0] -> mem(ar)
+4183 | jmp @fetch
+4184 | pc -> ar, pc+4 -> pc
+4185 | mem(ar)[31:0] -> dr
+4186 | jmp @instruction
+4187 | if Z set: jmp @fetch
+4188 | pc + extended(dr[22:0]) -> pc
+4189 | jmp @fetch
+4190 | pc -> ar, pc+4 -> pc
+4191 | mem(ar)[31:0] -> dr
+4192 | jmp @instruction
+4193 | dr[22:0] + pc -> ar
+4194 | mem(ar)[31:0] -> dr
+4195 | dr[31:0] -> acc
+4196 | jmp @fetch
+4197 | pc -> ar, pc+4 -> pc
+4198 | mem(ar)[31:0] -> dr
+4199 | jmp @instruction
+4200 | dr[22:0] + pc -> ar
+4201 | mem(ar)[31:0] -> dr
+4202 | acc + mem(ar) -> acc
+4203 | jmp @fetch
+4204 | pc -> ar, pc+4 -> pc
+4205 | mem(ar)[31:0] -> dr
+4206 | jmp @instruction
+4207 | dr[22:0] + pc -> ar
+4208 | acc[31:0] -> mem(ar)
+4209 | jmp @fetch
+4210 | pc -> ar, pc+4 -> pc
+4211 | mem(ar)[31:0] -> dr
+4212 | jmp @instruction
+4213 | dr[22:0] + pc -> ar
+4214 | mem(ar)[31:0] -> dr
+4215 | dr[31:0] -> acc
+4216 | jmp @fetch
+4217 | pc -> ar, pc+4 -> pc
+4218 | mem(ar)[31:0] -> dr
+4219 | jmp @instruction
+4220 | dr[22:0] + pc -> ar
+4221 | mem(ar)[31:0] -> dr
+4222 | acc * mem(ar) -> acc
+4223 | jmp @fetch
+4224 | pc -> ar, pc+4 -> pc
+4225 | mem(ar)[31:0] -> dr
+4226 | jmp @instruction
+4227 | dr[22:0] + pc -> ar
+4228 | mem(ar)[31:0] -> dr
+4229 | acc + mem(ar) -> acc
+4230 | jmp @fetch
+4231 | pc -> ar, pc+4 -> pc
+4232 | mem(ar)[31:0] -> dr
+4233 | jmp @instruction
+4234 | dr[22:0] + pc -> ar
+4235 | acc[31:0] -> mem(ar)
+4236 | jmp @fetch
+4237 | pc -> ar, pc+4 -> pc
+4238 | mem(ar)[31:0] -> dr
+4239 | jmp @instruction
+4240 | dr[22:0] + pc -> ar
+4241 | mem(ar)[31:0] -> dr
+4242 | dr[31:0] -> acc
+4243 | jmp @fetch
+4244 | pc -> ar, pc+4 -> pc
+4245 | mem(ar)[31:0] -> dr
+4246 | jmp @instruction
+4247 | acc - 1 -> acc
+4248 | jmp @fetch
+4249 | pc -> ar, pc+4 -> pc
+4250 | mem(ar)[31:0] -> dr
+4251 | jmp @instruction
+4252 | dr[22:0] + pc -> ar
+4253 | acc[31:0] -> mem(ar)
+4254 | jmp @fetch
+4255 | pc -> ar, pc+4 -> pc
+4256 | mem(ar)[31:0] -> dr
+4257 | jmp @instruction
+4258 | if Z set: jmp @fetch
+4259 | pc + extended(dr[22:0]) -> pc
+4260 | jmp @fetch
+4261 | pc -> ar, pc+4 -> pc
+4262 | mem(ar)[31:0] -> dr
+4263 | jmp @instruction
+4264 | dr[22:0] + pc -> ar
+4265 | mem(ar)[31:0] -> dr
+4266 | dr[31:0] -> acc
+4267 | jmp @fetch
+4268 | pc -> ar, pc+4 -> pc
+4269 | mem(ar)[31:0] -> dr
+4270 | jmp @instruction
+4271 | dr[22:0] + pc -> ar
+4272 | mem(ar)[31:0] -> dr
+4273 | acc + mem(ar) -> acc
+4274 | jmp @fetch
+4275 | pc -> ar, pc+4 -> pc
+4276 | mem(ar)[31:0] -> dr
+4277 | jmp @instruction
+4278 | dr[22:0] + pc -> ar
+4279 | acc[31:0] -> mem(ar)
+4280 | jmp @fetch
+4281 | pc -> ar, pc+4 -> pc
+4282 | mem(ar)[31:0] -> dr
+4283 | jmp @instruction
+4284 | dr[22:0] + pc -> ar
+4285 | mem(ar)[31:0] -> dr
+4286 | dr[31:0] -> acc
+4287 | jmp @fetch
+4288 | pc -> ar, pc+4 -> pc
+4289 | mem(ar)[31:0] -> dr
+4290 | jmp @instruction
+4291 | dr[22:0] + pc -> ar
+4292 | mem(ar)[31:0] -> dr
+4293 | acc * mem(ar) -> acc
+4294 | jmp @fetch
+4295 | pc -> ar, pc+4 -> pc
+4296 | mem(ar)[31:0] -> dr
+4297 | jmp @instruction
+4298 | dr[22:0] + pc -> ar
+4299 | mem(ar)[31:0] -> dr
+4300 | acc + mem(ar) -> acc
+4301 | jmp @fetch
+4302 | pc -> ar, pc+4 -> pc
+4303 | mem(ar)[31:0] -> dr
+4304 | jmp @instruction
+4305 | dr[22:0] + pc -> ar
+4306 | acc[31:0] -> mem(ar)
+4307 | jmp @fetch
+4308 | pc -> ar, pc+4 -> pc
+4309 | mem(ar)[31:0] -> dr
+4310 | jmp @instruction
+4311 | dr[22:0] + pc -> ar
+4312 | mem(ar)[31:0] -> dr
+4313 | dr[31:0] -> acc
+4314 | jmp @fetch
+4315 | pc -> ar, pc+4 -> pc
+4316 | mem(ar)[31:0] -> dr
+4317 | jmp @instruction
+4318 | acc - 1 -> acc
+4319 | jmp @fetch
+4320 | pc -> ar, pc+4 -> pc
+4321 | mem(ar)[31:0] -> dr
+4322 | jmp @instruction
+4323 | dr[22:0] + pc -> ar
+4324 | acc[31:0] -> mem(ar)
+4325 | jmp @fetch
+4326 | pc -> ar, pc+4 -> pc
+4327 | mem(ar)[31:0] -> dr
+4328 | jmp @instruction
+4329 | if Z set: jmp @fetch
+4330 | pc + extended(dr[22:0]) -> pc
+4331 | jmp @fetch
+4332 | pc -> ar, pc+4 -> pc
+4333 | mem(ar)[31:0] -> dr
+4334 | jmp @instruction
+4335 | dr[22:0] + pc -> ar
+4336 | mem(ar)[31:0] -> dr
+4337 | dr[31:0] -> acc
+4338 | jmp @fetch
+4339 | pc -> ar, pc+4 -> pc
+4340 | mem(ar)[31:0] -> dr
+4341 | jmp @instruction
+4342 | dr[22:0] + pc -> ar
+4343 | mem(ar)[31:0] -> dr
+4344 | acc + mem(ar) -> acc
+4345 | jmp @fetch
+4346 | pc -> ar, pc+4 -> pc
+4347 | mem(ar)[31:0] -> dr
+4348 | jmp @instruction
+4349 | dr[22:0] + pc -> ar
+4350 | acc[31:0] -> mem(ar)
+4351 | jmp @fetch
+4352 | pc -> ar, pc+4 -> pc
+4353 | mem(ar)[31:0] -> dr
+4354 | jmp @instruction
+4355 | dr[22:0] + pc -> ar
+4356 | mem(ar)[31:0] -> dr
+4357 | dr[31:0] -> acc
+4358 | jmp @fetch
+4359 | pc -> ar, pc+4 -> pc
+4360 | mem(ar)[31:0] -> dr
+4361 | jmp @instruction
+4362 | dr[22:0] + pc -> ar
+4363 | mem(ar)[31:0] -> dr
+4364 | acc * mem(ar) -> acc
+4365 | jmp @fetch
+4366 | pc -> ar, pc+4 -> pc
+4367 | mem(ar)[31:0] -> dr
+4368 | jmp @instruction
+4369 | dr[22:0] + pc -> ar
+4370 | mem(ar)[31:0] -> dr
+4371 | acc + mem(ar) -> acc
+4372 | jmp @fetch
+4373 | pc -> ar, pc+4 -> pc
+4374 | mem(ar)[31:0] -> dr
+4375 | jmp @instruction
+4376 | dr[22:0] + pc -> ar
+4377 | acc[31:0] -> mem(ar)
+4378 | jmp @fetch
+4379 | pc -> ar, pc+4 -> pc
+4380 | mem(ar)[31:0] -> dr
+4381 | jmp @instruction
+4382 | dr[22:0] + pc -> ar
+4383 | mem(ar)[31:0] -> dr
+4384 | dr[31:0] -> acc
+4385 | jmp @fetch
+4386 | pc -> ar, pc+4 -> pc
+4387 | mem(ar)[31:0] -> dr
+4388 | jmp @instruction
+4389 | acc - 1 -> acc
+4390 | jmp @fetch
+4391 | pc -> ar, pc+4 -> pc
+4392 | mem(ar)[31:0] -> dr
+4393 | jmp @instruction
+4394 | dr[22:0] + pc -> ar
+4395 | acc[31:0] -> mem(ar)
+4396 | jmp @fetch
+4397 | pc -> ar, pc+4 -> pc
+4398 | mem(ar)[31:0] -> dr
+4399 | jmp @instruction
+4400 | if Z set: jmp @fetch
+4401 | pc + extended(dr[22:0]) -> pc
+4402 | jmp @fetch
+4403 | pc -> ar, pc+4 -> pc
+4404 | mem(ar)[31:0] -> dr
+4405 | jmp @instruction
+4406 | dr[22:0] + pc -> ar
+4407 | mem(ar)[31:0] -> dr
+4408 | dr[31:0] -> acc
+4409 | jmp @fetch
+4410 | pc -> ar, pc+4 -> pc
+4411 | mem(ar)[31:0] -> dr
+4412 | jmp @instruction
+4413 | dr[22:0] + pc -> ar
+4414 | mem(ar)[31:0] -> dr
+4415 | acc + mem(ar) -> acc
+4416 | jmp @fetch
+4417 | pc -> ar, pc+4 -> pc
+4418 | mem(ar)[31:0] -> dr
+4419 | jmp @instruction
+4420 | dr[22:0] + pc -> ar
+4421 | acc[31:0] -> mem(ar)
+4422 | jmp @fetch
+4423 | pc -> ar, pc+4 -> pc
+4424 | mem(ar)[31:0] -> dr
+4425 | jmp @instruction
+4426 | dr[22:0] + pc -> ar
+4427 | mem(ar)[31:0] -> dr
+4428 | dr[31:0] -> acc
+4429 | jmp @fetch
+4430 | pc -> ar, pc+4 -> pc
+4431 | mem(ar)[31:0] -> dr
+4432 | jmp @instruction
+4433 | dr[22:0] + pc -> ar
+4434 | mem(ar)[31:0] -> dr
+4435 | acc * mem(ar) -> acc
+4436 | jmp @fetch
+4437 | pc -> ar, pc+4 -> pc
+4438 | mem(ar)[31:0] -> dr
+4439 | jmp @instruction
+4440 | dr[22:0] + pc -> ar
+4441 | mem(ar)[31:0] -> dr
+4442 | acc + mem(ar) -> acc
+4443 | jmp @fetch
+4444 | pc -> ar, pc+4 -> pc
+4445 | mem(ar)[31:0] -> dr
+4446 | jmp @instruction
+4447 | dr[22:0] + pc -> ar
+4448 | acc[31:0] -> mem(ar)
+4449 | jmp @fetch
+4450 | pc -> ar, pc+4 -> pc
+4451 | mem(ar)[31:0] -> dr
+4452 | jmp @instruction
+4453 | dr[22:0] + pc -> ar
+4454 | mem(ar)[31:0] -> dr
+4455 | dr[31:0] -> acc
+4456 | jmp @fetch
+4457 | pc -> ar, pc+4 -> pc
+4458 | mem(ar)[31:0] -> dr
+4459 | jmp @instruction
+4460 | acc - 1 -> acc
+4461 | jmp @fetch
+4462 | pc -> ar, pc+4 -> pc
+4463 | mem(ar)[31:0] -> dr
+4464 | jmp @instruction
+4465 | dr[22:0] + pc -> ar
+4466 | acc[31:0] -> mem(ar)
+4467 | jmp @fetch
+4468 | pc -> ar, pc+4 -> pc
+4469 | mem(ar)[31:0] -> dr
+4470 | jmp @instruction
+4471 | if Z set: jmp @fetch
+4472 | pc + extended(dr[22:0]) -> pc
+4473 | jmp @fetch
+4474 | pc -> ar, pc+4 -> pc
+4475 | mem(ar)[31:0] -> dr
+4476 | jmp @instruction
+4477 | dr[22:0] + pc -> ar
+4478 | mem(ar)[31:0] -> dr
+4479 | dr[31:0] -> acc
+4480 | jmp @fetch
+4481 | pc -> ar, pc+4 -> pc
+4482 | mem(ar)[31:0] -> dr
+4483 | jmp @instruction
+4484 | dr[22:0] + pc -> ar
+4485 | mem(ar)[31:0] -> dr
+4486 | acc + mem(ar) -> acc
+4487 | jmp @fetch
+4488 | pc -> ar, pc+4 -> pc
+4489 | mem(ar)[31:0] -> dr
+4490 | jmp @instruction
+4491 | dr[22:0] + pc -> ar
+4492 | acc[31:0] -> mem(ar)
+4493 | jmp @fetch
+4494 | pc -> ar, pc+4 -> pc
+4495 | mem(ar)[31:0] -> dr
+4496 | jmp @instruction
+4497 | dr[22:0] + pc -> ar
+4498 | mem(ar)[31:0] -> dr
+4499 | dr[31:0] -> acc
+4500 | jmp @fetch
+4501 | pc -> ar, pc+4 -> pc
+4502 | mem(ar)[31:0] -> dr
+4503 | jmp @instruction
+4504 | dr[22:0] + pc -> ar
+4505 | mem(ar)[31:0] -> dr
+4506 | acc * mem(ar) -> acc
+4507 | jmp @fetch
+4508 | pc -> ar, pc+4 -> pc
+4509 | mem(ar)[31:0] -> dr
+4510 | jmp @instruction
+4511 | dr[22:0] + pc -> ar
+4512 | mem(ar)[31:0] -> dr
+4513 | acc + mem(ar) -> acc
+4514 | jmp @fetch
+4515 | pc -> ar, pc+4 -> pc
+4516 | mem(ar)[31:0] -> dr
+4517 | jmp @instruction
+4518 | dr[22:0] + pc -> ar
+4519 | acc[31:0] -> mem(ar)
+4520 | jmp @fetch
+4521 | pc -> ar, pc+4 -> pc
+4522 | mem(ar)[31:0] -> dr
+4523 | jmp @instruction
+4524 | dr[22:0] + pc -> ar
+4525 | mem(ar)[31:0] -> dr
+4526 | dr[31:0] -> acc
+4527 | jmp @fetch
+4528 | pc -> ar, pc+4 -> pc
+4529 | mem(ar)[31:0] -> dr
+4530 | jmp @instruction
+4531 | acc - 1 -> acc
+4532 | jmp @fetch
+4533 | pc -> ar, pc+4 -> pc
+4534 | mem(ar)[31:0] -> dr
+4535 | jmp @instruction
+4536 | dr[22:0] + pc -> ar
+4537 | acc[31:0] -> mem(ar)
+4538 | jmp @fetch
+4539 | pc -> ar, pc+4 -> pc
+4540 | mem(ar)[31:0] -> dr
+4541 | jmp @instruction
+4542 | if Z set: jmp @fetch
+4543 | pc + extended(dr[22:0]) -> pc
+4544 | jmp @fetch
+4545 | pc -> ar, pc+4 -> pc
+4546 | mem(ar)[31:0] -> dr
+4547 | jmp @instruction
+4548 | dr[22:0] + pc -> ar
+4549 | mem(ar)[31:0] -> dr
+4550 | dr[31:0] -> acc
+4551 | jmp @fetch
+4552 | pc -> ar, pc+4 -> pc
+4553 | mem(ar)[31:0] -> dr
+4554 | jmp @instruction
+4555 | dr[22:0] + pc -> ar
+4556 | mem(ar)[31:0] -> dr
+4557 | acc + mem(ar) -> acc
+4558 | jmp @fetch
+4559 | pc -> ar, pc+4 -> pc
+4560 | mem(ar)[31:0] -> dr
+4561 | jmp @instruction
+4562 | dr[22:0] + pc -> ar
+4563 | acc[31:0] -> mem(ar)
+4564 | jmp @fetch
+4565 | pc -> ar, pc+4 -> pc
+4566 | mem(ar)[31:0] -> dr
+4567 | jmp @instruction
+4568 | dr[22:0] + pc -> ar
+4569 | mem(ar)[31:0] -> dr
+4570 | dr[31:0] -> acc
+4571 | jmp @fetch
+4572 | pc -> ar, pc+4 -> pc
+4573 | mem(ar)[31:0] -> dr
+4574 | jmp @instruction
+4575 | dr[22:0] + pc -> ar
+4576 | mem(ar)[31:0] -> dr
+4577 | acc * mem(ar) -> acc
+4578 | jmp @fetch
+4579 | pc -> ar, pc+4 -> pc
+4580 | mem(ar)[31:0] -> dr
+4581 | jmp @instruction
+4582 | dr[22:0] + pc -> ar
+4583 | mem(ar)[31:0] -> dr
+4584 | acc + mem(ar) -> acc
+4585 | jmp @fetch
+4586 | pc -> ar, pc+4 -> pc
+4587 | mem(ar)[31:0] -> dr
+4588 | jmp @instruction
+4589 | dr[22:0] + pc -> ar
+4590 | acc[31:0] -> mem(ar)
+4591 | jmp @fetch
+4592 | pc -> ar, pc+4 -> pc
+4593 | mem(ar)[31:0] -> dr
+4594 | jmp @instruction
+4595 | dr[22:0] + pc -> ar
+4596 | mem(ar)[31:0] -> dr
+4597 | dr[31:0] -> acc
+4598 | jmp @fetch
+4599 | pc -> ar, pc+4 -> pc
+4600 | mem(ar)[31:0] -> dr
+4601 | jmp @instruction
+4602 | acc - 1 -> acc
+4603 | jmp @fetch
+4604 | pc -> ar, pc+4 -> pc
+4605 | mem(ar)[31:0] -> dr
+4606 | jmp @instruction
+4607 | dr[22:0] + pc -> ar
+4608 | acc[31:0] -> mem(ar)
+4609 | jmp @fetch
+4610 | pc -> ar, pc+4 -> pc
+4611 | mem(ar)[31:0] -> dr
+4612 | jmp @instruction
+4613 | if Z set: jmp @fetch
+4614 | pc + extended(dr[22:0]) -> pc
+4615 | jmp @fetch
+4616 | pc -> ar, pc+4 -> pc
+4617 | mem(ar)[31:0] -> dr
+4618 | jmp @instruction
+4619 | dr[22:0] + pc -> ar
+4620 | mem(ar)[31:0] -> dr
+4621 | dr[31:0] -> acc
+4622 | jmp @fetch
+4623 | pc -> ar, pc+4 -> pc
+4624 | mem(ar)[31:0] -> dr
+4625 | jmp @instruction
+4626 | dr[22:0] + pc -> ar
+4627 | mem(ar)[31:0] -> dr
+4628 | acc + mem(ar) -> acc
+4629 | jmp @fetch
+4630 | pc -> ar, pc+4 -> pc
+4631 | mem(ar)[31:0] -> dr
+4632 | jmp @instruction
+4633 | dr[22:0] + pc -> ar
+4634 | acc[31:0] -> mem(ar)
+4635 | jmp @fetch
+4636 | pc -> ar, pc+4 -> pc
+4637 | mem(ar)[31:0] -> dr
+4638 | jmp @instruction
+4639 | dr[22:0] + pc -> ar
+4640 | mem(ar)[31:0] -> dr
+4641 | dr[31:0] -> acc
+4642 | jmp @fetch
+4643 | pc -> ar, pc+4 -> pc
+4644 | mem(ar)[31:0] -> dr
+4645 | jmp @instruction
+4646 | dr[22:0] + pc -> ar
+4647 | mem(ar)[31:0] -> dr
+4648 | acc * mem(ar) -> acc
+4649 | jmp @fetch
+4650 | pc -> ar, pc+4 -> pc
+4651 | mem(ar)[31:0] -> dr
+4652 | jmp @instruction
+4653 | dr[22:0] + pc -> ar
+4654 | mem(ar)[31:0] -> dr
+4655 | acc + mem(ar) -> acc
+4656 | jmp @fetch
+4657 | pc -> ar, pc+4 -> pc
+4658 | mem(ar)[31:0] -> dr
+4659 | jmp @instruction
+4660 | dr[22:0] + pc -> ar
+4661 | acc[31:0] -> mem(ar)
+4662 | jmp @fetch
+4663 | pc -> ar, pc+4 -> pc
+4664 | mem(ar)[31:0] -> dr
+4665 | jmp @instruction
+4666 | dr[22:0] + pc -> ar
+4667 | mem(ar)[31:0] -> dr
+4668 | dr[31:0] -> acc
+4669 | jmp @fetch
+4670 | pc -> ar, pc+4 -> pc
+4671 | mem(ar)[31:0] -> dr
+4672 | jmp @instruction
+4673 | acc - 1 -> acc
+4674 | jmp @fetch
+4675 | pc -> ar, pc+4 -> pc
+4676 | mem(ar)[31:0] -> dr
+4677 | jmp @instruction
+4678 | dr[22:0] + pc -> ar
+4679 | acc[31:0] -> mem(ar)
+4680 | jmp @fetch
+4681 | pc -> ar, pc+4 -> pc
+4682 | mem(ar)[31:0] -> dr
+4683 | jmp @instruction
+4684 | if Z set: jmp @fetch
+4685 | pc + extended(dr[22:0]) -> pc
+4686 | jmp @fetch
+4687 | pc -> ar, pc+4 -> pc
+4688 | mem(ar)[31:0] -> dr
+4689 | jmp @instruction
+4690 | dr[22:0] + pc -> ar
+4691 | mem(ar)[31:0] -> dr
+4692 | dr[31:0] -> acc
+4693 | jmp @fetch
+4694 | pc -> ar, pc+4 -> pc
+4695 | mem(ar)[31:0] -> dr
+4696 | jmp @instruction
+4697 | dr[22:0] + pc -> ar
+4698 | mem(ar)[31:0] -> dr
+4699 | acc + mem(ar) -> acc
+4700 | jmp @fetch
+4701 | pc -> ar, pc+4 -> pc
+4702 | mem(ar)[31:0] -> dr
+4703 | jmp @instruction
+4704 | dr[22:0] + pc -> ar
+4705 | acc[31:0] -> mem(ar)
+4706 | jmp @fetch
+4707 | pc -> ar, pc+4 -> pc
+4708 | mem(ar)[31:0] -> dr
+4709 | jmp @instruction
+4710 | dr[22:0] + pc -> ar
+4711 | mem(ar)[31:0] -> dr
+4712 | dr[31:0] -> acc
+4713 | jmp @fetch
+4714 | pc -> ar, pc+4 -> pc
+4715 | mem(ar)[31:0] -> dr
+4716 | jmp @instruction
+4717 | dr[22:0] + pc -> ar
+4718 | mem(ar)[31:0] -> dr
+4719 | acc * mem(ar) -> acc
+4720 | jmp @fetch
+4721 | pc -> ar, pc+4 -> pc
+4722 | mem(ar)[31:0] -> dr
+4723 | jmp @instruction
+4724 | dr[22:0] + pc -> ar
+4725 | mem(ar)[31:0] -> dr
+4726 | acc + mem(ar) -> acc
+4727 | jmp @fetch
+4728 | pc -> ar, pc+4 -> pc
+4729 | mem(ar)[31:0] -> dr
+4730 | jmp @instruction
+4731 | dr[22:0] + pc -> ar
+4732 | acc[31:0] -> mem(ar)
+4733 | jmp @fetch
+4734 | pc -> ar, pc+4 -> pc
+4735 | mem(ar)[31:0] -> dr
+4736 | jmp @instruction
+4737 | dr[22:0] + pc -> ar
+4738 | mem(ar)[31:0] -> dr
+4739 | dr[31:0] -> acc
+4740 | jmp @fetch
+4741 | pc -> ar, pc+4 -> pc
+4742 | mem(ar)[31:0] -> dr
+4743 | jmp @instruction
+4744 | acc - 1 -> acc
+4745 | jmp @fetch
+4746 | pc -> ar, pc+4 -> pc
+4747 | mem(ar)[31:0] -> dr
+4748 | jmp @instruction
+4749 | dr[22:0] + pc -> ar
+4750 | acc[31:0] -> mem(ar)
+4751 | jmp @fetch
+4752 | pc -> ar, pc+4 -> pc
+4753 | mem(ar)[31:0] -> dr
+4754 | jmp @instruction
+4755 | if Z set: jmp @fetch
+4756 | pc + extended(dr[22:0]) -> pc
+4757 | jmp @fetch
+4758 | pc -> ar, pc+4 -> pc
+4759 | mem(ar)[31:0] -> dr
+4760 | jmp @instruction
+4761 | dr[22:0] + pc -> ar
+4762 | mem(ar)[31:0] -> dr
+4763 | dr[31:0] -> acc
+4764 | jmp @fetch
+4765 | pc -> ar, pc+4 -> pc
+4766 | mem(ar)[31:0] -> dr
+4767 | jmp @instruction
+4768 | dr[22:0] + pc -> ar
+4769 | mem(ar)[31:0] -> dr
+4770 | acc + mem(ar) -> acc
+4771 | jmp @fetch
+4772 | pc -> ar, pc+4 -> pc
+4773 | mem(ar)[31:0] -> dr
+4774 | jmp @instruction
+4775 | dr[22:0] + pc -> ar
+4776 | acc[31:0] -> mem(ar)
+4777 | jmp @fetch
+4778 | pc -> ar, pc+4 -> pc
+4779 | mem(ar)[31:0] -> dr
+4780 | jmp @instruction
+4781 | dr[22:0] + pc -> ar
+4782 | mem(ar)[31:0] -> dr
+4783 | dr[31:0] -> acc
+4784 | jmp @fetch
+4785 | pc -> ar, pc+4 -> pc
+4786 | mem(ar)[31:0] -> dr
+4787 | jmp @instruction
+4788 | dr[22:0] + pc -> ar
+4789 | mem(ar)[31:0] -> dr
+4790 | acc * mem(ar) -> acc
+4791 | jmp @fetch
+4792 | pc -> ar, pc+4 -> pc
+4793 | mem(ar)[31:0] -> dr
+4794 | jmp @instruction
+4795 | dr[22:0] + pc -> ar
+4796 | mem(ar)[31:0] -> dr
+4797 | acc + mem(ar) -> acc
+4798 | jmp @fetch
+4799 | pc -> ar, pc+4 -> pc
+4800 | mem(ar)[31:0] -> dr
+4801 | jmp @instruction
+4802 | dr[22:0] + pc -> ar
+4803 | acc[31:0] -> mem(ar)
+4804 | jmp @fetch
+4805 | pc -> ar, pc+4 -> pc
+4806 | mem(ar)[31:0] -> dr
+4807 | jmp @instruction
+4808 | dr[22:0] + pc -> ar
+4809 | mem(ar)[31:0] -> dr
+4810 | dr[31:0] -> acc
+4811 | jmp @fetch
+4812 | pc -> ar, pc+4 -> pc
+4813 | mem(ar)[31:0] -> dr
+4814 | jmp @instruction
+4815 | acc - 1 -> acc
+4816 | jmp @fetch
+4817 | pc -> ar, pc+4 -> pc
+4818 | mem(ar)[31:0] -> dr
+4819 | jmp @instruction
+4820 | dr[22:0] + pc -> ar
+4821 | acc[31:0] -> mem(ar)
+4822 | jmp @fetch
+4823 | pc -> ar, pc+4 -> pc
+4824 | mem(ar)[31:0] -> dr
+4825 | jmp @instruction
+4826 | if Z set: jmp @fetch
+4827 | pc + extended(dr[22:0]) -> pc
+4828 | jmp @fetch
+4829 | pc -> ar, pc+4 -> pc
+4830 | mem(ar)[31:0] -> dr
+4831 | jmp @instruction
+4832 | dr[22:0] + pc -> ar
+4833 | mem(ar)[31:0] -> dr
+4834 | dr[31:0] -> acc
+4835 | jmp @fetch
+4836 | pc -> ar, pc+4 -> pc
+4837 | mem(ar)[31:0] -> dr
+4838 | jmp @instruction
+4839 | dr[22:0] + pc -> ar
+4840 | mem(ar)[31:0] -> dr
+4841 | acc + mem(ar) -> acc
+4842 | jmp @fetch
+4843 | pc -> ar, pc+4 -> pc
+4844 | mem(ar)[31:0] -> dr
+4845 | jmp @instruction
+4846 | dr[22:0] + pc -> ar
+4847 | acc[31:0] -> mem(ar)
+4848 | jmp @fetch
+4849 | pc -> ar, pc+4 -> pc
+4850 | mem(ar)[31:0] -> dr
+4851 | jmp @instruction
+4852 | dr[22:0] + pc -> ar
+4853 | mem(ar)[31:0] -> dr
+4854 | dr[31:0] -> acc
+4855 | jmp @fetch
+4856 | pc -> ar, pc+4 -> pc
+4857 | mem(ar)[31:0] -> dr
+4858 | jmp @instruction
+4859 | dr[22:0] + pc -> ar
+4860 | mem(ar)[31:0] -> dr
+4861 | acc * mem(ar) -> acc
+4862 | jmp @fetch
+4863 | pc -> ar, pc+4 -> pc
+4864 | mem(ar)[31:0] -> dr
+4865 | jmp @instruction
+4866 | dr[22:0] + pc -> ar
+4867 | mem(ar)[31:0] -> dr
+4868 | acc + mem(ar) -> acc
+4869 | jmp @fetch
+4870 | pc -> ar, pc+4 -> pc
+4871 | mem(ar)[31:0] -> dr
+4872 | jmp @instruction
+4873 | dr[22:0] + pc -> ar
+4874 | acc[31:0] -> mem(ar)
+4875 | jmp @fetch
+4876 | pc -> ar, pc+4 -> pc
+4877 | mem(ar)[31:0] -> dr
+4878 | jmp @instruction
+4879 | dr[22:0] + pc -> ar
+4880 | mem(ar)[31:0] -> dr
+4881 | dr[31:0] -> acc
+4882 | jmp @fetch
+4883 | pc -> ar, pc+4 -> pc
+4884 | mem(ar)[31:0] -> dr
+4885 | jmp @instruction
+4886 | acc - 1 -> acc
+4887 | jmp @fetch
+4888 | pc -> ar, pc+4 -> pc
+4889 | mem(ar)[31:0] -> dr
+4890 | jmp @instruction
+4891 | dr[22:0] + pc -> ar
+4892 | acc[31:0] -> mem(ar)
+4893 | jmp @fetch
+4894 | pc -> ar, pc+4 -> pc
+4895 | mem(ar)[31:0] -> dr
+4896 | jmp @instruction
+4897 | if Z set: jmp @fetch
+4898 | pc + extended(dr[22:0]) -> pc
+4899 | jmp @fetch
+4900 | pc -> ar, pc+4 -> pc
+4901 | mem(ar)[31:0] -> dr
+4902 | jmp @instruction
+4903 | dr[22:0] + pc -> ar
+4904 | mem(ar)[31:0] -> dr
+4905 | dr[31:0] -> acc
+4906 | jmp @fetch
+4907 | pc -> ar, pc+4 -> pc
+4908 | mem(ar)[31:0] -> dr
+4909 | jmp @instruction
+4910 | dr[22:0] + pc -> ar
+4911 | mem(ar)[31:0] -> dr
+4912 | acc + mem(ar) -> acc
+4913 | jmp @fetch
+4914 | pc -> ar, pc+4 -> pc
+4915 | mem(ar)[31:0] -> dr
+4916 | jmp @instruction
+4917 | dr[22:0] + pc -> ar
+4918 | acc[31:0] -> mem(ar)
+4919 | jmp @fetch
+4920 | pc -> ar, pc+4 -> pc
+4921 | mem(ar)[31:0] -> dr
+4922 | jmp @instruction
+4923 | dr[22:0] + pc -> ar
+4924 | mem(ar)[31:0] -> dr
+4925 | dr[31:0] -> acc
+4926 | jmp @fetch
+4927 | pc -> ar, pc+4 -> pc
+4928 | mem(ar)[31:0] -> dr
+4929 | jmp @instruction
+4930 | dr[22:0] + pc -> ar
+4931 | mem(ar)[31:0] -> dr
+4932 | acc * mem(ar) -> acc
+4933 | jmp @fetch
+4934 | pc -> ar, pc+4 -> pc
+4935 | mem(ar)[31:0] -> dr
+4936 | jmp @instruction
+4937 | dr[22:0] + pc -> ar
+4938 | mem(ar)[31:0] -> dr
+4939 | acc + mem(ar) -> acc
+4940 | jmp @fetch
+4941 | pc -> ar, pc+4 -> pc
+4942 | mem(ar)[31:0] -> dr
+4943 | jmp @instruction
+4944 | dr[22:0] + pc -> ar
+4945 | acc[31:0] -> mem(ar)
+4946 | jmp @fetch
+4947 | pc -> ar, pc+4 -> pc
+4948 | mem(ar)[31:0] -> dr
+4949 | jmp @instruction
+4950 | dr[22:0] + pc -> ar
+4951 | mem(ar)[31:0] -> dr
+4952 | dr[31:0] -> acc
+4953 | jmp @fetch
+4954 | pc -> ar, pc+4 -> pc
+4955 | mem(ar)[31:0] -> dr
+4956 | jmp @instruction
+4957 | acc - 1 -> acc
+4958 | jmp @fetch
+4959 | pc -> ar, pc+4 -> pc
+4960 | mem(ar)[31:0] -> dr
+4961 | jmp @instruction
+4962 | dr[22:0] + pc -> ar
+4963 | acc[31:0] -> mem(ar)
+4964 | jmp @fetch
+4965 | pc -> ar, pc+4 -> pc
+4966 | mem(ar)[31:0] -> dr
+4967 | jmp @instruction
+4968 | if Z set: jmp @fetch
+4969 | pc + extended(dr[22:0]) -> pc
+4970 | jmp @fetch
+4971 | pc -> ar, pc+4 -> pc
+4972 | mem(ar)[31:0] -> dr
+4973 | jmp @instruction
+4974 | dr[22:0] + pc -> ar
+4975 | mem(ar)[31:0] -> dr
+4976 | dr[31:0] -> acc
+4977 | jmp @fetch
+4978 | pc -> ar, pc+4 -> pc
+4979 | mem(ar)[31:0] -> dr
+4980 | jmp @instruction
+4981 | dr[22:0] + pc -> ar
+4982 | mem(ar)[31:0] -> dr
+4983 | acc + mem(ar) -> acc
+4984 | jmp @fetch
+4985 | pc -> ar, pc+4 -> pc
+4986 | mem(ar)[31:0] -> dr
+4987 | jmp @instruction
+4988 | dr[22:0] + pc -> ar
+4989 | acc[31:0] -> mem(ar)
+4990 | jmp @fetch
+4991 | pc -> ar, pc+4 -> pc
+4992 | mem(ar)[31:0] -> dr
+4993 | jmp @instruction
+4994 | dr[22:0] + pc -> ar
+4995 | mem(ar)[31:0] -> dr
+4996 | dr[31:0] -> acc
+4997 | jmp @fetch
+4998 | pc -> ar, pc+4 -> pc
+4999 | mem(ar)[31:0] -> dr
+5000 | jmp @instruction
+5001 | dr[22:0] + pc -> ar
+5002 | mem(ar)[31:0] -> dr
+5003 | acc * mem(ar) -> acc
+5004 | jmp @fetch
+5005 | pc -> ar, pc+4 -> pc
+5006 | mem(ar)[31:0] -> dr
+5007 | jmp @instruction
+5008 | dr[22:0] + pc -> ar
+5009 | mem(ar)[31:0] -> dr
+5010 | acc + mem(ar) -> acc
+5011 | jmp @fetch
+5012 | pc -> ar, pc+4 -> pc
+5013 | mem(ar)[31:0] -> dr
+5014 | jmp @instruction
+5015 | dr[22:0] + pc -> ar
+5016 | acc[31:0] -> mem(ar)
+5017 | jmp @fetch
+5018 | pc -> ar, pc+4 -> pc
+5019 | mem(ar)[31:0] -> dr
+5020 | jmp @instruction
+5021 | dr[22:0] + pc -> ar
+5022 | mem(ar)[31:0] -> dr
+5023 | dr[31:0] -> acc
+5024 | jmp @fetch
+5025 | pc -> ar, pc+4 -> pc
+5026 | mem(ar)[31:0] -> dr
+5027 | jmp @instruction
+5028 | acc - 1 -> acc
+5029 | jmp @fetch
+5030 | pc -> ar, pc+4 -> pc
+5031 | mem(ar)[31:0] -> dr
+5032 | jmp @instruction
+5033 | dr[22:0] + pc -> ar
+5034 | acc[31:0] -> mem(ar)
+5035 | jmp @fetch
+5036 | pc -> ar, pc+4 -> pc
+5037 | mem(ar)[31:0] -> dr
+5038 | jmp @instruction
+5039 | if Z set: jmp @fetch
+5040 | pc + extended(dr[22:0]) -> pc
+5041 | jmp @fetch
+5042 | pc -> ar, pc+4 -> pc
+5043 | mem(ar)[31:0] -> dr
+5044 | jmp @instruction
+5045 | dr[22:0] + pc -> ar
+5046 | mem(ar)[31:0] -> dr
+5047 | dr[31:0] -> acc
+5048 | jmp @fetch
+5049 | pc -> ar, pc+4 -> pc
+5050 | mem(ar)[31:0] -> dr
+5051 | jmp @instruction
+5052 | dr[22:0] + pc -> ar
+5053 | mem(ar)[31:0] -> dr
+5054 | acc + mem(ar) -> acc
+5055 | jmp @fetch
+5056 | pc -> ar, pc+4 -> pc
+5057 | mem(ar)[31:0] -> dr
+5058 | jmp @instruction
+5059 | dr[22:0] + pc -> ar
+5060 | acc[31:0] -> mem(ar)
+5061 | jmp @fetch
+5062 | pc -> ar, pc+4 -> pc
+5063 | mem(ar)[31:0] -> dr
+5064 | jmp @instruction
+5065 | dr[22:0] + pc -> ar
+5066 | mem(ar)[31:0] -> dr
+5067 | dr[31:0] -> acc
+5068 | jmp @fetch
+5069 | pc -> ar, pc+4 -> pc
+5070 | mem(ar)[31:0] -> dr
+5071 | jmp @instruction
+5072 | dr[22:0] + pc -> ar
+5073 | mem(ar)[31:0] -> dr
+5074 | acc * mem(ar) -> acc
+5075 | jmp @fetch
+5076 | pc -> ar, pc+4 -> pc
+5077 | mem(ar)[31:0] -> dr
+5078 | jmp @instruction
+5079 | dr[22:0] + pc -> ar
+5080 | mem(ar)[31:0] -> dr
+5081 | acc + mem(ar) -> acc
+5082 | jmp @fetch
+5083 | pc -> ar, pc+4 -> pc
+5084 | mem(ar)[31:0] -> dr
+5085 | jmp @instruction
+5086 | dr[22:0] + pc -> ar
+5087 | acc[31:0] -> mem(ar)
+5088 | jmp @fetch
+5089 | pc -> ar, pc+4 -> pc
+5090 | mem(ar)[31:0] -> dr
+5091 | jmp @instruction
+5092 | dr[22:0] + pc -> ar
+5093 | mem(ar)[31:0] -> dr
+5094 | dr[31:0] -> acc
+5095 | jmp @fetch
+5096 | pc -> ar, pc+4 -> pc
+5097 | mem(ar)[31:0] -> dr
+5098 | jmp @instruction
+5099 | acc - 1 -> acc
+5100 | jmp @fetch
+5101 | pc -> ar, pc+4 -> pc
+5102 | mem(ar)[31:0] -> dr
+5103 | jmp @instruction
+5104 | dr[22:0] + pc -> ar
+5105 | acc[31:0] -> mem(ar)
+5106 | jmp @fetch
+5107 | pc -> ar, pc+4 -> pc
+5108 | mem(ar)[31:0] -> dr
+5109 | jmp @instruction
+5110 | if Z set: jmp @fetch
+5111 | pc + extended(dr[22:0]) -> pc
+5112 | jmp @fetch
+5113 | pc -> ar, pc+4 -> pc
+5114 | mem(ar)[31:0] -> dr
+5115 | jmp @instruction
+5116 | dr[22:0] + pc -> ar
+5117 | mem(ar)[31:0] -> dr
+5118 | dr[31:0] -> acc
+5119 | jmp @fetch
+5120 | pc -> ar, pc+4 -> pc
+5121 | mem(ar)[31:0] -> dr
+5122 | jmp @instruction
+5123 | dr[22:0] + pc -> ar
+5124 | mem(ar)[31:0] -> dr
+5125 | acc + mem(ar) -> acc
+5126 | jmp @fetch
+5127 | pc -> ar, pc+4 -> pc
+5128 | mem(ar)[31:0] -> dr
+5129 | jmp @instruction
+5130 | dr[22:0] + pc -> ar
+5131 | acc[31:0] -> mem(ar)
+5132 | jmp @fetch
+5133 | pc -> ar, pc+4 -> pc
+5134 | mem(ar)[31:0] -> dr
+5135 | jmp @instruction
+5136 | dr[22:0] + pc -> ar
+5137 | mem(ar)[31:0] -> dr
+5138 | dr[31:0] -> acc
+5139 | jmp @fetch
+5140 | pc -> ar, pc+4 -> pc
+5141 | mem(ar)[31:0] -> dr
+5142 | jmp @instruction
+5143 | dr[22:0] + pc -> ar
+5144 | mem(ar)[31:0] -> dr
+5145 | acc * mem(ar) -> acc
+5146 | jmp @fetch
+5147 | pc -> ar, pc+4 -> pc
+5148 | mem(ar)[31:0] -> dr
+5149 | jmp @instruction
+5150 | dr[22:0] + pc -> ar
+5151 | mem(ar)[31:0] -> dr
+5152 | acc + mem(ar) -> acc
+5153 | jmp @fetch
+5154 | pc -> ar, pc+4 -> pc
+5155 | mem(ar)[31:0] -> dr
+5156 | jmp @instruction
+5157 | dr[22:0] + pc -> ar
+5158 | acc[31:0] -> mem(ar)
+5159 | jmp @fetch
+5160 | pc -> ar, pc+4 -> pc
+5161 | mem(ar)[31:0] -> dr
+5162 | jmp @instruction
+5163 | dr[22:0] + pc -> ar
+5164 | mem(ar)[31:0] -> dr
+5165 | dr[31:0] -> acc
+5166 | jmp @fetch
+5167 | pc -> ar, pc+4 -> pc
+5168 | mem(ar)[31:0] -> dr
+5169 | jmp @instruction
+5170 | acc - 1 -> acc
+5171 | jmp @fetch
+5172 | pc -> ar, pc+4 -> pc
+5173 | mem(ar)[31:0] -> dr
+5174 | jmp @instruction
+5175 | dr[22:0] + pc -> ar
+5176 | acc[31:0] -> mem(ar)
+5177 | jmp @fetch
+5178 | pc -> ar, pc+4 -> pc
+5179 | mem(ar)[31:0] -> dr
+5180 | jmp @instruction
+5181 | if Z set: jmp @fetch
+5182 | pc + extended(dr[22:0]) -> pc
+5183 | jmp @fetch
+5184 | pc -> ar, pc+4 -> pc
+5185 | mem(ar)[31:0] -> dr
+5186 | jmp @instruction
+5187 | dr[22:0] + pc -> ar
+5188 | mem(ar)[31:0] -> dr
+5189 | dr[31:0] -> acc
+5190 | jmp @fetch
+5191 | pc -> ar, pc+4 -> pc
+5192 | mem(ar)[31:0] -> dr
+5193 | jmp @instruction
+5194 | dr[22:0] + pc -> ar
+5195 | mem(ar)[31:0] -> dr
+5196 | acc + mem(ar) -> acc
+5197 | jmp @fetch
+5198 | pc -> ar, pc+4 -> pc
+5199 | mem(ar)[31:0] -> dr
+5200 | jmp @instruction
+5201 | dr[22:0] + pc -> ar
+5202 | acc[31:0] -> mem(ar)
+5203 | jmp @fetch
+5204 | pc -> ar, pc+4 -> pc
+5205 | mem(ar)[31:0] -> dr
+5206 | jmp @instruction
+5207 | dr[22:0] + pc -> ar
+5208 | mem(ar)[31:0] -> dr
+5209 | dr[31:0] -> acc
+5210 | jmp @fetch
+5211 | pc -> ar, pc+4 -> pc
+5212 | mem(ar)[31:0] -> dr
+5213 | jmp @instruction
+5214 | dr[22:0] + pc -> ar
+5215 | mem(ar)[31:0] -> dr
+5216 | acc * mem(ar) -> acc
+5217 | jmp @fetch
+5218 | pc -> ar, pc+4 -> pc
+5219 | mem(ar)[31:0] -> dr
+5220 | jmp @instruction
+5221 | dr[22:0] + pc -> ar
+5222 | mem(ar)[31:0] -> dr
+5223 | acc + mem(ar) -> acc
+5224 | jmp @fetch
+5225 | pc -> ar, pc+4 -> pc
+5226 | mem(ar)[31:0] -> dr
+5227 | jmp @instruction
+5228 | dr[22:0] + pc -> ar
+5229 | acc[31:0] -> mem(ar)
+5230 | jmp @fetch
+5231 | pc -> ar, pc+4 -> pc
+5232 | mem(ar)[31:0] -> dr
+5233 | jmp @instruction
+5234 | dr[22:0] + pc -> ar
+5235 | mem(ar)[31:0] -> dr
+5236 | dr[31:0] -> acc
+5237 | jmp @fetch
+5238 | pc -> ar, pc+4 -> pc
+5239 | mem(ar)[31:0] -> dr
+5240 | jmp @instruction
+5241 | acc - 1 -> acc
+5242 | jmp @fetch
+5243 | pc -> ar, pc+4 -> pc
+5244 | mem(ar)[31:0] -> dr
+5245 | jmp @instruction
+5246 | dr[22:0] + pc -> ar
+5247 | acc[31:0] -> mem(ar)
+5248 | jmp @fetch
+5249 | pc -> ar, pc+4 -> pc
+5250 | mem(ar)[31:0] -> dr
+5251 | jmp @instruction
+5252 | if Z set: jmp @fetch
+5253 | pc + extended(dr[22:0]) -> pc
+5254 | jmp @fetch
+5255 | pc -> ar, pc+4 -> pc
+5256 | mem(ar)[31:0] -> dr
+5257 | jmp @instruction
+5258 | dr[22:0] + pc -> ar
+5259 | mem(ar)[31:0] -> dr
+5260 | dr[31:0] -> acc
+5261 | jmp @fetch
+5262 | pc -> ar, pc+4 -> pc
+5263 | mem(ar)[31:0] -> dr
+5264 | jmp @instruction
+5265 | dr[22:0] + pc -> ar
+5266 | mem(ar)[31:0] -> dr
+5267 | acc + mem(ar) -> acc
+5268 | jmp @fetch
+5269 | pc -> ar, pc+4 -> pc
+5270 | mem(ar)[31:0] -> dr
+5271 | jmp @instruction
+5272 | dr[22:0] + pc -> ar
+5273 | acc[31:0] -> mem(ar)
+5274 | jmp @fetch
+5275 | pc -> ar, pc+4 -> pc
+5276 | mem(ar)[31:0] -> dr
+5277 | jmp @instruction
+5278 | dr[22:0] + pc -> ar
+5279 | mem(ar)[31:0] -> dr
+5280 | dr[31:0] -> acc
+5281 | jmp @fetch
+5282 | pc -> ar, pc+4 -> pc
+5283 | mem(ar)[31:0] -> dr
+5284 | jmp @instruction
+5285 | dr[22:0] + pc -> ar
+5286 | mem(ar)[31:0] -> dr
+5287 | acc * mem(ar) -> acc
+5288 | jmp @fetch
+5289 | pc -> ar, pc+4 -> pc
+5290 | mem(ar)[31:0] -> dr
+5291 | jmp @instruction
+5292 | dr[22:0] + pc -> ar
+5293 | mem(ar)[31:0] -> dr
+5294 | acc + mem(ar) -> acc
+5295 | jmp @fetch
+5296 | pc -> ar, pc+4 -> pc
+5297 | mem(ar)[31:0] -> dr
+5298 | jmp @instruction
+5299 | dr[22:0] + pc -> ar
+5300 | acc[31:0] -> mem(ar)
+5301 | jmp @fetch
+5302 | pc -> ar, pc+4 -> pc
+5303 | mem(ar)[31:0] -> dr
+5304 | jmp @instruction
+5305 | dr[22:0] + pc -> ar
+5306 | mem(ar)[31:0] -> dr
+5307 | dr[31:0] -> acc
+5308 | jmp @fetch
+5309 | pc -> ar, pc+4 -> pc
+5310 | mem(ar)[31:0] -> dr
+5311 | jmp @instruction
+5312 | acc - 1 -> acc
+5313 | jmp @fetch
+5314 | pc -> ar, pc+4 -> pc
+5315 | mem(ar)[31:0] -> dr
+5316 | jmp @instruction
+5317 | dr[22:0] + pc -> ar
+5318 | acc[31:0] -> mem(ar)
+5319 | jmp @fetch
+5320 | pc -> ar, pc+4 -> pc
+5321 | mem(ar)[31:0] -> dr
+5322 | jmp @instruction
+5323 | if Z set: jmp @fetch
+5324 | pc + extended(dr[22:0]) -> pc
+5325 | jmp @fetch
+5326 | pc -> ar, pc+4 -> pc
+5327 | mem(ar)[31:0] -> dr
+5328 | jmp @instruction
+5329 | dr[22:0] + pc -> ar
+5330 | mem(ar)[31:0] -> dr
+5331 | dr[31:0] -> acc
+5332 | jmp @fetch
+5333 | pc -> ar, pc+4 -> pc
+5334 | mem(ar)[31:0] -> dr
+5335 | jmp @instruction
+5336 | dr[22:0] + pc -> ar
+5337 | mem(ar)[31:0] -> dr
+5338 | acc + mem(ar) -> acc
+5339 | jmp @fetch
+5340 | pc -> ar, pc+4 -> pc
+5341 | mem(ar)[31:0] -> dr
+5342 | jmp @instruction
+5343 | dr[22:0] + pc -> ar
+5344 | acc[31:0] -> mem(ar)
+5345 | jmp @fetch
+5346 | pc -> ar, pc+4 -> pc
+5347 | mem(ar)[31:0] -> dr
+5348 | jmp @instruction
+5349 | dr[22:0] + pc -> ar
+5350 | mem(ar)[31:0] -> dr
+5351 | dr[31:0] -> acc
+5352 | jmp @fetch
+5353 | pc -> ar, pc+4 -> pc
+5354 | mem(ar)[31:0] -> dr
+5355 | jmp @instruction
+5356 | dr[22:0] + pc -> ar
+5357 | mem(ar)[31:0] -> dr
+5358 | acc * mem(ar) -> acc
+5359 | jmp @fetch
+5360 | pc -> ar, pc+4 -> pc
+5361 | mem(ar)[31:0] -> dr
+5362 | jmp @instruction
+5363 | dr[22:0] + pc -> ar
+5364 | mem(ar)[31:0] -> dr
+5365 | acc + mem(ar) -> acc
+5366 | jmp @fetch
+5367 | pc -> ar, pc+4 -> pc
+5368 | mem(ar)[31:0] -> dr
+5369 | jmp @instruction
+5370 | dr[22:0] + pc -> ar
+5371 | acc[31:0] -> mem(ar)
+5372 | jmp @fetch
+5373 | pc -> ar, pc+4 -> pc
+5374 | mem(ar)[31:0] -> dr
+5375 | jmp @instruction
+5376 | dr[22:0] + pc -> ar
+5377 | mem(ar)[31:0] -> dr
+5378 | dr[31:0] -> acc
+5379 | jmp @fetch
+5380 | pc -> ar, pc+4 -> pc
+5381 | mem(ar)[31:0] -> dr
+5382 | jmp @instruction
+5383 | acc - 1 -> acc
+5384 | jmp @fetch
+5385 | pc -> ar, pc+4 -> pc
+5386 | mem(ar)[31:0] -> dr
+5387 | jmp @instruction
+5388 | dr[22:0] + pc -> ar
+5389 | acc[31:0] -> mem(ar)
+5390 | jmp @fetch
+5391 | pc -> ar, pc+4 -> pc
+5392 | mem(ar)[31:0] -> dr
+5393 | jmp @instruction
+5394 | if Z set: jmp @fetch
+5395 | pc + extended(dr[22:0]) -> pc
+5396 | jmp @fetch
+5397 | pc -> ar, pc+4 -> pc
+5398 | mem(ar)[31:0] -> dr
+5399 | jmp @instruction
+5400 | dr[22:0] + pc -> ar
+5401 | mem(ar)[31:0] -> dr
+5402 | dr[31:0] -> acc
+5403 | jmp @fetch
+5404 | pc -> ar, pc+4 -> pc
+5405 | mem(ar)[31:0] -> dr
+5406 | jmp @instruction
+5407 | dr[22:0] + pc -> ar
+5408 | mem(ar)[31:0] -> dr
+5409 | acc + mem(ar) -> acc
+5410 | jmp @fetch
+5411 | pc -> ar, pc+4 -> pc
+5412 | mem(ar)[31:0] -> dr
+5413 | jmp @instruction
+5414 | dr[22:0] + pc -> ar
+5415 | acc[31:0] -> mem(ar)
+5416 | jmp @fetch
+5417 | pc -> ar, pc+4 -> pc
+5418 | mem(ar)[31:0] -> dr
+5419 | jmp @instruction
+5420 | dr[22:0] + pc -> ar
+5421 | mem(ar)[31:0] -> dr
+5422 | dr[31:0] -> acc
+5423 | jmp @fetch
+5424 | pc -> ar, pc+4 -> pc
+5425 | mem(ar)[31:0] -> dr
+5426 | jmp @instruction
+5427 | dr[22:0] + pc -> ar
+5428 | mem(ar)[31:0] -> dr
+5429 | acc * mem(ar) -> acc
+5430 | jmp @fetch
+5431 | pc -> ar, pc+4 -> pc
+5432 | mem(ar)[31:0] -> dr
+5433 | jmp @instruction
+5434 | dr[22:0] + pc -> ar
+5435 | mem(ar)[31:0] -> dr
+5436 | acc + mem(ar) -> acc
+5437 | jmp @fetch
+5438 | pc -> ar, pc+4 -> pc
+5439 | mem(ar)[31:0] -> dr
+5440 | jmp @instruction
+5441 | dr[22:0] + pc -> ar
+5442 | acc[31:0] -> mem(ar)
+5443 | jmp @fetch
+5444 | pc -> ar, pc+4 -> pc
+5445 | mem(ar)[31:0] -> dr
+5446 | jmp @instruction
+5447 | dr[22:0] + pc -> ar
+5448 | mem(ar)[31:0] -> dr
+5449 | dr[31:0] -> acc
+5450 | jmp @fetch
+5451 | pc -> ar, pc+4 -> pc
+5452 | mem(ar)[31:0] -> dr
+5453 | jmp @instruction
+5454 | acc - 1 -> acc
+5455 | jmp @fetch
+5456 | pc -> ar, pc+4 -> pc
+5457 | mem(ar)[31:0] -> dr
+5458 | jmp @instruction
+5459 | dr[22:0] + pc -> ar
+5460 | acc[31:0] -> mem(ar)
+5461 | jmp @fetch
+5462 | pc -> ar, pc+4 -> pc
+5463 | mem(ar)[31:0] -> dr
+5464 | jmp @instruction
+5465 | if Z set: jmp @fetch
+5466 | pc + extended(dr[22:0]) -> pc
+5467 | jmp @fetch
+5468 | pc -> ar, pc+4 -> pc
+5469 | mem(ar)[31:0] -> dr
+5470 | jmp @instruction
+5471 | dr[22:0] + pc -> ar
+5472 | mem(ar)[31:0] -> dr
+5473 | dr[31:0] -> acc
+5474 | jmp @fetch
+5475 | pc -> ar, pc+4 -> pc
+5476 | mem(ar)[31:0] -> dr
+5477 | jmp @instruction
+5478 | dr[22:0] + pc -> ar
+5479 | mem(ar)[31:0] -> dr
+5480 | acc + mem(ar) -> acc
+5481 | jmp @fetch
+5482 | pc -> ar, pc+4 -> pc
+5483 | mem(ar)[31:0] -> dr
+5484 | jmp @instruction
+5485 | dr[22:0] + pc -> ar
+5486 | acc[31:0] -> mem(ar)
+5487 | jmp @fetch
+5488 | pc -> ar, pc+4 -> pc
+5489 | mem(ar)[31:0] -> dr
+5490 | jmp @instruction
+5491 | dr[22:0] + pc -> ar
+5492 | mem(ar)[31:0] -> dr
+5493 | dr[31:0] -> acc
+5494 | jmp @fetch
+5495 | pc -> ar, pc+4 -> pc
+5496 | mem(ar)[31:0] -> dr
+5497 | jmp @instruction
+5498 | dr[22:0] + pc -> ar
+5499 | mem(ar)[31:0] -> dr
+5500 | acc * mem(ar) -> acc
+5501 | jmp @fetch
+5502 | pc -> ar, pc+4 -> pc
+5503 | mem(ar)[31:0] -> dr
+5504 | jmp @instruction
+5505 | dr[22:0] + pc -> ar
+5506 | mem(ar)[31:0] -> dr
+5507 | acc + mem(ar) -> acc
+5508 | jmp @fetch
+5509 | pc -> ar, pc+4 -> pc
+5510 | mem(ar)[31:0] -> dr
+5511 | jmp @instruction
+5512 | dr[22:0] + pc -> ar
+5513 | acc[31:0] -> mem(ar)
+5514 | jmp @fetch
+5515 | pc -> ar, pc+4 -> pc
+5516 | mem(ar)[31:0] -> dr
+5517 | jmp @instruction
+5518 | dr[22:0] + pc -> ar
+5519 | mem(ar)[31:0] -> dr
+5520 | dr[31:0] -> acc
+5521 | jmp @fetch
+5522 | pc -> ar, pc+4 -> pc
+5523 | mem(ar)[31:0] -> dr
+5524 | jmp @instruction
+5525 | acc - 1 -> acc
+5526 | jmp @fetch
+5527 | pc -> ar, pc+4 -> pc
+5528 | mem(ar)[31:0] -> dr
+5529 | jmp @instruction
+5530 | dr[22:0] + pc -> ar
+5531 | acc[31:0] -> mem(ar)
+5532 | jmp @fetch
+5533 | pc -> ar, pc+4 -> pc
+5534 | mem(ar)[31:0] -> dr
+5535 | jmp @instruction
+5536 | if Z set: jmp @fetch
+5537 | pc + extended(dr[22:0]) -> pc
+5538 | jmp @fetch
+5539 | pc -> ar, pc+4 -> pc
+5540 | mem(ar)[31:0] -> dr
+5541 | jmp @instruction
+5542 | dr[22:0] + pc -> ar
+5543 | mem(ar)[31:0] -> dr
+5544 | dr[31:0] -> acc
+5545 | jmp @fetch
+5546 | pc -> ar, pc+4 -> pc
+5547 | mem(ar)[31:0] -> dr
+5548 | jmp @instruction
+5549 | dr[22:0] + pc -> ar
+5550 | mem(ar)[31:0] -> dr
+5551 | acc + mem(ar) -> acc
+5552 | jmp @fetch
+5553 | pc -> ar, pc+4 -> pc
+5554 | mem(ar)[31:0] -> dr
+5555 | jmp @instruction
+5556 | dr[22:0] + pc -> ar
+5557 | acc[31:0] -> mem(ar)
+5558 | jmp @fetch
+5559 | pc -> ar, pc+4 -> pc
+5560 | mem(ar)[31:0] -> dr
+5561 | jmp @instruction
+5562 | dr[22:0] + pc -> ar
+5563 | mem(ar)[31:0] -> dr
+5564 | dr[31:0] -> acc
+5565 | jmp @fetch
+5566 | pc -> ar, pc+4 -> pc
+5567 | mem(ar)[31:0] -> dr
+5568 | jmp @instruction
+5569 | dr[22:0] + pc -> ar
+5570 | mem(ar)[31:0] -> dr
+5571 | acc * mem(ar) -> acc
+5572 | jmp @fetch
+5573 | pc -> ar, pc+4 -> pc
+5574 | mem(ar)[31:0] -> dr
+5575 | jmp @instruction
+5576 | dr[22:0] + pc -> ar
+5577 | mem(ar)[31:0] -> dr
+5578 | acc + mem(ar) -> acc
+5579 | jmp @fetch
+5580 | pc -> ar, pc+4 -> pc
+5581 | mem(ar)[31:0] -> dr
+5582 | jmp @instruction
+5583 | dr[22:0] + pc -> ar
+5584 | acc[31:0] -> mem(ar)
+5585 | jmp @fetch
+5586 | pc -> ar, pc+4 -> pc
+5587 | mem(ar)[31:0] -> dr
+5588 | jmp @instruction
+5589 | dr[22:0] + pc -> ar
+5590 | mem(ar)[31:0] -> dr
+5591 | dr[31:0] -> acc
+5592 | jmp @fetch
+5593 | pc -> ar, pc+4 -> pc
+5594 | mem(ar)[31:0] -> dr
+5595 | jmp @instruction
+5596 | acc - 1 -> acc
+5597 | jmp @fetch
+5598 | pc -> ar, pc+4 -> pc
+5599 | mem(ar)[31:0] -> dr
+5600 | jmp @instruction
+5601 | dr[22:0] + pc -> ar
+5602 | acc[31:0] -> mem(ar)
+5603 | jmp @fetch
+5604 | pc -> ar, pc+4 -> pc
+5605 | mem(ar)[31:0] -> dr
+5606 | jmp @instruction
+5607 | if Z set: jmp @fetch
+5608 | pc + extended(dr[22:0]) -> pc
+5609 | jmp @fetch
+5610 | pc -> ar, pc+4 -> pc
+5611 | mem(ar)[31:0] -> dr
+5612 | jmp @instruction
+5613 | dr[22:0] + pc -> ar
+5614 | mem(ar)[31:0] -> dr
+5615 | dr[31:0] -> acc
+5616 | jmp @fetch
+5617 | pc -> ar, pc+4 -> pc
+5618 | mem(ar)[31:0] -> dr
+5619 | jmp @instruction
+5620 | dr[22:0] + pc -> ar
+5621 | mem(ar)[31:0] -> dr
+5622 | acc + mem(ar) -> acc
+5623 | jmp @fetch
+5624 | pc -> ar, pc+4 -> pc
+5625 | mem(ar)[31:0] -> dr
+5626 | jmp @instruction
+5627 | dr[22:0] + pc -> ar
+5628 | acc[31:0] -> mem(ar)
+5629 | jmp @fetch
+5630 | pc -> ar, pc+4 -> pc
+5631 | mem(ar)[31:0] -> dr
+5632 | jmp @instruction
+5633 | dr[22:0] + pc -> ar
+5634 | mem(ar)[31:0] -> dr
+5635 | dr[31:0] -> acc
+5636 | jmp @fetch
+5637 | pc -> ar, pc+4 -> pc
+5638 | mem(ar)[31:0] -> dr
+5639 | jmp @instruction
+5640 | dr[22:0] + pc -> ar
+5641 | mem(ar)[31:0] -> dr
+5642 | acc * mem(ar) -> acc
+5643 | jmp @fetch
+5644 | pc -> ar, pc+4 -> pc
+5645 | mem(ar)[31:0] -> dr
+5646 | jmp @instruction
+5647 | dr[22:0] + pc -> ar
+5648 | mem(ar)[31:0] -> dr
+5649 | acc + mem(ar) -> acc
+5650 | jmp @fetch
+5651 | pc -> ar, pc+4 -> pc
+5652 | mem(ar)[31:0] -> dr
+5653 | jmp @instruction
+5654 | dr[22:0] + pc -> ar
+5655 | acc[31:0] -> mem(ar)
+5656 | jmp @fetch
+5657 | pc -> ar, pc+4 -> pc
+5658 | mem(ar)[31:0] -> dr
+5659 | jmp @instruction
+5660 | dr[22:0] + pc -> ar
+5661 | mem(ar)[31:0] -> dr
+5662 | dr[31:0] -> acc
+5663 | jmp @fetch
+5664 | pc -> ar, pc+4 -> pc
+5665 | mem(ar)[31:0] -> dr
+5666 | jmp @instruction
+5667 | acc - 1 -> acc
+5668 | jmp @fetch
+5669 | pc -> ar, pc+4 -> pc
+5670 | mem(ar)[31:0] -> dr
+5671 | jmp @instruction
+5672 | dr[22:0] + pc -> ar
+5673 | acc[31:0] -> mem(ar)
+5674 | jmp @fetch
+5675 | pc -> ar, pc+4 -> pc
+5676 | mem(ar)[31:0] -> dr
+5677 | jmp @instruction
+5678 | if Z set: jmp @fetch
+5679 | pc + extended(dr[22:0]) -> pc
+5680 | jmp @fetch
+5681 | pc -> ar, pc+4 -> pc
+5682 | mem(ar)[31:0] -> dr
+5683 | jmp @instruction
+5684 | dr[22:0] + pc -> ar
+5685 | mem(ar)[31:0] -> dr
+5686 | dr[31:0] -> acc
+5687 | jmp @fetch
+5688 | pc -> ar, pc+4 -> pc
+5689 | mem(ar)[31:0] -> dr
+5690 | jmp @instruction
+5691 | dr[22:0] + pc -> ar
+5692 | mem(ar)[31:0] -> dr
+5693 | acc + mem(ar) -> acc
+5694 | jmp @fetch
+5695 | pc -> ar, pc+4 -> pc
+5696 | mem(ar)[31:0] -> dr
+5697 | jmp @instruction
+5698 | dr[22:0] + pc -> ar
+5699 | acc[31:0] -> mem(ar)
+5700 | jmp @fetch
+5701 | pc -> ar, pc+4 -> pc
+5702 | mem(ar)[31:0] -> dr
+5703 | jmp @instruction
+5704 | dr[22:0] + pc -> ar
+5705 | mem(ar)[31:0] -> dr
+5706 | dr[31:0] -> acc
+5707 | jmp @fetch
+5708 | pc -> ar, pc+4 -> pc
+5709 | mem(ar)[31:0] -> dr
+5710 | jmp @instruction
+5711 | dr[22:0] + pc -> ar
+5712 | mem(ar)[31:0] -> dr
+5713 | acc * mem(ar) -> acc
+5714 | jmp @fetch
+5715 | pc -> ar, pc+4 -> pc
+5716 | mem(ar)[31:0] -> dr
+5717 | jmp @instruction
+5718 | dr[22:0] + pc -> ar
+5719 | mem(ar)[31:0] -> dr
+5720 | acc + mem(ar) -> acc
+5721 | jmp @fetch
+5722 | pc -> ar, pc+4 -> pc
+5723 | mem(ar)[31:0] -> dr
+5724 | jmp @instruction
+5725 | dr[22:0] + pc -> ar
+5726 | acc[31:0] -> mem(ar)
+5727 | jmp @fetch
+5728 | pc -> ar, pc+4 -> pc
+5729 | mem(ar)[31:0] -> dr
+5730 | jmp @instruction
+5731 | dr[22:0] + pc -> ar
+5732 | mem(ar)[31:0] -> dr
+5733 | dr[31:0] -> acc
+5734 | jmp @fetch
+5735 | pc -> ar, pc+4 -> pc
+5736 | mem(ar)[31:0] -> dr
+5737 | jmp @instruction
+5738 | acc - 1 -> acc
+5739 | jmp @fetch
+5740 | pc -> ar, pc+4 -> pc
+5741 | mem(ar)[31:0] -> dr
+5742 | jmp @instruction
+5743 | dr[22:0] + pc -> ar
+5744 | acc[31:0] -> mem(ar)
+5745 | jmp @fetch
+5746 | pc -> ar, pc+4 -> pc
+5747 | mem(ar)[31:0] -> dr
+5748 | jmp @instruction
+5749 | if Z set: jmp @fetch
+5750 | pc + extended(dr[22:0]) -> pc
+5751 | jmp @fetch
+5752 | pc -> ar, pc+4 -> pc
+5753 | mem(ar)[31:0] -> dr
+5754 | jmp @instruction
+5755 | dr[22:0] + pc -> ar
+5756 | mem(ar)[31:0] -> dr
+5757 | dr[31:0] -> acc
+5758 | jmp @fetch
+5759 | pc -> ar, pc+4 -> pc
+5760 | mem(ar)[31:0] -> dr
+5761 | jmp @instruction
+5762 | dr[22:0] + pc -> ar
+5763 | mem(ar)[31:0] -> dr
+5764 | acc + mem(ar) -> acc
+5765 | jmp @fetch
+5766 | pc -> ar, pc+4 -> pc
+5767 | mem(ar)[31:0] -> dr
+5768 | jmp @instruction
+5769 | dr[22:0] + pc -> ar
+5770 | acc[31:0] -> mem(ar)
+5771 | jmp @fetch
+5772 | pc -> ar, pc+4 -> pc
+5773 | mem(ar)[31:0] -> dr
+5774 | jmp @instruction
+5775 | dr[22:0] + pc -> ar
+5776 | mem(ar)[31:0] -> dr
+5777 | dr[31:0] -> acc
+5778 | jmp @fetch
+5779 | pc -> ar, pc+4 -> pc
+5780 | mem(ar)[31:0] -> dr
+5781 | jmp @instruction
+5782 | dr[22:0] + pc -> ar
+5783 | mem(ar)[31:0] -> dr
+5784 | acc * mem(ar) -> acc
+5785 | jmp @fetch
+5786 | pc -> ar, pc+4 -> pc
+5787 | mem(ar)[31:0] -> dr
+5788 | jmp @instruction
+5789 | dr[22:0] + pc -> ar
+5790 | mem(ar)[31:0] -> dr
+5791 | acc + mem(ar) -> acc
+5792 | jmp @fetch
+5793 | pc -> ar, pc+4 -> pc
+5794 | mem(ar)[31:0] -> dr
+5795 | jmp @instruction
+5796 | dr[22:0] + pc -> ar
+5797 | acc[31:0] -> mem(ar)
+5798 | jmp @fetch
+5799 | pc -> ar, pc+4 -> pc
+5800 | mem(ar)[31:0] -> dr
+5801 | jmp @instruction
+5802 | dr[22:0] + pc -> ar
+5803 | mem(ar)[31:0] -> dr
+5804 | dr[31:0] -> acc
+5805 | jmp @fetch
+5806 | pc -> ar, pc+4 -> pc
+5807 | mem(ar)[31:0] -> dr
+5808 | jmp @instruction
+5809 | acc - 1 -> acc
+5810 | jmp @fetch
+5811 | pc -> ar, pc+4 -> pc
+5812 | mem(ar)[31:0] -> dr
+5813 | jmp @instruction
+5814 | dr[22:0] + pc -> ar
+5815 | acc[31:0] -> mem(ar)
+5816 | jmp @fetch
+5817 | pc -> ar, pc+4 -> pc
+5818 | mem(ar)[31:0] -> dr
+5819 | jmp @instruction
+5820 | if Z set: jmp @fetch
+5821 | pc + extended(dr[22:0]) -> pc
+5822 | jmp @fetch
+5823 | pc -> ar, pc+4 -> pc
+5824 | mem(ar)[31:0] -> dr
+5825 | jmp @instruction
+5826 | dr[22:0] + pc -> ar
+5827 | mem(ar)[31:0] -> dr
+5828 | dr[31:0] -> acc
+5829 | jmp @fetch
+5830 | pc -> ar, pc+4 -> pc
+5831 | mem(ar)[31:0] -> dr
+5832 | jmp @instruction
+5833 | dr[22:0] + pc -> ar
+5834 | mem(ar)[31:0] -> dr
+5835 | acc + mem(ar) -> acc
+5836 | jmp @fetch
+5837 | pc -> ar, pc+4 -> pc
+5838 | mem(ar)[31:0] -> dr
+5839 | jmp @instruction
+5840 | dr[22:0] + pc -> ar
+5841 | acc[31:0] -> mem(ar)
+5842 | jmp @fetch
+5843 | pc -> ar, pc+4 -> pc
+5844 | mem(ar)[31:0] -> dr
+5845 | jmp @instruction
+5846 | dr[22:0] + pc -> ar
+5847 | mem(ar)[31:0] -> dr
+5848 | dr[31:0] -> acc
+5849 | jmp @fetch
+5850 | pc -> ar, pc+4 -> pc
+5851 | mem(ar)[31:0] -> dr
+5852 | jmp @instruction
+5853 | dr[22:0] + pc -> ar
+5854 | mem(ar)[31:0] -> dr
+5855 | acc * mem(ar) -> acc
+5856 | jmp @fetch
+5857 | pc -> ar, pc+4 -> pc
+5858 | mem(ar)[31:0] -> dr
+5859 | jmp @instruction
+5860 | dr[22:0] + pc -> ar
+5861 | mem(ar)[31:0] -> dr
+5862 | acc + mem(ar) -> acc
+5863 | jmp @fetch
+5864 | pc -> ar, pc+4 -> pc
+5865 | mem(ar)[31:0] -> dr
+5866 | jmp @instruction
+5867 | dr[22:0] + pc -> ar
+5868 | acc[31:0] -> mem(ar)
+5869 | jmp @fetch
+5870 | pc -> ar, pc+4 -> pc
+5871 | mem(ar)[31:0] -> dr
+5872 | jmp @instruction
+5873 | dr[22:0] + pc -> ar
+5874 | mem(ar)[31:0] -> dr
+5875 | dr[31:0] -> acc
+5876 | jmp @fetch
+5877 | pc -> ar, pc+4 -> pc
+5878 | mem(ar)[31:0] -> dr
+5879 | jmp @instruction
+5880 | acc - 1 -> acc
+5881 | jmp @fetch
+5882 | pc -> ar, pc+4 -> pc
+5883 | mem(ar)[31:0] -> dr
+5884 | jmp @instruction
+5885 | dr[22:0] + pc -> ar
+5886 | acc[31:0] -> mem(ar)
+5887 | jmp @fetch
+5888 | pc -> ar, pc+4 -> pc
+5889 | mem(ar)[31:0] -> dr
+5890 | jmp @instruction
+5891 | if Z set: jmp @fetch
+5892 | pc + extended(dr[22:0]) -> pc
+5893 | jmp @fetch
+5894 | pc -> ar, pc+4 -> pc
+5895 | mem(ar)[31:0] -> dr
+5896 | jmp @instruction
+5897 | dr[22:0] + pc -> ar
+5898 | mem(ar)[31:0] -> dr
+5899 | dr[31:0] -> acc
+5900 | jmp @fetch
+5901 | pc -> ar, pc+4 -> pc
+5902 | mem(ar)[31:0] -> dr
+5903 | jmp @instruction
+5904 | dr[22:0] + pc -> ar
+5905 | mem(ar)[31:0] -> dr
+5906 | acc + mem(ar) -> acc
+5907 | jmp @fetch
+5908 | pc -> ar, pc+4 -> pc
+5909 | mem(ar)[31:0] -> dr
+5910 | jmp @instruction
+5911 | dr[22:0] + pc -> ar
+5912 | acc[31:0] -> mem(ar)
+5913 | jmp @fetch
+5914 | pc -> ar, pc+4 -> pc
+5915 | mem(ar)[31:0] -> dr
+5916 | jmp @instruction
+5917 | dr[22:0] + pc -> ar
+5918 | mem(ar)[31:0] -> dr
+5919 | dr[31:0] -> acc
+5920 | jmp @fetch
+5921 | pc -> ar, pc+4 -> pc
+5922 | mem(ar)[31:0] -> dr
+5923 | jmp @instruction
+5924 | dr[22:0] + pc -> ar
+5925 | mem(ar)[31:0] -> dr
+5926 | acc * mem(ar) -> acc
+5927 | jmp @fetch
+5928 | pc -> ar, pc+4 -> pc
+5929 | mem(ar)[31:0] -> dr
+5930 | jmp @instruction
+5931 | dr[22:0] + pc -> ar
+5932 | mem(ar)[31:0] -> dr
+5933 | acc + mem(ar) -> acc
+5934 | jmp @fetch
+5935 | pc -> ar, pc+4 -> pc
+5936 | mem(ar)[31:0] -> dr
+5937 | jmp @instruction
+5938 | dr[22:0] + pc -> ar
+5939 | acc[31:0] -> mem(ar)
+5940 | jmp @fetch
+5941 | pc -> ar, pc+4 -> pc
+5942 | mem(ar)[31:0] -> dr
+5943 | jmp @instruction
+5944 | dr[22:0] + pc -> ar
+5945 | mem(ar)[31:0] -> dr
+5946 | dr[31:0] -> acc
+5947 | jmp @fetch
+5948 | pc -> ar, pc+4 -> pc
+5949 | mem(ar)[31:0] -> dr
+5950 | jmp @instruction
+5951 | acc - 1 -> acc
+5952 | jmp @fetch
+5953 | pc -> ar, pc+4 -> pc
+5954 | mem(ar)[31:0] -> dr
+5955 | jmp @instruction
+5956 | dr[22:0] + pc -> ar
+5957 | acc[31:0] -> mem(ar)
+5958 | jmp @fetch
+5959 | pc -> ar, pc+4 -> pc
+5960 | mem(ar)[31:0] -> dr
+5961 | jmp @instruction
+5962 | if Z set: jmp @fetch
+5963 | pc + extended(dr[22:0]) -> pc
+5964 | jmp @fetch
+5965 | pc -> ar, pc+4 -> pc
+5966 | mem(ar)[31:0] -> dr
+5967 | jmp @instruction
+5968 | dr[22:0] + pc -> ar
+5969 | mem(ar)[31:0] -> dr
+5970 | dr[31:0] -> acc
+5971 | jmp @fetch
+5972 | pc -> ar, pc+4 -> pc
+5973 | mem(ar)[31:0] -> dr
+5974 | jmp @instruction
+5975 | dr[22:0] + pc -> ar
+5976 | mem(ar)[31:0] -> dr
+5977 | acc + mem(ar) -> acc
+5978 | jmp @fetch
+5979 | pc -> ar, pc+4 -> pc
+5980 | mem(ar)[31:0] -> dr
+5981 | jmp @instruction
+5982 | dr[22:0] + pc -> ar
+5983 | acc[31:0] -> mem(ar)
+5984 | jmp @fetch
+5985 | pc -> ar, pc+4 -> pc
+5986 | mem(ar)[31:0] -> dr
+5987 | jmp @instruction
+5988 | dr[22:0] + pc -> ar
+5989 | mem(ar)[31:0] -> dr
+5990 | dr[31:0] -> acc
+5991 | jmp @fetch
+5992 | pc -> ar, pc+4 -> pc
+5993 | mem(ar)[31:0] -> dr
+5994 | jmp @instruction
+5995 | dr[22:0] + pc -> ar
+5996 | mem(ar)[31:0] -> dr
+5997 | acc * mem(ar) -> acc
+5998 | jmp @fetch
+5999 | pc -> ar, pc+4 -> pc
+6000 | mem(ar)[31:0] -> dr
+6001 | jmp @instruction
+6002 | dr[22:0] + pc -> ar
+6003 | mem(ar)[31:0] -> dr
+6004 | acc + mem(ar) -> acc
+6005 | jmp @fetch
+6006 | pc -> ar, pc+4 -> pc
+6007 | mem(ar)[31:0] -> dr
+6008 | jmp @instruction
+6009 | dr[22:0] + pc -> ar
+6010 | acc[31:0] -> mem(ar)
+6011 | jmp @fetch
+6012 | pc -> ar, pc+4 -> pc
+6013 | mem(ar)[31:0] -> dr
+6014 | jmp @instruction
+6015 | dr[22:0] + pc -> ar
+6016 | mem(ar)[31:0] -> dr
+6017 | dr[31:0] -> acc
+6018 | jmp @fetch
+6019 | pc -> ar, pc+4 -> pc
+6020 | mem(ar)[31:0] -> dr
+6021 | jmp @instruction
+6022 | acc - 1 -> acc
+6023 | jmp @fetch
+6024 | pc -> ar, pc+4 -> pc
+6025 | mem(ar)[31:0] -> dr
+6026 | jmp @instruction
+6027 | dr[22:0] + pc -> ar
+6028 | acc[31:0] -> mem(ar)
+6029 | jmp @fetch
+6030 | pc -> ar, pc+4 -> pc
+6031 | mem(ar)[31:0] -> dr
+6032 | jmp @instruction
+6033 | if Z set: jmp @fetch
+6034 | pc + extended(dr[22:0]) -> pc
+6035 | jmp @fetch
+6036 | pc -> ar, pc+4 -> pc
+6037 | mem(ar)[31:0] -> dr
+6038 | jmp @instruction
+6039 | dr[22:0] + pc -> ar
+6040 | mem(ar)[31:0] -> dr
+6041 | dr[31:0] -> acc
+6042 | jmp @fetch
+6043 | pc -> ar, pc+4 -> pc
+6044 | mem(ar)[31:0] -> dr
+6045 | jmp @instruction
+6046 | dr[22:0] + pc -> ar
+6047 | mem(ar)[31:0] -> dr
+6048 | acc + mem(ar) -> acc
+6049 | jmp @fetch
+6050 | pc -> ar, pc+4 -> pc
+6051 | mem(ar)[31:0] -> dr
+6052 | jmp @instruction
+6053 | dr[22:0] + pc -> ar
+6054 | acc[31:0] -> mem(ar)
+6055 | jmp @fetch
+6056 | pc -> ar, pc+4 -> pc
+6057 | mem(ar)[31:0] -> dr
+6058 | jmp @instruction
+6059 | dr[22:0] + pc -> ar
+6060 | mem(ar)[31:0] -> dr
+6061 | dr[31:0] -> acc
+6062 | jmp @fetch
+6063 | pc -> ar, pc+4 -> pc
+6064 | mem(ar)[31:0] -> dr
+6065 | jmp @instruction
+6066 | dr[22:0] + pc -> ar
+6067 | mem(ar)[31:0] -> dr
+6068 | acc * mem(ar) -> acc
+6069 | jmp @fetch
+6070 | pc -> ar, pc+4 -> pc
+6071 | mem(ar)[31:0] -> dr
+6072 | jmp @instruction
+6073 | dr[22:0] + pc -> ar
+6074 | mem(ar)[31:0] -> dr
+6075 | acc + mem(ar) -> acc
+6076 | jmp @fetch
+6077 | pc -> ar, pc+4 -> pc
+6078 | mem(ar)[31:0] -> dr
+6079 | jmp @instruction
+6080 | dr[22:0] + pc -> ar
+6081 | acc[31:0] -> mem(ar)
+6082 | jmp @fetch
+6083 | pc -> ar, pc+4 -> pc
+6084 | mem(ar)[31:0] -> dr
+6085 | jmp @instruction
+6086 | dr[22:0] + pc -> ar
+6087 | mem(ar)[31:0] -> dr
+6088 | dr[31:0] -> acc
+6089 | jmp @fetch
+6090 | pc -> ar, pc+4 -> pc
+6091 | mem(ar)[31:0] -> dr
+6092 | jmp @instruction
+6093 | acc - 1 -> acc
+6094 | jmp @fetch
+6095 | pc -> ar, pc+4 -> pc
+6096 | mem(ar)[31:0] -> dr
+6097 | jmp @instruction
+6098 | dr[22:0] + pc -> ar
+6099 | acc[31:0] -> mem(ar)
+6100 | jmp @fetch
+6101 | pc -> ar, pc+4 -> pc
+6102 | mem(ar)[31:0] -> dr
+6103 | jmp @instruction
+6104 | if Z set: jmp @fetch
+6105 | pc + extended(dr[22:0]) -> pc
+6106 | jmp @fetch
+6107 | pc -> ar, pc+4 -> pc
+6108 | mem(ar)[31:0] -> dr
+6109 | jmp @instruction
+6110 | dr[22:0] + pc -> ar
+6111 | mem(ar)[31:0] -> dr
+6112 | dr[31:0] -> acc
+6113 | jmp @fetch
+6114 | pc -> ar, pc+4 -> pc
+6115 | mem(ar)[31:0] -> dr
+6116 | jmp @instruction
+6117 | dr[22:0] + pc -> ar
+6118 | mem(ar)[31:0] -> dr
+6119 | acc + mem(ar) -> acc
+6120 | jmp @fetch
+6121 | pc -> ar, pc+4 -> pc
+6122 | mem(ar)[31:0] -> dr
+6123 | jmp @instruction
+6124 | dr[22:0] + pc -> ar
+6125 | acc[31:0] -> mem(ar)
+6126 | jmp @fetch
+6127 | pc -> ar, pc+4 -> pc
+6128 | mem(ar)[31:0] -> dr
+6129 | jmp @instruction
+6130 | dr[22:0] + pc -> ar
+6131 | mem(ar)[31:0] -> dr
+6132 | dr[31:0] -> acc
+6133 | jmp @fetch
+6134 | pc -> ar, pc+4 -> pc
+6135 | mem(ar)[31:0] -> dr
+6136 | jmp @instruction
+6137 | dr[22:0] + pc -> ar
+6138 | mem(ar)[31:0] -> dr
+6139 | acc * mem(ar) -> acc
+6140 | jmp @fetch
+6141 | pc -> ar, pc+4 -> pc
+6142 | mem(ar)[31:0] -> dr
+6143 | jmp @instruction
+6144 | dr[22:0] + pc -> ar
+6145 | mem(ar)[31:0] -> dr
+6146 | acc + mem(ar) -> acc
+6147 | jmp @fetch
+6148 | pc -> ar, pc+4 -> pc
+6149 | mem(ar)[31:0] -> dr
+6150 | jmp @instruction
+6151 | dr[22:0] + pc -> ar
+6152 | acc[31:0] -> mem(ar)
+6153 | jmp @fetch
+6154 | pc -> ar, pc+4 -> pc
+6155 | mem(ar)[31:0] -> dr
+6156 | jmp @instruction
+6157 | dr[22:0] + pc -> ar
+6158 | mem(ar)[31:0] -> dr
+6159 | dr[31:0] -> acc
+6160 | jmp @fetch
+6161 | pc -> ar, pc+4 -> pc
+6162 | mem(ar)[31:0] -> dr
+6163 | jmp @instruction
+6164 | acc - 1 -> acc
+6165 | jmp @fetch
+6166 | pc -> ar, pc+4 -> pc
+6167 | mem(ar)[31:0] -> dr
+6168 | jmp @instruction
+6169 | dr[22:0] + pc -> ar
+6170 | acc[31:0] -> mem(ar)
+6171 | jmp @fetch
+6172 | pc -> ar, pc+4 -> pc
+6173 | mem(ar)[31:0] -> dr
+6174 | jmp @instruction
+6175 | if Z set: jmp @fetch
+6176 | pc + extended(dr[22:0]) -> pc
+6177 | jmp @fetch
+6178 | pc -> ar, pc+4 -> pc
+6179 | mem(ar)[31:0] -> dr
+6180 | jmp @instruction
+6181 | dr[22:0] + pc -> ar
+6182 | mem(ar)[31:0] -> dr
+6183 | dr[31:0] -> acc
+6184 | jmp @fetch
+6185 | pc -> ar, pc+4 -> pc
+6186 | mem(ar)[31:0] -> dr
+6187 | jmp @instruction
+6188 | dr[22:0] + pc -> ar
+6189 | mem(ar)[31:0] -> dr
+6190 | acc + mem(ar) -> acc
+6191 | jmp @fetch
+6192 | pc -> ar, pc+4 -> pc
+6193 | mem(ar)[31:0] -> dr
+6194 | jmp @instruction
+6195 | dr[22:0] + pc -> ar
+6196 | acc[31:0] -> mem(ar)
+6197 | jmp @fetch
+6198 | pc -> ar, pc+4 -> pc
+6199 | mem(ar)[31:0] -> dr
+6200 | jmp @instruction
+6201 | dr[22:0] + pc -> ar
+6202 | mem(ar)[31:0] -> dr
+6203 | dr[31:0] -> acc
+6204 | jmp @fetch
+6205 | pc -> ar, pc+4 -> pc
+6206 | mem(ar)[31:0] -> dr
+6207 | jmp @instruction
+6208 | dr[22:0] + pc -> ar
+6209 | mem(ar)[31:0] -> dr
+6210 | acc * mem(ar) -> acc
+6211 | jmp @fetch
+6212 | pc -> ar, pc+4 -> pc
+6213 | mem(ar)[31:0] -> dr
+6214 | jmp @instruction
+6215 | dr[22:0] + pc -> ar
+6216 | mem(ar)[31:0] -> dr
+6217 | acc + mem(ar) -> acc
+6218 | jmp @fetch
+6219 | pc -> ar, pc+4 -> pc
+6220 | mem(ar)[31:0] -> dr
+6221 | jmp @instruction
+6222 | dr[22:0] + pc -> ar
+6223 | acc[31:0] -> mem(ar)
+6224 | jmp @fetch
+6225 | pc -> ar, pc+4 -> pc
+6226 | mem(ar)[31:0] -> dr
+6227 | jmp @instruction
+6228 | dr[22:0] + pc -> ar
+6229 | mem(ar)[31:0] -> dr
+6230 | dr[31:0] -> acc
+6231 | jmp @fetch
+6232 | pc -> ar, pc+4 -> pc
+6233 | mem(ar)[31:0] -> dr
+6234 | jmp @instruction
+6235 | acc - 1 -> acc
+6236 | jmp @fetch
+6237 | pc -> ar, pc+4 -> pc
+6238 | mem(ar)[31:0] -> dr
+6239 | jmp @instruction
+6240 | dr[22:0] + pc -> ar
+6241 | acc[31:0] -> mem(ar)
+6242 | jmp @fetch
+6243 | pc -> ar, pc+4 -> pc
+6244 | mem(ar)[31:0] -> dr
+6245 | jmp @instruction
+6246 | if Z set: jmp @fetch
+6247 | pc + extended(dr[22:0]) -> pc
+6248 | jmp @fetch
+6249 | pc -> ar, pc+4 -> pc
+6250 | mem(ar)[31:0] -> dr
+6251 | jmp @instruction
+6252 | dr[22:0] + pc -> ar
+6253 | mem(ar)[31:0] -> dr
+6254 | dr[31:0] -> acc
+6255 | jmp @fetch
+6256 | pc -> ar, pc+4 -> pc
+6257 | mem(ar)[31:0] -> dr
+6258 | jmp @instruction
+6259 | dr[22:0] + pc -> ar
+6260 | mem(ar)[31:0] -> dr
+6261 | acc + mem(ar) -> acc
+6262 | jmp @fetch
+6263 | pc -> ar, pc+4 -> pc
+6264 | mem(ar)[31:0] -> dr
+6265 | jmp @instruction
+6266 | dr[22:0] + pc -> ar
+6267 | acc[31:0] -> mem(ar)
+6268 | jmp @fetch
+6269 | pc -> ar, pc+4 -> pc
+6270 | mem(ar)[31:0] -> dr
+6271 | jmp @instruction
+6272 | dr[22:0] + pc -> ar
+6273 | mem(ar)[31:0] -> dr
+6274 | dr[31:0] -> acc
+6275 | jmp @fetch
+6276 | pc -> ar, pc+4 -> pc
+6277 | mem(ar)[31:0] -> dr
+6278 | jmp @instruction
+6279 | dr[22:0] + pc -> ar
+6280 | mem(ar)[31:0] -> dr
+6281 | acc * mem(ar) -> acc
+6282 | jmp @fetch
+6283 | pc -> ar, pc+4 -> pc
+6284 | mem(ar)[31:0] -> dr
+6285 | jmp @instruction
+6286 | dr[22:0] + pc -> ar
+6287 | mem(ar)[31:0] -> dr
+6288 | acc + mem(ar) -> acc
+6289 | jmp @fetch
+6290 | pc -> ar, pc+4 -> pc
+6291 | mem(ar)[31:0] -> dr
+6292 | jmp @instruction
+6293 | dr[22:0] + pc -> ar
+6294 | acc[31:0] -> mem(ar)
+6295 | jmp @fetch
+6296 | pc -> ar, pc+4 -> pc
+6297 | mem(ar)[31:0] -> dr
+6298 | jmp @instruction
+6299 | dr[22:0] + pc -> ar
+6300 | mem(ar)[31:0] -> dr
+6301 | dr[31:0] -> acc
+6302 | jmp @fetch
+6303 | pc -> ar, pc+4 -> pc
+6304 | mem(ar)[31:0] -> dr
+6305 | jmp @instruction
+6306 | acc - 1 -> acc
+6307 | jmp @fetch
+6308 | pc -> ar, pc+4 -> pc
+6309 | mem(ar)[31:0] -> dr
+6310 | jmp @instruction
+6311 | dr[22:0] + pc -> ar
+6312 | acc[31:0] -> mem(ar)
+6313 | jmp @fetch
+6314 | pc -> ar, pc+4 -> pc
+6315 | mem(ar)[31:0] -> dr
+6316 | jmp @instruction
+6317 | if Z set: jmp @fetch
+6318 | pc + extended(dr[22:0]) -> pc
+6319 | jmp @fetch
+6320 | pc -> ar, pc+4 -> pc
+6321 | mem(ar)[31:0] -> dr
+6322 | jmp @instruction
+6323 | dr[22:0] + pc -> ar
+6324 | mem(ar)[31:0] -> dr
+6325 | dr[31:0] -> acc
+6326 | jmp @fetch
+6327 | pc -> ar, pc+4 -> pc
+6328 | mem(ar)[31:0] -> dr
+6329 | jmp @instruction
+6330 | dr[22:0] + pc -> ar
+6331 | mem(ar)[31:0] -> dr
+6332 | acc + mem(ar) -> acc
+6333 | jmp @fetch
+6334 | pc -> ar, pc+4 -> pc
+6335 | mem(ar)[31:0] -> dr
+6336 | jmp @instruction
+6337 | dr[22:0] + pc -> ar
+6338 | acc[31:0] -> mem(ar)
+6339 | jmp @fetch
+6340 | pc -> ar, pc+4 -> pc
+6341 | mem(ar)[31:0] -> dr
+6342 | jmp @instruction
+6343 | dr[22:0] + pc -> ar
+6344 | mem(ar)[31:0] -> dr
+6345 | dr[31:0] -> acc
+6346 | jmp @fetch
+6347 | pc -> ar, pc+4 -> pc
+6348 | mem(ar)[31:0] -> dr
+6349 | jmp @instruction
+6350 | dr[22:0] + pc -> ar
+6351 | mem(ar)[31:0] -> dr
+6352 | acc * mem(ar) -> acc
+6353 | jmp @fetch
+6354 | pc -> ar, pc+4 -> pc
+6355 | mem(ar)[31:0] -> dr
+6356 | jmp @instruction
+6357 | dr[22:0] + pc -> ar
+6358 | mem(ar)[31:0] -> dr
+6359 | acc + mem(ar) -> acc
+6360 | jmp @fetch
+6361 | pc -> ar, pc+4 -> pc
+6362 | mem(ar)[31:0] -> dr
+6363 | jmp @instruction
+6364 | dr[22:0] + pc -> ar
+6365 | acc[31:0] -> mem(ar)
+6366 | jmp @fetch
+6367 | pc -> ar, pc+4 -> pc
+6368 | mem(ar)[31:0] -> dr
+6369 | jmp @instruction
+6370 | dr[22:0] + pc -> ar
+6371 | mem(ar)[31:0] -> dr
+6372 | dr[31:0] -> acc
+6373 | jmp @fetch
+6374 | pc -> ar, pc+4 -> pc
+6375 | mem(ar)[31:0] -> dr
+6376 | jmp @instruction
+6377 | acc - 1 -> acc
+6378 | jmp @fetch
+6379 | pc -> ar, pc+4 -> pc
+6380 | mem(ar)[31:0] -> dr
+6381 | jmp @instruction
+6382 | dr[22:0] + pc -> ar
+6383 | acc[31:0] -> mem(ar)
+6384 | jmp @fetch
+6385 | pc -> ar, pc+4 -> pc
+6386 | mem(ar)[31:0] -> dr
+6387 | jmp @instruction
+6388 | if Z set: jmp @fetch
+6389 | pc + extended(dr[22:0]) -> pc
+6390 | jmp @fetch
+6391 | pc -> ar, pc+4 -> pc
+6392 | mem(ar)[31:0] -> dr
+6393 | jmp @instruction
+6394 | dr[22:0] + pc -> ar
+6395 | mem(ar)[31:0] -> dr
+6396 | dr[31:0] -> acc
+6397 | jmp @fetch
+6398 | pc -> ar, pc+4 -> pc
+6399 | mem(ar)[31:0] -> dr
+6400 | jmp @instruction
+6401 | dr[22:0] + pc -> ar
+6402 | mem(ar)[31:0] -> dr
+6403 | acc + mem(ar) -> acc
+6404 | jmp @fetch
+6405 | pc -> ar, pc+4 -> pc
+6406 | mem(ar)[31:0] -> dr
+6407 | jmp @instruction
+6408 | dr[22:0] + pc -> ar
+6409 | acc[31:0] -> mem(ar)
+6410 | jmp @fetch
+6411 | pc -> ar, pc+4 -> pc
+6412 | mem(ar)[31:0] -> dr
+6413 | jmp @instruction
+6414 | dr[22:0] + pc -> ar
+6415 | mem(ar)[31:0] -> dr
+6416 | dr[31:0] -> acc
+6417 | jmp @fetch
+6418 | pc -> ar, pc+4 -> pc
+6419 | mem(ar)[31:0] -> dr
+6420 | jmp @instruction
+6421 | dr[22:0] + pc -> ar
+6422 | mem(ar)[31:0] -> dr
+6423 | acc * mem(ar) -> acc
+6424 | jmp @fetch
+6425 | pc -> ar, pc+4 -> pc
+6426 | mem(ar)[31:0] -> dr
+6427 | jmp @instruction
+6428 | dr[22:0] + pc -> ar
+6429 | mem(ar)[31:0] -> dr
+6430 | acc + mem(ar) -> acc
+6431 | jmp @fetch
+6432 | pc -> ar, pc+4 -> pc
+6433 | mem(ar)[31:0] -> dr
+6434 | jmp @instruction
+6435 | dr[22:0] + pc -> ar
+6436 | acc[31:0] -> mem(ar)
+6437 | jmp @fetch
+6438 | pc -> ar, pc+4 -> pc
+6439 | mem(ar)[31:0] -> dr
+6440 | jmp @instruction
+6441 | dr[22:0] + pc -> ar
+6442 | mem(ar)[31:0] -> dr
+6443 | dr[31:0] -> acc
+6444 | jmp @fetch
+6445 | pc -> ar, pc+4 -> pc
+6446 | mem(ar)[31:0] -> dr
+6447 | jmp @instruction
+6448 | acc - 1 -> acc
+6449 | jmp @fetch
+6450 | pc -> ar, pc+4 -> pc
+6451 | mem(ar)[31:0] -> dr
+6452 | jmp @instruction
+6453 | dr[22:0] + pc -> ar
+6454 | acc[31:0] -> mem(ar)
+6455 | jmp @fetch
+6456 | pc -> ar, pc+4 -> pc
+6457 | mem(ar)[31:0] -> dr
+6458 | jmp @instruction
+6459 | if Z set: jmp @fetch
+6460 | pc + extended(dr[22:0]) -> pc
+6461 | jmp @fetch
+6462 | pc -> ar, pc+4 -> pc
+6463 | mem(ar)[31:0] -> dr
+6464 | jmp @instruction
+6465 | dr[22:0] + pc -> ar
+6466 | mem(ar)[31:0] -> dr
+6467 | dr[31:0] -> acc
+6468 | jmp @fetch
+6469 | pc -> ar, pc+4 -> pc
+6470 | mem(ar)[31:0] -> dr
+6471 | jmp @instruction
+6472 | dr[22:0] + pc -> ar
+6473 | mem(ar)[31:0] -> dr
+6474 | acc + mem(ar) -> acc
+6475 | jmp @fetch
+6476 | pc -> ar, pc+4 -> pc
+6477 | mem(ar)[31:0] -> dr
+6478 | jmp @instruction
+6479 | dr[22:0] + pc -> ar
+6480 | acc[31:0] -> mem(ar)
+6481 | jmp @fetch
+6482 | pc -> ar, pc+4 -> pc
+6483 | mem(ar)[31:0] -> dr
+6484 | jmp @instruction
+6485 | dr[22:0] + pc -> ar
+6486 | mem(ar)[31:0] -> dr
+6487 | dr[31:0] -> acc
+6488 | jmp @fetch
+6489 | pc -> ar, pc+4 -> pc
+6490 | mem(ar)[31:0] -> dr
+6491 | jmp @instruction
+6492 | dr[22:0] + pc -> ar
+6493 | mem(ar)[31:0] -> dr
+6494 | acc * mem(ar) -> acc
+6495 | jmp @fetch
+6496 | pc -> ar, pc+4 -> pc
+6497 | mem(ar)[31:0] -> dr
+6498 | jmp @instruction
+6499 | dr[22:0] + pc -> ar
+6500 | mem(ar)[31:0] -> dr
+6501 | acc + mem(ar) -> acc
+6502 | jmp @fetch
+6503 | pc -> ar, pc+4 -> pc
+6504 | mem(ar)[31:0] -> dr
+6505 | jmp @instruction
+6506 | dr[22:0] + pc -> ar
+6507 | acc[31:0] -> mem(ar)
+6508 | jmp @fetch
+6509 | pc -> ar, pc+4 -> pc
+6510 | mem(ar)[31:0] -> dr
+6511 | jmp @instruction
+6512 | dr[22:0] + pc -> ar
+6513 | mem(ar)[31:0] -> dr
+6514 | dr[31:0] -> acc
+6515 | jmp @fetch
+6516 | pc -> ar, pc+4 -> pc
+6517 | mem(ar)[31:0] -> dr
+6518 | jmp @instruction
+6519 | acc - 1 -> acc
+6520 | jmp @fetch
+6521 | pc -> ar, pc+4 -> pc
+6522 | mem(ar)[31:0] -> dr
+6523 | jmp @instruction
+6524 | dr[22:0] + pc -> ar
+6525 | acc[31:0] -> mem(ar)
+6526 | jmp @fetch
+6527 | pc -> ar, pc+4 -> pc
+6528 | mem(ar)[31:0] -> dr
+6529 | jmp @instruction
+6530 | if Z set: jmp @fetch
+6531 | pc + extended(dr[22:0]) -> pc
+6532 | jmp @fetch
+6533 | pc -> ar, pc+4 -> pc
+6534 | mem(ar)[31:0] -> dr
+6535 | jmp @instruction
+6536 | dr[22:0] + pc -> ar
+6537 | mem(ar)[31:0] -> dr
+6538 | dr[31:0] -> acc
+6539 | jmp @fetch
+6540 | pc -> ar, pc+4 -> pc
+6541 | mem(ar)[31:0] -> dr
+6542 | jmp @instruction
+6543 | dr[22:0] + pc -> ar
+6544 | mem(ar)[31:0] -> dr
+6545 | acc + mem(ar) -> acc
+6546 | jmp @fetch
+6547 | pc -> ar, pc+4 -> pc
+6548 | mem(ar)[31:0] -> dr
+6549 | jmp @instruction
+6550 | dr[22:0] + pc -> ar
+6551 | acc[31:0] -> mem(ar)
+6552 | jmp @fetch
+6553 | pc -> ar, pc+4 -> pc
+6554 | mem(ar)[31:0] -> dr
+6555 | jmp @instruction
+6556 | dr[22:0] + pc -> ar
+6557 | mem(ar)[31:0] -> dr
+6558 | dr[31:0] -> acc
+6559 | jmp @fetch
+6560 | pc -> ar, pc+4 -> pc
+6561 | mem(ar)[31:0] -> dr
+6562 | jmp @instruction
+6563 | dr[22:0] + pc -> ar
+6564 | mem(ar)[31:0] -> dr
+6565 | acc * mem(ar) -> acc
+6566 | jmp @fetch
+6567 | pc -> ar, pc+4 -> pc
+6568 | mem(ar)[31:0] -> dr
+6569 | jmp @instruction
+6570 | dr[22:0] + pc -> ar
+6571 | mem(ar)[31:0] -> dr
+6572 | acc + mem(ar) -> acc
+6573 | jmp @fetch
+6574 | pc -> ar, pc+4 -> pc
+6575 | mem(ar)[31:0] -> dr
+6576 | jmp @instruction
+6577 | dr[22:0] + pc -> ar
+6578 | acc[31:0] -> mem(ar)
+6579 | jmp @fetch
+6580 | pc -> ar, pc+4 -> pc
+6581 | mem(ar)[31:0] -> dr
+6582 | jmp @instruction
+6583 | dr[22:0] + pc -> ar
+6584 | mem(ar)[31:0] -> dr
+6585 | dr[31:0] -> acc
+6586 | jmp @fetch
+6587 | pc -> ar, pc+4 -> pc
+6588 | mem(ar)[31:0] -> dr
+6589 | jmp @instruction
+6590 | acc - 1 -> acc
+6591 | jmp @fetch
+6592 | pc -> ar, pc+4 -> pc
+6593 | mem(ar)[31:0] -> dr
+6594 | jmp @instruction
+6595 | dr[22:0] + pc -> ar
+6596 | acc[31:0] -> mem(ar)
+6597 | jmp @fetch
+6598 | pc -> ar, pc+4 -> pc
+6599 | mem(ar)[31:0] -> dr
+6600 | jmp @instruction
+6601 | if Z set: jmp @fetch
+6602 | pc + extended(dr[22:0]) -> pc
+6603 | jmp @fetch
+6604 | pc -> ar, pc+4 -> pc
+6605 | mem(ar)[31:0] -> dr
+6606 | jmp @instruction
+6607 | dr[22:0] + pc -> ar
+6608 | mem(ar)[31:0] -> dr
+6609 | dr[31:0] -> acc
+6610 | jmp @fetch
+6611 | pc -> ar, pc+4 -> pc
+6612 | mem(ar)[31:0] -> dr
+6613 | jmp @instruction
+6614 | dr[22:0] + pc -> ar
+6615 | mem(ar)[31:0] -> dr
+6616 | acc + mem(ar) -> acc
+6617 | jmp @fetch
+6618 | pc -> ar, pc+4 -> pc
+6619 | mem(ar)[31:0] -> dr
+6620 | jmp @instruction
+6621 | dr[22:0] + pc -> ar
+6622 | acc[31:0] -> mem(ar)
+6623 | jmp @fetch
+6624 | pc -> ar, pc+4 -> pc
+6625 | mem(ar)[31:0] -> dr
+6626 | jmp @instruction
+6627 | dr[22:0] + pc -> ar
+6628 | mem(ar)[31:0] -> dr
+6629 | dr[31:0] -> acc
+6630 | jmp @fetch
+6631 | pc -> ar, pc+4 -> pc
+6632 | mem(ar)[31:0] -> dr
+6633 | jmp @instruction
+6634 | dr[22:0] + pc -> ar
+6635 | mem(ar)[31:0] -> dr
+6636 | acc * mem(ar) -> acc
+6637 | jmp @fetch
+6638 | pc -> ar, pc+4 -> pc
+6639 | mem(ar)[31:0] -> dr
+6640 | jmp @instruction
+6641 | dr[22:0] + pc -> ar
+6642 | mem(ar)[31:0] -> dr
+6643 | acc + mem(ar) -> acc
+6644 | jmp @fetch
+6645 | pc -> ar, pc+4 -> pc
+6646 | mem(ar)[31:0] -> dr
+6647 | jmp @instruction
+6648 | dr[22:0] + pc -> ar
+6649 | acc[31:0] -> mem(ar)
+6650 | jmp @fetch
+6651 | pc -> ar, pc+4 -> pc
+6652 | mem(ar)[31:0] -> dr
+6653 | jmp @instruction
+6654 | dr[22:0] + pc -> ar
+6655 | mem(ar)[31:0] -> dr
+6656 | dr[31:0] -> acc
+6657 | jmp @fetch
+6658 | pc -> ar, pc+4 -> pc
+6659 | mem(ar)[31:0] -> dr
+6660 | jmp @instruction
+6661 | acc - 1 -> acc
+6662 | jmp @fetch
+6663 | pc -> ar, pc+4 -> pc
+6664 | mem(ar)[31:0] -> dr
+6665 | jmp @instruction
+6666 | dr[22:0] + pc -> ar
+6667 | acc[31:0] -> mem(ar)
+6668 | jmp @fetch
+6669 | pc -> ar, pc+4 -> pc
+6670 | mem(ar)[31:0] -> dr
+6671 | jmp @instruction
+6672 | if Z set: jmp @fetch
+6673 | pc + extended(dr[22:0]) -> pc
+6674 | jmp @fetch
+6675 | pc -> ar, pc+4 -> pc
+6676 | mem(ar)[31:0] -> dr
+6677 | jmp @instruction
+6678 | dr[22:0] + pc -> ar
+6679 | mem(ar)[31:0] -> dr
+6680 | dr[31:0] -> acc
+6681 | jmp @fetch
+6682 | pc -> ar, pc+4 -> pc
+6683 | mem(ar)[31:0] -> dr
+6684 | jmp @instruction
+6685 | dr[22:0] + pc -> ar
+6686 | mem(ar)[31:0] -> dr
+6687 | acc + mem(ar) -> acc
+6688 | jmp @fetch
+6689 | pc -> ar, pc+4 -> pc
+6690 | mem(ar)[31:0] -> dr
+6691 | jmp @instruction
+6692 | dr[22:0] + pc -> ar
+6693 | acc[31:0] -> mem(ar)
+6694 | jmp @fetch
+6695 | pc -> ar, pc+4 -> pc
+6696 | mem(ar)[31:0] -> dr
+6697 | jmp @instruction
+6698 | dr[22:0] + pc -> ar
+6699 | mem(ar)[31:0] -> dr
+6700 | dr[31:0] -> acc
+6701 | jmp @fetch
+6702 | pc -> ar, pc+4 -> pc
+6703 | mem(ar)[31:0] -> dr
+6704 | jmp @instruction
+6705 | dr[22:0] + pc -> ar
+6706 | mem(ar)[31:0] -> dr
+6707 | acc * mem(ar) -> acc
+6708 | jmp @fetch
+6709 | pc -> ar, pc+4 -> pc
+6710 | mem(ar)[31:0] -> dr
+6711 | jmp @instruction
+6712 | dr[22:0] + pc -> ar
+6713 | mem(ar)[31:0] -> dr
+6714 | acc + mem(ar) -> acc
+6715 | jmp @fetch
+6716 | pc -> ar, pc+4 -> pc
+6717 | mem(ar)[31:0] -> dr
+6718 | jmp @instruction
+6719 | dr[22:0] + pc -> ar
+6720 | acc[31:0] -> mem(ar)
+6721 | jmp @fetch
+6722 | pc -> ar, pc+4 -> pc
+6723 | mem(ar)[31:0] -> dr
+6724 | jmp @instruction
+6725 | dr[22:0] + pc -> ar
+6726 | mem(ar)[31:0] -> dr
+6727 | dr[31:0] -> acc
+6728 | jmp @fetch
+6729 | pc -> ar, pc+4 -> pc
+6730 | mem(ar)[31:0] -> dr
+6731 | jmp @instruction
+6732 | acc - 1 -> acc
+6733 | jmp @fetch
+6734 | pc -> ar, pc+4 -> pc
+6735 | mem(ar)[31:0] -> dr
+6736 | jmp @instruction
+6737 | dr[22:0] + pc -> ar
+6738 | acc[31:0] -> mem(ar)
+6739 | jmp @fetch
+6740 | pc -> ar, pc+4 -> pc
+6741 | mem(ar)[31:0] -> dr
+6742 | jmp @instruction
+6743 | if Z set: jmp @fetch
+6744 | pc + extended(dr[22:0]) -> pc
+6745 | jmp @fetch
+6746 | pc -> ar, pc+4 -> pc
+6747 | mem(ar)[31:0] -> dr
+6748 | jmp @instruction
+6749 | dr[22:0] + pc -> ar
+6750 | mem(ar)[31:0] -> dr
+6751 | dr[31:0] -> acc
+6752 | jmp @fetch
+6753 | pc -> ar, pc+4 -> pc
+6754 | mem(ar)[31:0] -> dr
+6755 | jmp @instruction
+6756 | dr[22:0] + pc -> ar
+6757 | mem(ar)[31:0] -> dr
+6758 | acc + mem(ar) -> acc
+6759 | jmp @fetch
+6760 | pc -> ar, pc+4 -> pc
+6761 | mem(ar)[31:0] -> dr
+6762 | jmp @instruction
+6763 | dr[22:0] + pc -> ar
+6764 | acc[31:0] -> mem(ar)
+6765 | jmp @fetch
+6766 | pc -> ar, pc+4 -> pc
+6767 | mem(ar)[31:0] -> dr
+6768 | jmp @instruction
+6769 | dr[22:0] + pc -> ar
+6770 | mem(ar)[31:0] -> dr
+6771 | dr[31:0] -> acc
+6772 | jmp @fetch
+6773 | pc -> ar, pc+4 -> pc
+6774 | mem(ar)[31:0] -> dr
+6775 | jmp @instruction
+6776 | dr[22:0] + pc -> ar
+6777 | mem(ar)[31:0] -> dr
+6778 | acc * mem(ar) -> acc
+6779 | jmp @fetch
+6780 | pc -> ar, pc+4 -> pc
+6781 | mem(ar)[31:0] -> dr
+6782 | jmp @instruction
+6783 | dr[22:0] + pc -> ar
+6784 | mem(ar)[31:0] -> dr
+6785 | acc + mem(ar) -> acc
+6786 | jmp @fetch
+6787 | pc -> ar, pc+4 -> pc
+6788 | mem(ar)[31:0] -> dr
+6789 | jmp @instruction
+6790 | dr[22:0] + pc -> ar
+6791 | acc[31:0] -> mem(ar)
+6792 | jmp @fetch
+6793 | pc -> ar, pc+4 -> pc
+6794 | mem(ar)[31:0] -> dr
+6795 | jmp @instruction
+6796 | dr[22:0] + pc -> ar
+6797 | mem(ar)[31:0] -> dr
+6798 | dr[31:0] -> acc
+6799 | jmp @fetch
+6800 | pc -> ar, pc+4 -> pc
+6801 | mem(ar)[31:0] -> dr
+6802 | jmp @instruction
+6803 | acc - 1 -> acc
+6804 | jmp @fetch
+6805 | pc -> ar, pc+4 -> pc
+6806 | mem(ar)[31:0] -> dr
+6807 | jmp @instruction
+6808 | dr[22:0] + pc -> ar
+6809 | acc[31:0] -> mem(ar)
+6810 | jmp @fetch
+6811 | pc -> ar, pc+4 -> pc
+6812 | mem(ar)[31:0] -> dr
+6813 | jmp @instruction
+6814 | if Z set: jmp @fetch
+6815 | pc + extended(dr[22:0]) -> pc
+6816 | jmp @fetch
+6817 | pc -> ar, pc+4 -> pc
+6818 | mem(ar)[31:0] -> dr
+6819 | jmp @instruction
+6820 | dr[22:0] + pc -> ar
+6821 | mem(ar)[31:0] -> dr
+6822 | dr[31:0] -> acc
+6823 | jmp @fetch
+6824 | pc -> ar, pc+4 -> pc
+6825 | mem(ar)[31:0] -> dr
+6826 | jmp @instruction
+6827 | dr[22:0] + pc -> ar
+6828 | mem(ar)[31:0] -> dr
+6829 | acc + mem(ar) -> acc
+6830 | jmp @fetch
+6831 | pc -> ar, pc+4 -> pc
+6832 | mem(ar)[31:0] -> dr
+6833 | jmp @instruction
+6834 | dr[22:0] + pc -> ar
+6835 | acc[31:0] -> mem(ar)
+6836 | jmp @fetch
+6837 | pc -> ar, pc+4 -> pc
+6838 | mem(ar)[31:0] -> dr
+6839 | jmp @instruction
+6840 | dr[22:0] + pc -> ar
+6841 | mem(ar)[31:0] -> dr
+6842 | dr[31:0] -> acc
+6843 | jmp @fetch
+6844 | pc -> ar, pc+4 -> pc
+6845 | mem(ar)[31:0] -> dr
+6846 | jmp @instruction
+6847 | dr[22:0] + pc -> ar
+6848 | mem(ar)[31:0] -> dr
+6849 | acc * mem(ar) -> acc
+6850 | jmp @fetch
+6851 | pc -> ar, pc+4 -> pc
+6852 | mem(ar)[31:0] -> dr
+6853 | jmp @instruction
+6854 | dr[22:0] + pc -> ar
+6855 | mem(ar)[31:0] -> dr
+6856 | acc + mem(ar) -> acc
+6857 | jmp @fetch
+6858 | pc -> ar, pc+4 -> pc
+6859 | mem(ar)[31:0] -> dr
+6860 | jmp @instruction
+6861 | dr[22:0] + pc -> ar
+6862 | acc[31:0] -> mem(ar)
+6863 | jmp @fetch
+6864 | pc -> ar, pc+4 -> pc
+6865 | mem(ar)[31:0] -> dr
+6866 | jmp @instruction
+6867 | dr[22:0] + pc -> ar
+6868 | mem(ar)[31:0] -> dr
+6869 | dr[31:0] -> acc
+6870 | jmp @fetch
+6871 | pc -> ar, pc+4 -> pc
+6872 | mem(ar)[31:0] -> dr
+6873 | jmp @instruction
+6874 | acc - 1 -> acc
+6875 | jmp @fetch
+6876 | pc -> ar, pc+4 -> pc
+6877 | mem(ar)[31:0] -> dr
+6878 | jmp @instruction
+6879 | dr[22:0] + pc -> ar
+6880 | acc[31:0] -> mem(ar)
+6881 | jmp @fetch
+6882 | pc -> ar, pc+4 -> pc
+6883 | mem(ar)[31:0] -> dr
+6884 | jmp @instruction
+6885 | if Z set: jmp @fetch
+6886 | pc + extended(dr[22:0]) -> pc
+6887 | jmp @fetch
+6888 | pc -> ar, pc+4 -> pc
+6889 | mem(ar)[31:0] -> dr
+6890 | jmp @instruction
+6891 | dr[22:0] + pc -> ar
+6892 | mem(ar)[31:0] -> dr
+6893 | dr[31:0] -> acc
+6894 | jmp @fetch
+6895 | pc -> ar, pc+4 -> pc
+6896 | mem(ar)[31:0] -> dr
+6897 | jmp @instruction
+6898 | dr[22:0] + pc -> ar
+6899 | mem(ar)[31:0] -> dr
+6900 | acc + mem(ar) -> acc
+6901 | jmp @fetch
+6902 | pc -> ar, pc+4 -> pc
+6903 | mem(ar)[31:0] -> dr
+6904 | jmp @instruction
+6905 | dr[22:0] + pc -> ar
+6906 | acc[31:0] -> mem(ar)
+6907 | jmp @fetch
+6908 | pc -> ar, pc+4 -> pc
+6909 | mem(ar)[31:0] -> dr
+6910 | jmp @instruction
+6911 | dr[22:0] + pc -> ar
+6912 | mem(ar)[31:0] -> dr
+6913 | dr[31:0] -> acc
+6914 | jmp @fetch
+6915 | pc -> ar, pc+4 -> pc
+6916 | mem(ar)[31:0] -> dr
+6917 | jmp @instruction
+6918 | dr[22:0] + pc -> ar
+6919 | mem(ar)[31:0] -> dr
+6920 | acc * mem(ar) -> acc
+6921 | jmp @fetch
+6922 | pc -> ar, pc+4 -> pc
+6923 | mem(ar)[31:0] -> dr
+6924 | jmp @instruction
+6925 | dr[22:0] + pc -> ar
+6926 | mem(ar)[31:0] -> dr
+6927 | acc + mem(ar) -> acc
+6928 | jmp @fetch
+6929 | pc -> ar, pc+4 -> pc
+6930 | mem(ar)[31:0] -> dr
+6931 | jmp @instruction
+6932 | dr[22:0] + pc -> ar
+6933 | acc[31:0] -> mem(ar)
+6934 | jmp @fetch
+6935 | pc -> ar, pc+4 -> pc
+6936 | mem(ar)[31:0] -> dr
+6937 | jmp @instruction
+6938 | dr[22:0] + pc -> ar
+6939 | mem(ar)[31:0] -> dr
+6940 | dr[31:0] -> acc
+6941 | jmp @fetch
+6942 | pc -> ar, pc+4 -> pc
+6943 | mem(ar)[31:0] -> dr
+6944 | jmp @instruction
+6945 | acc - 1 -> acc
+6946 | jmp @fetch
+6947 | pc -> ar, pc+4 -> pc
+6948 | mem(ar)[31:0] -> dr
+6949 | jmp @instruction
+6950 | dr[22:0] + pc -> ar
+6951 | acc[31:0] -> mem(ar)
+6952 | jmp @fetch
+6953 | pc -> ar, pc+4 -> pc
+6954 | mem(ar)[31:0] -> dr
+6955 | jmp @instruction
+6956 | if Z set: jmp @fetch
+6957 | pc + extended(dr[22:0]) -> pc
+6958 | jmp @fetch
+6959 | pc -> ar, pc+4 -> pc
+6960 | mem(ar)[31:0] -> dr
+6961 | jmp @instruction
+6962 | dr[22:0] + pc -> ar
+6963 | mem(ar)[31:0] -> dr
+6964 | dr[31:0] -> acc
+6965 | jmp @fetch
+6966 | pc -> ar, pc+4 -> pc
+6967 | mem(ar)[31:0] -> dr
+6968 | jmp @instruction
+6969 | dr[22:0] + pc -> ar
+6970 | mem(ar)[31:0] -> dr
+6971 | acc + mem(ar) -> acc
+6972 | jmp @fetch
+6973 | pc -> ar, pc+4 -> pc
+6974 | mem(ar)[31:0] -> dr
+6975 | jmp @instruction
+6976 | dr[22:0] + pc -> ar
+6977 | acc[31:0] -> mem(ar)
+6978 | jmp @fetch
+6979 | pc -> ar, pc+4 -> pc
+6980 | mem(ar)[31:0] -> dr
+6981 | jmp @instruction
+6982 | dr[22:0] + pc -> ar
+6983 | mem(ar)[31:0] -> dr
+6984 | dr[31:0] -> acc
+6985 | jmp @fetch
+6986 | pc -> ar, pc+4 -> pc
+6987 | mem(ar)[31:0] -> dr
+6988 | jmp @instruction
+6989 | dr[22:0] + pc -> ar
+6990 | mem(ar)[31:0] -> dr
+6991 | acc * mem(ar) -> acc
+6992 | jmp @fetch
+6993 | pc -> ar, pc+4 -> pc
+6994 | mem(ar)[31:0] -> dr
+6995 | jmp @instruction
+6996 | dr[22:0] + pc -> ar
+6997 | mem(ar)[31:0] -> dr
+6998 | acc + mem(ar) -> acc
+6999 | jmp @fetch
+7000 | pc -> ar, pc+4 -> pc
+7001 | mem(ar)[31:0] -> dr
+7002 | jmp @instruction
+7003 | dr[22:0] + pc -> ar
+7004 | acc[31:0] -> mem(ar)
+7005 | jmp @fetch
+7006 | pc -> ar, pc+4 -> pc
+7007 | mem(ar)[31:0] -> dr
+7008 | jmp @instruction
+7009 | dr[22:0] + pc -> ar
+7010 | mem(ar)[31:0] -> dr
+7011 | dr[31:0] -> acc
+7012 | jmp @fetch
+7013 | pc -> ar, pc+4 -> pc
+7014 | mem(ar)[31:0] -> dr
+7015 | jmp @instruction
+7016 | acc - 1 -> acc
+7017 | jmp @fetch
+7018 | pc -> ar, pc+4 -> pc
+7019 | mem(ar)[31:0] -> dr
+7020 | jmp @instruction
+7021 | dr[22:0] + pc -> ar
+7022 | acc[31:0] -> mem(ar)
+7023 | jmp @fetch
+7024 | pc -> ar, pc+4 -> pc
+7025 | mem(ar)[31:0] -> dr
+7026 | jmp @instruction
+7027 | if Z set: jmp @fetch
+7028 | pc + extended(dr[22:0]) -> pc
+7029 | jmp @fetch
+7030 | pc -> ar, pc+4 -> pc
+7031 | mem(ar)[31:0] -> dr
+7032 | jmp @instruction
+7033 | dr[22:0] + pc -> ar
+7034 | mem(ar)[31:0] -> dr
+7035 | dr[31:0] -> acc
+7036 | jmp @fetch
+7037 | pc -> ar, pc+4 -> pc
+7038 | mem(ar)[31:0] -> dr
+7039 | jmp @instruction
+7040 | dr[22:0] + pc -> ar
+7041 | mem(ar)[31:0] -> dr
+7042 | acc + mem(ar) -> acc
+7043 | jmp @fetch
+7044 | pc -> ar, pc+4 -> pc
+7045 | mem(ar)[31:0] -> dr
+7046 | jmp @instruction
+7047 | dr[22:0] + pc -> ar
+7048 | acc[31:0] -> mem(ar)
+7049 | jmp @fetch
+7050 | pc -> ar, pc+4 -> pc
+7051 | mem(ar)[31:0] -> dr
+7052 | jmp @instruction
+7053 | dr[22:0] + pc -> ar
+7054 | mem(ar)[31:0] -> dr
+7055 | dr[31:0] -> acc
+7056 | jmp @fetch
+7057 | pc -> ar, pc+4 -> pc
+7058 | mem(ar)[31:0] -> dr
+7059 | jmp @instruction
+7060 | dr[22:0] + pc -> ar
+7061 | mem(ar)[31:0] -> dr
+7062 | acc * mem(ar) -> acc
+7063 | jmp @fetch
+7064 | pc -> ar, pc+4 -> pc
+7065 | mem(ar)[31:0] -> dr
+7066 | jmp @instruction
+7067 | dr[22:0] + pc -> ar
+7068 | mem(ar)[31:0] -> dr
+7069 | acc + mem(ar) -> acc
+7070 | jmp @fetch
+7071 | pc -> ar, pc+4 -> pc
+7072 | mem(ar)[31:0] -> dr
+7073 | jmp @instruction
+7074 | dr[22:0] + pc -> ar
+7075 | acc[31:0] -> mem(ar)
+7076 | jmp @fetch
+7077 | pc -> ar, pc+4 -> pc
+7078 | mem(ar)[31:0] -> dr
+7079 | jmp @instruction
+7080 | dr[22:0] + pc -> ar
+7081 | mem(ar)[31:0] -> dr
+7082 | dr[31:0] -> acc
+7083 | jmp @fetch
+7084 | pc -> ar, pc+4 -> pc
+7085 | mem(ar)[31:0] -> dr
+7086 | jmp @instruction
+7087 | acc - 1 -> acc
+7088 | jmp @fetch
+7089 | pc -> ar, pc+4 -> pc
+7090 | mem(ar)[31:0] -> dr
+7091 | jmp @instruction
+7092 | dr[22:0] + pc -> ar
+7093 | acc[31:0] -> mem(ar)
+7094 | jmp @fetch
+7095 | pc -> ar, pc+4 -> pc
+7096 | mem(ar)[31:0] -> dr
+7097 | jmp @instruction
+7098 | if Z set: jmp @fetch
+7099 | pc -> ar, pc+4 -> pc
+7100 | mem(ar)[31:0] -> dr
+7101 | jmp @instruction
+7102 | dr[22:0] + pc -> ar
+7103 | mem(ar)[31:0] -> dr
+7104 | dr[31:0] -> acc
+7105 | jmp @fetch
+7106 | pc -> ar, pc+4 -> pc
+7107 | mem(ar)[31:0] -> dr
+7108 | jmp @instruction
+7109 | dr[22:0] + pc -> ar
+7110 | mem(ar)[31:0] -> dr
+7111 | acc * mem(ar) -> acc
+7112 | jmp @fetch
+7113 | pc -> ar, pc+4 -> pc
+7114 | mem(ar)[31:0] -> dr
+7115 | jmp @instruction
+7116 | dr[22:0] + pc -> ar
+7117 | acc[31:0] -> mem(ar)
+7118 | jmp @fetch
+7119 | pc -> ar, pc+4 -> pc
+7120 | mem(ar)[31:0] -> dr
+7121 | jmp @instruction
+7122 | dr[22:0] + pc -> ar
+7123 | mem(ar)[31:0] -> dr
+7124 | acc - mem(ar) -> acc
+7125 | jmp @fetch
+7126 | pc -> ar, pc+4 -> pc
+7127 | mem(ar)[31:0] -> dr
+7128 | jmp @instruction
+7129 | dr[22:0] -> output address
+7130 | acc -> output
+7131 | jmp @fetch
+7132 | pc -> ar, pc+4 -> pc
+7133 | mem(ar)[31:0] -> dr
+7134 | jmp @instruction
+7135 | halt
+-------------------------------------------------
+Program executed after 7135 ticks. Final state:
+in: 
+[]
+out: 
+[25164150]
+memory_dump:
+  [0x0000] 03 80 00 40 0b 00 00 40 07 80 00 3c 03 80 00 34
+  [0x0010] 1e 00 00 30 0b 00 00 34 07 80 00 30 03 80 00 24
+  [0x0020] 02 80 00 00 07 80 00 1c 16 ff ff d4 03 80 00 18
+  [0x0030] 1e 00 00 14 07 80 00 18 0d 00 00 10 13 80 00 00
+  [0x0040] 00 80 00 00 00 00 00 00 00 00 13 ba 00 05 29 ae
+  [0x0050] 01 85 23 24 00 00 00 00 00 00 00 00 00 00 00 00

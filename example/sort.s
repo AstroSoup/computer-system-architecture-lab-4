@@ -1,5 +1,0 @@
-.text
-_start:
-
-
-.data
