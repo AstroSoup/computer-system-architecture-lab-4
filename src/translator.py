@@ -254,19 +254,19 @@ def write_debug_file(filename, state):
             f.write(line + "\n")
 
 
-def main(source, target, debug=False):
+def main(source, target, debug=""):
     text = read_file(source)
     tokens = translate_to_token_list(text)
     state = first_pass(tokens)
     state = second_pass(state)
     if debug:
-        write_debug_file("translator.debug", state)
+        write_debug_file(debug, state)
     write_output(state, target)
 
 
 if __name__ == "__main__":
-    assert len(sys.argv) >= 3, "Wrong arguments: translator.py <input_file> <target_file>"
-    if len(sys.argv) > 3 and sys.argv[3] == "--debug":
-        main(sys.argv[1], sys.argv[2], True)
+    assert len(sys.argv) >= 3, "Wrong arguments: translator.py <input_file> <target_file> [--debug=<debug_file>]"
+    if len(sys.argv) > 3 and "--debug" in sys.argv[3]:
+        main(sys.argv[1], sys.argv[2], sys.argv[3].split("=")[1])
     else:
         main(sys.argv[1], sys.argv[2])

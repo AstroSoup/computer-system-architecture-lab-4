@@ -1,4 +1,5 @@
 import logging
+import re
 import struct
 import sys
 
@@ -57,6 +58,20 @@ def disassemble_at(datapath, addr):
         msg += f"  mem(mem(operand)) = {val:#010x}"
     return msg
 
+alu_ops = {
+    "ADD": {"action": lambda self: self.ext_acc_mux_out + self.in_or_mem_mux_out, "bin": 0b0000, "desc":lambda op: f"acc + {op} -> acc"},
+    "SUB": {"action": lambda self: self.ext_acc_mux_out - self.in_or_mem_mux_out, "bin": 0b0001, "desc": lambda op: f"acc - {op} -> acc"},
+    "AND": {"action": lambda self: self.ext_acc_mux_out & self.in_or_mem_mux_out, "bin": 0b0010, "desc": lambda op: f"acc & {op} -> acc"},
+    "OR": {"action": lambda self: self.ext_acc_mux_out | self.in_or_mem_mux_out, "bin": 0b0011, "desc": lambda op: f"acc | {op} -> acc"},
+    "NOT": {"action": lambda self: ~self.ext_acc_mux_out, "bin": 0b0100, "desc": lambda op: f"~acc -> acc"},
+    "CLR": {"action": lambda self: 0, "bin": 0b0101, "desc": lambda op: f"0 -> acc"},
+    "INC": {"action": lambda self: self.ext_acc_mux_out + 1, "bin": 0b0110, "desc": lambda op: f"acc + {op} -> acc"},
+    "DEC": {"action": lambda self: self.ext_acc_mux_out - 1, "bin": 0b0111, "desc": lambda op: f"acc - {op} -> acc"},
+    "NEG": {"action": lambda self: -self.ext_acc_mux_out, "bin": 0b1000, "desc": lambda op: f"-acc -> acc"},
+    "LFT": {"action": lambda self: self.ext_acc_mux_out, "bin": 0b1001, "desc": lambda op: f"acc -> acc"},
+    "RGHT": {"action": lambda self: self.in_or_mem_mux_out, "bin": 0b1010, "desc": lambda op: f"{op} -> acc"},
+    "MUL": {"action": lambda self: self.ext_acc_mux_out * self.in_or_mem_mux_out, "bin": 0b1011, "desc": lambda op: f"acc * {op} -> acc"},
+    }
 
 class Datapath:
     # datapath elements
@@ -159,30 +174,7 @@ class Datapath:
 
     # ALU and ADD signals
     def alu_perform_operation(self, operation):
-        if operation == "ADD":
-            self.alu_out = self.ext_acc_mux_out + self.in_or_mem_mux_out
-        elif operation == "SUB":
-            self.alu_out = self.ext_acc_mux_out - self.in_or_mem_mux_out
-        elif operation == "AND":
-            self.alu_out = self.ext_acc_mux_out & self.in_or_mem_mux_out
-        elif operation == "OR":
-            self.alu_out = self.ext_acc_mux_out | self.in_or_mem_mux_out
-        elif operation == "NOT":
-            self.alu_out = ~self.ext_acc_mux_out
-        elif operation == "CLR":
-            self.alu_out = 0
-        elif operation == "INC":
-            self.alu_out = self.ext_acc_mux_out + 1
-        elif operation == "DEC":
-            self.alu_out = self.ext_acc_mux_out - 1
-        elif operation == "NEG":
-            self.alu_out = -self.ext_acc_mux_out
-        elif operation == "LFT":
-            self.alu_out = self.ext_acc_mux_out
-        elif operation == "RGHT":
-            self.alu_out = self.in_or_mem_mux_out
-        else:
-            raise ValueError(f"Unsupported ALU operation: {operation}")
+        self.alu_out = alu_ops.get(operation, {"action": None})["action"](self)
 
     def add_perform_operation(self):
         self.add_pc_out = self.pc_out + self.next_or_offset_mux_out
@@ -292,11 +284,12 @@ class Datapath:
         self.input_out = self.input_device.read()
 
     def log_memory(self, start, end, step):
-        logging.debug("Memory dump:")
+        mem_str = ""
         for addr in range(start, end, step):
             chunk = self.memory[addr : addr + step]
             hex_chunk = " ".join(f"{byte:02x}" for byte in chunk)
-            logging.info(f"  [{addr:#06x}] {hex_chunk}")
+            mem_str +=f"\n  [{addr:#06x}] {hex_chunk}"
+        return mem_str.strip("\n")
 
 
 class Device:
@@ -318,15 +311,67 @@ class Device:
         self.output_buffer.append(value)
 
 
-SEL_N = 0b000  # branch if N
-SEL_Z = 0b001  # branch if Z
-SEL_V = 0b010  # branch if V
-SEL_C = 0b011  # branch if C
-SEL_NN = 0b100  # branch if not N
-SEL_NZ = 0b101  # branch if not Z
-SEL_NV = 0b110  # branch if not V
-SEL_NC = 0b111  # branch if not C
 
+
+selectors = {
+    "N": {"bin":0b000, "desc": "N set"},
+    "Z": {"bin":0b001, "desc": "Z set"},
+    "V": {"bin":0b010, "desc": "V set"},
+    "C": {"bin":0b011, "desc": "C set"},
+    "NN": {"bin":0b100, "desc": "N not set"},
+    "NZ": {"bin":0b101, "desc": "Z not set"},
+    "NV": {"bin":0b110, "desc": "V not set"},
+    "NC": {"bin":0b111, "desc": "C not set"}
+}
+
+def dp_mc(
+    # mux selectors
+    ext_data_mux_sel=False,
+    rel_or_abs_mux_sel=False,
+    data_or_inst_mux_sel=False,
+    sh_ar_or_addr_mux_sel=False,
+    next_or_offset_mux_sel=False,
+    ext_acc_mux_sel=False,
+    in_or_mem_mux_sel=True,
+    sa_or_alu_mux_sel=False,
+    # operations
+    alu_operation=None,
+    add_operation=False,
+    # latches
+    latch_dr=False,
+    latch_input_address=False,
+    latch_output_address=False,
+    latch_acc=False,
+    latch_shadow_acc=False,
+    latch_ar=False,
+    latch_shadow_ar=False,
+    latch_pc=False,
+    # mem
+    read_memory_word=False,
+    read_memory_byte=False,
+    write_memory_word=False,
+    write_memory_byte=False,
+    write2_memory_byte=False,
+    write2_memory_word=False,
+    # IO
+    write_output=False,
+    read_input=False,
+    # mnemonics
+    mnemonic=None,
+):
+    return {"type": "dp", **locals()}
+
+
+def cf_mc(
+    halt=False,
+    jmp=False,
+    cmp=False,
+    sel_cmp=None,
+    address=None,
+    dispatch=False,
+    mnemonic=None,
+):
+    return {"type": "cf", **locals()}
 
 class ControlUnit:
     mpc = 0
@@ -335,7 +380,7 @@ class ControlUnit:
     tick = 0
     datapath = None
     running = False
-
+    mir = dp_mc()
     opcode_table = None
 
     def __init__(self, microcode_memory, datapath, opcode_table):
@@ -343,23 +388,27 @@ class ControlUnit:
         self.datapath = datapath
         self.opcode_table = opcode_table
 
-    def run(self, limit):
+    def run(self, config):
         self.datapath.sync()
         self.running = True
-        while self.running and self.tick < limit:
+        while self.running and self.tick < config.get("limit", 4096):
             self.process_next_tick()
-        if self.tick >= limit:
+            if config.get("report", False):
+                template = next((report for report in config.get('report') if report.get("type") == "step-by-step"), None)
+                if template:
+                    logging.info(log_template(template.get('view', ''), self))
+        if self.tick >= config.get("limit", 4096):
             logging.warning("Reached the limit of simulation.")
 
     def process_next_tick(self):
         # mIR latches the microinstruction from microcode memory
-        mir = self.microcode_memory[self.mpc]
-        if mir["type"] == "dp":
+        self.mir = self.microcode_memory[self.mpc]
+        if self.mir["type"] == "dp":
             # DP decoder fires; CF decoder defaults to mPC+1
-            self._execute_dp(mir)
+            self._execute_dp(self.mir)
         else:
             # CF decoder fires; DP decoder output is masked off
-            self._execute_cf(mir)
+            self._execute_cf(self.mir)
         logging.debug(f"DR: {self.datapath.dr:#010x}")
         self.datapath.sync()
         self.tick += 1
@@ -469,52 +518,7 @@ class ControlUnit:
         self.nzvc["V"] = result > 0x7FFFFFFF or result < -0x80000000
 
 
-def dp_mc(
-    # mux selectors
-    ext_data_mux_sel=False,
-    rel_or_abs_mux_sel=False,
-    data_or_inst_mux_sel=False,
-    sh_ar_or_addr_mux_sel=False,
-    next_or_offset_mux_sel=False,
-    ext_acc_mux_sel=False,
-    in_or_mem_mux_sel=True,
-    sa_or_alu_mux_sel=False,
-    # operations
-    alu_operation=None,
-    add_operation=False,
-    # latches
-    latch_dr=False,
-    latch_input_address=False,
-    latch_output_address=False,
-    latch_acc=False,
-    latch_shadow_acc=False,
-    latch_ar=False,
-    latch_shadow_ar=False,
-    latch_pc=False,
-    # mem
-    read_memory_word=False,
-    read_memory_byte=False,
-    write_memory_word=False,
-    write_memory_byte=False,
-    write2_memory_byte=False,
-    write2_memory_word=False,
-    # IO
-    write_output=False,
-    read_input=False,
-):
-    """DP microinstruction: drives datapath control lines. mPC advances by +1."""
-    return {"type": "dp", **locals()}
 
-
-def cf_mc(
-    halt=False,
-    jmp=False,
-    cmp=False,
-    sel_cmp=None,
-    address=None,
-    dispatch=False,
-):
-    return {"type": "cf", **locals()}
 
 
 def load_program_into_memory(datapath, bin):
@@ -566,11 +570,12 @@ def load_program_into_memory(datapath, bin):
 # common microinstructions for reuse.
 def _mc_set_ar_abs_from_dr():
     return dp_mc(
-        ext_data_mux_sel=True,  # ext_data_mux_out = dr_out (full word)
-        rel_or_abs_mux_sel=True,  # select ext_data_mux_out
-        data_or_inst_mux_sel=True,  # select rel_or_abs_mux_out
-        sh_ar_or_addr_mux_sel=True,  # select data_or_inst_mux_out
-        latch_ar=True,  # AR ← result & 0x7FFFFF
+        ext_data_mux_sel=True,
+        rel_or_abs_mux_sel=True,
+        data_or_inst_mux_sel=True,
+        sh_ar_or_addr_mux_sel=True, 
+        latch_ar=True,
+        mnemonic="dr[22:0] -> ar"
     )
 
 
@@ -583,15 +588,16 @@ def _mc_set_ar_rel_from_dr():
         data_or_inst_mux_sel=True,
         sh_ar_or_addr_mux_sel=True,
         latch_ar=True,
+        mnemonic="dr[22:0] + pc -> ar"
     )
 
 
 def _mc_read_word_to_dr():
-    return dp_mc(read_memory_word=True, latch_dr=True)
+    return dp_mc(read_memory_word=True, latch_dr=True, mnemonic="mem(ar)[31:0] -> dr")
 
 
 def _mc_read_byte_to_dr():
-    return dp_mc(read_memory_byte=True, latch_dr=True)
+    return dp_mc(read_memory_byte=True, latch_dr=True, mnemonic="mem(ar)[7:0] -> dr")
 
 
 # TODO: REFACTOR INTO ONE INSTRUCTION mc_load_from_dr
@@ -602,6 +608,7 @@ def _mc_load_from_dr_word():
         sa_or_alu_mux_sel=True,
         alu_operation="RGHT",
         latch_acc=True,
+        mnemonic="dr[31:0] -> acc"
     )
 
 
@@ -612,6 +619,7 @@ def _mc_load_from_dr_byte():
         sa_or_alu_mux_sel=True,
         alu_operation="RGHT",
         latch_acc=True,
+        mnemonic="dr[7:0] -> acc"
     )
 
 
@@ -622,6 +630,7 @@ def _mc_load_imm():
         sa_or_alu_mux_sel=True,
         alu_operation="RGHT",
         latch_acc=True,
+        mnemonic="extended(dr[22:0]) -> acc"
     )
 
 
@@ -632,8 +641,8 @@ def _mc_alu_imm(op):
         sa_or_alu_mux_sel=True,
         alu_operation=op,
         latch_acc=True,
+        mnemonic=alu_ops[op]["desc"]("extended(dr[22:0])")
     )
-
 
 def _mc_alu_mem(op):
     return dp_mc(
@@ -642,15 +651,14 @@ def _mc_alu_mem(op):
         sa_or_alu_mux_sel=True,
         alu_operation=op,
         latch_acc=True,
+        mnemonic=alu_ops[op]["desc"]("mem(ar)")
     )
-
 
 def setup_machine_simulation(memory_size=1024, input_interface=[Device()], output_interface=[Device()]):
     datapath = Datapath(memory_size, input_interface, output_interface)
 
     microcode = []
 
-    # TODO: add comments for microinstructions
     def emit(mc):
         addr = len(microcode)
         microcode.append(mc)
@@ -667,18 +675,20 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             add_operation=True,
             latch_ar=True,
             latch_pc=True,
+            mnemonic="pc -> ar, pc+4 -> pc"
         )
     )
     emit(
         dp_mc(
             read_memory_word=True,
             latch_dr=True,
+            mnemonic="mem(ar)[31:0] -> dr"
         )
     )
-    emit(cf_mc(dispatch=True))
+    emit(cf_mc(dispatch=True, mnemonic="jmp @instruction"))
 
     def jmp_fetch():
-        return cf_mc(jmp=True, address=fetch_addr)
+        return cf_mc(jmp=True, address=fetch_addr, mnemonic="jmp @fetch")
 
     # address resolve sequences
     def emit_abs_prologue():
@@ -692,31 +702,35 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
         emit(_mc_read_word_to_dr())
         emit(_mc_set_ar_abs_from_dr())
 
-    def emit_cond_branch_rel(inverted_sel):
+    def emit_cond_branch_rel(inverted_sel_entry):
+        inverted_sel = inverted_sel_entry["bin"]
         a = len(microcode)
-        emit(cf_mc(jmp=True, cmp=True, sel_cmp=inverted_sel, address=fetch_addr))
+        emit(cf_mc(jmp=True, cmp=True, sel_cmp=inverted_sel, address=fetch_addr, mnemonic=f"if {inverted_sel_entry['desc']}: jmp @fetch"))
         emit(
             dp_mc(
                 ext_data_mux_sel=False,
                 next_or_offset_mux_sel=True,
                 add_operation=True,
                 latch_pc=True,
+                mnemonic="pc + extended(dr[22:0]) -> pc"
             )
         )
         emit(jmp_fetch())
         return a
 
-    def emit_cond_branch_ind(inverted_sel):
+    def emit_cond_branch_ind(inverted_sel_entry):
+        inverted_sel = inverted_sel_entry["bin"]
         a = len(microcode)
-        emit(cf_mc(jmp=True, cmp=True, sel_cmp=inverted_sel, address=fetch_addr))
-        emit(_mc_set_ar_abs_from_dr())  # AR ← operand cell address
-        emit(_mc_read_word_to_dr())  # DR ← relative offset from memory
+        emit(cf_mc(jmp=True, cmp=True, sel_cmp=inverted_sel, address=fetch_addr, mnemonic=f"if {inverted_sel_entry['desc']}: jmp @fetch"))
+        emit(_mc_set_ar_abs_from_dr())
+        emit(_mc_read_word_to_dr())
         emit(
             dp_mc(
                 ext_data_mux_sel=False,
                 next_or_offset_mux_sel=True,
                 add_operation=True,
                 latch_pc=True,
+                mnemonic="pc + mem(ar) -> pc"
             )
         )
         emit(jmp_fetch())
@@ -728,26 +742,26 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
 
     # HALT
     addr_halt = len(microcode)
-    emit(cf_mc(halt=True))
+    emit(cf_mc(halt=True, mnemonic="halt"))
 
     # CLR
     addr_clr = len(microcode)
-    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="CLR", latch_acc=True))
+    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="CLR", latch_acc=True, mnemonic="0 -> acc"))
     emit(jmp_fetch())
 
     # NOT
     addr_not = len(microcode)
-    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="NOT", latch_acc=True))
+    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="NOT", latch_acc=True, mnemonic="~acc -> acc"))
     emit(jmp_fetch())
 
     # INC
     addr_inc = len(microcode)
-    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="INC", latch_acc=True))
+    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="INC", latch_acc=True, mnemonic="acc + 1 -> acc"))
     emit(jmp_fetch())
 
     # DEC
     addr_dec = len(microcode)
-    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="DEC", latch_acc=True))
+    emit(dp_mc(sa_or_alu_mux_sel=True, alu_operation="DEC", latch_acc=True, mnemonic="acc - 1 -> acc"))
     emit(jmp_fetch())
 
     # LD WORD
@@ -778,54 +792,54 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     emit(_mc_load_imm())
     emit(jmp_fetch())
 
-    addr_LD_REL_BYTE = len(microcode)
+    addr_ld_rel_byte = len(microcode)
     emit_rel_prologue()
     emit(_mc_read_byte_to_dr())
     emit(_mc_load_from_dr_byte())
     emit(jmp_fetch())
 
-    addr_LD_ABS_BYTE = len(microcode)
+    addr_ld_abs_byte = len(microcode)
     emit_abs_prologue()
     emit(_mc_read_byte_to_dr())
     emit(_mc_load_from_dr_byte())
     emit(jmp_fetch())
 
-    addr_LD_IND_BYTE = len(microcode)
+    addr_ld_ind_byte = len(microcode)
     emit_ind_prologue()
     emit(_mc_read_byte_to_dr())
     emit(_mc_load_from_dr_byte())
     emit(jmp_fetch())
 
     # ST WORD
-    addr_ST_REL_WORD = len(microcode)
+    addr_st_rel_word = len(microcode)
     emit_rel_prologue()
-    emit(dp_mc(write_memory_word=True))
+    emit(dp_mc(write_memory_word=True, mnemonic="acc[31:0] -> mem(ar)"))
     emit(jmp_fetch())
 
-    addr_ST_ABS_WORD = len(microcode)
+    addr_st_abs_word = len(microcode)
     emit_abs_prologue()
-    emit(dp_mc(write_memory_word=True))
+    emit(dp_mc(write_memory_word=True, mnemonic="acc[31:0] -> mem(ar)"))
     emit(jmp_fetch())
 
-    addr_ST_IND_WORD = len(microcode)
+    addr_st_ind_word = len(microcode)
     emit_ind_prologue()
-    emit(dp_mc(write_memory_word=True))
+    emit(dp_mc(write_memory_word=True, mnemonic="acc[31:0] -> mem(ar)"))
     emit(jmp_fetch())
 
     # ST BYTE
-    addr_ST_REL_BYTE = len(microcode)
+    addr_st_rel_byte = len(microcode)
     emit_rel_prologue()
-    emit(dp_mc(write_memory_byte=True))
+    emit(dp_mc(write_memory_byte=True, mnemonic="acc[7:0] -> mem(ar)"))
     emit(jmp_fetch())
 
-    addr_ST_ABS_BYTE = len(microcode)
+    addr_st_abs_byte = len(microcode)
     emit_abs_prologue()
-    emit(dp_mc(write_memory_byte=True))
+    emit(dp_mc(write_memory_byte=True, mnemonic="acc[7:0] -> mem(ar)"))
     emit(jmp_fetch())
 
-    addr_ST_IND_BYTE = len(microcode)
+    addr_st_ind_byte = len(microcode)
     emit_ind_prologue()
-    emit(dp_mc(write_memory_byte=True))
+    emit(dp_mc(write_memory_byte=True, mnemonic="acc[7:0] -> mem(ar)"))
     emit(jmp_fetch())
 
     # alu
@@ -854,14 +868,15 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
 
         return a_imm, a_rel, a_abs, a_ind
 
-    addr_ADD_IMM, addr_ADD_REL, addr_ADD_ABS, addr_ADD_IND = emit_alu_group("ADD")
-    addr_SUB_IMM, addr_SUB_REL, addr_SUB_ABS, addr_SUB_IND = emit_alu_group("SUB")
-    addr_AND_IMM, addr_AND_REL, addr_AND_ABS, addr_AND_IND = emit_alu_group("AND")
-    addr_OR_IMM, addr_OR_REL, addr_OR_ABS, addr_OR_IND = emit_alu_group("OR")
+    addr_add_imm, addr_add_rel, addr_add_abs, addr_add_ind = emit_alu_group("ADD")
+    addr_sub_imm, addr_sub_rel, addr_sub_abs, addr_sub_ind = emit_alu_group("SUB")
+    addr_and_imm, addr_and_rel, addr_and_abs, addr_and_ind = emit_alu_group("AND")
+    addr_or_imm, addr_or_rel, addr_or_abs, addr_or_ind = emit_alu_group("OR")
+    addr_mul_imm, addr_mul_rel, addr_mul_abs, addr_mul_ind = emit_alu_group("MUL")
 
     # in
     addr_IN_ABS = len(microcode)
-    emit(dp_mc(latch_input_address=True))
+    emit(dp_mc(latch_input_address=True, mnemonic="dr[22:0] -> input address"))
     emit(
         dp_mc(
             read_input=True,
@@ -869,6 +884,7 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             sa_or_alu_mux_sel=True,
             alu_operation="RGHT",
             latch_acc=True,
+            mnemonic="input -> acc"
         )
     )
     emit(jmp_fetch())
@@ -876,7 +892,7 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     addr_IN_IND = len(microcode)
     emit(_mc_set_ar_abs_from_dr())
     emit(_mc_read_word_to_dr())
-    emit(dp_mc(latch_input_address=True))
+    emit(dp_mc(latch_input_address=True, mnemonic="dr[31:0] -> input address"))
     emit(
         dp_mc(
             read_input=True,
@@ -884,21 +900,22 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             sa_or_alu_mux_sel=True,
             alu_operation="RGHT",
             latch_acc=True,
+            mnemonic="input -> acc"
         )
     )
     emit(jmp_fetch())
 
     # out
     addr_OUT_ABS = len(microcode)
-    emit(dp_mc(latch_output_address=True))
-    emit(dp_mc(write_output=True))
+    emit(dp_mc(latch_output_address=True, mnemonic="dr[22:0] -> output address"))
+    emit(dp_mc(write_output=True, mnemonic="acc -> output"))
     emit(jmp_fetch())
 
     addr_OUT_IND = len(microcode)
     emit(_mc_set_ar_abs_from_dr())
     emit(_mc_read_word_to_dr())
-    emit(dp_mc(latch_output_address=True))
-    emit(dp_mc(write_output=True))
+    emit(dp_mc(latch_output_address=True, mnemonic="dr[31:0] -> output address"))
+    emit(dp_mc(write_output=True, mnemonic="acc -> output"))
     emit(jmp_fetch())
 
     # jmp
@@ -909,6 +926,7 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             next_or_offset_mux_sel=True,
             add_operation=True,
             latch_pc=True,
+            mnemonic="pc + extended(dr[22:0]) -> pc"
         )
     )
     emit(jmp_fetch())
@@ -922,28 +940,29 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             next_or_offset_mux_sel=True,
             add_operation=True,
             latch_pc=True,
+            mnemonic="pc + dr[31:0] -> pc"
         )
     )
     emit(jmp_fetch())
 
     # Conditional branches
 
-    addr_bzs_rel = emit_cond_branch_rel(SEL_NZ)
-    addr_bzs_ind = emit_cond_branch_ind(SEL_NZ)
-    addr_bzns_rel = emit_cond_branch_rel(SEL_Z)
-    addr_bzns_ind = emit_cond_branch_ind(SEL_Z)
-    addr_bcs_rel = emit_cond_branch_rel(SEL_NC)
-    addr_bcs_ind = emit_cond_branch_ind(SEL_NC)
-    addr_bcns_rel = emit_cond_branch_rel(SEL_C)
-    addr_bcns_ind = emit_cond_branch_ind(SEL_C)
-    addr_bvs_rel = emit_cond_branch_rel(SEL_NV)
-    addr_bvs_ind = emit_cond_branch_ind(SEL_NV)
-    addr_bvns_rel = emit_cond_branch_rel(SEL_V)
-    addr_bvns_ind = emit_cond_branch_ind(SEL_V)
-    addr_BNS_REL = emit_cond_branch_rel(SEL_NN)
-    addr_bns_ind = emit_cond_branch_ind(SEL_NN)
-    addr_bnns_rel = emit_cond_branch_rel(SEL_N)
-    addr_bnns_ind = emit_cond_branch_ind(SEL_N)
+    addr_bzs_rel = emit_cond_branch_rel(selectors["NZ"])
+    addr_bzs_ind = emit_cond_branch_ind(selectors["NZ"])
+    addr_bzns_rel = emit_cond_branch_rel(selectors["Z"])
+    addr_bzns_ind = emit_cond_branch_ind(selectors["Z"])
+    addr_bcs_rel = emit_cond_branch_rel(selectors["NC"])
+    addr_bcs_ind = emit_cond_branch_ind(selectors["NC"])
+    addr_bcns_rel = emit_cond_branch_rel(selectors["C"])
+    addr_bcns_ind = emit_cond_branch_ind(selectors["C"])
+    addr_bvs_rel = emit_cond_branch_rel(selectors["NV"])
+    addr_bvs_ind = emit_cond_branch_ind(selectors["NV"])
+    addr_bvns_rel = emit_cond_branch_rel(selectors["V"])
+    addr_bvns_ind = emit_cond_branch_ind(selectors["V"])
+    addr_bns_rel = emit_cond_branch_rel(selectors["NN"])
+    addr_bns_ind = emit_cond_branch_ind(selectors["NN"])
+    addr_bnns_rel = emit_cond_branch_rel(selectors["N"])
+    addr_bnns_ind = emit_cond_branch_ind(selectors["N"])
 
     dispatch_table = {
         # no operand
@@ -958,31 +977,35 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
         opcodes["ld.w_absolute"]: addr_ld_abs_word,
         opcodes["ld.w_indirect"]: addr_ld_ind_word,
         opcodes["ld.b_immediate"]: addr_ld_imm_byte,
-        opcodes["ld.b_relative"]: addr_LD_REL_BYTE,
-        opcodes["ld.b_absolute"]: addr_LD_ABS_BYTE,
-        opcodes["ld.b_indirect"]: addr_LD_IND_BYTE,
-        opcodes["st.w_relative"]: addr_ST_REL_WORD,
-        opcodes["st.w_absolute"]: addr_ST_ABS_WORD,
-        opcodes["st.w_indirect"]: addr_ST_IND_WORD,
-        opcodes["st.b_relative"]: addr_ST_REL_BYTE,
-        opcodes["st.b_absolute"]: addr_ST_ABS_BYTE,
-        opcodes["st.b_indirect"]: addr_ST_IND_BYTE,
-        opcodes["add_immediate"]: addr_ADD_IMM,
-        opcodes["add_relative"]: addr_ADD_REL,
-        opcodes["add_absolute"]: addr_ADD_ABS,
-        opcodes["add_indirect"]: addr_ADD_IND,
-        opcodes["sub_immediate"]: addr_SUB_IMM,
-        opcodes["sub_relative"]: addr_SUB_REL,
-        opcodes["sub_absolute"]: addr_SUB_ABS,
-        opcodes["sub_indirect"]: addr_SUB_IND,
-        opcodes["and_immediate"]: addr_AND_IMM,
-        opcodes["and_relative"]: addr_AND_REL,
-        opcodes["and_absolute"]: addr_AND_ABS,
-        opcodes["and_indirect"]: addr_AND_IND,
-        opcodes["or_immediate"]: addr_OR_IMM,
-        opcodes["or_relative"]: addr_OR_REL,
-        opcodes["or_absolute"]: addr_OR_ABS,
-        opcodes["or_indirect"]: addr_OR_IND,
+        opcodes["ld.b_relative"]: addr_ld_rel_byte,
+        opcodes["ld.b_absolute"]: addr_ld_abs_byte,
+        opcodes["ld.b_indirect"]: addr_ld_ind_byte,
+        opcodes["st.w_relative"]: addr_st_rel_word,
+        opcodes["st.w_absolute"]: addr_st_abs_word,
+        opcodes["st.w_indirect"]: addr_st_ind_word,
+        opcodes["st.b_relative"]: addr_st_rel_byte,
+        opcodes["st.b_absolute"]: addr_st_abs_byte,
+        opcodes["st.b_indirect"]: addr_st_ind_byte,
+        opcodes["add_immediate"]: addr_add_imm,
+        opcodes["add_relative"]: addr_add_rel,
+        opcodes["add_absolute"]: addr_add_abs,
+        opcodes["add_indirect"]: addr_add_ind,
+        opcodes["mul_immediate"]: addr_mul_imm,
+        opcodes["mul_relative"]: addr_mul_rel,
+        opcodes["mul_absolute"]: addr_mul_abs,
+        opcodes["mul_indirect"]: addr_mul_ind,
+        opcodes["sub_immediate"]: addr_sub_imm,
+        opcodes["sub_relative"]: addr_sub_rel,
+        opcodes["sub_absolute"]: addr_sub_abs,
+        opcodes["sub_indirect"]: addr_sub_ind,
+        opcodes["and_immediate"]: addr_and_imm,
+        opcodes["and_relative"]: addr_and_rel,
+        opcodes["and_absolute"]: addr_and_abs,
+        opcodes["and_indirect"]: addr_and_ind,
+        opcodes["or_immediate"]: addr_or_imm,
+        opcodes["or_relative"]: addr_or_rel,
+        opcodes["or_absolute"]: addr_or_abs,
+        opcodes["or_indirect"]: addr_or_ind,
         # IO
         opcodes["in_absolute"]: addr_IN_ABS,
         opcodes["in_indirect"]: addr_IN_IND,
@@ -1004,7 +1027,7 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
         opcodes["bvs_indirect"]: addr_bvs_ind,
         opcodes["bvns_relative"]: addr_bvns_rel,
         opcodes["bvns_indirect"]: addr_bvns_ind,
-        opcodes["bns_relative"]: addr_BNS_REL,
+        opcodes["bns_relative"]: addr_bns_rel,
         opcodes["bns_indirect"]: addr_bns_ind,
         opcodes["bnns_relative"]: addr_bnns_rel,
         opcodes["bnns_indirect"]: addr_bnns_ind,
@@ -1018,10 +1041,133 @@ def parse_config(config_file):
     with open(config_file) as f:
         return yaml.safe_load(f.read())
 
+def current_mc_to_str(control_unit):
+    mc = control_unit.mir
+    str_mc = ""
+    if mc["type"] == "dp":
+        str_mc += "1"
+        str_mc += str(int(mc["read_memory_word"]))
+        str_mc += str(int(mc["read_memory_byte"]))
+        str_mc += str(int(mc["write_output"]))
+        str_mc += str(int(mc["read_input"]))
+
+        str_mc += str(int(mc["ext_data_mux_sel"]))
+
+        str_mc += str(int(mc["next_or_offset_mux_sel"]))
+
+        str_mc += str(int(mc["add_operation"]))
+            
+
+        str_mc += str(int(mc["rel_or_abs_mux_sel"]))
+
+        str_mc += str(int(mc["in_or_mem_mux_sel"]))
+
+        str_mc += str(int(mc["ext_acc_mux_sel"]))
+
+        if mc["alu_operation"] is not None:
+            str_mc += f"{alu_ops[mc['alu_operation']]['bin']:04b}"
+        else:
+            str_mc += "0000"
+        
+
+        str_mc += str(int(mc["data_or_inst_mux_sel"]))
+
+        str_mc += str(int(mc["sh_ar_or_addr_mux_sel"]))
+
+        str_mc += str(int(mc["sa_or_alu_mux_sel"]))
+
+        str_mc += str(int(mc["write_memory_word"]))
+
+        str_mc += str(int(mc["write_memory_byte"]))
+
+
+        str_mc += str(int(mc["write2_memory_word"]))
+        str_mc += str(int(mc["write2_memory_byte"]))
+
+        str_mc += str(int(mc["latch_dr"]))
+
+        str_mc += str(int(mc["latch_input_address"]))
+        str_mc += str(int(mc["latch_output_address"]))
+        str_mc += str(int(mc["latch_acc"]))
+        str_mc += str(int(mc["latch_shadow_acc"]))
+        str_mc += str(int(mc["latch_ar"]))
+        str_mc += str(int(mc["latch_shadow_ar"]))
+        
+        str_mc += str(int(mc["latch_pc"]))
+    else:
+        str_mc += "0"
+        str_mc += str(int(mc["halt"]))
+        str_mc += str(int(mc["dispatch"]))
+        str_mc += str(int(mc["jmp"]))
+        str_mc += str(int(mc["cmp"]))
+        if mc["sel_cmp"] is not None:
+            str_mc += f"{int(mc['sel_cmp']):03b}"
+        else:
+            str_mc += "000"
+        if mc["address"] is not None:
+            str_mc += f"{mc['address']:022b}"
+        else:
+            if not mc['dispatch']:
+                str_mc += '0' * 22
+            else:
+                str_mc += f"{control_unit.opcode_table[control_unit.datapath.dr_out >> 23 & 0x1FF]:022b}"
+        
+        
+
+    return str_mc
+
+def current_mc_to_mnemonic(control_unit):
+    mc = control_unit.mir
+    if mc["type"] == "dp":
+        return mc["mnemonic"] or ""
+    else:
+        return mc["mnemonic"] or ""
+
+def get_device_state(control_unit, device, io_type):
+    if io_type == "input":
+        return control_unit.datapath.input_interface[device].input_buffer
+    else:
+        return control_unit.datapath.output_interface[device].output_buffer
+
 
 def log_template(template, control_unit):
-    pass
-
+    state = {
+        r"{acc}": f"{control_unit.datapath.acc:#010x}",
+        r"{shadow_acc}": f"{control_unit.datapath.shadow_acc:#010x}",
+        r"{pc}": f"{control_unit.datapath.pc:#010x}",
+        r"{dr}": f"{control_unit.datapath.dr:#010x}",
+        r"{ar}": f"{control_unit.datapath.ar:#010x}",
+        r"{shadow_ar}": f"{control_unit.datapath.shadow_ar:#010x}",
+        r"{N}": f"{int(control_unit.nzvc['N'])}",
+        r"{Z}": f"{int(control_unit.nzvc['Z'])}",
+        r"{V}": f"{int(control_unit.nzvc['V'])}",
+        r"{C}": f"{int(control_unit.nzvc['C'])}",
+        r"{mir}": f"{current_mc_to_str(control_unit)}",
+        r"{mpc}": f"{control_unit.mpc:#06x}",
+        r"{tick}": f"{control_unit.tick:04d}",
+        r"{in\(\d\)}": lambda device: get_device_state(control_unit, device, "input"),
+        r"{in\(\d\):hex}": lambda device: "[" + ", ".join(f"{word:#08x}" for word in get_device_state(control_unit, device, "input")) + "]",
+        r"{in\(\d\):dec}": lambda device: [word for word in get_device_state(control_unit, device, "input")],
+        r"{in\(\d\):sym}": lambda device: [f"{chr(byte)}" for byte in get_device_state(control_unit, device, "input")],
+        r"{out\(\d\)}": lambda device: get_device_state(control_unit, device, "output"),
+        r"{out\(\d\):hex}": lambda device: "[" + ", ".join(f"{word:#08x}" for word in get_device_state(control_unit, device, "output")) + "]",
+        r"{out\(\d\):dec}": lambda device: [word for word in get_device_state(control_unit, device, "output")],
+        r"{out\(\d\):sym}": lambda device: [f"{chr(byte)}" for byte in get_device_state(control_unit, device, "output")],
+        r"{memory\(\d+:\d+:\d+\)}": lambda start, end, step: control_unit.datapath.log_memory(start, end, step),
+        r"{mnemonic}": current_mc_to_mnemonic(control_unit),
+    }
+    for key, value in state.items():
+        if callable(value):
+            def make_replacer(fn):
+                def replacer(match):
+                    args = [int(s) for s in re.findall(r"\d+", match.group(0))]
+                    return str(fn(*args))
+                return replacer
+            template = re.sub(key, make_replacer(value), template)
+        else:
+            template = template.replace(key, value)
+        template = template.strip("\n")
+    return template
 
 def main(bin, config_file):
     logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -1030,7 +1176,15 @@ def main(bin, config_file):
     output_interface = []
     if "devices" in config.keys():
         for elem in config["devices"]:
+            for key in ["in", "out"]:
+                for word in elem.get(key, []):
+                    if isinstance(word, str):
+                        assert len(word) == 1, "String literals in device buffers must be single characters"
+                        elem[key][elem[key].index(word)] = ord(word)
+                    else:
+                        assert isinstance(word, int) and 0 <= word <= 0xFFFFFFFF, "Device buffer words must be 32-bit unsigned integers"
             device = Device(input_buffer=elem["in"], output_buffer=elem["out"])
+            
             input_interface.append(device)
             output_interface.append(device)
     control_unit, datapath = setup_machine_simulation(
@@ -1038,8 +1192,15 @@ def main(bin, config_file):
     )
 
     load_program_into_memory(datapath, bin)
-    control_unit.run(config.get("limit", 4096))
-    logging.info(output_interface[0].output_buffer)
+    if config.get("report", False):
+        template = next((report for report in config.get('report') if report.get("type") == "first"), None)
+        if template:
+            logging.info(log_template(template.get('view', ""), control_unit))
+    control_unit.run(config)
+    if config.get("report", False):
+        template = next((report for report in config.get('report') if report.get("type") == "last"), None)
+        if template:
+            logging.info(log_template(template.get('view', ""), control_unit))
 
 
 if __name__ == "__main__":
