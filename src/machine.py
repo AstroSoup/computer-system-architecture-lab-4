@@ -1013,7 +1013,9 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             add_operation=True,
             latch_ar=True,
             latch_shadow_ar=True,
-            mnemonic="acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar"))
+            mnemonic="acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar",
+        )
+    )
     emit(jmp_fetch())
     addr_swp_abs = len(microcode)
     emit(
@@ -1029,7 +1031,9 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             sh_ar_or_addr_mux_sel=True,
             latch_ar=True,
             latch_shadow_ar=True,
-            mnemonic="acc <-> shadow_acc, dr[22:0] -> ar -> shadow_ar"))
+            mnemonic="acc <-> shadow_acc, dr[22:0] -> ar -> shadow_ar",
+        )
+    )
     emit(jmp_fetch())
     addr_swp_ind = len(microcode)
     emit(_mc_set_ar_abs_from_dr())
@@ -1047,58 +1051,131 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
             sh_ar_or_addr_mux_sel=True,
             latch_ar=True,
             latch_shadow_ar=True,
-            mnemonic="acc <-> shadow_acc, mem(dr[22:0]) -> ar -> shadow_ar"))
+            mnemonic="acc <-> shadow_acc, mem(dr[22:0]) -> ar -> shadow_ar",
+        )
+    )
     emit(jmp_fetch())
     # FLSH
     addr_flsh_ww_rel = len(microcode)
     emit_rel_prologue()
-    emit(dp_mc(write2_memory_word=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_word=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_ww_abs = len(microcode)
     emit_abs_prologue()
-    emit(dp_mc(write2_memory_word=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_word=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_ww_ind = len(microcode)
     emit_ind_prologue()
-    emit(dp_mc(write2_memory_word=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_word=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_bb_rel = len(microcode)
     emit_rel_prologue()
-    emit(dp_mc(write2_memory_byte=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_byte=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_bb_abs = len(microcode)
     emit_abs_prologue()
-    emit(dp_mc(write2_memory_byte=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_byte=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_bb_ind = len(microcode)
     emit_ind_prologue()
-    emit(dp_mc(write2_memory_byte=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_byte=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_wb_rel = len(microcode)
     emit_rel_prologue()
-    emit(dp_mc(write2_memory_word=True, write_memory_byte=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_word=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_wb_abs = len(microcode)
     emit_abs_prologue()
-    emit(dp_mc(write2_memory_word=True, write_memory_byte=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_word=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_wb_ind = len(microcode)
     emit_ind_prologue()
-    emit(dp_mc(write2_memory_word=True, write_memory_byte=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_word=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_bw_rel = len(microcode)
     emit_rel_prologue()
-    emit(dp_mc(write2_memory_byte=True, write_memory_word=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_byte=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_bw_abs = len(microcode)
     emit_abs_prologue()
-    emit(dp_mc(write2_memory_byte=True, write_memory_word=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_byte=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
     addr_flsh_bw_ind = len(microcode)
     emit_ind_prologue()
-    emit(dp_mc(write2_memory_byte=True, write_memory_word=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(
+        dp_mc(
+            write2_memory_byte=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+        )
+    )
     emit(jmp_fetch())
-
 
     dispatch_table = {
         # no operand

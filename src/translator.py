@@ -4,22 +4,24 @@ import sys
 from isa import mnemonics, opcode_names, opcodes
 
 
-
 def ir_label(name):
     return {"kind": "label", "name": name}
+
 
 def ir_org(value):
     return {"kind": "org", "value": value}
 
+
 def ir_instr(type_, value=None):
     return {"kind": "instr", "type": type_, "value": value}
+
 
 def ir_word(value):
     return {"kind": "word", "value": value}
 
+
 def ir_byte(value):
     return {"kind": "byte", "value": value}
-
 
 
 class ParseState:
@@ -131,31 +133,40 @@ def parse(tokens):
 
 
 _SAFE_OPS = {
-    "nop":  None,
-    "clr":  None,
-    "not":  None,
-    "inc":  None,
-    "dec":  None,
+    "nop": None,
+    "clr": None,
+    "not": None,
+    "inc": None,
+    "dec": None,
     "ld.w": {"immediate", "relative", "absolute"},
     "ld.b": {"immediate", "relative", "absolute"},
-
     "st.w": {"relative", "absolute"},
     "st.b": {"relative", "absolute"},
-    "add":  {"immediate", "relative", "absolute"},
-    "sub":  {"immediate", "relative", "absolute"},
-    "and":  {"immediate", "relative", "absolute"},
-    "or":   {"immediate", "relative", "absolute"},
-    "mul":  {"immediate", "relative", "absolute"},
-    "in":   {"absolute"},
-    "out":  {"absolute"},
+    "add": {"immediate", "relative", "absolute"},
+    "sub": {"immediate", "relative", "absolute"},
+    "and": {"immediate", "relative", "absolute"},
+    "or": {"immediate", "relative", "absolute"},
+    "mul": {"immediate", "relative", "absolute"},
+    "in": {"absolute"},
+    "out": {"absolute"},
 }
 
 _UNSAFE_OPS = {
     "halt",
     "jmp",
-    "bzs", "bzns", "bcs", "bcns", "bvs", "bvns", "bns", "bnns",
+    "bzs",
+    "bzns",
+    "bcs",
+    "bcns",
+    "bvs",
+    "bvns",
+    "bns",
+    "bnns",
     "swp",
-    "flsh.ww", "flsh.bb", "flsh.wb", "flsh.bw",
+    "flsh.ww",
+    "flsh.bb",
+    "flsh.wb",
+    "flsh.bw",
 }
 
 
@@ -176,11 +187,15 @@ def _label_operand(value):
 
 
 def _operand_mode(value):
-    if value is None:   return None
+    if value is None:
+        return None
     v = value.strip()
-    if v.startswith("#"):           return "immediate"
-    if v.startswith("$"):           return "absolute"
-    if v.startswith("("):           return "indirect"
+    if v.startswith("#"):
+        return "immediate"
+    if v.startswith("$"):
+        return "absolute"
+    if v.startswith("("):
+        return "indirect"
     return "relative"
 
 
@@ -188,7 +203,7 @@ def _st_size(type_):
     return type_.split(".")[1]
 
 
-def _is_safe_in_window(node, label_x):
+def _is_safe_in_window(node, label_x):  # noqa: C901
     if node["kind"] != "instr":
         return False
     t = node["type"]
@@ -199,7 +214,7 @@ def _is_safe_in_window(node, label_x):
         return False  # assume any unknown instruction is unsafe
     allowed = _SAFE_OPS[t]
     if allowed is None:
-        return True   # no-operand instruction
+        return True  # no-operand instruction
     if mode not in allowed:
         return False
     # store to label_x inside window aliases with shadow_ar
@@ -213,7 +228,7 @@ def _is_safe_in_window(node, label_x):
 def _next_instr_index(nodes, start):
     for k in range(start, len(nodes)):
         if nodes[k]["kind"] == "label":
-            return None   # branch target risk
+            return None  # branch target risk
         if nodes[k]["kind"] == "instr":
             return k
     return None
@@ -222,7 +237,6 @@ def _next_instr_index(nodes, start):
 def _optimize_section(nodes):  # noqa: C901
     i = 0
     while i < len(nodes):
-
         # Gate 1: must be st.w or st.b with a label operand
         if nodes[i]["kind"] != "instr" or nodes[i]["type"] not in ("st.w", "st.b"):
             i += 1
@@ -231,10 +245,10 @@ def _optimize_section(nodes):  # noqa: C901
         if lx is None:
             i += 1
             continue
-        label_x   = lx[0]
-        size_x    = _st_size(nodes[i]["type"])
-        st1_value = nodes[i]["value"]   # preserve operand string for swp
-        
+        label_x = lx[0]
+        size_x = _st_size(nodes[i]["type"])
+        st1_value = nodes[i]["value"]  # preserve operand string for swp
+
         # Gate 2: next instr (no label nodes allowed between) must be ld.w/ld.b
         # with a label operand.
         j = _next_instr_index(nodes, i + 1)
@@ -255,24 +269,23 @@ def _optimize_section(nodes):  # noqa: C901
             i += 1
             continue
 
-        current_x   = label_x
-        current_y   = label_y
-        shadow_size = size_x    # size of what is currently in shadow_acc
-        scan_from   = j + 1
-        pending     = [(i, "swp", st1_value)]
-        committed   = False
+        current_x = label_x
+        current_y = label_y
+        shadow_size = size_x  # size of what is currently in shadow_acc
+        scan_from = j + 1
+        pending = [(i, "swp", st1_value)]
+        committed = False
         last_ping = None
         while True:
             # Scan for closing st.current_y
             found_close = None
             safe = True
 
-            
             for k in range(scan_from, len(nodes)):
                 n = nodes[k]
 
                 if n["kind"] == "label":
-                    safe = False    # potential branch target inside window
+                    safe = False  # potential branch target inside window
                     break
                 if n["kind"] != "instr":
                     continue
@@ -292,21 +305,18 @@ def _optimize_section(nodes):  # noqa: C901
 
             k, close_size, close_value = found_close
 
-
             kk = _next_instr_index(nodes, k + 1)
-            if (kk is not None
-                    and nodes[kk]["type"] in ("ld.w", "ld.b")):
+            if kk is not None and nodes[kk]["type"] in ("ld.w", "ld.b"):
                 lkk = _label_operand(nodes[kk]["value"])
 
-                # If the next instruction is a load from current_y, we have a ping-pong pattern: 
+                # If the next instruction is a load from current_y, we have a ping-pong pattern:
                 # ld a; st a; ld b; st b; ld a ...
                 if lkk is not None and lkk[0] == current_x:
-
                     logging.debug(
                         f"optimize: ping-pong [{k}] {nodes[k]['type']} {current_y} "
                         f"-> swp,  [{kk}] {nodes[kk]['type']} {current_x} -> nop"
                     )
-                    pending.append((k,  "swp", close_value))
+                    pending.append((k, "swp", close_value))
                     pending.append((kk, "nop", None))
                     last_ping = {
                         "k": k,
@@ -319,7 +329,7 @@ def _optimize_section(nodes):  # noqa: C901
                     }
                     current_x, current_y = current_y, current_x
                     shadow_size = close_size
-                    scan_from   = kk + 1
+                    scan_from = kk + 1
                     continue
 
             # No ping-pong. Commit a flsh to persist the values.
@@ -331,22 +341,21 @@ def _optimize_section(nodes):  # noqa: C901
             pending.append((k, flsh_type, close_value))
             committed = True
             break
-        # if earlier we found the ping-pong pattern and didn`t close it, we can still persist with the last pong in the sequence. 
+        # if earlier we found the ping-pong pattern and didn`t close it, we can still persist with the last pong in the sequence.
         if last_ping is not None and not committed:
-            k  = last_ping["k"]
+            k = last_ping["k"]
             kk = last_ping["kk"]
 
             st = nodes[k]
             ld = nodes[kk]
 
-            close_size  = _st_size(st["type"])
+            close_size = _st_size(st["type"])
             shadow_size = last_ping["shadow_size"]
 
-            flsh_type  = f"flsh.{shadow_size}{close_size}"
+            flsh_type = f"flsh.{shadow_size}{close_size}"
             close_value = st["value"]
 
-
-            pending[last_ping["pos_k"]] = (k,  flsh_type, close_value)
+            pending[last_ping["pos_k"]] = (k, flsh_type, close_value)
             pending[last_ping["pos_kk"]] = (kk, ld["type"], ld["value"])
 
             committed = True
@@ -355,7 +364,7 @@ def _optimize_section(nodes):  # noqa: C901
             for idx, new_type, new_value in pending:
                 nodes[idx] = ir_instr(new_type, new_value)
             i = max(idx for idx, _, _ in pending) + 1
-            
+
         else:
             i += 1
 
@@ -372,11 +381,10 @@ def optimize(parse_state):
     return parse_state
 
 
-
 class LayoutState:
     def __init__(self, sections, labels):
         self.sections = sections
-        self.labels   = labels
+        self.labels = labels
 
 
 def layout(parse_state):
@@ -409,15 +417,14 @@ def layout(parse_state):
 
             if node["kind"] in ("instr", "word"):
                 current_address += 4
-                sec["size"]     += 4
+                sec["size"] += 4
             elif node["kind"] == "byte":
                 current_address += 1
-                sec["size"]     += 1
+                sec["size"] += 1
 
         laid_out_sections.append(sec)
 
     return LayoutState(laid_out_sections, labels)
-
 
 
 def encode(layout_state):  # noqa: C901
@@ -435,11 +442,11 @@ def encode(layout_state):  # noqa: C901
                 if v.startswith("#"):
                     mode, operand = "immediate", v[1:].strip()
                 elif v.startswith("$"):
-                    mode, operand = "absolute",  v[1:].strip()
+                    mode, operand = "absolute", v[1:].strip()
                 elif v.startswith("(") and v.endswith(")"):
-                    mode, operand = "indirect",  v[1:-1].strip()
+                    mode, operand = "indirect", v[1:-1].strip()
                 else:
-                    mode, operand = "relative",  v
+                    mode, operand = "relative", v
 
                 if operand in labels:
                     operand_value = labels[operand]
@@ -450,14 +457,10 @@ def encode(layout_state):  # noqa: C901
 
                 instr["value"] = operand_value
                 try:
-                    instr["encoded"] = (
-                        opcodes[instr["type"] + "_" + mode] << 23
-                        | (operand_value & 0x7FFFFF)
-                    )
+                    instr["encoded"] = opcodes[instr["type"] + "_" + mode] << 23 | (operand_value & 0x7FFFFF)
                 except KeyError as e:
                     raise ValueError(
-                        f"Unknown instruction or addressing mode: "
-                        f"{instr['type']} with operand {value}"
+                        f"Unknown instruction or addressing mode: " f"{instr['type']} with operand {value}"
                     ) from e
             else:
                 try:
@@ -504,39 +507,32 @@ def write_output(layout_state, target):
 
 def write_debug_file(filename, layout_state):
     lines = []
-    max_addr     = len("<address>")
-    max_hex      = len("<hex_code>")
+    max_addr = len("<address>")
+    max_hex = len("<hex_code>")
     max_mnemonic = len("<mnemonic>")
 
     for section in layout_state.sections:
         if section["name"] != "text":
             continue
         for instr in section["content"]:
-            address  = instr["address"]
+            address = instr["address"]
             hex_code = f"{instr['encoded']:#010x}"
-            mnemonic = (
-                f"{instr['type']}: "
-                f"{mnemonics[opcode_names[instr['encoded'] >> 23 & 0x1FF]](instr['value'])}"
-            )
+            mnemonic = f"{instr['type']}: " f"{mnemonics[opcode_names[instr['encoded'] >> 23 & 0x1FF]](instr['value'])}"
             lines.append((address, hex_code, mnemonic))
-            max_addr     = max(max_addr,     len(str(address)))
-            max_hex      = max(max_hex,      len(hex_code))
+            max_addr = max(max_addr, len(str(address)))
+            max_hex = max(max_hex, len(hex_code))
             max_mnemonic = max(max_mnemonic, len(mnemonic))
 
     with open(filename, "w") as f:
-        f.write(
-            f"{'<address>':<{max_addr}} | {'<hex_code>':<{max_hex}} | "
-            f"{'<mnemonic>':<{max_mnemonic}}\n"
-        )
+        f.write(f"{'<address>':<{max_addr}} | {'<hex_code>':<{max_hex}} | " f"{'<mnemonic>':<{max_mnemonic}}\n")
         for address, hex_code, mnemonic in lines:
             f.write(f"{address:<{max_addr}} | {hex_code:<{max_hex}} | {mnemonic:<{max_mnemonic}}\n")
-
 
 
 def main(source, target, debug="", optimize_shadows=False):
     text = read_file(source)
     tokens = tokenize(text)
-    parse_state  = parse(tokens)
+    parse_state = parse(tokens)
     if optimize_shadows:
         optimize(parse_state)
     layout_state = layout(parse_state)
@@ -548,10 +544,9 @@ def main(source, target, debug="", optimize_shadows=False):
 
 if __name__ == "__main__":
     assert len(sys.argv) >= 3, (
-        "Wrong arguments: translator.py <input_file> <target_file> "
-        "[--debug=<debug_file>] [--optimize]"
+        "Wrong arguments: translator.py <input_file> <target_file> " "[--debug=<debug_file>] [--optimize]"
     )
-    _debug    = ""
+    _debug = ""
     _optimize = False
     for _arg in sys.argv[3:]:
         if _arg.startswith("--debug="):
