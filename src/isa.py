@@ -71,6 +71,22 @@ opcodes = {
     "mul_relative": 60,
     "mul_absolute": 61,
     "mul_indirect": 62,
+    # shadows
+    "swp_relative": 63,
+    "swp_absolute": 64,
+    "swp_indirect": 65,
+    "flsh.ww_relative": 66,
+    "flsh.ww_absolute": 67,
+    "flsh.ww_indirect": 68,
+    "flsh.bb_relative": 69,
+    "flsh.bb_absolute": 70,
+    "flsh.bb_indirect": 71,
+    "flsh.wb_relative": 72,
+    "flsh.wb_absolute": 73,
+    "flsh.wb_indirect": 74,
+    "flsh.bw_relative": 75,
+    "flsh.bw_absolute": 76,
+    "flsh.bw_indirect": 77,
 }
 mnemonics = {
     # no operand
@@ -144,6 +160,21 @@ mnemonics = {
     "bns_indirect": lambda value: f"if (n == 1) mem({value}) -> pc",
     "bnns_relative": lambda value: f"if (n == 0) pc + {value} -> pc",
     "bnns_indirect": lambda value: f"if (n == 0) mem({value}) -> pc",
+    "swp_relative": lambda value: f"acc <-> shadow_acc; pc + {value} -> shadow_ar",
+    "swp_absolute": lambda value: f"acc <-> shadow_acc; {value} -> shadow_ar",
+    "swp_indirect": lambda value: f"acc <-> shadow_acc; mem({value}) -> shadow_ar",
+    "flsh.ww_relative": lambda value: f"acc -> mem(pc + {value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.ww_absolute": lambda value: f"acc -> mem({value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.ww_indirect": lambda value: f"acc -> mem(mem({value})); shadow_acc -> mem(shadow_ar)",
+    "flsh.bb_relative": lambda value: f"acc -> mem(pc + {value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.bb_absolute": lambda value: f"acc -> mem({value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.bb_indirect": lambda value: f"acc -> mem(mem({value})); shadow_acc -> mem(shadow_ar)",
+    "flsh.wb_relative": lambda value: f"acc -> mem(pc + {value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.wb_absolute": lambda value: f"acc -> mem({value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.wb_indirect": lambda value: f"acc -> mem(mem({value})); shadow_acc -> mem(shadow_ar)",
+    "flsh.bw_relative": lambda value: f"acc -> mem(pc + {value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.bw_absolute": lambda value: f"acc -> mem({value}); shadow_acc -> mem(shadow_ar)",
+    "flsh.bw_indirect": lambda value: f"acc -> mem(mem({value})); shadow_acc -> mem(shadow_ar)",
 }
 
 opcode_names = {v: k for k, v in opcodes.items()}

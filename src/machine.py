@@ -188,7 +188,7 @@ class Datapath:
         self.ar = self.sh_ar_or_addr_mux_out & 0x7FFFFF
 
     def signal_latch_shadow_ar(self):
-        self.shadow_ar = self.ar_out & 0x7FFFFF
+        self.shadow_ar = self.ar & 0x7FFFFF
 
     # PC signals
     def signal_latch_pc(self):
@@ -621,7 +621,6 @@ def _mc_read_byte_to_dr():
     return dp_mc(read_memory_byte=True, latch_dr=True, mnemonic="mem(ar)[7:0] -> dr")
 
 
-# TODO: REFACTOR INTO ONE INSTRUCTION mc_load_from_dr
 def _mc_load_from_dr_word():
     return dp_mc(
         ext_data_mux_sel=True,
@@ -997,6 +996,110 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     addr_bnns_rel = emit_cond_branch_rel(selectors["N"])
     addr_bnns_ind = emit_cond_branch_ind(selectors["N"])
 
+    # SWP
+    addr_swp_rel = len(microcode)
+    emit(
+        dp_mc(
+            # swap acc and shadow_acc
+            latch_shadow_acc=True,
+            sa_or_alu_mux_sel=False,
+            latch_acc=True,
+            # write the intended storing address into shadow_ar through ar
+            ext_data_mux_sel=False,
+            next_or_offset_mux_sel=True,
+            rel_or_abs_mux_sel=False,
+            data_or_inst_mux_sel=True,
+            sh_ar_or_addr_mux_sel=True,
+            add_operation=True,
+            latch_ar=True,
+            latch_shadow_ar=True,
+            mnemonic="acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar"))
+    emit(jmp_fetch())
+    addr_swp_abs = len(microcode)
+    emit(
+        dp_mc(
+            # swap acc and shadow_acc
+            latch_shadow_acc=True,
+            sa_or_alu_mux_sel=False,
+            latch_acc=True,
+            # write the intended storing address into shadow_ar through ar
+            ext_data_mux_sel=True,
+            rel_or_abs_mux_sel=True,
+            data_or_inst_mux_sel=True,
+            sh_ar_or_addr_mux_sel=True,
+            latch_ar=True,
+            latch_shadow_ar=True,
+            mnemonic="acc <-> shadow_acc, dr[22:0] -> ar -> shadow_ar"))
+    emit(jmp_fetch())
+    addr_swp_ind = len(microcode)
+    emit(_mc_set_ar_abs_from_dr())
+    emit(_mc_read_word_to_dr())
+    emit(
+        dp_mc(
+            # swap acc and shadow_acc
+            latch_shadow_acc=True,
+            sa_or_alu_mux_sel=False,
+            latch_acc=True,
+            # write the intended storing address into shadow_ar through ar
+            ext_data_mux_sel=True,
+            rel_or_abs_mux_sel=True,
+            data_or_inst_mux_sel=True,
+            sh_ar_or_addr_mux_sel=True,
+            latch_ar=True,
+            latch_shadow_ar=True,
+            mnemonic="acc <-> shadow_acc, mem(dr[22:0]) -> ar -> shadow_ar"))
+    emit(jmp_fetch())
+    # FLSH
+    addr_flsh_ww_rel = len(microcode)
+    emit_rel_prologue()
+    emit(dp_mc(write2_memory_word=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_ww_abs = len(microcode)
+    emit_abs_prologue()
+    emit(dp_mc(write2_memory_word=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_ww_ind = len(microcode)
+    emit_ind_prologue()
+    emit(dp_mc(write2_memory_word=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_bb_rel = len(microcode)
+    emit_rel_prologue()
+    emit(dp_mc(write2_memory_byte=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_bb_abs = len(microcode)
+    emit_abs_prologue()
+    emit(dp_mc(write2_memory_byte=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_bb_ind = len(microcode)
+    emit_ind_prologue()
+    emit(dp_mc(write2_memory_byte=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_wb_rel = len(microcode)
+    emit_rel_prologue()
+    emit(dp_mc(write2_memory_word=True, write_memory_byte=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_wb_abs = len(microcode)
+    emit_abs_prologue()
+    emit(dp_mc(write2_memory_word=True, write_memory_byte=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_wb_ind = len(microcode)
+    emit_ind_prologue()
+    emit(dp_mc(write2_memory_word=True, write_memory_byte=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_bw_rel = len(microcode)
+    emit_rel_prologue()
+    emit(dp_mc(write2_memory_byte=True, write_memory_word=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_bw_abs = len(microcode)
+    emit_abs_prologue()
+    emit(dp_mc(write2_memory_byte=True, write_memory_word=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(jmp_fetch())
+    addr_flsh_bw_ind = len(microcode)
+    emit_ind_prologue()
+    emit(dp_mc(write2_memory_byte=True, write_memory_word=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)"))
+    emit(jmp_fetch())
+
+
     dispatch_table = {
         # no operand
         opcodes["nop"]: addr_nop,
@@ -1064,6 +1167,21 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
         opcodes["bns_indirect"]: addr_bns_ind,
         opcodes["bnns_relative"]: addr_bnns_rel,
         opcodes["bnns_indirect"]: addr_bnns_ind,
+        opcodes["swp_relative"]: addr_swp_rel,
+        opcodes["swp_absolute"]: addr_swp_abs,
+        opcodes["swp_indirect"]: addr_swp_ind,
+        opcodes["flsh.ww_relative"]: addr_flsh_ww_rel,
+        opcodes["flsh.ww_absolute"]: addr_flsh_ww_abs,
+        opcodes["flsh.ww_indirect"]: addr_flsh_ww_ind,
+        opcodes["flsh.bb_relative"]: addr_flsh_bb_rel,
+        opcodes["flsh.bb_absolute"]: addr_flsh_bb_abs,
+        opcodes["flsh.bb_indirect"]: addr_flsh_bb_ind,
+        opcodes["flsh.wb_relative"]: addr_flsh_wb_rel,
+        opcodes["flsh.wb_absolute"]: addr_flsh_wb_abs,
+        opcodes["flsh.wb_indirect"]: addr_flsh_wb_ind,
+        opcodes["flsh.bw_relative"]: addr_flsh_bw_rel,
+        opcodes["flsh.bw_absolute"]: addr_flsh_bw_abs,
+        opcodes["flsh.bw_indirect"]: addr_flsh_bw_ind,
     }
 
     control_unit = ControlUnit(microcode, datapath, dispatch_table)
