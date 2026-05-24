@@ -387,41 +387,46 @@ class LayoutState:
         self.labels = labels
 
 
-def layout(parse_state):
+def layout(parse_state):  # noqa: C901
     labels = {}
     laid_out_sections = []
     current_address = 0
 
     for section in parse_state.sections:
+        base_address = current_address
+        for node in section["content"]:
+            if node["kind"] == "org":
+                base_address = node["value"]
+
         sec = {
             "name": section["name"],
-            "start_address": current_address,
+            "start_address": base_address,
             "size": 0,
             "content": [],
         }
 
+        offset = 0
         for node in section["content"]:
             if node["kind"] == "org":
-                current_address = node["value"]
-                sec["start_address"] = current_address
                 continue
 
             if node["kind"] == "label":
                 assert node["name"] not in labels, f"Duplicate label: {node['name']}"
-                labels[node["name"]] = current_address
+                labels[node["name"]] = base_address + offset
                 continue
 
             laid_node = dict(node)
-            laid_node["address"] = current_address
+            laid_node["address"] = base_address + offset
             sec["content"].append(laid_node)
 
             if node["kind"] in ("instr", "word"):
-                current_address += 4
+                offset += 4
                 sec["size"] += 4
             elif node["kind"] == "byte":
-                current_address += 1
+                offset += 1
                 sec["size"] += 1
 
+        current_address = base_address + offset
         laid_out_sections.append(sec)
 
     return LayoutState(laid_out_sections, labels)
