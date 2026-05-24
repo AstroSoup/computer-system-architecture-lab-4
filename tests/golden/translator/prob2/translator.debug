@@ -1,18 +1,18 @@
-<address> | <hex_code> | <mnemonic>                      
-0         | 0x03800040 | ld.w: mem(pc + 64) -> acc       
-4         | 0x0b000040 | add: mem(pc + 64) + acc -> acc  
-8         | 0x0780003c | st.w: acc -> mem(pc + 60)       
-12        | 0x03800034 | ld.w: mem(pc + 52) -> acc       
-16        | 0x1e000030 | mul: mem(pc + 48) * acc -> acc  
-20        | 0x0b000034 | add: mem(pc + 52) + acc -> acc  
-24        | 0x07800030 | st.w: acc -> mem(pc + 48)       
-28        | 0x03800024 | ld.w: mem(pc + 36) -> acc       
-32        | 0x02800000 | dec: acc - 1 -> acc             
-36        | 0x0780001c | st.w: acc -> mem(pc + 28)       
-40        | 0x16ffffd4 | bzns: if (z == 0) pc + -44 -> pc
-44        | 0x03800018 | ld.w: mem(pc + 24) -> acc       
-48        | 0x1e000014 | mul: mem(pc + 20) * acc -> acc  
-52        | 0x07800018 | st.w: acc -> mem(pc + 24)       
-56        | 0x0d000010 | sub: acc - mem(pc + 16) -> acc  
-60        | 0x13800000 | out: acc -> device(0)           
-64        | 0x00800000 | halt: halt execution            
+<address> | <hex_code> | <mnemonic>                                                
+0         | 0x03800040 | ld.w: mem(pc + 64) -> acc                                 
+4         | 0x0b000040 | add: mem(pc + 64) + acc -> acc                            
+8         | 0x1f80003c | swp: acc <-> shadow_acc; pc + 60 -> shadow_ar             
+12        | 0x03800034 | ld.w: mem(pc + 52) -> acc                                 
+16        | 0x1e000030 | mul: mem(pc + 48) * acc -> acc                            
+20        | 0x0b000034 | add: mem(pc + 52) + acc -> acc                            
+24        | 0x07800030 | st.w: acc -> mem(pc + 48)                                 
+28        | 0x03800024 | ld.w: mem(pc + 36) -> acc                                 
+32        | 0x02800000 | dec: acc - 1 -> acc                                       
+36        | 0x2100001c | flsh.ww: acc -> mem(pc + 28); shadow_acc -> mem(shadow_ar)
+40        | 0x16ffffd4 | bzns: if (z == 0) pc + -44 -> pc                          
+44        | 0x03800018 | ld.w: mem(pc + 24) -> acc                                 
+48        | 0x1e000014 | mul: mem(pc + 20) * acc -> acc                            
+52        | 0x07800018 | st.w: acc -> mem(pc + 24)                                 
+56        | 0x0d000010 | sub: acc - mem(pc + 16) -> acc                            
+60        | 0x13800000 | out: acc -> device(0)                                     
+64        | 0x00800000 | halt: halt execution                                      

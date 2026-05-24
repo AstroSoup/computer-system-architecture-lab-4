@@ -13,7 +13,7 @@ def get_test_cases():
 
 
 @pytest.mark.parametrize("case_dir", get_test_cases(), ids=lambda d: d.name)
-def test_machine_golden(case_dir, caplog, tmp_path, request):
+def test_machine_golden(case_dir, caplog):
     bin_file = case_dir / "out.maibinbin"
     config_file = case_dir / "config.yaml"
     expected_log_file = case_dir / "machine.log"

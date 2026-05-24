@@ -1,0 +1,92 @@
+tick | mnemonic
+-------------------------------------------------
+0001 | pc -> ar, pc+4 -> pc
+0002 | mem(ar)[31:0] -> dr
+0003 | jmp @instruction
+0004 | dr[22:0] + pc -> ar
+0005 | mem(ar)[31:0] -> dr
+0006 | dr[31:0] -> acc
+0007 | jmp @fetch
+0008 | pc -> ar, pc+4 -> pc
+0009 | mem(ar)[31:0] -> dr
+0010 | jmp @instruction
+0011 | acc + 1 -> acc
+0012 | jmp @fetch
+0013 | pc -> ar, pc+4 -> pc
+0014 | mem(ar)[31:0] -> dr
+0015 | jmp @instruction
+0016 | acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar
+0017 | jmp @fetch
+0018 | pc -> ar, pc+4 -> pc
+0019 | mem(ar)[31:0] -> dr
+0020 | jmp @instruction
+0021 | dr[22:0] + pc -> ar
+0022 | mem(ar)[31:0] -> dr
+0023 | dr[31:0] -> acc
+0024 | jmp @fetch
+0025 | pc -> ar, pc+4 -> pc
+0026 | mem(ar)[31:0] -> dr
+0027 | jmp @instruction
+0028 | acc + 1 -> acc
+0029 | jmp @fetch
+0030 | pc -> ar, pc+4 -> pc
+0031 | mem(ar)[31:0] -> dr
+0032 | jmp @instruction
+0033 | acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar
+0034 | jmp @fetch
+0035 | pc -> ar, pc+4 -> pc
+0036 | mem(ar)[31:0] -> dr
+0037 | jmp @instruction
+0038 | acc + 1 -> acc
+0039 | jmp @fetch
+0040 | pc -> ar, pc+4 -> pc
+0041 | mem(ar)[31:0] -> dr
+0042 | jmp @instruction
+0043 | dr[22:0] + pc -> ar
+0044 | shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)
+0045 | jmp @fetch
+0046 | pc -> ar, pc+4 -> pc
+0047 | mem(ar)[31:0] -> dr
+0048 | jmp @instruction
+0049 | dr[22:0] + pc -> ar
+0050 | mem(ar)[31:0] -> dr
+0051 | dr[31:0] -> acc
+0052 | jmp @fetch
+0053 | pc -> ar, pc+4 -> pc
+0054 | mem(ar)[31:0] -> dr
+0055 | jmp @instruction
+0056 | dr[22:0] -> output address
+0057 | acc -> output
+0058 | jmp @fetch
+0059 | pc -> ar, pc+4 -> pc
+0060 | mem(ar)[31:0] -> dr
+0061 | jmp @instruction
+0062 | dr[22:0] + pc -> ar
+0063 | mem(ar)[31:0] -> dr
+0064 | dr[31:0] -> acc
+0065 | jmp @fetch
+0066 | pc -> ar, pc+4 -> pc
+0067 | mem(ar)[31:0] -> dr
+0068 | jmp @instruction
+0069 | dr[22:0] -> output address
+0070 | acc -> output
+0071 | jmp @fetch
+0072 | pc -> ar, pc+4 -> pc
+0073 | mem(ar)[31:0] -> dr
+0074 | jmp @instruction
+0075 | halt
+-------------------------------------------------
+Program executed after 0075 ticks. Final state:
+in: 
+[]
+out: 
+[2, 2]
+memory_dump:
+  [0x0000] 00 00 00 02 00 00 00 02 03 ff ff f4 02 00 00 00
+  [0x0010] 1f ff ff ec 03 ff ff ec 02 00 00 00 1f ff ff e4
+  [0x0020] 02 00 00 00 21 7f ff d8 03 ff ff d8 13 80 00 00
+  [0x0030] 03 ff ff cc 13 80 00 00 00 80 00 00 00 00 00 00
+  [0x0040] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  [0x0050] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  [0x0060] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  [0x0070] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00

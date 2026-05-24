@@ -18,7 +18,7 @@ def test_translator_golden(case_dir, tmp_path):
     output_file = tmp_path / "out.maibinbin"
     expected_debug_file = case_dir / "translator.debug"
     output_debug_file = tmp_path / "translator.debug"
-    main(str(input_file), str(output_file), str(output_debug_file))
+    main(str(input_file), str(output_file), str(output_debug_file), True)
 
     assert output_file.read_bytes() == expected_file.read_bytes()
     assert output_debug_file.read_text() == expected_debug_file.read_text()

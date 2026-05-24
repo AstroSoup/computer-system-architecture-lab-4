@@ -1,0 +1,23 @@
+memory_size: 128
+limit: 4096
+devices:
+  - in: []
+    out: []
+report:
+  - type: "first"
+    view: |
+      tick | mnemonic
+      -------------------------------------------------
+  - type: "step-by-step"
+    view: |
+      {tick} | {mnemonic}
+  - type: "last"
+    view: |
+      -------------------------------------------------
+      Program executed after {tick} ticks. Final state:
+      in: 
+      {in(0):sym}
+      out: 
+      {out(0):dec}
+      memory_dump:
+      {memory(0:128:16)}
