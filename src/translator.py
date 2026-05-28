@@ -218,7 +218,7 @@ def _is_safe_in_window(node, label_x):  # noqa: C901
     if mode not in allowed:
         return False
     # store to label_x inside window aliases with shadow_ar
-    if t in ("st.w", "st.b"):
+    if t in ("st.w", "st.b", "add", "sub", "and", "or", "mul", "ld.w", "ld.b"):
         lk = _label_operand(node["value"])
         if lk is not None and lk[0] == label_x:
             return False
