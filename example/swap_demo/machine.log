@@ -43,40 +43,41 @@ tick | mnemonic
 0041 | mem(ar)[31:0] -> dr
 0042 | jmp @instruction
 0043 | dr[22:0] + pc -> ar
-0044 | shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)
-0045 | jmp @fetch
-0046 | pc -> ar, pc+4 -> pc
-0047 | mem(ar)[31:0] -> dr
-0048 | jmp @instruction
-0049 | dr[22:0] + pc -> ar
-0050 | mem(ar)[31:0] -> dr
-0051 | dr[31:0] -> acc
-0052 | jmp @fetch
-0053 | pc -> ar, pc+4 -> pc
-0054 | mem(ar)[31:0] -> dr
-0055 | jmp @instruction
-0056 | dr[22:0] -> output address
-0057 | acc -> output
-0058 | jmp @fetch
-0059 | pc -> ar, pc+4 -> pc
-0060 | mem(ar)[31:0] -> dr
-0061 | jmp @instruction
-0062 | dr[22:0] + pc -> ar
-0063 | mem(ar)[31:0] -> dr
-0064 | dr[31:0] -> acc
-0065 | jmp @fetch
-0066 | pc -> ar, pc+4 -> pc
-0067 | mem(ar)[31:0] -> dr
-0068 | jmp @instruction
-0069 | dr[22:0] -> output address
-0070 | acc -> output
-0071 | jmp @fetch
-0072 | pc -> ar, pc+4 -> pc
-0073 | mem(ar)[31:0] -> dr
-0074 | jmp @instruction
-0075 | halt
+0044 | acc[31:0] -> mem(ar)
+0045 | shadow_acc[31:0] -> mem(shadow_ar)
+0046 | jmp @fetch
+0047 | pc -> ar, pc+4 -> pc
+0048 | mem(ar)[31:0] -> dr
+0049 | jmp @instruction
+0050 | dr[22:0] + pc -> ar
+0051 | mem(ar)[31:0] -> dr
+0052 | dr[31:0] -> acc
+0053 | jmp @fetch
+0054 | pc -> ar, pc+4 -> pc
+0055 | mem(ar)[31:0] -> dr
+0056 | jmp @instruction
+0057 | dr[22:0] -> output address
+0058 | acc -> output
+0059 | jmp @fetch
+0060 | pc -> ar, pc+4 -> pc
+0061 | mem(ar)[31:0] -> dr
+0062 | jmp @instruction
+0063 | dr[22:0] + pc -> ar
+0064 | mem(ar)[31:0] -> dr
+0065 | dr[31:0] -> acc
+0066 | jmp @fetch
+0067 | pc -> ar, pc+4 -> pc
+0068 | mem(ar)[31:0] -> dr
+0069 | jmp @instruction
+0070 | dr[22:0] -> output address
+0071 | acc -> output
+0072 | jmp @fetch
+0073 | pc -> ar, pc+4 -> pc
+0074 | mem(ar)[31:0] -> dr
+0075 | jmp @instruction
+0076 | halt
 -------------------------------------------------
-Program executed after 0075 ticks. Final state:
+Program executed after 0076 ticks. Final state:
 in: 
 []
 out: 

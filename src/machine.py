@@ -128,6 +128,9 @@ class Datapath:
     ar_out = 0
     shadow_ar_out = 0
 
+    mem_addr_in = 0
+    mem_in = 0
+
     # pc related
     next_or_offset_mux_out = 0
 
@@ -244,6 +247,18 @@ class Datapath:
         else:
             self.ext_acc_mux_out = self.acc_out
 
+    def signal_sh_ar_or_ar_mux(self, sel):
+        if sel:
+            self.mem_addr_in = self.shadow_ar_out
+        else:
+            self.mem_addr_in = self.ar_out
+
+    def signal_sh_acc_or_acc_mux(self, sel):
+        if sel:
+            self.mem_in = self.shadow_acc_out
+        else:
+            self.mem_in = self.acc_out
+
     def signal_in_or_mem_mux(self, sel):
         if sel:
             self.in_or_mem_mux_out = self.ext_data_mux_out
@@ -258,33 +273,24 @@ class Datapath:
 
     # memory
     def signal_write_memory_word(self):
-        self.memory[self.ar_out] = (self.acc_out >> 24) & 0xFF
-        self.memory[self.ar_out + 1] = (self.acc_out >> 16) & 0xFF
-        self.memory[self.ar_out + 2] = (self.acc_out >> 8) & 0xFF
-        self.memory[self.ar_out + 3] = self.acc_out & 0xFF
+        self.memory[self.mem_addr_in] = (self.mem_in >> 24) & 0xFF
+        self.memory[self.mem_addr_in + 1] = (self.mem_in >> 16) & 0xFF
+        self.memory[self.mem_addr_in + 2] = (self.mem_in >> 8) & 0xFF
+        self.memory[self.mem_addr_in + 3] = self.mem_in & 0xFF
 
     def signal_write_memory_byte(self):
-        self.memory[self.ar_out] = self.acc_out & 0xFF
-
-    def signal_write2_memory_word(self):
-        self.memory[self.shadow_ar_out] = (self.shadow_acc_out >> 24) & 0xFF
-        self.memory[self.shadow_ar_out + 1] = (self.shadow_acc_out >> 16) & 0xFF
-        self.memory[self.shadow_ar_out + 2] = (self.shadow_acc_out >> 8) & 0xFF
-        self.memory[self.shadow_ar_out + 3] = self.shadow_acc_out & 0xFF
-
-    def signal_write2_memory_byte(self):
-        self.memory[self.shadow_ar_out] = self.shadow_acc_out & 0xFF
+        self.memory[self.mem_addr_in] = self.mem_in & 0xFF
 
     def signal_read_memory_word(self):
         self.memory_out = (
-            (self.memory[self.ar_out] << 24)
-            | (self.memory[self.ar_out + 1] << 16)
-            | (self.memory[self.ar_out + 2] << 8)
-            | self.memory[self.ar_out + 3]
+            (self.memory[self.mem_addr_in] << 24)
+            | (self.memory[self.mem_addr_in + 1] << 16)
+            | (self.memory[self.mem_addr_in + 2] << 8)
+            | self.memory[self.mem_addr_in + 3]
         )
 
     def signal_read_memory_byte(self):
-        self.memory_out = (self.memory[self.ar_out]) & 0xFF
+        self.memory_out = (self.memory[self.mem_addr_in]) & 0xFF
 
     def sync(self):
         self.ar_out = self.ar
@@ -355,6 +361,7 @@ def dp_mc(
     ext_acc_mux_sel=False,
     in_or_mem_mux_sel=True,
     sa_or_alu_mux_sel=False,
+    st_sh_mux_sel=False,
     # operations
     alu_operation=None,
     add_operation=False,
@@ -372,8 +379,6 @@ def dp_mc(
     read_memory_byte=False,
     write_memory_word=False,
     write_memory_byte=False,
-    write2_memory_byte=False,
-    write2_memory_word=False,
     # IO
     write_output=False,
     read_input=False,
@@ -443,6 +448,8 @@ class ControlUnit:
         # mPC advances by +1 (the default sequential path in the scheme).
         dp = self.datapath
 
+        dp.signal_sh_ar_or_ar_mux(mc["st_sh_mux_sel"])
+
         if mc["read_memory_word"]:
             dp.signal_read_memory_word()
         if mc["read_memory_byte"]:
@@ -476,15 +483,12 @@ class ControlUnit:
 
         dp.signal_sa_or_alu_mux(mc["sa_or_alu_mux_sel"])
 
+        dp.signal_sh_acc_or_acc_mux(mc["st_sh_mux_sel"])
+
         if mc["write_memory_word"]:
             dp.signal_write_memory_word()
         if mc["write_memory_byte"]:
             dp.signal_write_memory_byte()
-
-        if mc["write2_memory_word"]:
-            dp.signal_write2_memory_word()
-        if mc["write2_memory_byte"]:
-            dp.signal_write2_memory_byte()
 
         if mc["latch_dr"]:
             dp.signal_latch_dr()
@@ -1060,19 +1064,26 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     emit_rel_prologue()
     emit(
         dp_mc(
-            write2_memory_word=True,
             write_memory_word=True,
-            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+            mnemonic="acc[31:0] -> mem(ar)",
         )
     )
+    emit(dp_mc(st_sh_mux_sel=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar)"))
+
     emit(jmp_fetch())
     addr_flsh_ww_abs = len(microcode)
     emit_abs_prologue()
     emit(
         dp_mc(
-            write2_memory_word=True,
             write_memory_word=True,
-            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+            mnemonic="acc[31:0] -> mem(ar)",
+        )
+    )
+    emit(
+        dp_mc(
+            st_sh_mux_sel=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar)",
         )
     )
     emit(jmp_fetch())
@@ -1080,9 +1091,15 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     emit_ind_prologue()
     emit(
         dp_mc(
-            write2_memory_word=True,
             write_memory_word=True,
-            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
+            mnemonic="acc[31:0] -> mem(ar)",
+        )
+    )
+    emit(
+        dp_mc(
+            st_sh_mux_sel=True,
+            write_memory_word=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar)",
         )
     )
     emit(jmp_fetch())
@@ -1090,9 +1107,15 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     emit_rel_prologue()
     emit(
         dp_mc(
-            write2_memory_byte=True,
             write_memory_byte=True,
-            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+            mnemonic="acc[7:0] -> mem(ar)",
+        )
+    )
+    emit(
+        dp_mc(
+            st_sh_mux_sel=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar)",
         )
     )
     emit(jmp_fetch())
@@ -1100,9 +1123,15 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     emit_abs_prologue()
     emit(
         dp_mc(
-            write2_memory_byte=True,
             write_memory_byte=True,
-            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+            mnemonic="acc[7:0] -> mem(ar)",
+        )
+    )
+    emit(
+        dp_mc(
+            st_sh_mux_sel=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar)",
         )
     )
     emit(jmp_fetch())
@@ -1110,9 +1139,15 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     emit_ind_prologue()
     emit(
         dp_mc(
-            write2_memory_byte=True,
             write_memory_byte=True,
-            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+            mnemonic="acc[7:0] -> mem(ar)",
+        )
+    )
+    emit(
+        dp_mc(
+            st_sh_mux_sel=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[7:0] -> mem(shadow_ar)",
         )
     )
     emit(jmp_fetch())
@@ -1120,61 +1155,46 @@ def setup_machine_simulation(memory_size=1024, input_interface=[Device()], outpu
     emit_rel_prologue()
     emit(
         dp_mc(
-            write2_memory_word=True,
             write_memory_byte=True,
-            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
+            mnemonic="acc[7:0] -> mem(ar)",
+        )
+    )
+    emit(
+        dp_mc(
+            st_sh_mux_sel=True,
+            write_memory_byte=True,
+            mnemonic="shadow_acc[31:0] -> mem(shadow_ar)",
         )
     )
     emit(jmp_fetch())
     addr_flsh_wb_abs = len(microcode)
     emit_abs_prologue()
-    emit(
-        dp_mc(
-            write2_memory_word=True,
-            write_memory_byte=True,
-            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
-        )
-    )
+    emit(dp_mc(write_memory_byte=True, mnemonic="acc[7:0] -> mem(ar)"))
+    emit(dp_mc(st_sh_mux_sel=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar)"))
     emit(jmp_fetch())
+
     addr_flsh_wb_ind = len(microcode)
     emit_ind_prologue()
-    emit(
-        dp_mc(
-            write2_memory_word=True,
-            write_memory_byte=True,
-            mnemonic="shadow_acc[31:0] -> mem(shadow_ar), acc[7:0] -> mem(ar)",
-        )
-    )
+    emit(dp_mc(write_memory_byte=True, mnemonic="acc[7:0] -> mem(ar)"))
+    emit(dp_mc(st_sh_mux_sel=True, write_memory_word=True, mnemonic="shadow_acc[31:0] -> mem(shadow_ar)"))
     emit(jmp_fetch())
+
     addr_flsh_bw_rel = len(microcode)
     emit_rel_prologue()
-    emit(
-        dp_mc(
-            write2_memory_byte=True,
-            write_memory_word=True,
-            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
-        )
-    )
+    emit(dp_mc(write_memory_word=True, mnemonic="acc[31:0] -> mem(ar)"))
+    emit(dp_mc(st_sh_mux_sel=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar)"))
     emit(jmp_fetch())
+
     addr_flsh_bw_abs = len(microcode)
     emit_abs_prologue()
-    emit(
-        dp_mc(
-            write2_memory_byte=True,
-            write_memory_word=True,
-            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
-        )
-    )
+    emit(dp_mc(write_memory_word=True, mnemonic="acc[31:0] -> mem(ar)"))
+    emit(dp_mc(st_sh_mux_sel=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar)"))
     emit(jmp_fetch())
+
     addr_flsh_bw_ind = len(microcode)
     emit_ind_prologue()
-    emit(
-        dp_mc(
-            write2_memory_byte=True,
-            write_memory_word=True,
-            mnemonic="shadow_acc[7:0] -> mem(shadow_ar), acc[31:0] -> mem(ar)",
-        )
-    )
+    emit(dp_mc(write_memory_word=True, mnemonic="acc[31:0] -> mem(ar)"))
+    emit(dp_mc(st_sh_mux_sel=True, write_memory_byte=True, mnemonic="shadow_acc[7:0] -> mem(shadow_ar)"))
     emit(jmp_fetch())
 
     dispatch_table = {
@@ -1272,73 +1292,59 @@ def parse_config(config_file):
 
 def current_mc_to_str(control_unit):
     mc = control_unit.mir
-    str_mc = ""
     if mc["type"] == "dp":
-        str_mc += "1"
-        str_mc += str(int(mc["read_memory_word"]))
-        str_mc += str(int(mc["read_memory_byte"]))
-        str_mc += str(int(mc["write_output"]))
-        str_mc += str(int(mc["read_input"]))
 
-        str_mc += str(int(mc["ext_data_mux_sel"]))
+        def b(key):
+            return str(int(mc[key]))
 
-        str_mc += str(int(mc["next_or_offset_mux_sel"]))
+        alu = f"{alu_ops[mc['alu_operation']]['bin']:04b}" if mc["alu_operation"] is not None else "0000"
 
-        str_mc += str(int(mc["add_operation"]))
-
-        str_mc += str(int(mc["rel_or_abs_mux_sel"]))
-
-        str_mc += str(int(mc["in_or_mem_mux_sel"]))
-
-        str_mc += str(int(mc["ext_acc_mux_sel"]))
-
-        if mc["alu_operation"] is not None:
-            str_mc += f"{alu_ops[mc['alu_operation']]['bin']:04b}"
-        else:
-            str_mc += "0000"
-
-        str_mc += str(int(mc["data_or_inst_mux_sel"]))
-
-        str_mc += str(int(mc["sh_ar_or_addr_mux_sel"]))
-
-        str_mc += str(int(mc["sa_or_alu_mux_sel"]))
-
-        str_mc += str(int(mc["write_memory_word"]))
-
-        str_mc += str(int(mc["write_memory_byte"]))
-
-        str_mc += str(int(mc["write2_memory_word"]))
-        str_mc += str(int(mc["write2_memory_byte"]))
-
-        str_mc += str(int(mc["latch_dr"]))
-
-        str_mc += str(int(mc["latch_input_address"]))
-        str_mc += str(int(mc["latch_output_address"]))
-        str_mc += str(int(mc["latch_acc"]))
-        str_mc += str(int(mc["latch_shadow_acc"]))
-        str_mc += str(int(mc["latch_ar"]))
-        str_mc += str(int(mc["latch_shadow_ar"]))
-
-        str_mc += str(int(mc["latch_pc"]))
+        return (
+            "1"  # type: dp
+            + b("read_memory_word")
+            + b("read_memory_byte")
+            + b("write_output")
+            + b("read_input")
+            + b("ext_data_mux_sel")
+            + b("next_or_offset_mux_sel")
+            + b("add_operation")
+            + b("rel_or_abs_mux_sel")
+            + b("in_or_mem_mux_sel")
+            + b("ext_acc_mux_sel")
+            + alu  # 4 bits
+            + b("data_or_inst_mux_sel")
+            + b("sh_ar_or_addr_mux_sel")
+            + b("sa_or_alu_mux_sel")
+            + b("st_sh_mux_sel")
+            + b("write_memory_word")
+            + b("write_memory_byte")
+            + b("latch_dr")
+            + b("latch_input_address")
+            + b("latch_output_address")
+            + b("latch_acc")
+            + b("latch_shadow_acc")
+            + b("latch_ar")
+            + b("latch_shadow_ar")
+            + b("latch_pc")
+        )
+    if mc["address"] is not None:
+        addr_bits = f"{mc['address']:023b}"
+    elif mc["dispatch"]:
+        addr_bits = f"{control_unit.opcode_table[control_unit.datapath.dr_out >> 23 & 0x1FF]:023b}"
     else:
-        str_mc += "0"
-        str_mc += str(int(mc["halt"]))
-        str_mc += str(int(mc["dispatch"]))
-        str_mc += str(int(mc["jmp"]))
-        str_mc += str(int(mc["cmp"]))
-        if mc["sel_cmp"] is not None:
-            str_mc += f"{int(mc['sel_cmp']):03b}"
-        else:
-            str_mc += "000"
-        if mc["address"] is not None:
-            str_mc += f"{mc['address']:022b}"
-        else:
-            if not mc["dispatch"]:
-                str_mc += "0" * 22
-            else:
-                str_mc += f"{control_unit.opcode_table[control_unit.datapath.dr_out >> 23 & 0x1FF]:022b}"
+        addr_bits = "0" * 23
 
-    return str_mc
+    sel_bits = f"{int(mc['sel_cmp']):03b}" if mc["sel_cmp"] is not None else "000"
+
+    return (
+        "0"  # type: cf
+        + str(int(mc["halt"]))
+        + str(int(mc["dispatch"]))
+        + str(int(mc["jmp"]))
+        + str(int(mc["cmp"]))
+        + sel_bits  # 3 bits
+        + addr_bits  # 23 bits
+    )
 
 
 def current_mc_to_mnemonic(control_unit):
