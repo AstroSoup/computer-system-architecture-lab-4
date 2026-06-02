@@ -452,8 +452,3 @@ report:
 
 Конфигурация CI доступна в [python_ci.yaml](/.github/workflows/python_ci.yaml)
 
-
-# TODO:
-
-- CHANGE TESTS TO YML FORMAT FOR EASE OF CHECK
-
