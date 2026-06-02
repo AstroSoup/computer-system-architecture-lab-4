@@ -1,0 +1,64 @@
+sources: |
+  .text
+  _start:
+  
+  
+  loop:
+      ld.w cur
+  
+      add sum
+      st.w sum
+      
+      ld.w cur
+      mul cur
+      add sum_squared
+      st.w sum_squared
+  
+      ld.w cur
+      dec
+      st.w cur
+      bzns loop
+  
+  ld.w sum
+  mul sum
+  st.w squared_sum
+  
+  sub sum_squared
+  out $0
+  
+  halt
+      
+  
+  .data
+  cur: .word 100
+  sum: .word 0
+  sum_squared: .word 0
+  squared_sum: .word 0
+  square: .word 0
+  counter: .word 0
+
+bin_out: !!binary |
+  YA3K/gAAAAAAAAAAAAAARAAAAEQAAAAYuq3K/gOAAEALAABAH4AAPAOAADQeAAAwCwAANAeAADAD
+  gAAkAoAAACEAABwW///UA4AAGB4AABQHgAAYDQAAEBOAAAAAgAAAAAAAZAAAAAAAAAAAAAAAAAAA
+  AAAAAAAA
+
+translator_debug: |
+  <address> | <hex_code> | <mnemonic>                                                
+  0         | 0x03800040 | ld.w: mem(pc + 64) -> acc                                 
+  4         | 0x0b000040 | add: mem(pc + 64) + acc -> acc                            
+  8         | 0x1f80003c | swp: acc <-> shadow_acc; pc + 60 -> shadow_ar             
+  12        | 0x03800034 | ld.w: mem(pc + 52) -> acc                                 
+  16        | 0x1e000030 | mul: mem(pc + 48) * acc -> acc                            
+  20        | 0x0b000034 | add: mem(pc + 52) + acc -> acc                            
+  24        | 0x07800030 | st.w: acc -> mem(pc + 48)                                 
+  28        | 0x03800024 | ld.w: mem(pc + 36) -> acc                                 
+  32        | 0x02800000 | dec: acc - 1 -> acc                                       
+  36        | 0x2100001c | flsh.ww: acc -> mem(pc + 28); shadow_acc -> mem(shadow_ar)
+  40        | 0x16ffffd4 | bzns: if (z == 0) pc + -44 -> pc                          
+  44        | 0x03800018 | ld.w: mem(pc + 24) -> acc                                 
+  48        | 0x1e000014 | mul: mem(pc + 20) * acc -> acc                            
+  52        | 0x07800018 | st.w: acc -> mem(pc + 24)                                 
+  56        | 0x0d000010 | sub: acc - mem(pc + 16) -> acc                            
+  60        | 0x13800000 | out: acc -> device(0)                                     
+  64        | 0x00800000 | halt: halt execution                                      
+

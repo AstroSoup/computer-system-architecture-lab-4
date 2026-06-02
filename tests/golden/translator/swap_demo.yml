@@ -1,0 +1,42 @@
+sources: |
+  .data
+  a: .word 0
+  b: .word 1
+  
+  .text
+  _start:
+      ld.w a
+      inc
+      st.w a
+      ld.w b
+      inc
+      st.w b
+      ld.w a
+      inc
+      st.w a
+      ld.w b
+      out $0
+      ld.w a
+      out $0
+      halt
+
+bin_out: !!binary |
+  YA3K/gAAAAgAAAAAAAAACAAAAAgAAAA0uq3K/gAAAAAAAAABA///9AIAAAAf///sA///7AIAAAAf
+  ///kAgAAACF//9gD///YE4AAAAP//8wTgAAAAIAAAA==
+
+translator_debug: |
+  <address> | <hex_code> | <mnemonic>                                                 
+  8         | 0x03fffff4 | ld.w: mem(pc + -12) -> acc                                 
+  12        | 0x02000000 | inc: acc + 1 -> acc                                        
+  16        | 0x1fffffec | swp: acc <-> shadow_acc; pc + -20 -> shadow_ar             
+  20        | 0x03ffffec | ld.w: mem(pc + -20) -> acc                                 
+  24        | 0x02000000 | inc: acc + 1 -> acc                                        
+  28        | 0x1fffffe4 | swp: acc <-> shadow_acc; pc + -28 -> shadow_ar             
+  32        | 0x02000000 | inc: acc + 1 -> acc                                        
+  36        | 0x217fffd8 | flsh.ww: acc -> mem(pc + -40); shadow_acc -> mem(shadow_ar)
+  40        | 0x03ffffd8 | ld.w: mem(pc + -40) -> acc                                 
+  44        | 0x13800000 | out: acc -> device(0)                                      
+  48        | 0x03ffffcc | ld.w: mem(pc + -52) -> acc                                 
+  52        | 0x13800000 | out: acc -> device(0)                                      
+  56        | 0x00800000 | halt: halt execution                                       
+

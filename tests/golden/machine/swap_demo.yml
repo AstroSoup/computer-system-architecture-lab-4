@@ -1,0 +1,124 @@
+config_file: |
+  memory_size: 128
+  limit: 4096
+  devices:
+    - in: []
+      out: []
+  report:
+    - type: "first"
+      view: |
+        tick | mnemonic
+        -------------------------------------------------
+    - type: "step-by-step"
+      view: |
+        {tick} | {mnemonic}
+    - type: "last"
+      view: |
+        -------------------------------------------------
+        Program executed after {tick} ticks. Final state:
+        in: 
+        {in(0):sym}
+        out: 
+        {out(0):dec}
+        memory_dump:
+        {memory(0:128:16)}
+
+bin_file: !!binary |
+  YA3K/gAAAAgAAAAAAAAACAAAAAgAAAA0uq3K/gAAAAAAAAABA///9AIAAAAf///sA///7AIAAAAf
+  ///kAgAAACF//9gD///YE4AAAAP//8wTgAAAAIAAAA==
+
+machine_log: |
+  tick | mnemonic
+  -------------------------------------------------
+  0001 | pc -> ar, pc+4 -> pc
+  0002 | mem(ar)[31:0] -> dr
+  0003 | jmp @instruction
+  0004 | dr[22:0] + pc -> ar
+  0005 | mem(ar)[31:0] -> dr
+  0006 | dr[31:0] -> acc
+  0007 | jmp @fetch
+  0008 | pc -> ar, pc+4 -> pc
+  0009 | mem(ar)[31:0] -> dr
+  0010 | jmp @instruction
+  0011 | acc + 1 -> acc
+  0012 | jmp @fetch
+  0013 | pc -> ar, pc+4 -> pc
+  0014 | mem(ar)[31:0] -> dr
+  0015 | jmp @instruction
+  0016 | acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar
+  0017 | jmp @fetch
+  0018 | pc -> ar, pc+4 -> pc
+  0019 | mem(ar)[31:0] -> dr
+  0020 | jmp @instruction
+  0021 | dr[22:0] + pc -> ar
+  0022 | mem(ar)[31:0] -> dr
+  0023 | dr[31:0] -> acc
+  0024 | jmp @fetch
+  0025 | pc -> ar, pc+4 -> pc
+  0026 | mem(ar)[31:0] -> dr
+  0027 | jmp @instruction
+  0028 | acc + 1 -> acc
+  0029 | jmp @fetch
+  0030 | pc -> ar, pc+4 -> pc
+  0031 | mem(ar)[31:0] -> dr
+  0032 | jmp @instruction
+  0033 | acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar
+  0034 | jmp @fetch
+  0035 | pc -> ar, pc+4 -> pc
+  0036 | mem(ar)[31:0] -> dr
+  0037 | jmp @instruction
+  0038 | acc + 1 -> acc
+  0039 | jmp @fetch
+  0040 | pc -> ar, pc+4 -> pc
+  0041 | mem(ar)[31:0] -> dr
+  0042 | jmp @instruction
+  0043 | dr[22:0] + pc -> ar
+  0044 | acc[31:0] -> mem(ar)
+  0045 | shadow_acc[31:0] -> mem(shadow_ar)
+  0046 | jmp @fetch
+  0047 | pc -> ar, pc+4 -> pc
+  0048 | mem(ar)[31:0] -> dr
+  0049 | jmp @instruction
+  0050 | dr[22:0] + pc -> ar
+  0051 | mem(ar)[31:0] -> dr
+  0052 | dr[31:0] -> acc
+  0053 | jmp @fetch
+  0054 | pc -> ar, pc+4 -> pc
+  0055 | mem(ar)[31:0] -> dr
+  0056 | jmp @instruction
+  0057 | dr[22:0] -> output address
+  0058 | acc -> output
+  0059 | jmp @fetch
+  0060 | pc -> ar, pc+4 -> pc
+  0061 | mem(ar)[31:0] -> dr
+  0062 | jmp @instruction
+  0063 | dr[22:0] + pc -> ar
+  0064 | mem(ar)[31:0] -> dr
+  0065 | dr[31:0] -> acc
+  0066 | jmp @fetch
+  0067 | pc -> ar, pc+4 -> pc
+  0068 | mem(ar)[31:0] -> dr
+  0069 | jmp @instruction
+  0070 | dr[22:0] -> output address
+  0071 | acc -> output
+  0072 | jmp @fetch
+  0073 | pc -> ar, pc+4 -> pc
+  0074 | mem(ar)[31:0] -> dr
+  0075 | jmp @instruction
+  0076 | halt
+  -------------------------------------------------
+  Program executed after 0076 ticks. Final state:
+  in: 
+  []
+  out: 
+  [2, 2]
+  memory_dump:
+    [0x0000] 00 00 00 02 00 00 00 02 03 ff ff f4 02 00 00 00
+    [0x0010] 1f ff ff ec 03 ff ff ec 02 00 00 00 1f ff ff e4
+    [0x0020] 02 00 00 00 21 7f ff d8 03 ff ff d8 13 80 00 00
+    [0x0030] 03 ff ff cc 13 80 00 00 00 80 00 00 00 00 00 00
+    [0x0040] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    [0x0050] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    [0x0060] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    [0x0070] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+

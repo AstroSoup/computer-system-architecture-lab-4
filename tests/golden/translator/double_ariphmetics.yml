@@ -1,0 +1,93 @@
+sources: |
+  .text
+  _start:
+      clr
+      st.w sum_lo
+      st.w sum_hi
+      in $0
+      st.w len
+  
+  loop:
+      ld.w len
+      bzs exit
+      dec
+      st.w len
+  
+      in $0
+      st.w cur
+      bns cur_is_negative
+  
+      ld.w sum_lo
+      add cur
+      st.w sum_lo
+      bcns loop
+      ld.w sum_hi
+      inc
+      st.w sum_hi
+      jmp loop
+  
+  cur_is_negative:
+      ld.w sum_lo
+      add cur
+      st.w sum_lo
+      bcs loop
+      ld.w sum_hi
+      dec
+      st.w sum_hi
+      jmp loop
+  
+  exit:
+      ld.w sum_hi
+      out $0
+      ld.w sum_lo
+      out $0
+      halt
+  
+  .data
+  len: .word 0
+  cur:    .word 0
+  sum_lo: .word 0
+  sum_hi: .word 0
+
+bin_out: !!binary |
+  YA3K/gAAAAAAAAAAAAAAhAAAAIQAAAAQuq3K/gEAAAAHgACEB4AAhBKAAAAHgABwA4AAbBWAAFQC
+  gAAAB4AAYBKAAAAHgABcG4AAIAOAAFgLAABQB4AAUBj//9QDgABMAgAAAAeAAEQU///EA4AAOAsA
+  ADAHgAAwF///tAOAACwCgAAAB4AAJBT//6QDgAAcE4AAAAOAABATgAAAAIAAAAAAAAAAAAAAAAAA
+  AAAAAAA=
+
+translator_debug: |
+  <address> | <hex_code> | <mnemonic>                      
+  0         | 0x01000000 | clr: 0 -> acc                   
+  4         | 0x07800084 | st.w: acc -> mem(pc + 132)      
+  8         | 0x07800084 | st.w: acc -> mem(pc + 132)      
+  12        | 0x12800000 | in: device(0) -> acc            
+  16        | 0x07800070 | st.w: acc -> mem(pc + 112)      
+  20        | 0x0380006c | ld.w: mem(pc + 108) -> acc      
+  24        | 0x15800054 | bzs: if (z == 1) pc + 84 -> pc  
+  28        | 0x02800000 | dec: acc - 1 -> acc             
+  32        | 0x07800060 | st.w: acc -> mem(pc + 96)       
+  36        | 0x12800000 | in: device(0) -> acc            
+  40        | 0x0780005c | st.w: acc -> mem(pc + 92)       
+  44        | 0x1b800020 | bns: if (n == 1) pc + 32 -> pc  
+  48        | 0x03800058 | ld.w: mem(pc + 88) -> acc       
+  52        | 0x0b000050 | add: mem(pc + 80) + acc -> acc  
+  56        | 0x07800050 | st.w: acc -> mem(pc + 80)       
+  60        | 0x18ffffd4 | bcns: if (c == 0) pc + -44 -> pc
+  64        | 0x0380004c | ld.w: mem(pc + 76) -> acc       
+  68        | 0x02000000 | inc: acc + 1 -> acc             
+  72        | 0x07800044 | st.w: acc -> mem(pc + 68)       
+  76        | 0x14ffffc4 | jmp: pc + -60 -> pc             
+  80        | 0x03800038 | ld.w: mem(pc + 56) -> acc       
+  84        | 0x0b000030 | add: mem(pc + 48) + acc -> acc  
+  88        | 0x07800030 | st.w: acc -> mem(pc + 48)       
+  92        | 0x17ffffb4 | bcs: if (c == 1) pc + -76 -> pc 
+  96        | 0x0380002c | ld.w: mem(pc + 44) -> acc       
+  100       | 0x02800000 | dec: acc - 1 -> acc             
+  104       | 0x07800024 | st.w: acc -> mem(pc + 36)       
+  108       | 0x14ffffa4 | jmp: pc + -92 -> pc             
+  112       | 0x0380001c | ld.w: mem(pc + 28) -> acc       
+  116       | 0x13800000 | out: acc -> device(0)           
+  120       | 0x03800010 | ld.w: mem(pc + 16) -> acc       
+  124       | 0x13800000 | out: acc -> device(0)           
+  128       | 0x00800000 | halt: halt execution            
+
