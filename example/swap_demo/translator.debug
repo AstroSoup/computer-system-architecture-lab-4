@@ -1,14 +1,15 @@
-<address> | <hex_code> | <mnemonic>                                                 
-8         | 0x03fffff4 | ld.w: mem(pc + -12) -> acc                                 
-12        | 0x02000000 | inc: acc + 1 -> acc                                        
-16        | 0x1fffffec | swp: acc <-> shadow_acc; pc + -20 -> shadow_ar             
-20        | 0x03ffffec | ld.w: mem(pc + -20) -> acc                                 
-24        | 0x02000000 | inc: acc + 1 -> acc                                        
-28        | 0x1fffffe4 | swp: acc <-> shadow_acc; pc + -28 -> shadow_ar             
-32        | 0x02000000 | inc: acc + 1 -> acc                                        
-36        | 0x217fffd8 | flsh.ww: acc -> mem(pc + -40); shadow_acc -> mem(shadow_ar)
-40        | 0x03ffffd8 | ld.w: mem(pc + -40) -> acc                                 
-44        | 0x13800000 | out: acc -> device(0)                                      
-48        | 0x03ffffcc | ld.w: mem(pc + -52) -> acc                                 
-52        | 0x13800000 | out: acc -> device(0)                                      
-56        | 0x00800000 | halt: halt execution                                       
+<address> | <hex_code> | <mnemonic>                
+8         | 0x03fffff4 | ld.w: mem(pc + -12) -> acc
+12        | 0x02000000 | inc: acc + 1 -> acc       
+16        | 0x07ffffec | st.w: acc -> mem(pc + -20)
+20        | 0x03ffffec | ld.w: mem(pc + -20) -> acc
+24        | 0x02000000 | inc: acc + 1 -> acc       
+28        | 0x07ffffe4 | st.w: acc -> mem(pc + -28)
+32        | 0x03ffffdc | ld.w: mem(pc + -36) -> acc
+36        | 0x02000000 | inc: acc + 1 -> acc       
+40        | 0x07ffffd4 | st.w: acc -> mem(pc + -44)
+44        | 0x03ffffd4 | ld.w: mem(pc + -44) -> acc
+48        | 0x13800000 | out: acc -> device(0)     
+52        | 0x03ffffc8 | ld.w: mem(pc + -56) -> acc
+56        | 0x13800000 | out: acc -> device(0)     
+60        | 0x00800000 | halt: halt execution      

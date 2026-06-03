@@ -22,92 +22,52 @@ config_file: |
         {out(0):dec}
         memory_dump:
         {memory(0:128:16)}
-
 bin_file: !!binary |
   YA3K/gAAAAgAAAAAAAAACAAAAAgAAAA0uq3K/gAAAAAAAAABA///9AIAAAAf///sA///7AIAAAAf
   ///kAgAAACF//9gD///YE4AAAAP//8wTgAAAAIAAAA==
-
 machine_log: |
   tick | mnemonic
   -------------------------------------------------
-  0001 | pc -> ar, pc+4 -> pc
-  0002 | mem(ar)[31:0] -> dr
-  0003 | jmp @instruction
-  0004 | dr[22:0] + pc -> ar
-  0005 | mem(ar)[31:0] -> dr
-  0006 | dr[31:0] -> acc
-  0007 | jmp @fetch
-  0008 | pc -> ar, pc+4 -> pc
-  0009 | mem(ar)[31:0] -> dr
-  0010 | jmp @instruction
-  0011 | acc + 1 -> acc
-  0012 | jmp @fetch
-  0013 | pc -> ar, pc+4 -> pc
-  0014 | mem(ar)[31:0] -> dr
-  0015 | jmp @instruction
+  0001 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0002 | dr[22:0] + pc -> ar
+  0003 | mem(ar)[31:0] -> dr
+  0004 | dr[31:0] -> acc
+  0005 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0006 | acc + 1 -> acc
+  0007 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0008 | acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar
+  0009 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0010 | dr[22:0] + pc -> ar
+  0011 | mem(ar)[31:0] -> dr
+  0012 | dr[31:0] -> acc
+  0013 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0014 | acc + 1 -> acc
+  0015 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
   0016 | acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar
-  0017 | jmp @fetch
-  0018 | pc -> ar, pc+4 -> pc
-  0019 | mem(ar)[31:0] -> dr
-  0020 | jmp @instruction
-  0021 | dr[22:0] + pc -> ar
-  0022 | mem(ar)[31:0] -> dr
-  0023 | dr[31:0] -> acc
-  0024 | jmp @fetch
-  0025 | pc -> ar, pc+4 -> pc
-  0026 | mem(ar)[31:0] -> dr
-  0027 | jmp @instruction
-  0028 | acc + 1 -> acc
-  0029 | jmp @fetch
-  0030 | pc -> ar, pc+4 -> pc
-  0031 | mem(ar)[31:0] -> dr
-  0032 | jmp @instruction
-  0033 | acc <-> shadow_acc, dr[22:0] + pc -> ar -> shadow_ar
-  0034 | jmp @fetch
-  0035 | pc -> ar, pc+4 -> pc
-  0036 | mem(ar)[31:0] -> dr
-  0037 | jmp @instruction
-  0038 | acc + 1 -> acc
-  0039 | jmp @fetch
-  0040 | pc -> ar, pc+4 -> pc
-  0041 | mem(ar)[31:0] -> dr
-  0042 | jmp @instruction
-  0043 | dr[22:0] + pc -> ar
-  0044 | acc[31:0] -> mem(ar)
-  0045 | shadow_acc[31:0] -> mem(shadow_ar)
-  0046 | jmp @fetch
-  0047 | pc -> ar, pc+4 -> pc
-  0048 | mem(ar)[31:0] -> dr
-  0049 | jmp @instruction
-  0050 | dr[22:0] + pc -> ar
-  0051 | mem(ar)[31:0] -> dr
-  0052 | dr[31:0] -> acc
-  0053 | jmp @fetch
-  0054 | pc -> ar, pc+4 -> pc
-  0055 | mem(ar)[31:0] -> dr
-  0056 | jmp @instruction
-  0057 | dr[22:0] -> output address
-  0058 | acc -> output
-  0059 | jmp @fetch
-  0060 | pc -> ar, pc+4 -> pc
-  0061 | mem(ar)[31:0] -> dr
-  0062 | jmp @instruction
-  0063 | dr[22:0] + pc -> ar
-  0064 | mem(ar)[31:0] -> dr
-  0065 | dr[31:0] -> acc
-  0066 | jmp @fetch
-  0067 | pc -> ar, pc+4 -> pc
-  0068 | mem(ar)[31:0] -> dr
-  0069 | jmp @instruction
-  0070 | dr[22:0] -> output address
-  0071 | acc -> output
-  0072 | jmp @fetch
-  0073 | pc -> ar, pc+4 -> pc
-  0074 | mem(ar)[31:0] -> dr
-  0075 | jmp @instruction
-  0076 | halt
+  0017 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0018 | acc + 1 -> acc
+  0019 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0020 | dr[22:0] + pc -> ar
+  0021 | acc[31:0] -> mem(ar)
+  0022 | shadow_acc[31:0] -> mem(shadow_ar)
+  0023 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0024 | dr[22:0] + pc -> ar
+  0025 | mem(ar)[31:0] -> dr
+  0026 | dr[31:0] -> acc
+  0027 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0028 | dr[22:0] -> output address
+  0029 | acc -> output
+  0030 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0031 | dr[22:0] + pc -> ar
+  0032 | mem(ar)[31:0] -> dr
+  0033 | dr[31:0] -> acc
+  0034 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0035 | dr[22:0] -> output address
+  0036 | acc -> output
+  0037 | mem(pc)[31:0] -> dr, pc+4 -> pc, jmp @instruction
+  0038 | halt
   -------------------------------------------------
-  Program executed after 0076 ticks. Final state:
+  Program executed after 0038 ticks. Final state:
   in: 
   []
   out: 
@@ -121,4 +81,3 @@ machine_log: |
     [0x0050] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     [0x0060] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     [0x0070] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-

@@ -80,7 +80,6 @@ bin_out: !!binary |
   AAAHgABcDIAA1wyAAAQNAABvDQAAZxb//9gDgABfCwAAXweAAFsDAADXCoAABAeAADAHAAC4E4AA
   AAOAACQCAAAAB4AAHAyAANcMgAAEDQAALxb//9wGAAAME4AAAACAAAAAAAAAIQAAABJXaGF0IGlz
   IHlvdXIgbmFtZT8AAAAAAAAAB0hlbGxvLCA=
-
 translator_debug: |
   <address> | <hex_code> | <mnemonic>                      
   0         | 0x030000bd | ld.w: 189 -> acc                
@@ -129,4 +128,3 @@ translator_debug: |
   172       | 0x0600000c | ld.b: mem(pc + 12) -> acc       
   176       | 0x13800000 | out: acc -> device(0)           
   180       | 0x00800000 | halt: halt execution            
-

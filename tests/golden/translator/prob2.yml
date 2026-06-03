@@ -36,12 +36,10 @@ sources: |
   squared_sum: .word 0
   square: .word 0
   counter: .word 0
-
 bin_out: !!binary |
   YA3K/gAAAAAAAAAAAAAARAAAAEQAAAAYuq3K/gOAAEALAABAH4AAPAOAADQeAAAwCwAANAeAADAD
   gAAkAoAAACEAABwW///UA4AAGB4AABQHgAAYDQAAEBOAAAAAgAAAAAAAZAAAAAAAAAAAAAAAAAAA
   AAAAAAAA
-
 translator_debug: |
   <address> | <hex_code> | <mnemonic>                                                
   0         | 0x03800040 | ld.w: mem(pc + 64) -> acc                                 
@@ -61,4 +59,3 @@ translator_debug: |
   56        | 0x0d000010 | sub: acc - mem(pc + 16) -> acc                            
   60        | 0x13800000 | out: acc -> device(0)                                     
   64        | 0x00800000 | halt: halt execution                                      
-

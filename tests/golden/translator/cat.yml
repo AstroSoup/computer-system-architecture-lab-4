@@ -27,7 +27,6 @@ sources: |
 bin_out: !!binary |
   YA3K/gAAAgAAAAGWAAAABAAAAgAAAAAouq3K/gAAAAASgAAAFYAAHAf//4oSgAAAE4AAAAP//34C
   gAAAB///dhb//+gAgAAA
-
 translator_debug: |
   <address> | <hex_code> | <mnemonic>                      
   512       | 0x12800000 | in: device(0) -> acc            
@@ -40,4 +39,3 @@ translator_debug: |
   540       | 0x07ffff76 | st.w: acc -> mem(pc + -138)     
   544       | 0x16ffffe8 | bzns: if (z == 0) pc + -24 -> pc
   548       | 0x00800000 | halt: halt execution            
-

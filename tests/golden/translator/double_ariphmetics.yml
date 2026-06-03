@@ -48,13 +48,11 @@ sources: |
   cur:    .word 0
   sum_lo: .word 0
   sum_hi: .word 0
-
 bin_out: !!binary |
   YA3K/gAAAAAAAAAAAAAAhAAAAIQAAAAQuq3K/gEAAAAHgACEB4AAhBKAAAAHgABwA4AAbBWAAFQC
   gAAAB4AAYBKAAAAHgABcG4AAIAOAAFgLAABQB4AAUBj//9QDgABMAgAAAAeAAEQU///EA4AAOAsA
   ADAHgAAwF///tAOAACwCgAAAB4AAJBT//6QDgAAcE4AAAAOAABATgAAAAIAAAAAAAAAAAAAAAAAA
   AAAAAAA=
-
 translator_debug: |
   <address> | <hex_code> | <mnemonic>                      
   0         | 0x01000000 | clr: 0 -> acc                   
@@ -90,4 +88,3 @@ translator_debug: |
   120       | 0x03800010 | ld.w: mem(pc + 16) -> acc       
   124       | 0x13800000 | out: acc -> device(0)           
   128       | 0x00800000 | halt: halt execution            
-

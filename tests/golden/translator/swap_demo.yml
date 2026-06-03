@@ -23,7 +23,6 @@ sources: |
 bin_out: !!binary |
   YA3K/gAAAAgAAAAAAAAACAAAAAgAAAA0uq3K/gAAAAAAAAABA///9AIAAAAf///sA///7AIAAAAf
   ///kAgAAACF//9gD///YE4AAAAP//8wTgAAAAIAAAA==
-
 translator_debug: |
   <address> | <hex_code> | <mnemonic>                                                 
   8         | 0x03fffff4 | ld.w: mem(pc + -12) -> acc                                 
@@ -39,4 +38,3 @@ translator_debug: |
   48        | 0x03ffffcc | ld.w: mem(pc + -52) -> acc                                 
   52        | 0x13800000 | out: acc -> device(0)                                      
   56        | 0x00800000 | halt: halt execution                                       
-

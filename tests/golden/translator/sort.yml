@@ -111,7 +111,6 @@ sources: |
   tmp:       .word 0
   array_len: .word 0
   array:     .word 0
-
 bin_out: !!binary |
   YA3K/gAAAAAAAAAAAAABIAAAASAAAAAguq3K/hKAAAAHgAEwAwABPAeAARASgAAACIABIAOAAQQK
   gAAEB4AA/AyAATwNAAEMDQABCA0AAQQNAAEAFv//1AMAATwHgADkA4AA4AyAATwNAADoDQAA5A0A
@@ -120,7 +119,6 @@ bin_out: !!binary |
   A4AAaAiAASgDgABUCoAABAeAAEwU//9kAwABPAeAAEgDgABEDIABPA0AAEQNAABADQAAPA0AADgV
   gAAYBIABMBOAAAADgAAgCoAABAeAABgU///MAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   AAAAAAAA
-
 translator_debug: |
   <address> | <hex_code> | <mnemonic>                      
   0         | 0x12800000 | in: device(0) -> acc            
@@ -195,4 +193,3 @@ translator_debug: |
   276       | 0x07800018 | st.w: acc -> mem(pc + 24)       
   280       | 0x14ffffcc | jmp: pc + -52 -> pc             
   284       | 0x00800000 | halt: halt execution            
-

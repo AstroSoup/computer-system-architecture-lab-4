@@ -145,83 +145,83 @@ comment            ::= ";" { <any symbol except "\n"> }
 
 | команда | количество тактов | описание |
 | ------- | ----------------- | -------- |
-| nop | 4 | plain nothingness |
-| halt | 4 | halt execution |
-| clr | 5 | 0 -> acc |
-| not | 5 | ~acc -> acc |
-| inc | 5 | acc + 1 -> acc |
-| dec | 5 | acc - 1 -> acc |
-| ld.w_immediate | 5 | DR[22:0] -> acc |
-| ld.w_relative | 7 | mem(pc + DR[22:0]) -> acc |
-| ld.w_absolute | 7 | mem(DR[22:0]) -> acc |
-| ld.w_indirect | 9 | mem(mem(DR[22:0])) -> acc |
-| ld.b_immediate | 5 | DR[7:0] -> acc |
-| ld.b_relative | 7 | mem(pc + DR)[7:0] -> acc |
-| ld.b_absolute | 7 | mem(DR)[7:0] -> acc |
-| ld.b_indirect | 9 | mem(mem(DR))[7:0] -> acc |
-| st.w_relative | 6 | acc[22:0] -> mem(pc + DR[22:0]) |
-| st.w_absolute | 6 | acc[22:0] -> mem(DR[22:0]) |
-| st.w_indirect | 8 | acc[22:0] -> mem(mem(DR[22:0])) |
-| st.b_relative | 6 | acc[7:0] -> mem(pc + DR[22:0]) |
-| st.b_absolute | 6 | acc[7:0] -> mem(DR[22:0]) |
-| st.b_indirect | 8 | acc[7:0] -> mem(mem(DR[22:0])) |
-| add_immediate | 5 | DR[22:0] + acc -> acc |
-| add_relative | 7 | mem(pc + DR[22:0]) + acc -> acc |
-| add_absolute | 7 | mem(DR[22:0]) + acc -> acc |
-| add_indirect | 9 | mem(mem(DR[22:0])) + acc -> acc |
-| sub_immediate | 5 | acc - DR[22:0] -> acc |
-| sub_relative | 7 | acc - mem(pc + DR[22:0]) -> acc |
-| sub_absolute | 7 | acc - mem(DR[22:0]) -> acc |
-| sub_indirect | 9 | acc - mem(mem(DR[22:0])) -> acc |
-| and_immediate | 5 | DR[22:0] & acc -> acc |
-| and_relative | 7 | mem(pc + DR[22:0]) & acc -> acc |
-| and_absolute | 7 | mem(DR[22:0]) & acc -> acc |
-| and_indirect | 9 | mem(mem(DR[22:0])) & acc -> acc |
-| or_immediate | 5 | DR[22:0] \| acc -> acc |
-| or_relative | 7 | mem(pc + DR[22:0]) \| acc -> acc |
-| or_absolute | 7 | mem(DR[22:0]) \| acc -> acc |
-| or_indirect | 9 | mem(mem(DR[22:0])) \| acc -> acc |
-| mul_immediate | 5 | DR[22:0] * acc -> acc |
-| mul_relative | 7 | mem(pc + DR[22:0]) * acc -> acc |
-| mul_absolute | 7 | mem(DR[22:0]) * acc -> acc |
-| mul_indirect | 9 | mem(mem(DR[22:0])) * acc -> acc |
-| in_absolute | 6 | device(DR[22:0]) -> acc |
-| in_indirect | 9 | device(mem(DR[22:0])) -> acc |
-| out_absolute | 6 | acc -> device(DR[22:0]) |
-| out_indirect | 9 | acc -> device(mem(DR[22:0])) |
-| jmp_relative | 5 | pc + DR[22:0] -> pc |
-| jmp_indirect | 8 | mem(DR[22:0]) -> pc |
-| bzs_relative | 6 | if (z == 1) pc + DR[22:0] -> pc |
-| bzs_indirect | 8 | if (z == 1) pc + mem(DR[22:0]) -> pc |
-| bzns_relative | 6 | if (z == 0) pc + DR[22:0] -> pc |
-| bzns_indirect | 8 | if (z == 0) pc + mem(DR[22:0]) -> pc |
-| bcs_relative | 6 | if (c == 1) pc + DR[22:0] -> pc |
-| bcs_indirect | 8 | if (c == 1) pc + mem(DR[22:0]) -> pc |
-| bcns_relative | 6 | if (c == 0) pc + DR[22:0] -> pc |
-| bcns_indirect | 8 | if (c == 0) pc + mem(DR[22:0]) -> pc |
-| bvs_relative | 6 | if (v == 1) pc + DR[22:0] -> pc |
-| bvs_indirect | 8 | if (v == 1) pc + mem(DR[22:0]) -> pc |
-| bvns_relative | 6 | if (v == 0) pc + DR[22:0] -> pc |
-| bvns_indirect | 8 | if (v == 0) pc + mem(DR[22:0]) -> pc |
-| bns_relative | 6 | if (n == 1) pc + DR[22:0] -> pc |
-| bns_indirect | 8 | if (n == 1) pc + mem(DR[22:0]) -> pc |
-| bnns_relative | 6 | if (n == 0) pc + DR[22:0] -> pc |
-| bnns_indirect | 8 | if (n == 0) pc + mem(DR[22:0]) -> pc |
-| swp_relative | 5 | acc <-> shadow_acc; pc + DR[22:0] -> shadow_ar |
-| swp_absolute | 5 | acc <-> shadow_acc; DR[22:0] -> shadow_ar |
-| swp_indirect | 8 | acc <-> shadow_acc; mem(DR[22:0]) -> shadow_ar |
-| flsh.ww_relative | 6 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.ww_absolute | 6 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.ww_indirect | 8 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
-| flsh.bb_relative | 6 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.bb_absolute | 6 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.bb_indirect | 8 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
-| flsh.wb_relative | 6 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.wb_absolute | 6 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.wb_indirect | 8 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
-| flsh.bw_relative | 6 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.bw_absolute | 6 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
-| flsh.bw_indirect | 8 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
+| nop | 2 | plain nothingness |
+| halt | 2 | halt execution |
+| clr | 2 | 0 -> acc |
+| not | 2 | ~acc -> acc |
+| inc | 2 | acc + 1 -> acc |
+| dec | 2 | acc - 1 -> acc |
+| ld.w_immediate | 2 | DR[22:0] -> acc |
+| ld.w_relative | 4 | mem(pc + DR[22:0]) -> acc |
+| ld.w_absolute | 4 | mem(DR[22:0]) -> acc |
+| ld.w_indirect | 6 | mem(mem(DR[22:0])) -> acc |
+| ld.b_immediate | 2 | DR[7:0] -> acc |
+| ld.b_relative | 4 | mem(pc + DR)[7:0] -> acc |
+| ld.b_absolute | 4 | mem(DR)[7:0] -> acc |
+| ld.b_indirect | 6 | mem(mem(DR))[7:0] -> acc |
+| st.w_relative | 3 | acc[31:0] -> mem(pc + DR[22:0]) |
+| st.w_absolute | 3 | acc[31:0] -> mem(DR[22:0]) |
+| st.w_indirect | 5 | acc[31:0] -> mem(mem(DR[22:0])) |
+| st.b_relative | 3 | acc[7:0] -> mem(pc + DR[22:0]) |
+| st.b_absolute | 3 | acc[7:0] -> mem(DR[22:0]) |
+| st.b_indirect | 5 | acc[7:0] -> mem(mem(DR[22:0])) |
+| add_immediate | 2 | DR[22:0] + acc -> acc |
+| add_relative | 4 | mem(pc + DR[22:0]) + acc -> acc |
+| add_absolute | 4 | mem(DR[22:0]) + acc -> acc |
+| add_indirect | 6 | mem(mem(DR[22:0])) + acc -> acc |
+| sub_immediate | 2 | acc - DR[22:0] -> acc |
+| sub_relative | 4 | acc - mem(pc + DR[22:0]) -> acc |
+| sub_absolute | 4 | acc - mem(DR[22:0]) -> acc |
+| sub_indirect | 6 | acc - mem(mem(DR[22:0])) -> acc |
+| and_immediate | 2 | DR[22:0] & acc -> acc |
+| and_relative | 4 | mem(pc + DR[22:0]) & acc -> acc |
+| and_absolute | 4 | mem(DR[22:0]) & acc -> acc |
+| and_indirect | 6 | mem(mem(DR[22:0])) & acc -> acc |
+| or_immediate | 2 | DR[22:0] \| acc -> acc |
+| or_relative | 4 | mem(pc + DR[22:0]) \| acc -> acc |
+| or_absolute | 4 | mem(DR[22:0]) \| acc -> acc |
+| or_indirect | 6 | mem(mem(DR[22:0])) \| acc -> acc |
+| mul_immediate | 2 | DR[22:0] * acc -> acc |
+| mul_relative | 4 | mem(pc + DR[22:0]) * acc -> acc |
+| mul_absolute | 4 | mem(DR[22:0]) * acc -> acc |
+| mul_indirect | 6 | mem(mem(DR[22:0])) * acc -> acc |
+| in_absolute | 3 | device(DR[22:0]) -> acc |
+| in_indirect | 6 | device(mem(DR[22:0])) -> acc |
+| out_absolute | 3 | acc -> device(DR[22:0]) |
+| out_indirect | 6 | acc -> device(mem(DR[22:0])) |
+| jmp_relative | 2 | pc + DR[22:0] -> pc |
+| jmp_indirect | 5 | mem(DR[22:0]) -> pc |
+| bzs_relative | 3 | if (z == 1) pc + DR[22:0] -> pc |
+| bzs_indirect | 5 | if (z == 1) pc + mem(DR[22:0]) -> pc |
+| bzns_relative | 3 | if (z == 0) pc + DR[22:0] -> pc |
+| bzns_indirect | 5 | if (z == 0) pc + mem(DR[22:0]) -> pc |
+| bcs_relative | 3 | if (c == 1) pc + DR[22:0] -> pc |
+| bcs_indirect | 5 | if (c == 1) pc + mem(DR[22:0]) -> pc |
+| bcns_relative | 3 | if (c == 0) pc + DR[22:0] -> pc |
+| bcns_indirect | 5 | if (c == 0) pc + mem(DR[22:0]) -> pc |
+| bvs_relative | 3 | if (v == 1) pc + DR[22:0] -> pc |
+| bvs_indirect | 5 | if (v == 1) pc + mem(DR[22:0]) -> pc |
+| bvns_relative | 3 | if (v == 0) pc + DR[22:0] -> pc |
+| bvns_indirect | 5 | if (v == 0) pc + mem(DR[22:0]) -> pc |
+| bns_relative | 3 | if (n == 1) pc + DR[22:0] -> pc |
+| bns_indirect | 5 | if (n == 1) pc + mem(DR[22:0]) -> pc |
+| bnns_relative | 3 | if (n == 0) pc + DR[22:0] -> pc |
+| bnns_indirect | 5 | if (n == 0) pc + mem(DR[22:0]) -> pc |
+| swp_relative | 2 | acc <-> shadow_acc; pc + DR[22:0] -> shadow_ar |
+| swp_absolute | 2 | acc <-> shadow_acc; DR[22:0] -> shadow_ar |
+| swp_indirect | 5 | acc <-> shadow_acc; mem(DR[22:0]) -> shadow_ar |
+| flsh.ww_relative | 4 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.ww_absolute | 4 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.ww_indirect | 6 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
+| flsh.bb_relative | 4 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.bb_absolute | 4 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.bb_indirect | 6 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
+| flsh.wb_relative | 4 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.wb_absolute | 4 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.wb_indirect | 6 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
+| flsh.bw_relative | 4 | acc -> mem(pc + DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.bw_absolute | 4 | acc -> mem(DR[22:0]); shadow_acc -> mem(shadow_ar) |
+| flsh.bw_indirect | 6 | acc -> mem(mem(DR[22:0])); shadow_acc -> mem(shadow_ar) |
 
 ## Транслятор
 CLI:
@@ -299,7 +299,7 @@ python translator.py <input_file> <output_file> [--debug=<debug_file>] [--optimi
 ```
 Полученное время исполнения(доступ к памяти осуществляется за 1 такт):
 ```
-Program executed after 0084 ticks.
+Program executed after 0043 ticks.
 ```
 Код оптимизированный транслятором:
 ```
@@ -321,7 +321,7 @@ Program executed after 0084 ticks.
 ```
 Полученное время исполнения (доступ к памяти осуществляется за 1 такт)
 ```
-Program executed after 0076 ticks.
+Program executed after 0038 ticks.
 ```
 
 ## Модель процессора
@@ -371,7 +371,7 @@ report:
 
 ### Datapath
 
-Процессор построен на базе аккумуляторной архитектуры с применением паттерна теневого регистра для уменьшения обращений к памяти и параллелезации записей в память. 
+Процессор построен на базе аккумуляторной архитектуры с применением паттерна теневого регистра для уменьшения обращений к памяти и параллелезации записей в память.
 
 ![Datapath scheme](assets/datapath/scheme.svg)
 
@@ -405,12 +405,13 @@ report:
 
 ### Control Unit
 
-Управляющеее устройство построено на базе микроинструкций. Коды операций совмещенные с режимами адресации (для упрощения внутренного устройства control unit'а) получаются из справочной таблицы.
+Управляющеее устройство построено на базе микроинструкций. Коды операций совмещенные с режимами адресации (для упрощения внутренного устройства control unit'а) получаются из внутренней памяти CU. 
+
+Микроинструкция включает в себя биты для установки всех сигнальных линий, для того чтобы уменьшить оверхед fetch'а.
 
 ![Control Unit scheme](assets/control_unit/scheme.svg)
 
 #### Сигналы
-- `type` --- указывает на тип микрокоманды
 - `jmp` --- обозначает микрокоманду перехода (условного или безусловного)
 - `cmp` --- условный переход
 - `sel_cmp` --- трехбитовый сигнал для выбора признака сравнения
@@ -426,13 +427,12 @@ report:
 ### Особенности реализации процесса моделирования
 - при запуске производится инициализация модели в функции `setup_machine_simulation()` (заполнение памяти микрокоманд и таблицы опкодов, создание объектов `DP` и `CU`)
 - в `mIR` загружается инструкция по текущему адресу `mPC`
-- по типу микрокоманды вызывается одна из двух функций обработки микрокоманд
 - микрокоманда обрабатывается
 - увеличивается счетчик тиков
 - выполняется запись в журнал логов (если была заполнена конфигурация `step-by-step`)
 - в случае превышения лимита исполнения или установления флага `running` в 0 процесс моделирования прерывается
 
-Так как мы вынуждены вызывать функции сигналов к `DP` последовательно, они расположены в порядке от выхода из памяти, ко входу в память. Так же для того чтобы обеспечить одновременное защелкивание двух регистров на сигналы от друг друга (`acc` <-> `shadow_acc`) данные регистров изменяются по краю такта в функции `sync()`
+Для того чтобы обеспечить одновременное защелкивание двух регистров на сигналы от друг друга (`acc` <-> `shadow_acc`) данные регистров изменяются по краю такта в функции `sync()` (да и в целом это корректное поведение модели относительно реального мира).
 
 
 ## Тестирование

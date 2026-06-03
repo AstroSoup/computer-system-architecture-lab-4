@@ -27,7 +27,6 @@ sources: |
 bin_out: !!binary |
   YA3K/gAAABMAAAAAAAAAEwAAABMAAAAsAAAAPwAAAAS6rcr+AAAAC2hlbGxvIHdvcmxkAAAAAAMA
   AAAKgAAEB///8AcAAA8TgAAAA///5AIAAAAH///cDIAABA1//8UW///gAIAAAA==
-
 translator_debug: |
   <address> | <hex_code> | <mnemonic>                      
   19        | 0x03000000 | ld.w: 0 -> acc                  
@@ -42,4 +41,3 @@ translator_debug: |
   55        | 0x0d7fffc5 | sub: acc - mem(pc + -59) -> acc 
   59        | 0x16ffffe0 | bzns: if (z == 0) pc + -32 -> pc
   63        | 0x00800000 | halt: halt execution            
-
