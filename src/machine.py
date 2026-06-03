@@ -1326,7 +1326,9 @@ def current_mc_to_str(control_unit):
             + b("latch_ar")
             + b("latch_shadow_ar")
             + b("latch_pc")
+            + "0000"
         )
+
     if mc["address"] is not None:
         addr_bits = f"{mc['address']:023b}"
     elif mc["dispatch"]:
@@ -1344,6 +1346,7 @@ def current_mc_to_str(control_unit):
         + str(int(mc["cmp"]))
         + sel_bits  # 3 bits
         + addr_bits  # 23 bits
+        + "00"
     )
 
 
